@@ -1,19 +1,35 @@
 <template>
-  <form className="settings">
-    <div ng-click="toggleSetting('translate')">
-        Latinska kapitelnamn <div className="toggle" ng-style="{'background-color': settings.translate ? '#F60' : 'unset'}"></div>
+  <form class="settings">
+    <div @click="$store.commit('toggleSetting','translate')">
+        Latinska kapitelnamn <div class="toggle" v-bind:class="{'active': $store.state.translate}"></div>
     </div>
-    <div ng-click="toggleSetting('night')">
-        Mörk bakgrund <div className="toggle" ng-style="{'background-color': settings.night ? '#F60' : 'unset'}"></div>
+    <div @click="$store.commit('toggleSetting','night')">
+        Mörk bakgrund <div class="toggle" v-bind:class="{'active': $store.state.night}"></div>
     </div>
-    <div ng-click="toggleSetting('larger')">
-        Större sångtext <div className="toggle" ng-style="{'background-color': settings.larger ? '#F60' : 'unset'}"></div>
+    <div @click="$store.commit('toggleSetting','larger')">
+        Större sångtext <div class="toggle" v-bind:class="{'active': $store.state.larger}"></div>
     </div>
-    <div ng-click="toggleSetting('generator')">
-        Skapa sångblad <div className="toggle" ng-style="{'background-color': settings.generator ? '#F60' : 'unset'}"></div>
+    <div @click="$store.commit('toggleSetting','generator')">
+        Skapa sångblad <div class="toggle" v-bind:class="{'active': $store.state.generator}"></div>
     </div>
-    <div className="copy" ng-if="stage == stages.lyrics" ng-click="copyToClipboard(chapters[current.chapterindex].songs[current.songindex])">
+    <!--div class="copy" ng-if="stage == stages.lyrics" ng-click="copyToClipboard(chapters[current.chapterindex].songs[current.songindex])">
         Kopiera sångtext
-    </div>
+    </div-->
   </form>
 </template>
+
+<style scoped lang="scss">
+.toggle {
+    float: right;
+    width: 0.8em;
+    height: 0.8em;
+    border-radius: 0.4em;
+    border: 1px solid #F60;
+    margin-top: 0.3em;
+    padding: 0;
+}
+
+.toggle.active {
+  background-color: #F60;
+}
+</style>

@@ -27,7 +27,8 @@ export default defineComponent({
   },
   data () {
     return {
-      showSettings: false
+      showSettings: false,
+      store: this.$store
     }
   }
 })

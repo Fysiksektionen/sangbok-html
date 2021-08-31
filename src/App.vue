@@ -1,5 +1,5 @@
 <template>
-  <div class="night">
+  <div v-bind:class="{'night': $store.state.night}">
     <router-view/>
   </div>
 </template>
@@ -389,15 +389,5 @@ body {
         margin-right: 0.1em;
         color: #0E0;
     }
-
-div.toggle {
-    float: right;
-    width: 0.8em;
-    height: 0.8em;
-    border-radius: 0.4em;
-    border: 1px solid #F60;
-    margin-top: 0.3em;
-    padding: 0;
-}
 
 </style>
