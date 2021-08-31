@@ -3,7 +3,8 @@
 ##
 .vscode
 .idea
-
+build
+dist
 
 ##
 ## GitHub Node template
