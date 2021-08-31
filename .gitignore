@@ -1,3 +1,14 @@
+##
+## Custom
+##
+.vscode
+.idea
+
+
+##
+## GitHub Node template
+##
+
 # Logs
 logs
 *.log
