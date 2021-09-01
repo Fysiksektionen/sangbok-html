@@ -1,15 +1,22 @@
 # sangbok-html
-Sångboken, för hemsidan.
+Sångboken, för hemsidan. WIP.
 
 ## Varför?
 Jag har tänkt att sångboken behöver uppdateras lite. Det fattas noter och matematikhatarvisor, och sångbladsskaparen borde vara mer användarvänlig. Vill du hänga på, eller har fler förslag på vad som kan göras är det bara att hojta till 😊.  
 / Oskar
 
 ## Att göra
-* Strukturera originalkoden (ev. skriva om allt).
-* Hitta en lösning för att lägga in noter i sångboken.
+* Skriva om layouten i Vue för att underlätta framtida underhåll.
+* Hitta en lösning för att lägga in noter i sångboken (t.ex. svg eller [Vexflow](https://www.vexflow.com)).
 * Förbättra sångbladsskaparen.
   - Fundera ut vad python-filen faktiskt gör.
   - Undersöka möjligheten att använda [Overleafs API](https://www.overleaf.com/devs) för sångbladsskapande.
 * Ev. fixa en parser för att generera `lyrics.min.js` direkt från LaTeX-filerna i [sångboksrepot](https://github.com/Fysiksektionen/Sangbok).
-* Fixa ett alternativt tema för att matcha den nya hemsidan.
+* Ev. fixa ett alternativt tema för att matcha den nya hemsidan.
+
+## Hur du kör detta projekt
+Installera [Node.js 16](https://nodejs.org) om du inte redan har det. Klona sedan repot, och kör `npm install` i rotmappen. Utvecklingsservern körs sedan med `npm start`. Andra kommandon är:
+* `npm run build` - kompilera projektet.
+* `npm run lint` - lintar och fixar källkoden.
+
+<!-- See [Configuration Reference](https://cli.vuejs.org/config/). -->

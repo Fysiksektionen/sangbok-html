@@ -70,4 +70,37 @@ button:active {
     padding-top: 0.4em;
     z-index: -1;
 }
+
+.settings {
+    position: fixed;
+    left: 0;
+    right: 0;
+    padding: 0.5em;
+    padding-bottom: 0;
+    background-color: #fff;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2em;
+    box-shadow: 0 0 14px black;
+    transition: top 0.3s ease-in-out;
+    z-index: 9;
+}
+
+    .night .settings {
+        color: #ddd;
+        background-color: #222;
+    }
+
+    .settings div {
+        width: 100%;
+        padding: 0.8em 0;
+    }
+
+    .settings .copy .checkmark {
+        float: right;
+        width: 0.8em;
+        height: 0.8em;
+        padding: 0;
+        margin-right: 0.1em;
+        color: #0E0;
+    }
 </style>

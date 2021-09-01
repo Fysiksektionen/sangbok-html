@@ -1,14 +1,10 @@
 <template>
-  <div v-bind:class="{'night': $store.state.night}">
+  <div v-bind:class="{'night': $store.state.settings.night}">
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
-
-/* Dev only */
-html, body, #app, #app > div {height: 100%;}
-
 /* Other, unmigrated */
 body {
     margin: 0;
@@ -16,41 +12,26 @@ body {
     transition: 0.1s background-color ease-in-out;
 }
 
-    body.night, #app > div.night {
-        background-color: #222;
-    }
-
-.maintable {
-    font-family: 'EB Garamond', serif;
-    width: 98%;
-    margin-left: 1%;
-    margin-right: 1%;
-    border-spacing: 0;
+body.night, #app > div.night {
+    background-color: #222;
 }
 
 .songbook {
     overflow-x: hidden;
     font-family: 'EB Garamond', serif;
     vertical-align: top;
+  width: 100%;
 }
 
-    .songbook table {
-        width: 100%;
-        font-size: 1.2em;
-        line-height: 2em;
-        color: #333;
-        border-spacing: 0;
-    }
+.songbook table, table.songbook {
+    width: 100%;
+    font-size: 1.2em;
+    line-height: 2em;
+    color: #333;
+    border-spacing: 0;
+}
 
 .night table {
-    color: #ddd;
-}
-
-.lyrics {
-    color: #333;
-}
-
-.night .lyrics {
     color: #ddd;
 }
 
@@ -64,11 +45,11 @@ body {
     border-bottom: 1px solid #aaa;
 }
 
-    .songbook tr.nohits {
-        text-align: center;
-        box-shadow: unset !important;
-        border-bottom: unset !important;
-    }
+.songbook tr.nohits {
+    text-align: center;
+    box-shadow: unset !important;
+    border-bottom: unset !important;
+}
 
 .night .songbook tr {
     box-shadow: 0 2px 3px #111;
@@ -82,20 +63,12 @@ body {
 .night .songbook tr:active {
     background-color: #444;
 }
-
-.songbook tr:nth-child(even) {
-}
-
 .songbook tr:first-child {
     box-shadow: 0 1px 5px #aaa;
 }
 
 .night .songbook tr:first-child {
     box-shadow: 0 1px 5px #111;
-}
-
-.songbook tr:nth-child(odd) {
-    /*background-color: #eee;*/
 }
 
 .index {
@@ -105,71 +78,6 @@ body {
 .name {
     padding-left: 1em;
     padding-right: 0.5em;
-}
-
-.songbook form {
-    text-align: center;
-}
-
-    .songbook form input[type=search] {
-        margin: 1.62em 0;
-        width: 85%;
-        /*border: 1px solid #aaa;*/
-        border: 0;
-        height: 1.8em;
-        background-color: #f0f0f0;
-        border-radius: 0.3em;
-        padding-left: 0.5em !important;
-        padding-right: 0.5em !important;
-    }
-
-.night form input[type="search"] {
-    color: white;
-    background-color: #444;
-}
-
-.textcontainer {
-    /*text-align: center;*/
-    text-align: left;
-}
-
-    .textcontainer .text {
-        text-align: left;
-        display: inline-block;
-        padding: 0 24px 12px;
-        font-size: 1.05em;
-        line-height: 1.25em;
-    }
-
-        .textcontainer .text.larger {
-            font-size: 1.2em !important;
-            line-height: 1.5em !important;
-        }
-
-.lyrics .title {
-    text-align: center;
-    color: #333;
-    margin: 0.75em 24px 0.75em;
-    padding: 0;
-}
-
-.night .lyrics .title {
-    color: #ddd;
-}
-
-.lyrics .melody {
-    text-align: center;
-    font-style: italic;
-    margin-bottom: 12px;
-    padding-left: 24px;
-    padding-right: 24px;
-}
-
-.lyrics .author {
-    text-align: right;
-    font-style: italic;
-    padding-right: 24px;
-    padding-left: 24px;
 }
 
 .chaptertitle {
@@ -182,212 +90,4 @@ body {
 .night .chaptertitle {
     color: #ddd;
 }
-
-.navbuttons {
-    padding: 20px 0;
-}
-    .navbuttons .container {
-        width: 50%;
-        position: relative;
-    }
-
-    .navbuttons .container:nth-child(2) {
-        float: right;
-    }
-
-        .navbuttons .container > div {
-            left: 12px; right: 12px;
-            position: absolute;
-            text-align: center;
-            border-radius: 12px;
-            padding: 12px;
-            background-color: rgba(128, 128, 128, 0.10);
-        }
-
-        .navbuttons .container:nth-child(1) > div {
-            left: 24px;
-        }
-        .navbuttons .container:nth-child(2) > div {
-            right: 24px;
-        }
-
-            .navbuttons .container > div:active {
-                background-color: rgba(128, 128, 128, 0.30);
-            }
-
-            .navbuttons .container > div .upper {
-                width: 100%;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .navbuttons .container > div .lower {
-                width: 100%;
-            }
-
-.generator {
-    width: 30%;
-    vertical-align: top;
-    padding-top: 4.3em;
-    padding-left: 1.5%;
-}
-    .generator > div {
-        text-align: center;
-    }
-    .generator > table {
-        width: 100%;
-        font-size: 1.2em;
-        line-height: 2em;
-        border-spacing: 0;
-    }
-        .generator > table tr:active {
-            background-color: unset !important;
-        }
-
-    .generator .generatorbuttons {
-        padding: 20px 0;
-    }
-        .generator .generatorbuttons .container {
-            width: 50%;
-            position: relative;
-        }
-            .generator .generatorbuttons .container:nth-child(2) {
-                float: right;
-            }
-
-            .generator .generatorbuttons .container > div {
-                background-color: rgba(128, 128, 128, 0.10);
-                left: 12px;
-                right: 12px;
-                border-radius: 12px;
-                padding: 0.2em 12px 0.35em;
-                font-size: 2em;
-                text-align: center;
-                font-weight: bold;
-                color: #ff6600;
-                position: absolute;
-                -webkit-touch-callout: none;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-                padding-right: 0.5em;
-            }
-
-                .generator .generatorbuttons .container > div:active {
-                    background-color: rgba(128, 128, 128, 0.30);
-                }
-                .generator .generatorbuttons .container > div.disabled {
-                    background-color: rgba(128, 128, 128, 0.80);
-                    color: unset;
-                }
-
-            .generator .generatorbuttons .container:nth-child(1) > div {
-                left: 24px;
-            }
-            .generator .generatorbuttons .container:nth-child(2) > div {
-                right: 24px;
-                font-size: 1.9em;
-            }
-
-    .generator .operation {
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        padding-right: 0.5em;
-    }
-
-        .generator .operation:active {
-            color: #ff6600 !important;
-        }
-
-        .generator .operation.delete:active {
-            color: #E00 !important;
-        }
-
-    .generator h2 {
-        text-align: center;
-    }
-    .generator h3 {
-        margin-bottom: 0.3em;
-    }
-
-    .generator .generatorsettings {
-        text-align: left;
-        margin-top: 3em;
-    }
-        .generator .generatorsettings .setting {
-            margin-bottom: 0.6em;
-        }
-            .generator .generatorsettings .setting input {
-                float: right;
-                background-color: #f0f0f0;
-                border: none;
-                border-radius: 0.3em;
-                padding-left: 0.5em !important;
-                padding-right: 0.5em !important;
-                height: 1.8em;
-                text-align: right;
-            }
-                .generator .generatorsettings .setting input[type=text] {
-                    width: 40%;
-                }
-                .night .generator .generatorsettings .setting input {
-                    color: white;
-                    background-color: #444;
-                }
-
-    .generator .instructions {
-        text-align: left;
-    }
-        .generator .instructions code {
-            font-weight: bold;
-            text-shadow: 0 0 5px #ff6600;
-        }
-
-.flip {
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH";
-}
-
-.settings {
-    position: fixed;
-    left: 0;
-    right: 0;
-    padding: 0.5em;
-    padding-bottom: 0;
-    background-color: #fff;
-    font-family: 'EB Garamond', serif;
-    font-size: 1.2em;
-    box-shadow: 0 0 14px black;
-    transition: top 0.3s ease-in-out;
-    z-index: 9;
-}
-
-    .night .settings {
-        color: #ddd;
-        background-color: #222;
-    }
-
-    .settings div {
-        width: 100%;
-        padding: 0.8em 0;
-    }
-
-    .settings .copy .checkmark {
-        float: right;
-        width: 0.8em;
-        height: 0.8em;
-        padding: 0;
-        margin-right: 0.1em;
-        color: #0E0;
-    }
-
 </style>

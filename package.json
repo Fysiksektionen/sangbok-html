@@ -48,7 +48,13 @@
     "parserOptions": {
       "ecmaVersion": 2020
     },
-    "rules": {}
+    "rules": {
+      "quotes": "warn",
+      "quote-props": "warn",
+      "comma-dangle": "warn",
+      "semi": "warn",
+      "no-multiple-empty-lines": "warn"
+    }
   },
   "browserslist": [
     "> 1%",
