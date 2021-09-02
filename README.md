@@ -8,6 +8,7 @@ Jag har tänkt att sångboken behöver uppdateras lite. Det fattas noter och mat
 ## Att göra
 * Skriva om layouten i Vue för att underlätta framtida underhåll.
 * Hitta en lösning för att lägga in noter i sångboken (t.ex. svg eller [Vexflow](https://www.vexflow.com)).
+* Kolla vilka noter som upphovsrättsmässigt "får" läggas upp.
 * Förbättra sångbladsskaparen.
   - Fundera ut vad python-filen faktiskt gör.
   - Undersöka möjligheten att använda [Overleafs API](https://www.overleaf.com/devs) för sångbladsskapande.
