@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Dropdown from '@/components/Dropdown.vue'
+import Dropdown from '@/components/Settings.vue'
 
 export default defineComponent({
   name: 'Navbar',
