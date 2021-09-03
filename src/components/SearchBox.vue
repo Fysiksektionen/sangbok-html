@@ -1,25 +1,35 @@
 <template>
-  <div>
-    <input type="search" placeholder="Sök i sångboken" disabled />
-  </div>
+  <form @submit="search">
+    <input type="search" v-model="query2" placeholder="Sök i sångboken" />
+  </form>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'SearchBox',
-  data () {
-    return {
-      store: this.$store
+    name: 'SearchBox',
+    props: ['query'],
+    data () {
+        return {
+            store: this.$store,
+            query2: this.$props.query || ''
+        }
+    },
+    methods: {
+        search (evt: Event) {
+            evt.preventDefault()
+            if (this !== undefined) {
+                this.$router.push('/search/' + this.query2)
+            }
+        }
     }
-  }
 })
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="css">
-div {width: 100%; text-align: center;}
+form {width: 100%; text-align: center;}
 
 input[type=search] {
         margin: 1.62em 0;

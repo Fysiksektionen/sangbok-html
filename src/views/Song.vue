@@ -1,7 +1,7 @@
 <!-- View to list all songs in a chapter. -->
 
 <template>
-  <Navbar :parent="() => $router.push('/chapter/'+$route.params.chapterId)"/>
+  <Navbar :parent="goToParent"/>
     <!--TODO: Back button (:parent) should send the user to the search if they got here through the search. -->
     <div class="lyrics"
     v-for="(song, i) in [$store.state.lyrics.chapters[$route.params.chapterId].songs[$route.params.songId]]"
@@ -20,16 +20,27 @@ import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
 import NavButtons from '@/components/SongNavButtons.vue'
 
 export default defineComponent({
-  name: 'ChapterView',
-  components: {
-    Navbar,
-    NavButtons
-  },
-  methods: {
-    toHTML (text: string):string {
-      return text.replace(/</gm, "&lt;").replace(/>/gm, "&gt;").replace(/\n/igm, '<br />')
+    name: 'SongView',
+    components: {
+        Navbar,
+        NavButtons
+    },
+    methods: {
+        toHTML (text: string):string {
+            return text.replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/\n/igm, '<br />')
+        },
+        goToParent () {
+            if (this !== undefined) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                if ((this as any).$store.state.query !== '') {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    this.$router.push('/search/' + (this as any).$store.state.query)
+                } else {
+                    this.$router.push('/chapter/' + this.$route.params.chapterId)
+                }
+            }
+        }
     }
-  }
 })
 </script>
 
@@ -92,7 +103,6 @@ h2 {
 .navbuttons > div > div.lower {
   width: 100%;
 }
-
 
 element.style {
     visibility: visible;

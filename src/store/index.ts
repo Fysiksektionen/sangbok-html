@@ -3,23 +3,27 @@ import { createStore } from 'vuex'
 import lyrics from '@/assets/lyrics.json'
 
 export default createStore({
-  state: {
-    settings: {
-      translate: false,
-      night: true,
-      larger: false,
-      generator: false
+    state: {
+        settings: {
+            translate: false,
+            night: true,
+            larger: false,
+            generator: false
+        },
+        lyrics: lyrics,
+        query: ''
     },
-    lyrics: lyrics
-  },
-  mutations: {
-    toggleSetting (state, key: 'translate' | 'night' | 'larger' | 'generator') {
-      state.settings[key] = !(state.settings[key])
-      document.body.className = (state.settings.night === true) ? 'night' : ''
+    mutations: {
+        toggleSetting (state, key: 'translate' | 'night' | 'larger' | 'generator') {
+            state.settings[key] = !(state.settings[key])
+            document.body.className = (state.settings.night === true) ? 'night' : ''
+        },
+        setQuery (state, query: string) {
+            state.query = query
+        }
+    },
+    actions: {
+    },
+    modules: {
     }
-  },
-  actions: {
-  },
-  modules: {
-  }
 })

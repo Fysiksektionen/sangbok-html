@@ -2,25 +2,30 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Chapters from '../views/Chapters.vue'
 import Chapter from '../views/Chapter.vue'
 import Song from '../views/Song.vue'
+import Search from '../views/Search.vue'
 
 const routes: Array<RouteRecordRaw> = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Chapters
-  },
-  {
-    path: '/chapter/:id',
-    name: 'Chapter',
-    component: Chapter
-  },
-  {
-    path: '/chapter/:chapterId/song/:songId',
-    name: 'Song',
-    component: Song
-  }
+    {
+        path: '/',
+        name: 'Home',
+        component: Chapters
+    },
+    {
+        path: '/chapter/:id',
+        name: 'Chapter',
+        component: Chapter
+    },
+    {
+        path: '/chapter/:chapterId/song/:songId',
+        name: 'Song',
+        component: Song
+    },
+    {
+        path: '/search/:query',
+        name: 'Search',
+        component: Search
+    }
 ]
-
 
 // for route level code-splitting
 // that generates a separate chunk (about.[hash].js) for this route
@@ -28,8 +33,8 @@ const routes: Array<RouteRecordRaw> = [
 // component: () => import('../views/Chapter.vue')
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes
+    history: createWebHashHistory(),
+    routes
 })
 
 export default router

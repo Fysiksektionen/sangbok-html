@@ -21,17 +21,17 @@ import { defineComponent } from 'vue'
 import Dropdown from '@/components/Settings.vue'
 
 export default defineComponent({
-  name: 'Navbar',
-  props: ["parent"],
-  components: {
-    Dropdown
-  },
-  data () {
-    return {
-      showSettings: false,
-      store: this.$store
+    name: 'Navbar',
+    props: ['parent'],
+    components: {
+        Dropdown
+    },
+    data () {
+        return {
+            showSettings: false,
+            store: this.$store
+        }
     }
-  }
 })
 </script>
 

@@ -35,27 +35,6 @@
     "sass-loader": "^8.0.2",
     "typescript": "~4.1.5"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "@vue/standard",
-      "@vue/typescript/recommended"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2020
-    },
-    "rules": {
-      "quotes": "warn",
-      "quote-props": "warn",
-      "comma-dangle": "warn",
-      "semi": "warn",
-      "no-multiple-empty-lines": "warn"
-    }
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
