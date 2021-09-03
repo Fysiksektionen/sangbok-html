@@ -1,7 +1,5 @@
 <template>
-  <div v-bind:class="{'night': $store.state.settings.night}">
     <router-view/>
-  </div>
 </template>
 
 <style lang="scss">
@@ -12,7 +10,9 @@ body {
     transition: 0.1s background-color ease-in-out;
 }
 
-body.night, #app > div.night {
+body.night {
+  /* TODO: Since <body> is outside of Vue's scope, the night class is set through an ugly fix in the @/store/index.ts file.
+   This can probably be made more elegantly. */
     background-color: #222;
 }
 
@@ -80,14 +80,11 @@ body.night, #app > div.night {
     padding-right: 0.5em;
 }
 
-.chaptertitle {
-    text-align: center;
-    color: #333;
-    margin: 0.75em 24px 0.75em;
-    padding: 0;
-}
-
-.night .chaptertitle {
-    color: #ddd;
+table {
+  font-family: 'EB Garamond', serif;
+  width: 98%;
+  margin-left: 1%;
+  margin-right: 1%;
+  border-spacing: 0;
 }
 </style>

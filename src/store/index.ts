@@ -13,7 +13,10 @@ export default createStore({
     lyrics: lyrics
   },
   mutations: {
-    toggleSetting (state, key: 'translate' | 'night' | 'larger' | 'generator') { state.settings[key] = !(state.settings[key]) }
+    toggleSetting (state, key: 'translate' | 'night' | 'larger' | 'generator') {
+      state.settings[key] = !(state.settings[key])
+      document.body.className = (state.settings.night === true) ? 'night' : ''
+    }
   },
   actions: {
   },

@@ -2,15 +2,15 @@
 
 <template>
   <div class="navbar">
-    <div style="float: left;">
-      <button><img src="../assets/back.png" alt="back" /></button>
+    <div style="float: left;" v-if="parent" @click="parent">
+      <button><img src="../assets/back.png" alt="Go back" /></button>
     </div>
     <div class="title">
         Sångboken
     </div>
     <div style="float: right;">
-      <button @click="showSettings=true" v-if="!showSettings"><img src="../assets/settings.png" alt="settings" /></button>
-      <button @click="showSettings=false" v-if="showSettings"><img src="../assets/x.png" alt="close" /></button>
+      <button @click="showSettings=true" v-if="!showSettings"><img src="../assets/settings.png" alt="Show settings" /></button>
+      <button @click="showSettings=false" v-if="showSettings"><img src="../assets/x.png" alt="Close settings" /></button>
     </div>
   </div>
   <Dropdown v-if="showSettings"/>
@@ -22,6 +22,7 @@ import Dropdown from '@/components/Dropdown.vue'
 
 export default defineComponent({
   name: 'Navbar',
+  props: ["parent"],
   components: {
     Dropdown
   },

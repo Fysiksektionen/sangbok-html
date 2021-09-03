@@ -1,8 +1,12 @@
+<!-- Main chapter list view-->
+
 <template>
   <Navbar/>
   <SearchBox/>
   <table class="songbook">
-      <tr v-for="chapter in $store.state.lyrics.chapters" v-bind:key="chapter.prefix">
+      <tr v-for="(chapter, idx) in $store.state.lyrics.chapters"
+          @click="$router.push('/chapter/'+idx)"
+          v-bind:key="idx">
           <td class="index">
               {{$store.state.settings.translate ? greek2latin(chapter.prefix) : chapter.prefix}}
           </td>
@@ -49,13 +53,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style scoped lang="css">
-table {
-  font-family: 'EB Garamond', serif;
-  width: 98%;
-  margin-left: 1%;
-  margin-right: 1%;
-  border-spacing: 0;
-}
-</style>
