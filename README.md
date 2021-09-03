@@ -21,3 +21,22 @@ Installera [Node.js 16](https://nodejs.org) om du inte redan har det. Klona seda
 * `npm run lint` - lintar och fixar källkoden.
 
 <!-- See [Configuration Reference](https://cli.vuejs.org/config/). -->
+
+
+### Noter och upphovsrätt
+Det är inte säkert att det är upphovsrättsligt korrekt att ha med alla noter öppet på hemsidan.
+Noter som vi i princip garanterat kan ha:
+* Du gamla du fria
+* Längtan till landet
+* Smedsvisa
+* Molltoner från Norrland (aka. Vårvindar friska)
+* Studentsången
+* O gamla klang och jubeltid
+* Lyft ditt välförsedda glas (Ding dong Merrily on high. Arrat av Charles Wood)
+* Kungssången
+
+Noter som förmodligen är upphovsrättsskyddade:
+* Nu grönskar det (egentligen är texten upphovsrättsskyddad, men...)
+* Sveriges flagga (Upphovsrätten innehas av [Hugo Alfvénfonden](http://www.musakad.se/omakademien/organisation/stifelserochfonder/hugoalfvenfonden.601.html))
+* Porthos visa
+* Amanda Lundbom
