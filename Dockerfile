@@ -8,6 +8,7 @@ RUN npm clean-install
 
 COPY public public
 COPY *.json .
+COPY *.js .
 COPY .eslintrc .
 COPY src src
 
