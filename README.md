@@ -1,5 +1,5 @@
 # sangbok-html
-Sångboken, för hemsidan. WIP.
+Sångboken, för hemsidan. WIP (detta är alltså _inte_ den version som ligger uppe på hemsidan nu).
 
 ## Varför?
 Jag har tänkt att sångboken behöver uppdateras lite. Det fattas noter och matematikhatarvisor, och sångbladsskaparen borde vara mer användarvänlig. Vill du hänga på, eller har fler förslag på vad som kan göras är det bara att hojta till 😊.  
@@ -7,10 +7,9 @@ Jag har tänkt att sångboken behöver uppdateras lite. Det fattas noter och mat
 
 ## Att göra
 * Skriva om layouten i Vue för att underlätta framtida underhåll.
-* Städa i koden så att den blir mer läsbar.
+  - Städa i koden så att den blir mer läsbar.
 * Tillåt typos i sökmotorn.
 * Hitta en lösning för att lägga in noter i sångboken (t.ex. svg eller [Vexflow](https://www.vexflow.com)).
-* Kolla vilka noter som upphovsrättsmässigt "får" läggas upp.
 * Förbättra sångbladsskaparen.
   - Ersätt python-filen med LaTeX (Python-filen renderar pdf:en, och sammanfogar sedan sidorna i rätt ordning för att göra pdf:en redo för direkt utskrift).
   - Undersöka möjligheten att använda [Overleafs API](https://www.overleaf.com/devs) för sångbladsskapande.
