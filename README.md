@@ -8,10 +8,11 @@ Jag har tänkt att sångboken behöver uppdateras lite. Det fattas noter och mat
 ## Att göra
 * Skriva om layouten i Vue för att underlätta framtida underhåll.
 * Städa i koden så att den blir mer läsbar.
+* Tillåt typos i sökmotorn.
 * Hitta en lösning för att lägga in noter i sångboken (t.ex. svg eller [Vexflow](https://www.vexflow.com)).
 * Kolla vilka noter som upphovsrättsmässigt "får" läggas upp.
 * Förbättra sångbladsskaparen.
-  - Fundera ut vad python-filen faktiskt gör.
+  - Ersätt python-filen med LaTeX (Python-filen renderar pdf:en, och sammanfogar sedan sidorna i rätt ordning för att göra pdf:en redo för direkt utskrift).
   - Undersöka möjligheten att använda [Overleafs API](https://www.overleaf.com/devs) för sångbladsskapande.
 * Ev. fixa en parser för att generera `lyrics.min.js` direkt från LaTeX-filerna i [sångboksrepot](https://github.com/Fysiksektionen/Sangbok).
 * Ev. fixa ett alternativt tema för att matcha den nya hemsidan.
@@ -24,7 +25,7 @@ Installera [Node.js 16](https://nodejs.org) om du inte redan har det. Klona seda
 <!-- See [Configuration Reference](https://cli.vuejs.org/config/). -->
 
 
-### Noter och upphovsrätt
+## Noter och upphovsrätt
 Det är inte säkert att det är upphovsrättsligt korrekt att ha med alla noter öppet på hemsidan.
 Noter som vi i princip garanterat kan ha:
 * Du gamla du fria

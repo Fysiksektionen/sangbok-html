@@ -24,7 +24,6 @@ body.night {
 }
 
 .songbook table, table.songbook {
-    width: 100%;
     font-size: 1.2em;
     line-height: 2em;
     color: #333;
