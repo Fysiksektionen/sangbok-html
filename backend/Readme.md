@@ -1,0 +1,9 @@
+# Backend
+
+## Varför
+Målet med detta är att låta användaren ladda ner PDF-filer i princip direkt. Tidigare har LaTeX använts, i kombination med Python. Python är numera överflödigt, då [blad.cls](../public/blad.cls) skrivits om till att använda booklet för att sköta layouten. Dock återstår fortfarande problemet hur PDF:en skall genereras. Vi skulle kunna ha en egen instans av `pdflatex` på servern osv., men det tar rätt mycket plats. (Overleafs API)[https://www.overleaf.com/devs] är trevligt, men för att detta ska acceptera mer än en fil, krävs att man skickar _länkar_ till filerna, och inte enbart deras innehåll.  Man skulle visserligen kanske kunna trixa lite, och generera en stor .tex-fil som man sedan skickar till Overleaf med en POST-request. Fördelen med detta är att allt kan ske på klientsidan, men nackdelen är att den resulterande filen kan bli ganska så avskräckande om användaren vill göra ändringar.
+
+Detta är för närvarande ett försök till en hybridlösning, där backendet genererar en .tex-fil som sedan används i kombination med statiska filer från servern, vilka sedan används av Overleaf för att generera målfilen. Oavsett vad är ett backend den enda rimliga lösningen för att slippa få en massiv, ohanterlig `main.tex`-fil med inbäddad logga.
+
+## Hur
+Idén är att sångnummerna Base64-encodeas, för att sedan skickas till backendet, likt [http://localhost:8080/generate/W1swLDNdLFswLDRdXQ==](http://localhost:8080/generate/W1swLDNdLFswLDRdXQ==). Möjligen kommer det att ändras så att denna genererar en `content.tex`-fil istället för en `main.tex`-fil (se [main.tex](../public/tex/main.tex)). Vi får se.
