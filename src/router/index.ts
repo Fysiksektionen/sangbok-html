@@ -25,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Search',
     component: Search
   },
-  { path: '/search/', redirect: '/' }/* Redirect empty searches back to the start page. */
+  { path: '/:pathMatch(.*)*', redirect: '/' } // Redirect 404:s to the start page.
 ]
 
 // for route level code-splitting
