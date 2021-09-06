@@ -1,5 +1,5 @@
 # sangbok-html
-[![Docker build status](https://img.shields.io/github/workflow/status/Fysiksektionen/sangbok-html/Docker/main)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/docker-build.yml)
+[![Build](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml/badge.svg?branch=vue)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml) [![ESLint](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/lint.yml/badge.svg?branch=vue)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/lint.yml)
 
 Sångboken, för hemsidan. Work-in-progress. Detta är alltså _inte_ den version som ligger uppe på hemsidan nu. Vill du se hur det går, ligger en hyfsat uppdaterad version [här](https://f-sangbok-3cf6d8.netlify.app).
 

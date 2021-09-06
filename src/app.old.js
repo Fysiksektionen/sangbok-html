@@ -1,5 +1,5 @@
 // app.js from the old version of this site
-// eslint-disable
+/* eslint-disable */
 
 angular.module('sangbok', ['ngRoute', 'sangbok.lyrics', 'sangbok.resources'])
 
