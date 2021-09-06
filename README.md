@@ -6,7 +6,7 @@ Sångboken, för hemsidan. Work-in-progress. Detta är alltså _inte_ [den versi
 
 ## Att göra
 Se [issues](https://github.com/Fysiksektionen/sangbok-html/issues). Saker som kan göras i mån av tid och behov är:
-* Fixa en parser för att generera `lyrics.min.js` direkt från LaTeX-filerna i [sångboksrepot](https://github.com/Fysiksektionen/Sangbok).
+* Fixa en parser för att generera `lyrics.json` direkt från LaTeX-filerna i [sångboksrepot](https://github.com/Fysiksektionen/Sangbok).
 * Fixa ett alternativt tema för att matcha den nya hemsidan.
 * Fixa så att rewrites ej behövs för docker-containern.
 
