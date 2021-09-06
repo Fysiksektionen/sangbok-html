@@ -24,22 +24,22 @@ import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
 import SearchBox from '@/components/SearchBox.vue'
 
 export default defineComponent({
-    name: 'Search',
-    components: {
-        Navbar,
-        SearchBox
-    },
-    methods: {
-        search: search
-    },
-    created() {
-        if (this !== undefined) {
-            // If $store.state.query is set, the Song view will go back to the search page.
-            // If it is set to '', the Song view goes back to the Chapter view.
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (this as any).$store.commit('setQuery', this.$route.params.query)
-        }
+  name: 'Search',
+  components: {
+    Navbar,
+    SearchBox
+  },
+  methods: {
+    search: search
+  },
+  created() {
+    if (this !== undefined) {
+      // If $store.state.query is set, the Song view will go back to the search page.
+      // If it is set to '', the Song view goes back to the Chapter view.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (this as any).$store.commit('setQuery', this.$route.params.query)
     }
+  }
 })
 </script>
 

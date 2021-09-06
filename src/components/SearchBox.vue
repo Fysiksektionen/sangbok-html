@@ -8,22 +8,22 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: 'SearchBox',
-    props: ['query'],
-    data () {
-        return {
-            store: this.$store,
-            query2: this.$props.query || ''
-        }
-    },
-    methods: {
-        search (evt: Event) {
-            evt.preventDefault()
-            if (this !== undefined) {
-                this.$router.push('/search/' + this.query2)
-            }
-        }
+  name: 'SearchBox',
+  props: ['query'],
+  data () {
+    return {
+      store: this.$store,
+      query2: this.$props.query || ''
     }
+  },
+  methods: {
+    search (evt: Event) {
+      evt.preventDefault()
+      if (this !== undefined) {
+        this.$router.push('/search/' + this.query2)
+      }
+    }
+  }
 })
 </script>
 

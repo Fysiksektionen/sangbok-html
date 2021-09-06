@@ -20,27 +20,27 @@ import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
 import NavButtons from '@/components/SongNavButtons.vue'
 
 export default defineComponent({
-    name: 'SongView',
-    components: {
-        Navbar,
-        NavButtons
+  name: 'SongView',
+  components: {
+    Navbar,
+    NavButtons
+  },
+  methods: {
+    toHTML (text: string):string {
+      return text.replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/\n/igm, '<br />')
     },
-    methods: {
-        toHTML (text: string):string {
-            return text.replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/\n/igm, '<br />')
-        },
-        goToParent () {
-            if (this !== undefined) {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                if ((this as any).$store.state.query !== '') {
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    this.$router.push('/search/' + (this as any).$store.state.query)
-                } else {
-                    this.$router.push('/chapter/' + this.$route.params.chapterId)
-                }
-            }
+    goToParent () {
+      if (this !== undefined) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if ((this as any).$store.state.query !== '') {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          this.$router.push('/search/' + (this as any).$store.state.query)
+        } else {
+          this.$router.push('/chapter/' + this.$route.params.chapterId)
         }
+      }
     }
+  }
 })
 </script>
 

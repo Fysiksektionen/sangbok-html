@@ -19,7 +19,7 @@
       "no-multiple-empty-lines": "warn",
       "space-before-function-paren": "off",
       "keyword-spacing": "warn",
-      "indent": ["warn", 4],
+      "indent": ["warn", 2],
       "no-use-before-define": "off",
       "@typescript-eslint/no-use-before-define": ["error"],
       "no-unused-vars": "off",

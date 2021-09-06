@@ -4,5 +4,5 @@
  * @type {import('@vue/cli-service').ProjectOptions}
  */
 module.exports = {
-    publicPath: ''// See https://cli.vuejs.org/config/#publicpath for limitations.
+  publicPath: ''// See https://cli.vuejs.org/config/#publicpath for limitations.
 }
