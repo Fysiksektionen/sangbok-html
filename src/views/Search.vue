@@ -12,7 +12,7 @@
               {{ $store.state.lyrics.indexes[hit.song.chapterindex][hit.song.songindex] }}
             </td>
             <td class="name">
-                {{ $store.state.lyrics.chapters[hit.song.chapterindex].songs[hit.song.songindex].title }}
+              {{ $store.state.lyrics.chapters[hit.song.chapterindex].songs[hit.song.songindex].title }}
             </td>
         </tr>
         <tr class="nohits"><td>Inga sånger hittades.</td></tr>

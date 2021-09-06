@@ -3,7 +3,6 @@
     <GeneratorView v-if="$store.state.settings.generator"/>
 </template>
 
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import GeneratorView from '@/views/Generator.vue'
@@ -15,7 +14,6 @@ export default defineComponent({
   }
 })
 </script>
-
 
 <style lang="scss">
 /* Colors */

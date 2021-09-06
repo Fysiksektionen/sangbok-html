@@ -19,7 +19,7 @@ export default defineComponent({
   props: ['show'],
   components: {
     SettingsButton
-  },
+  }
 })
 </script>
 

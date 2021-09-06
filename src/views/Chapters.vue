@@ -54,7 +54,7 @@ export default defineComponent({
         Νν: 'Ny',
         Οο: 'Omikron',
         Σσ: 'Sigma',
-        Lℓ: 'Leo'
+        Lℓ: 'Leo' // TODO: Why?
       }
       return dict[greek]
     }
