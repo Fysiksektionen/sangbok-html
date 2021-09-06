@@ -12,42 +12,41 @@ import { getContentTeX } from '@/utils/export.ts'
 import { chapters } from '@/utils/lyrics.ts'
 import { mainTex, blad, logga } from '@/assets/tex/resources.ts'
 
-
 export default defineComponent({
   name: 'GeneratorView',
   methods: {
     go () {
       const content = getContentTeX(chapters.map(c => c.songs).flat(), (this as any).$store.state.settings.download)
 
-      var form = document.createElement("form");
-      form.setAttribute("method", "post");
-      form.setAttribute("action", "https://www.overleaf.com/docs");
-      form.setAttribute("target", "_blank");
+      var form = document.createElement('form')
+      form.setAttribute('method', 'post')
+      form.setAttribute('action', 'https://www.overleaf.com/docs')
+      form.setAttribute('target', '_blank')
 
       const files: {[key: string]: string} = {
-        "main.tex": mainTex,
-        "blad.cls": blad,
-        "logga.svg": logga,
-        "content.tex": content
+        'main.tex': mainTex,
+        'blad.cls': blad,
+        'logga.svg': logga,
+        'content.tex': content
       }
 
-      for (let [key, value] of Object.entries(files)) {
-        let name = document.createElement("input");
-        name.setAttribute("type", "hidden");
-        name.setAttribute("name", "snip_name[]");
-        name.setAttribute("value", key);
+      for (const [key, value] of Object.entries(files)) {
+        const name = document.createElement('input')
+        name.setAttribute('type', 'hidden')
+        name.setAttribute('name', 'snip_name[]')
+        name.setAttribute('value', key)
 
-        let content = document.createElement("input");
-        content.setAttribute("type", "hidden");
-        content.setAttribute("name", "snip[]");
-        content.setAttribute("value", value);
+        const content = document.createElement('input')
+        content.setAttribute('type', 'hidden')
+        content.setAttribute('name', 'snip[]')
+        content.setAttribute('value', value)
 
-        form.appendChild(name);
-        form.appendChild(content);
+        form.appendChild(name)
+        form.appendChild(content)
       }
 
-      document.body.appendChild(form);
-      form.submit();
+      document.body.appendChild(form)
+      form.submit()
     }
   }
 })
