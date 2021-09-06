@@ -49,7 +49,7 @@ func loadLyrics() LyricsDatabase {
 	var lyricsLocation string
 
 	if gin.Mode() == "debug" {
-		lyricsLocation = "../../src/assets/lyrics.json"
+		lyricsLocation = "../src/assets/lyrics.json"
 	} else {
 		lyricsLocation = "/app/lyrics.json"
 	}

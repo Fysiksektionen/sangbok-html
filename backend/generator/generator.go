@@ -6,8 +6,8 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"f-sangbok-backend/lyrics"
-	"fmt"
 	"net/http"
+	"regexp"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -18,12 +18,14 @@ func GenerateTeX() string {
 }
 
 func GeneratorHandler(c *gin.Context) {
+	// Parse base64
 	originalStringBytes, err := base64.StdEncoding.DecodeString(c.Param("b64"))
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "Unable to decode base64 parameter."})
 		return
 	}
 
+	// Parse indices
 	var indices [][]int
 	err = json.Unmarshal(originalStringBytes, &indices)
 	if err != nil {
@@ -31,8 +33,9 @@ func GeneratorHandler(c *gin.Context) {
 		return
 	}
 
+	// Load songs from db.
+	// TODO: add error handling for songs not found.
 	var songs []lyrics.Song
-
 	for _, idx := range indices {
 		songs = append(songs, lyrics.GetLyricsByIndex(idx[0], idx[1]))
 	}
@@ -77,7 +80,9 @@ type getContentProps struct {
 // TODO: Replace c with an options object.
 func getContent(songs []lyrics.Song, props getContentProps) string {
 	//
-	// Header etc.
+	// Headers etc.
+	//
+	// TODO: Make this a sub-function.
 	//
 	content := []string{
 		"\\documentclass[a4paper, twoside, titlepage]{blad}\n\\usepackage{amsmath,amsfonts,amssymb,graphicx}\n%amsmath används ganska ofta graphicx är till för att använda grafik\n\n\\usepackage{verbatim}\n\\usepackage[T1]{fontenc}\n%\\usepackage{moreverb}\n%\\usepackage{xspace}\n%\\usepackage{float}\n\n%\\setlength{\\parindent}{0pt}     % tar bort indrag från stycken. Avslaget\n%\\setlength{\\parskip}{3pt}       % Ändra så att stycken skiljs av\n                                 % blankrader. Avslaget\n%\\addtolength{\\topmargin}{-0.8cm} %Minskar marginalerna litegrann\n%\\addtolength{\\textheight}{0.8cm}\n\n% Titel, författare etc.\n\\title{",
@@ -129,7 +134,8 @@ func getContent(songs []lyrics.Song, props getContentProps) string {
 			}
 		}
 
-		// settingsSwitch()
+		// Adds the lyrics
+		content = append(content, getLyrics(song))
 
 		content = append(content, "\n")
 
@@ -151,23 +157,34 @@ func getContent(songs []lyrics.Song, props getContentProps) string {
 	return strings.Join(content, "")
 }
 
-// var addDefaultText = function (text) {
-// 	content.push(escapeAll(text
-// 		.replace(/\n\n\n/g, "\\\\ \\vspace*{0.5cm}")
-// 		.replace(/\n\n/g, "\\\\ ")
-// 		.replace(/\n/g, "\\\\*\n")
-// 		.replace(/\\\\ /g, "\n\n")
-// 		.replace(/\\vspace\*{0\.5cm}/g, "\\vspace*{0.5cm}\n")
-// 	));
-// };
+func getDefaultText(song lyrics.Song) string {
+	var text string = song.Text
 
-func settingsSwitch() {
-	// var settingsIndex = 0;
-	// switch (d.findIndex(function (entry, currentIndex) {
+	var regexes = map[*regexp.Regexp]string{
+		regexp.MustCompile(`\n\n\n`):             "\\\\ \\vspace*{0.5cm}",
+		regexp.MustCompile(`\n\n`):               "\\\\ ",
+		regexp.MustCompile(`\n`):                 "\\\\*\n",
+		regexp.MustCompile(`\\\\ `):              "\n\n",
+		regexp.MustCompile(`\\vspace\*{0\.5cm}`): "\\vspace*{0.5cm}\n",
+	}
+
+	for regex, replacement := range regexes {
+		text = regex.ReplaceAllString(text, replacement)
+	}
+
+	return escapeAll(text)
+}
+
+func getLyrics(song lyrics.Song) string {
+	var out string = ""
+	// var settingsIndex = 0
+	// Actual switch
+	// 	d.findIndex(function (entry, currentIndex) {
 	// 	return currentIndex >= 2 && entry.indexes.some(function (index) {
 	// 		return index[0] == item[1] && index[1] == item[2];
 	// 	});
-	// })) {
+	// })
+	switch 123 {
 	// 	case 2: //Årskursernas
 	// 		var description = songs[i].text.split("\n").filter(function (line) {
 	// 			return /^(?!\d\d)/.test(line);
@@ -315,51 +332,21 @@ func settingsSwitch() {
 	// 		else
 	// 			addDefaultText(songs[i].text);
 	// 		break;
-
-	// 	default:
-	// 		if (item[1] == 8 && item[2] == 14) //Aris summavisa
-	// 			addDefaultText(songs[i].text
-	// 				.replace("trollat bort n", "trollat bort \\(n\\)")
-	// 				.replace("Maclaurin av ln", "Maclaurin av \\(\\ln\\)")
-	// 			);
-	// 		else if (item[1] == 8 && item[2] == 16) //Liten visa om Gram-Schmidts metod
-	// 			addDefaultText(songs[i].text
-	// 				.replace(/M/g, "\\(M\\)")
-	// 				.replace("vektor a", "vektor \\(\\boldsymbol{a}\\)")
-	// 			);
-	// 		else if (item[1] == 9 && item[2] == 15) //Stad i ljus
-	// 			addDefaultText(songs[i].text.split(/\n\n\n/g)[0]);
-	// 		else
-	// 			addDefaultText(songs[i].text);
-	// 		break;
-	// }
-}
-
-func signature(page_count int) string {
-	page_count_rounded := page_count
-	for page_count_rounded%4 != 0 {
-		page_count_rounded += 1
+	default:
+		// if (item[1] == 8 && item[2] == 14) //Aris summavisa
+		// 	addDefaultText(song.Text
+		// 		.replace("trollat bort n", "trollat bort \\(n\\)")
+		// 		.replace("Maclaurin av ln", "Maclaurin av \\(\\ln\\)")
+		// 	);
+		// else if (item[1] == 8 && item[2] == 16) //Liten visa om Gram-Schmidts metod
+		// 	addDefaultText(songs[i].Text
+		// 		.replace(/M/g, "\\(M\\)")
+		// 		.replace("vektor a", "vektor \\(\\boldsymbol{a}\\)")
+		// 	);
+		// else if (item[1] == 9 && item[2] == 15) //Stad i ljus
+		// 	addDefaultText(songs[i].text.split(/\n\n\n/g)[0]);
+		// else
+		out += getDefaultText(song)
 	}
-
-	var res []int
-
-	for block := 0; block < page_count_rounded/4; block++ { // Should be integer division
-		res = append(res,
-			page_count_rounded-(2*block),
-			1+(2*block),
-			2+(2*block),
-			page_count_rounded-1-(2*block),
-		)
-	}
-
-	var strs []string
-	for _, x := range res {
-		if x <= page_count {
-			strs = append(strs, fmt.Sprint(x))
-		} else {
-			strs = append(strs, "{}")
-		}
-	}
-
-	return "{" + strings.Join(strs, ",") + "}"
+	return out
 }

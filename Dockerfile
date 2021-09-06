@@ -16,7 +16,7 @@ RUN npm run build
 
 
 # Backend
-FROM golang:1.16-alpine as backend-build
+FROM golang:1.17-alpine as backend-build
 
 WORKDIR /app/backend
 COPY backend /app/backend
