@@ -1,6 +1,5 @@
 
 import { createStore } from 'vuex'
-import lyrics from '@/assets/lyrics.json'
 import { downloadSettings } from './downloadSettings'
 
 export default createStore({
@@ -12,7 +11,6 @@ export default createStore({
       generator: false,
       download: downloadSettings
     },
-    lyrics: lyrics,
     query: ''
   },
   mutations: {

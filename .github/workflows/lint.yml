@@ -5,9 +5,9 @@ name: ESLint
 
 on:
   push:
-    branches: [ main, vue ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, vue ]
+    branches: [ main ]
 
 jobs:
   lint:

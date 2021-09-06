@@ -3,16 +3,16 @@
 <template>
   <Navbar :parent="() => $router.push('/')"/>
   <div class="main">
-    <h2>{{$store.state.lyrics.chapters[$route.params.id].chapter}}</h2>
+    <h2>{{chapter.chapter}}</h2>
     <table class="songbook">
-        <tr v-for="(song, idx) in $store.state.lyrics.chapters[$route.params.id].songs"
+        <tr v-for="(song, idx) in chapter.songs"
             @click="$router.push('/chapter/'+$route.params.id+'/song/'+idx)"
             v-bind:key="idx">
             <td class="index">
-              {{ $store.state.lyrics.indexes[$route.params.id][idx]}}
+              {{ song.index }}
             </td>
             <td class="name">
-                {{ song.title }}
+              {{ song.title }}
             </td>
         </tr>
     </table>
@@ -22,11 +22,17 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
+import { chapters } from '@/utils/lyrics.ts'
 
 export default defineComponent({
   name: 'ChapterView',
   components: {
     Navbar
+  },
+  data() {
+    return {
+      chapter: chapters[(this as any).$route.params.id]
+    }
   }
 })
 </script>

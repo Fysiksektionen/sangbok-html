@@ -1,4 +1,4 @@
-import { Chapter, Song } from './types'
+import { Chapter, Song } from './lyrics'
 
 type Hit = {
   song: {

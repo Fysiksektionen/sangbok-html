@@ -12,19 +12,25 @@
       "ecmaVersion": 2020
     },
     "rules": {
+      "space-before-function-paren": "off",
+
+      "semi": "warn",
       "quotes": "warn",
       "quote-props": "warn",
       "comma-dangle": "warn",
-      "semi": "warn",
-      "no-multiple-empty-lines": "warn",
-      "space-before-function-paren": "off",
       "keyword-spacing": "warn",
+      "object-curly-spacing": "warn",
+
       "indent": ["warn", 2],
-      "no-use-before-define": "off",
-      "@typescript-eslint/no-use-before-define": ["error"],
-      "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": ["warn"],
+      "no-multiple-empty-lines": "warn",
+
+      "prefer-const": "warn",
+      "no-unused-vars": "warn",
+      "no-use-before-define": "warn",
+
       "no-duplicate-imports": ["error"],
-      "@typescript-eslint/no-explicit-any": ["warn"]
+      "@typescript-eslint/no-unused-vars": ["warn"],
+      "@typescript-eslint/no-explicit-any": ["warn"],
+      "@typescript-eslint/no-use-before-define": ["error"]
     }
   }
