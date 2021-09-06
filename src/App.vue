@@ -16,18 +16,14 @@ body.night {
     background-color: #222;
 }
 
-.songbook {
-    overflow-x: hidden;
-    font-family: 'EB Garamond', serif;
-    vertical-align: top;
-  width: 100%;
-}
-
-.songbook table, table.songbook {
+table.songbook {
     font-size: 1.2em;
     line-height: 2em;
     color: #333;
     border-spacing: 0;
+    overflow-x: hidden;
+    font-family: 'EB Garamond', serif;
+    vertical-align: top;
 }
 
 .night table {
