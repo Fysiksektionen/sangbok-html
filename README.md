@@ -14,10 +14,13 @@ Se [issues](https://github.com/Fysiksektionen/sangbok-html/issues). Saker som ka
 * Fixa så att rewrites ej behövs för docker-containern.
 
 ## Hur du kör detta projekt
+### Utveckling
 Installera [Node.js 16](https://nodejs.org) om du inte redan har det. Klona sedan repot, och kör `npm install` i rotmappen. Utvecklingsservern körs sedan med `npm start`. Andra kommandon är:
 * `npm run build` - kompilera projektet.
 * `npm run lint` - lintar och fixar källkoden.
-* `docker run ghcr.io/fysiksektionen/sangbok:main -p <hostPort>:80` - Starta en [https://www.lighttpd.net](lighttpd)-baserad container med sångboken på `/`.
+
+### Körning
+Gå till den senaste [build-körningen](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml), skrolla ner till artifacts, och klicka på `dist`. Alternativt kan Docker användas med `docker run ghcr.io/fysiksektionen/sangbok:main -p <hostPort>:80`, som startar en [lighttpd](https://www.lighttpd.net)-baserad container med sångboken på `/`.
 
 <!-- See [Configuration Reference](https://cli.vuejs.org/config/). -->
 
