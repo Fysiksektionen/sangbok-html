@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Chapters
   },
   {
-    path: '/chapter/:id',
+    path: '/chapter/:cid',
     name: 'Chapter',
     component: Chapter
   },

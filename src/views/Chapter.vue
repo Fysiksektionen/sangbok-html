@@ -6,7 +6,7 @@
     <h2>{{chapter.chapter}}</h2>
     <table class="songbook">
         <tr v-for="(song, idx) in chapter.songs"
-            @click="$router.push('/chapter/'+$route.params.id+'/song/'+idx)"
+            @click="$router.push('/chapter/'+$route.params.cid+'/song/'+idx)"
             v-bind:key="idx">
             <td class="index">
               {{ song.index }}
@@ -31,7 +31,7 @@ export default defineComponent({
   },
   data() {
     return {
-      chapter: chapters[(this as any).$route.params.id]
+      chapter: chapters[(this as any).$route.params.cid]
     }
   }
 })

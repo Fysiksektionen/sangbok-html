@@ -11,7 +11,7 @@
         {{chapters[chapterid].songs[parseInt(songid)-1].index}}
       </div>
     </div>
-    <div v-if="parseInt(songid) == 0" style="opacity: 0;"><!--Filler div.--></div>
+    <div class="filler" v-if="parseInt(songid) == 0"></div>
     <div v-if="chapters[chapterid].songs[parseInt(songid)+1]"
       @click="$router.push('/chapter/'+chapterid+'/song/'+(parseInt(songid)+1))">
       <div>{{chapters[chapterid].songs[parseInt(songid)+1].title}}</div>
@@ -20,6 +20,7 @@
         <img src="../assets/back.png" style="transform: scaleX(-1);"/>
       </div>
     </div>
+    <div class="filler" v-if="parseInt(songid) == chapters[chapterid].songs.length-1"></div>
   </div>
 </template>
 
@@ -65,4 +66,6 @@ export default defineComponent({
       }
   }
 }
+
+div.filler {opacity: 0;}
 </style>

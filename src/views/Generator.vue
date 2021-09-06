@@ -1,22 +1,76 @@
 <template>
   <div class="generator">
     <h2>Sångbladsskaparen</h2>
-    <p>Är ännu inte implementerad.</p>
-    <button @click="go">Jag bryr mig inte. Visa mig ändå.</button>
+    <table class="songbook">
+      <tr v-for="songIdxs, listIdx in generatorSongs" v-bind:key="listIdx">
+        <td class="name">{{ chapters[songIdxs[0]].songs[songIdxs[1]].title }}</td>
+        <td class="operation up" v-bind:class="{ 'disabled': listIdx == 0 }" @click="listIdx > 0 && move(listIdx, -1)">▲</td>
+        <td class="operation down" v-bind:class="{ 'disabled': listIdx == generatorSongs.length-1 }" @click="listIdx < generatorSongs.length && move(listIdx, 1)">▼</td>
+        <td class="operation delete" @click="generatorSongs.splice(listIdx, 1)">✖</td>
+      </tr>
+    </table>
+    <div class="generatorbuttons">
+      <div v-bind:class="{ 'disabled': !canAdd() }" @click="add()" title="Lägg till">+</div>
+      <div @click="go" title="Öppna i Overleaf">☁</div>
+      <div @click="alert('Ej implementerad ännu.')" title="Ladda ner" class="disabled">↓</div>
+    </div>
+    <p style="text-align: center;">Sångbladsskaparen är för närvarande experimentell.</p>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { getContentTeX } from '@/utils/export.ts'
-import { chapters } from '@/utils/lyrics.ts'
+import { chapters, Song } from '@/utils/lyrics.ts'
 import { mainTex, blad, logga } from '@/assets/tex/resources.ts'
+
+type SongIndex = [number, number]
 
 export default defineComponent({
   name: 'GeneratorView',
+  data () {
+    // TODO: Perhaps should be stored using $store.
+    const gs: SongIndex[] = []
+    return {
+      generatorSongs: gs,
+      chapters: chapters
+    }
+  },
+  props: ['songid', 'chapterid'],
   methods: {
+    add() {
+      if (this.$route.params.songId !== undefined && this.$route.params.chapterId !== undefined) { // Song
+        const songId = parseInt(this.$route.params.songId as string)
+        const chapterId = parseInt(this.$route.params.chapterId as string)
+        this.generatorSongs.push([chapterId, songId])
+      } else if (this.$route.params.cid !== undefined) { // Chapter
+        const cid = parseInt(this.$route.params.cid as string)
+        for (let i = 0; i < this.chapters[cid].songs.length; i++) {
+          this.generatorSongs.push([cid, i])
+        }
+      }
+    },
+    move (index: number, direction: number) {
+      var temp = this.generatorSongs[index]
+      this.generatorSongs[index] = this.generatorSongs[index + direction]
+      this.generatorSongs[index + direction] = temp
+    },
+    canAdd () { // TODO: Move to computed
+      return (// TODO: Don't rely on $route.params for state identification.
+        (this.$route.params.songId !== undefined && this.$route.params.chapterId !== undefined) ||
+        (this.$route.params.cid !== undefined)
+      )
+    },
+    getSongs(indices: SongIndex[]): Song[] {
+      const out: Song[] = []
+      for (const songIndex of indices) {
+        out.push(chapters[songIndex[0]].songs[songIndex[1]])
+      }
+      return out
+    },
     go () {
-      const content = getContentTeX(chapters.map(c => c.songs).flat(), (this as any).$store.state.settings.download)
+      const songs = (this.generatorSongs.length === 0) ? chapters.map(c => c.songs).flat() : this.getSongs(this.generatorSongs)
+      const content = getContentTeX(songs, (this as any).$store.state.settings.download)
 
       var form = document.createElement('form')
       form.setAttribute('method', 'post')
@@ -54,7 +108,39 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .generator {
-  width: 30%;
+  width: 40%;
   right: 0;
 }
-</style>
+
+table.songbook tr:active {background-color: unset;}
+
+  .operation:hover:not(.disabled) {cursor:pointer;}
+  .operation.disabled {color:#333}
+
+  .generatorbuttons {
+        padding-bottom: 20px;
+        text-align: center;
+
+        &> div {
+          display: inline-block;
+          background-color: rgba(128, 128, 128, 0.10);
+
+          $navbutton-spacing: 12px;
+          border-radius: $navbutton-spacing;
+          margin: $navbutton-spacing;
+          padding: $navbutton-spacing;
+          width: calc(33% - 4 * #{$navbutton-spacing});
+
+          color: #f60;
+          font-size: 2em;
+
+          &:hover:not(.disabled) {
+            cursor:pointer;
+          }
+          &.disabled {
+            background-color: rgba(128, 128, 128, 0.80);
+            color: unset;
+          }
+      }
+    }
+  </style>
