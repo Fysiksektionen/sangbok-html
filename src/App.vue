@@ -5,12 +5,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import GeneratorView from '@/views/Generator.vue'
 
 export default defineComponent({
   name: 'Sångbok',
   components: {
-    GeneratorView
+    GeneratorView: () => import('@/views/Generator.vue')
   }
 })
 </script>
