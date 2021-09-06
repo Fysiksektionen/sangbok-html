@@ -5,7 +5,7 @@
   <div class="main">
     <SearchBox/>
     <table class="songbook">
-        <tr v-for="(chapter, idx) in $store.state.lyrics.chapters"
+        <tr v-for="(chapter, idx) in chapters"
             @click="$router.push('/chapter/'+idx)"
             v-bind:key="idx">
             <td class="index">
@@ -23,12 +23,18 @@
 import { defineComponent } from 'vue'
 import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
 import SearchBox from '@/components/SearchBox.vue'
+import { chapters } from '@/utils/lyrics.ts'
 
 export default defineComponent({
   name: 'ChaptersView',
   components: {
     Navbar,
     SearchBox
+  },
+  data() {
+    return {
+      chapters: chapters
+    }
   },
   created() {
     if (this !== undefined) {

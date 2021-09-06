@@ -5,14 +5,14 @@
   <div class="main">
     <SearchBox :query="$route.params.query"/>
     <table class="songbook">
-        <tr v-for="(hit, idx) in search($route.params.query, $store.state.lyrics.chapters)"
+        <tr v-for="(hit, idx) in search($route.params.query, chapters)"
             @click="$router.push('/chapter/'+hit.song.chapterindex+'/song/'+hit.song.songindex)"
             v-bind:key="idx">
             <td class="index">
-              {{ $store.state.lyrics.indexes[hit.song.chapterindex][hit.song.songindex] }}
+              {{ chapters[hit.song.chapterindex].songs[hit.song.songindex].index }}
             </td>
             <td class="name">
-              {{ $store.state.lyrics.chapters[hit.song.chapterindex].songs[hit.song.songindex].title }}
+              {{ chapters[hit.song.chapterindex].songs[hit.song.songindex].title }}
             </td>
         </tr>
         <tr class="nohits"><td>Inga sånger hittades.</td></tr>
@@ -25,6 +25,7 @@ import { defineComponent } from 'vue'
 import { search } from '@/utils/search.ts'
 import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
 import SearchBox from '@/components/SearchBox.vue'
+import { chapters } from '@/utils/lyrics.ts'
 
 export default defineComponent({
   name: 'Search',
@@ -34,6 +35,11 @@ export default defineComponent({
   },
   methods: {
     search: search
+  },
+  data() {
+    return {
+      chapters: chapters
+    }
   },
   created() {
     if (this !== undefined) {
@@ -52,7 +58,7 @@ export default defineComponent({
   box-shadow: unset !important;
   border-bottom: unset !important;
   &:not(:first-child) {/* Hide the nohits row if there are hits. */
-    visibility: hidden;
+    display: none;
   }
 }
 </style>

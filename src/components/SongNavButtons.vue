@@ -5,18 +5,18 @@
   <div class="navbuttons">
     <div v-if="parseInt(songid) > 0"
       @click="$router.push('/chapter/'+chapterid+'/song/'+(parseInt(songid)-1))">
-      <div>{{$store.state.lyrics.chapters[chapterid].songs[parseInt(songid)-1].title}}</div>
+      <div>{{chapters[chapterid].songs[parseInt(songid)-1].title}}</div>
       <div>
         <img src="../assets/back.png"/> &nbsp;
-        {{$store.state.lyrics.indexes[chapterid][parseInt(songid)-1]}}
+        {{chapters[chapterid].songs[parseInt(songid)-1].index}}
       </div>
     </div>
     <div v-if="parseInt(songid) == 0" style="opacity: 0;"><!--Filler div.--></div>
-    <div v-if="$store.state.lyrics.chapters[chapterid].songs[parseInt(songid)+1]"
+    <div v-if="chapters[chapterid].songs[parseInt(songid)+1]"
       @click="$router.push('/chapter/'+chapterid+'/song/'+(parseInt(songid)+1))">
-      <div>{{$store.state.lyrics.chapters[chapterid].songs[parseInt(songid)+1].title}}</div>
+      <div>{{chapters[chapterid].songs[parseInt(songid)+1].title}}</div>
       <div>
-        {{$store.state.lyrics.indexes[chapterid][parseInt(songid)+1]}} &nbsp;
+        {{chapters[chapterid].songs[parseInt(songid)+1].index}} &nbsp;
         <img src="../assets/back.png" style="transform: scaleX(-1);"/>
       </div>
     </div>
@@ -25,10 +25,16 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { chapters } from '@/utils/lyrics.ts'
 
 export default defineComponent({
   name: 'Navbar',
-  props: ['songid', 'chapterid']
+  props: ['songid', 'chapterid'],
+  data() {
+    return {
+      chapters: chapters
+    }
+  }
 })
 </script>
 

@@ -1,6 +1,7 @@
 // This file is currently unused.
 /* eslint-disable no-case-declarations */
-import { Song } from './types'
+import { DownloadSettings } from '@/store/downloadSettings'
+import { Song } from './lyrics'
 
 const latexEscapes: [RegExp, string][] = [
   [/"/g, "''"],
@@ -36,10 +37,7 @@ function getDefaultText(text: string): string {
   )
 }
 
-export function getContentTeX(store: any): string {
-  const d = store.state.settings.download
-  const songs: Song[] = store.state.generatorSongs
-
+export function getContentTeX(songs: Song[], d: DownloadSettings[]): string {
   // eslint-disable-next-line prefer-const
   let content: string[] = []
 

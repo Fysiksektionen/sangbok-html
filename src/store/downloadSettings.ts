@@ -1,4 +1,33 @@
-export const downloadSettings = [
+type BoolSetting = {
+  text: string,
+  type: 'bool',
+  value: boolean
+}
+
+type StringSetting = {
+  text: string,
+  type: 'string',
+  value: string
+}
+
+type NumberSetting = {
+  text: string,
+  type: 'number',
+  value: number,
+  min: number,
+  max: number,
+  placeholder?: string
+}
+
+type DownloadSetting = BoolSetting | StringSetting | NumberSetting
+
+export type DownloadSettings = {
+  title: string,
+  indexes?: [number, number][],
+  settings: DownloadSetting[]
+}
+
+export const downloadSettings: DownloadSettings[] = [
   {
     title: 'Allmänt',
     settings: [{
