@@ -24,13 +24,14 @@ const routes: Array<RouteRecordRaw> = [
     path: '/search/:query',
     name: 'Search',
     component: Search
-  }
+  },
+  { path: '/search/', redirect: '/' }/* Redirect empty searches back to the start page. */
 ]
 
 // for route level code-splitting
 // that generates a separate chunk (about.[hash].js) for this route
 // which is lazy-loaded when the route is visited, use the below code in the routes constant above.
-// component: () => import('../views/Chapter.vue')
+// component: () => import('../views/Generator.vue')
 
 const router = createRouter({
   history: createWebHashHistory(),

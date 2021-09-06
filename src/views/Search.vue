@@ -14,6 +14,7 @@
               {{ $store.state.lyrics.chapters[hit.song.chapterindex].songs[hit.song.songindex].title }}
           </td>
       </tr>
+      <tr class="nohits"><td>Inga sånger hittades.</td></tr>
   </table>
 </template>
 
@@ -43,17 +44,13 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="css">
-h2 {
-    font-family: 'EB Garamond', serif;
-    text-align: center;
-    color: #333;
-    margin: 0.75em 24px;
-    padding: 0;
-    padding-top: 0.75em;
-}
-
-.night h2 {
-    color: #ddd;
+<style scoped lang="scss">
+.nohits {
+  text-align: center;
+  box-shadow: unset !important;
+  border-bottom: unset !important;
+  &:not(:first-child) {/* Hide the nohits row if there are hits. */
+    visibility: hidden;
+  }
 }
 </style>

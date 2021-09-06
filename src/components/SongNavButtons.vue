@@ -36,32 +36,27 @@ export default defineComponent({
 <style scoped lang="scss">
 .navbuttons {
     padding: 20px 0;
-}
-
-.navbuttons > div {
     text-align: center;
-    display: inline-block;
-    background-color: rgba(128, 128, 128, 0.10);
 
-    $navbutton-padding: 12px;
-    border-radius: $navbutton-padding;
-    margin: $navbutton-padding;
-    padding: $navbutton-padding;
-    width: calc(50% - 4 * #{$navbutton-padding});
-}
+    &> div {
+      display: inline-block;
+      background-color: rgba(128, 128, 128, 0.10);
 
-.navbuttons > div:active {
-    background-color: rgba(128, 128, 128, 0.30);
-}
+      $navbutton-spacing: 12px;
+      border-radius: $navbutton-spacing;
+      margin: $navbutton-spacing;
+      padding: $navbutton-spacing;
+      width: calc(50% - 4 * #{$navbutton-spacing});
 
-.navbuttons > div > div{
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+      &:active {background-color: rgba(128, 128, 128, 0.30);}
 
-.navbuttons > div > div > img {
-  height: 0.5em;
+      &> div{
+          width: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          &>img {height: 0.5em;}
+      }
+  }
 }
 </style>

@@ -2,13 +2,12 @@
 
 <template>
   <Navbar :parent="goToParent"/>
-    <!--TODO: Back button (:parent) should send the user to the search if they got here through the search. -->
     <div class="lyrics"
     v-for="(song, i) in [$store.state.lyrics.chapters[$route.params.chapterId].songs[$route.params.songId]]"
     v-bind:key="i">
       <h2>{{song.title}}</h2>
       <div v-if="song.melody" class="melody" v-html="toHTML(song.melody)"></div>
-      <div class="textcontainer" v-html="toHTML(song.text)"></div>
+      <div class="textcontainer" v-html="toHTML(song.text)" v-bind:class="{'larger': $store.state.settings.larger}"></div>
       <div v-if="song.author" class="author" v-html="toHTML(song.author)"></div>
       <NavButtons :chapterid="$route.params.chapterId" :songid="$route.params.songId"/>
     </div>
@@ -29,7 +28,7 @@ export default defineComponent({
     toHTML (text: string):string {
       return text.replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/\n/igm, '<br />')
     },
-    goToParent () {
+    goToParent () { // this.$store.state.query is set if the user came from search. If that's the case, send them back to the search page, else go to the chapter page.
       if (this !== undefined) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if ((this as any).$store.state.query !== '') {
@@ -44,9 +43,12 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="css">
-.lyrics {
-  font-family: 'EB Garamond', serif;
+<style scoped lang="scss">
+h2 {
+    text-align: center;
+    margin: 0.75em 24px;
+    padding: 0;
+    padding-top: 0.75em;
 }
 
 div.lyrics {
@@ -54,69 +56,23 @@ div.lyrics {
   margin-right: 1%;
 }
 
-h2 {
-    text-align: center;
-    color: #333;
-    margin: 0.75em 24px;
-    padding: 0;
-    padding-top: 0.75em;
-}
-
-.night .lyrics, .night h2 {
-    color: #ddd;
-}
-
-.lyrics .melody {
-    text-align: center;
+.melody, .author {
     font-style: italic;
-    margin-bottom: 12px;
-    padding-left: 24px;
     padding-right: 24px;
+    padding-left: 24px;
 }
+.melody {text-align: center;margin-bottom: 12px;}
+.author {text-align: right;}
+
 .textcontainer {
     text-align: left;
     display: inline-block;
     padding: 0 24px 12px;
     font-size: 1.05em;
     line-height: 1.25em;
-}
-
-.author {
-    text-align: right;
-    font-style: italic;
-    padding-right: 24px;
-    padding-left: 24px;
-}
-
-.navbuttons > div {
-    width: 50%;
-    position: relative;
-}
-
-.navbuttons > div > div.upper {
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.navbuttons > div > div.lower {
-  width: 100%;
-}
-
-element.style {
-    visibility: visible;
-}
-.navbuttons .container:nth-child(1) > div {
-    left: 24px;
-}
-.navbuttons > div > div {
-    left: 12px;
-    right: 12px;
-    position: absolute;
-    text-align: center;
-    border-radius: 12px;
-    padding: 12px;
-    background-color: rgba(128, 128, 128, 0.10);
+    &.larger {
+      font-size: 1.2em;
+      line-height: 1.5em;
+    }
 }
 </style>

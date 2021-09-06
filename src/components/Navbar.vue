@@ -1,19 +1,15 @@
-<!--TODO: Make a NavbarButton component. -->
-
 <template>
-  <div class="navbar">
+  <div class="navbar bg-orange">
     <div style="float: left;" v-if="parent" @click="parent">
       <button><img src="../assets/back.png" alt="Go back" /></button>
     </div>
-    <div class="title">
-        Sångboken
-    </div>
+    <div class="title">Sångboken</div>
     <div style="float: right;">
       <button @click="showSettings=true" v-if="!showSettings"><img src="../assets/settings.png" alt="Show settings" /></button>
       <button @click="showSettings=false" v-if="showSettings"><img src="../assets/x.png" alt="Close settings" /></button>
     </div>
   </div>
-  <Dropdown v-if="showSettings"/>
+  <Dropdown :show="showSettings"/>
 </template>
 
 <script lang="ts">
@@ -44,10 +40,7 @@ button {
     height: 100%;
     border: 0;
     padding: 0.8em 0.8em;
-}
-
-button:active {
-    background-color: rgba(255, 255, 255, 0.20);
+    &:active {background-color: rgba(255, 255, 255, 0.20);}
 }
 
 .navbar {
@@ -55,7 +48,6 @@ button:active {
     left: 0;
     right: 0;
     top: 0;
-    background-color: #F60;
     height: 2.3em;
     z-index: 10;
 }
@@ -84,24 +76,23 @@ button:active {
     box-shadow: 0 0 14px black;
     transition: top 0.3s ease-in-out;
     z-index: 9;
-}
 
-    .night .settings {
-        color: #ddd;
-        background-color: #222;
-    }
-
-    .settings div {
+    & div{
         width: 100%;
         padding: 0.8em 0;
     }
+}
 
-    .settings .copy .checkmark {
-        float: right;
-        width: 0.8em;
-        height: 0.8em;
-        padding: 0;
-        margin-right: 0.1em;
-        color: #0E0;
-    }
+.night .settings {
+    color: #ddd;
+    background-color: #222;
+}
+.settings .copy .checkmark {
+    float: right;
+    width: 0.8em;
+    height: 0.8em;
+    padding: 0;
+    margin-right: 0.1em;
+    color: #0E0;
+}
 </style>

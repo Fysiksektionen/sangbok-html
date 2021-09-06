@@ -3,83 +3,68 @@
 </template>
 
 <style lang="scss">
+/* Colors */
+/* $f-orange: #FF642B;
+$f-orange-light: #FB9C74;
+$f-orange-lighter: #F7D48C;
+$f-porcelain: #f5f4f4;
+$f-navy: #132a3e;
+$f-gray-violet: #2f3b4b;
+$f-gray-navy: #3B5262;
+$f-gray-turqoise: #829899;
+$f-blue: #1757A3;
+$f-sky: #58a7cb;
+$f-green: #197F2A;
+$f-onyx: #221F20; */
+
+/* Color classes. Used by views and components */
+.bg-orange {background-color: #f60;}
+.border-orange {border-color: #f60;}
+
 /* Other, unmigrated */
 body {
     margin: 0;
     margin-top: 2.2em;
     transition: 0.1s background-color ease-in-out;
-}
+    font-family: 'EB Garamond', serif;
 
-body.night {
-  /* TODO: Since <body> is outside of Vue's scope, the night class is set through an ugly fix in the @/store/index.ts file.
-   This can probably be made more elegantly. */
-    background-color: #222;
+    &.night {
+      /* TODO: Since <body> is outside of Vue's scope, the night class is set through an ugly fix in the @/store/index.ts file. This can probably be made more elegantly. */
+      background-color: #222;
+      color: #ddd;
+    }
 }
 
 table.songbook {
     font-size: 1.2em;
     line-height: 2em;
-    color: #333;
     border-spacing: 0;
     overflow-x: hidden;
-    font-family: 'EB Garamond', serif;
     vertical-align: top;
+
+    width: 98%;
+    margin: 0 1% 2em 1%;
+    border-spacing: 0;
+
+    & td {
+      height: 3em;
+      vertical-align: middle;
+    }
+    & tr {
+      box-shadow: 0 2px 3px #aaa;
+      border-bottom: 1px solid #aaa;
+      &:active {background-color: #f3f3f3;}
+      &:first-child {box-shadow: 0 1px 5px #aaa;}
+    }
+
+    & .index {padding-left: 1em;}
+    & .name {padding-left: 1em;padding-right: 0.5em;}
 }
 
-.night table {
-    color: #ddd;
-}
-
-.songbook td {
-    height: 3em;
-    vertical-align: middle;
-}
-
-.songbook tr {
-    box-shadow: 0 2px 3px #aaa;
-    border-bottom: 1px solid #aaa;
-}
-
-.songbook tr.nohits {
-    text-align: center;
-    box-shadow: unset !important;
-    border-bottom: unset !important;
-}
-
-.night .songbook tr {
-    box-shadow: 0 2px 3px #111;
-    border-bottom: 1px solid #111;
-}
-
-.songbook tr:active {
-    background-color: #f3f3f3;
-}
-
-.night .songbook tr:active {
-    background-color: #444;
-}
-.songbook tr:first-child {
-    box-shadow: 0 1px 5px #aaa;
-}
-
-.night .songbook tr:first-child {
-    box-shadow: 0 1px 5px #111;
-}
-
-.index {
-    padding-left: 1em;
-}
-
-.name {
-    padding-left: 1em;
-    padding-right: 0.5em;
-}
-
-table {
-  font-family: 'EB Garamond', serif;
-  width: 98%;
-  margin-left: 1%;
-  margin-right: 1%;
-  border-spacing: 0;
+.night table.songbook tr {
+  box-shadow: 0 2px 3px #111;
+  border-bottom: 1px solid #111;
+  &:active {background-color: #444;}
+  &:first-child {box-shadow: 0 1px 5px #111;}
 }
 </style>
