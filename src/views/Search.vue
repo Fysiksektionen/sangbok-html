@@ -2,20 +2,22 @@
 
 <template>
   <Navbar :parent="() => $router.push('/')"/>
-  <SearchBox :query="$route.params.query"/>
-  <table class="songbook">
-      <tr v-for="(hit, idx) in search($route.params.query, $store.state.lyrics.chapters)"
-          @click="$router.push('/chapter/'+hit.song.chapterindex+'/song/'+hit.song.songindex)"
-          v-bind:key="idx">
-          <td class="index">
-            {{ $store.state.lyrics.indexes[hit.song.chapterindex][hit.song.songindex] }}
-          </td>
-          <td class="name">
-              {{ $store.state.lyrics.chapters[hit.song.chapterindex].songs[hit.song.songindex].title }}
-          </td>
-      </tr>
-      <tr class="nohits"><td>Inga sånger hittades.</td></tr>
-  </table>
+  <div class="main">
+    <SearchBox :query="$route.params.query"/>
+    <table class="songbook">
+        <tr v-for="(hit, idx) in search($route.params.query, $store.state.lyrics.chapters)"
+            @click="$router.push('/chapter/'+hit.song.chapterindex+'/song/'+hit.song.songindex)"
+            v-bind:key="idx">
+            <td class="index">
+              {{ $store.state.lyrics.indexes[hit.song.chapterindex][hit.song.songindex] }}
+            </td>
+            <td class="name">
+                {{ $store.state.lyrics.chapters[hit.song.chapterindex].songs[hit.song.songindex].title }}
+            </td>
+        </tr>
+        <tr class="nohits"><td>Inga sånger hittades.</td></tr>
+    </table>
+  </div>
 </template>
 
 <script lang="ts">

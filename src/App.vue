@@ -1,6 +1,21 @@
 <template>
     <router-view/>
+    <GeneratorView v-if="$store.state.settings.generator"/>
 </template>
+
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import GeneratorView from '@/views/Generator.vue'
+
+export default defineComponent({
+  name: 'Sångbok',
+  components: {
+    GeneratorView
+  }
+})
+</script>
+
 
 <style lang="scss">
 /* Colors */
@@ -21,7 +36,7 @@ $f-onyx: #221F20; */
 .bg-orange {background-color: #f60;}
 .border-orange {border-color: #f60;}
 
-/* Other, unmigrated */
+/* Layout */
 body {
     margin: 0;
     margin-top: 2.2em;
@@ -35,6 +50,18 @@ body {
     }
 }
 
+#app {display: flex;}
+div.main {width: 100%;}
+
+/* General */
+h2 {text-align: center;}
+div.main h2 {
+    margin: 0.75em 24px;
+    padding: 0;
+    padding-top: 0.75em;
+}
+
+/* Tables, etc. */
 table.songbook {
     font-size: 1.2em;
     line-height: 2em;

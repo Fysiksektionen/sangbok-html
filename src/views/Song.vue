@@ -2,6 +2,7 @@
 
 <template>
   <Navbar :parent="goToParent"/>
+  <div class="main">
     <div class="lyrics"
     v-for="(song, i) in [$store.state.lyrics.chapters[$route.params.chapterId].songs[$route.params.songId]]"
     v-bind:key="i">
@@ -10,6 +11,7 @@
       <div class="textcontainer" v-html="toHTML(song.text)" v-bind:class="{'larger': $store.state.settings.larger}"></div>
       <div v-if="song.author" class="author" v-html="toHTML(song.author)"></div>
       <NavButtons :chapterid="$route.params.chapterId" :songid="$route.params.songId"/>
+    </div>
     </div>
 </template>
 
@@ -44,13 +46,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-h2 {
-    text-align: center;
-    margin: 0.75em 24px;
-    padding: 0;
-    padding-top: 0.75em;
-}
-
 div.lyrics {
   margin-left: 1%;
   margin-right: 1%;

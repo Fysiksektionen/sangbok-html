@@ -2,19 +2,21 @@
 
 <template>
   <Navbar/>
-  <SearchBox/>
-  <table class="songbook">
-      <tr v-for="(chapter, idx) in $store.state.lyrics.chapters"
-          @click="$router.push('/chapter/'+idx)"
-          v-bind:key="idx">
-          <td class="index">
-              {{$store.state.settings.translate ? greek2latin(chapter.prefix) : chapter.prefix}}
-          </td>
-          <td class="name">
-              {{ chapter.chapter }}
-          </td>
-      </tr>
-  </table>
+  <div class="main">
+    <SearchBox/>
+    <table class="songbook">
+        <tr v-for="(chapter, idx) in $store.state.lyrics.chapters"
+            @click="$router.push('/chapter/'+idx)"
+            v-bind:key="idx">
+            <td class="index">
+                {{$store.state.settings.translate ? greek2latin(chapter.prefix) : chapter.prefix}}
+            </td>
+            <td class="name">
+                {{ chapter.chapter }}
+            </td>
+        </tr>
+    </table>
+  </div>
 </template>
 
 <script lang="ts">
