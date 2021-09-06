@@ -1,4 +1,6 @@
-﻿angular.module('sangbok', ['ngRoute', 'sangbok.lyrics', 'sangbok.resources'])
+﻿// app.js from the old version of this site
+
+angular.module('sangbok', ['ngRoute', 'sangbok.lyrics', 'sangbok.resources'])
 
 .config(function ($routeProvider) {
     $routeProvider
@@ -168,7 +170,7 @@
         $scope.deleteCheckmark();
 
         var textArea = document.createElement("textarea");
-        
+
         textArea.style.position = 'fixed';
         textArea.style.top = 0;
         textArea.style.left = 0;
@@ -181,7 +183,7 @@
         textArea.style.background = 'transparent';
 
         textArea.value = song.title + "\n\n" + song.text;
-        
+
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
@@ -304,7 +306,7 @@
         content.push("\\date{}                          %Ta bort kommentaren om du inte vill ha med datum.\n\n\\begin{document}\n");
 
         content.push("\\pagenumbering{arabic}\n\\maketitle\n");
-        
+
         var addDefaultText = function (text) {
             content.push(escapeAll(text
                 .replace(/\n\n\n/g, "\\\\ \\vspace*{0.5cm}")
@@ -319,7 +321,7 @@
             content.push("\\begin{sang}{")
             content.push(escapeAll(songs[i].title));
             content.push("}\n");
-            
+
 
             if (d[0].settings[3].value && songs[i].melody) {
                 var melodyContent = (songs[i].melody
@@ -365,7 +367,7 @@
                     }
                     for (var j = yearIndex; j < years.length; j++)
                         yearsContent.unshift(years[j] + "\\\\\n");
-                    
+
                     if (d[2].settings[3].value)
                         yearsContent = yearsContent.reverse();
 
