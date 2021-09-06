@@ -1,5 +1,5 @@
 # sangbok-html
-Sångboken, för hemsidan. WIP (detta är alltså _inte_ den version som ligger uppe på hemsidan nu).
+Sångboken, för hemsidan. Work-in-progress. Detta är alltså _inte_ den version som ligger uppe på hemsidan nu. Vill du se hur det går, ligger en hyfsat uppdaterad version [här](https://f-sangbok-3cf6d8.netlify.app).
 
 ## Varför?
 Jag har tänkt att sångboken behöver uppdateras lite. Det fattas noter och matematikhatarvisor, och sångbladsskaparen borde vara mer användarvänlig. Vill du hänga på, eller har fler förslag på vad som kan göras är det bara att hojta till 😊.  
@@ -22,7 +22,6 @@ Installera [Node.js 16](https://nodejs.org) om du inte redan har det. Klona seda
 * `npm run lint` - lintar och fixar källkoden.
 
 <!-- See [Configuration Reference](https://cli.vuejs.org/config/). -->
-
 
 ## Noter och upphovsrätt
 Det är inte säkert att det är upphovsrättsligt korrekt att ha med alla noter öppet på hemsidan.
