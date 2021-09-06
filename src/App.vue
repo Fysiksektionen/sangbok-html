@@ -4,12 +4,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, defineAsyncComponent } from 'vue'
 
 export default defineComponent({
   name: 'Sångbok',
-  components: {
-    GeneratorView: () => import('@/views/Generator.vue')
+  components: { // load Generator component and generator helper functions asynchronously.
+    GeneratorView: defineAsyncComponent(() => import('@/views/Generator.vue'))
   }
 })
 </script>
