@@ -31,7 +31,7 @@ export default defineComponent({
   },
   data() {
     return {
-      chapter: chapters[(this as any).$route.params.cid]
+      chapter: chapters[parseInt(this.$route.params.cid as string)]
     }
   }
 })

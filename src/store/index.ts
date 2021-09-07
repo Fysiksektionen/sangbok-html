@@ -1,9 +1,6 @@
 import { createStore } from 'vuex'
 import { downloadSettings } from './downloadSettings'
 
-// TODO: This is an ugly workaround for state not being type declared
-const gs: [number, number][] = []
-
 export default createStore({
   state: {
     settings: {

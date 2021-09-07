@@ -78,10 +78,10 @@ export function getContentTeX(songs: Song[], d: DownloadSettings[]): string {
     // const item = songs[i]
 
     // let settingsIndex = 0
-    switch (Math.random()
-    //   d.findIndex(function (entry, currentIndex) {
-    //   return currentIndex >= 2 && entry.indexes.some(function (index) {
-    //     return index[0] == item[1] && index[1] == item[2]
+    switch (Math.random() // Dummy
+    // d.findIndex((entry: DownloadSettings, currentIndex: number) => {
+    //   return currentIndex >= 2 && entry.indexes && entry.indexes.some(function (index) {
+    //     return index[0] === item[1] && index[1] === item[2]
     //   })
     // })
     ) {
@@ -243,8 +243,6 @@ export function getContentTeX(songs: Song[], d: DownloadSettings[]): string {
 
     content.push('\\end{sang}\n')
   }
-
-  content.push('\n\\end{document}')
 
   return content.join('')
 }

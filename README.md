@@ -6,9 +6,8 @@ Sångboken, för hemsidan. Work-in-progress. Detta är alltså _inte_ [den versi
 
 ## Att göra
 Se [issues](https://github.com/Fysiksektionen/sangbok-html/issues). Saker som kan göras i mån av tid och behov är:
-* Fixa en parser för att generera `lyrics.json` direkt från LaTeX-filerna i [sångboksrepot](https://github.com/Fysiksektionen/Sangbok).
 * Fixa ett alternativt tema för att matcha den nya hemsidan.
-* Fixa så att rewrites ej behövs för docker-containern.
+* Easter-eggs
 
 ## Hur du kör detta projekt
 ### Utveckling
@@ -17,7 +16,7 @@ Installera [Node.js 16](https://nodejs.org) om du inte redan har det. Klona seda
 * `npm run lint` - lintar och fixar källkoden.
 
 ### Körning
-Gå till den senaste [build-körningen](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml), skrolla ner till artifacts, och klicka på `dist`. Alternativt kan Docker användas med `docker run ghcr.io/fysiksektionen/sangbok:main -p <hostPort>:80`, som startar en [lighttpd](https://www.lighttpd.net)-baserad container med sångboken på `/`.
+Gå till den senaste [build-körningen](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml), skrolla ner till artifacts, och klicka på `dist` för att ladda ner en zip-fil med statiskt innehåll.
 
 <!-- See [Configuration Reference](https://cli.vuejs.org/config/). -->
 

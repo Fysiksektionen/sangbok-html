@@ -12,7 +12,6 @@ export default defineComponent({
   props: ['query'],
   data () {
     return {
-      store: this.$store,
       query2: this.$props.query || ''
     }
   },

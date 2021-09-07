@@ -38,7 +38,7 @@ export default defineComponent({
   },
   props: ['songid', 'chapterid'],
   methods: {
-    add() {
+    add() { // TODO: Duplicate-check.
       if (this.$route.params.songId !== undefined && this.$route.params.chapterId !== undefined) { // Song
         const songId = parseInt(this.$route.params.songId as string)
         const chapterId = parseInt(this.$route.params.chapterId as string)
@@ -56,7 +56,7 @@ export default defineComponent({
       this.generatorSongs[index + direction] = temp
     },
     canAdd () { // TODO: Move to computed
-      return (// TODO: Don't rely on $route.params for state identification.
+      return (// TODO: Don't rely on $route.params for state identification. (Also applies to add())
         (this.$route.params.songId !== undefined && this.$route.params.chapterId !== undefined) ||
         (this.$route.params.cid !== undefined)
       )
@@ -70,6 +70,7 @@ export default defineComponent({
     },
     go () {
       const songs = (this.generatorSongs.length === 0) ? chapters.map(c => c.songs).flat() : this.getSongs(this.generatorSongs)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const content = getContentTeX(songs, (this as any).$store.state.settings.download)
 
       var form = document.createElement('form')
