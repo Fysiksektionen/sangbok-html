@@ -1382,13 +1382,19 @@
 					"title": "Handelsvisa",
 					"author": "Team kangaroo Gerhards-gasque 1977",
 					"melody": "Åh, hur saligt att få vandra",
-					"text": "Vi vill aldrig gå på Handels,\nAldrig tenta företagsekonomi.\nDeras IQ den e' Mandels\nOch förståndet, det har ju gjort sorti.\nDom har jätteusla snören,\nTill sitt jätteusla draperi.\nDom kan bara räkna ören,\nHela skolan e' ett enda aperi!\n\nHandels är skit - Jag vill ej dit ....\n\nMammons pojkar är dom alla,\nPappas flickor är dom likaså,\nGår och tror att dom är balla,\nFastän dom inget alls ju förstå.\nHela Handels borde rivas,\nDetta anser hela vårat lag.\nDå skulle Osquarina trivas\nUppå denna Handels ljuva domedag!\n\nÅh, vilket drag - på denna dag ...."
+					"text": "Vi vill aldrig gå på Handels,\nAldrig tenta företagsekonomi.\nDeras IQ den e' Mandels\nOch förståndet, det har ju gjort sorti.\nDom har jätteusla snören,\nTill sitt jätteusla draperi.\nDom kan bara räkna ören,\nHela skolan e' ett enda aperi!\n\nHandels är skit - Jag vill ej dit ....\n\nMammons pojkar är dom alla,\nPappas flickor är dom likaså,\nGår och tror att dom är balla,\nFastän dom inget alls ju förstå.\nHela Handels borde rivas,\nDetta anser hela vårat lag.\nDå skulle Osquarulda trivas\nUppå denna Handels ljuva domedag!\n\nÅh, vilket drag - på denna dag ...."
 				},
 				{
 					"title": "Fysikhatarvisan",
 					"author": "DKM hösten 2000",
 					"melody": "Åh, hur saligt att få vandra",
 					"text": "Jag vill inte gå på fysik,\naldrig tenta termometerdynamik.\nJag vill inte höra syntmusik,\ninte festa som en tråkig mattegeek.\nVi ser ut som Televerket\ni vår jättefula overall.\nVi kan bara räkna kvarkar,\nnu hyllar vi Data med en skål!\n\nFysik är torrt - jag vill ju bort!\n\nEinsteins vänner är vi alla.\nHandelsmänniskor kan vi aldrig få.\nGår och tror att vi är balla,\ndet får bli på egen hand om det ska gå.\nNu ska hela Sing-Sing rivas,\nArkitekt är med på Datas lag.\nTeleverket ska fördrivas\nuppå Konsulatets ljuva domedag\n\nÅ nubbedrag - på denna dag ..."
+				},
+				{
+					"title": "Mattehatarvisan",
+					"author": "Felix, Alex och Tuffs\nStuggasquen 2021",
+					"melody": "Åh, hur saligt att få vandra",
+					"text": "Jag vill aldrig gå på matte\nAldrig tenta komplicerad analys\nIngen av oss har ju vänner\nPluggar algebra när de har fest och mys\n\nVi kan räkna integraler\nDerivera nolltegradens polynom\nHälften av oss dubblar Handels\nFör det är så lätt att bli en ekonom\n\n||: Matte är svårt - vi jobbar hårt\nDet inses lätt - om man gör rätt\nMatte är kul - om man är ful\nBeviset slut :||\n\nGauss lärjungar är vi alla\nEulers vänner är vi likaså\nTycker om att gå och malla\nFastän verkligheten vi ej kan förstå\n\nFinns det satser om att haffa?\nEkvationer som kan göra någon kär?\nPartner kan vi inte skaffa\nVi får nöja oss med en imaginär\n\n||: Matte är svårt..."
 				},
 				{
 					"title": "Datas visa",
@@ -1527,10 +1533,15 @@
 					"author": "Povel Ramel",
 					"melody": "Studentsången",
 					"text": "Sjung om fru Svenssons lyckliga karl,\nlåt honom plöja i ungdomens fåror.\nFem gamla hjärtan i sprit har jag.\nå' en ljus elefant i ett snår.\nInga stoppar den,\ni vårat linneskåp.\nLoppor tär vår vän,\nsom idisslar en sko\nnär vi snyta en rund liten hund.\n||: Där den här lilla bagaren bor. :|||\nHursa?"
+				},{
+					"title": "Jesus lever",
+					"author": null,
+					"melody": "Sånt är livet",
+					"text": "Jesus lever, han bor i Skövde\nHan kör en Volvo och han är gift\nHan har en villa med rododendron\nHan sparar pengar och jobbar skift\n\nRedan på lekis var han märklig\nHan ville inte leka krig\nMen när hans kompis, Knut, blev skjuten\nså lät han Jesus uppväcka sig\n\nJesus lever, han bor i Skövde...\n\nHan gick i skolan, som alla andra\nHan var rätt duktig på gymnastik\nå vilken kille han gick på vatten\nen gång så gick han till Reykjavik\n\nJesus lever, han bor i Skövde...\n\nI sina tonår så var han poppis\nOch han blev bjuden på varje fest\nÅ vilken kille, han fick ju vatten\natt bli till rusdryck utan jäst\n\n"
 				},
 				{
 					"title": "Temperaturen",
-					"author": "",
+					"author": null,
 					"melody": "",
 					"text": "Temperaturen är hög uti kroppen\nNärmare 40 än 37,5.\nMen så skall det vara när ångan är oppe\nOch så är fallet uti detta nu!\n||: Det rullar, det rullar, vi rullar, vi rullar,\nVi rullar, vi rullar, vi rullar, å hej! :||\n\nÅ framåt och bakåt...\nÅ höger och vänster...\nAugust... och Lotta..."
 				}
@@ -1544,13 +1555,13 @@
 					"title": "Konglig Fysiks Paradhymn",
 					"author": "Dum-Dum 1977",
 					"melody": "Katyuscha",
-					"text": "Här på festen stiger åter glammet\nSången börjar, tentan bortglömd är\nLyss min strupe Du plågas utav dammet\nFrukta ej ty hjälpen är just här\nibland oss\nHöj pokalen, dess flöde känns som sammet\nDrick till det som Bacchi vapen lär.\n\nKänn, Osquarina, känn hur blodet hettar\nOsquarina orsak till det är\nTimmar skrider och dygdens bojor lättar\nFest och glädje kärleksflamman när\nmen minns att\nBlott ej synen en hungrig kärlek mättar\nDrick till det som Venus' vapen lär.\n\nFYSIKER, gasqueropen de har skallat\nLikt musik från någon högre sfär\nTentans piska för länge har oss vallat\nTrotsa den och studiernas misär\nmed lärdom\nFrån de makter som ytterst har oss kallat\nBacchus, Venus värdar hos oss är\noch vänner\nBacchi nektar ej Venus' flamma släcker\nSKÅL för det Fysiks skyddsgudar lär.\n\n\nUnder sista versen står fysiker, men inga andra, upp. \"Osquarina\" kan bytas mot \"Osquar\" eller \"Quristina\" efter behag."
+					"text": "Här på festen stiger åter glammet\nSången börjar, tentan bortglömd är\nLyss min strupe Du plågas utav dammet\nFrukta ej ty hjälpen är just här\nibland oss\nHöj pokalen, dess flöde känns som sammet\nDrick till det som Bacchi vapen lär.\n\nKänn, Osquarulda, känn hur blodet hettar\nOsquarulda orsak till det är\nTimmar skrider och dygdens bojor lättar\nFest och glädje kärleksflamman när\nmen minns att\nBlott ej synen en hungrig kärlek mättar\nDrick till det som Venus' vapen lär.\n\nFYSIKER, gasqueropen de har skallat\nLikt musik från någon högre sfär\nTentans piska för länge har oss vallat\nTrotsa den och studiernas misär\nmed lärdom\nFrån de makter som ytterst har oss kallat\nBacchus, Venus värdar hos oss är\noch vänner\nBacchi nektar ej Venus' flamma släcker\nSKÅL för det Fysiks skyddsgudar lär.\n\n\nUnder sista versen står fysiker, men inga andra, upp. \"Osquarulda\" kan bytas mot \"Osquar\" eller \"Osqulda\" efter behag."
 				},
 				{
 					"title": "Årskursernas hederssång",
 					"author": null,
 					"melody": null,
-					"text": "Alla: För det var i vår ungdoms fagraste vår,\nvi drack varandra till och vi sade \"gutår\".\nOch alla så dricka vi nu <Foo> till,\n\nFoo: Och <Foo> säger inte nej därtill...\n\nVid <Foo> insättes n-m, där n=aktuellt årtal, m=0, 1, 2...\n35 Fux\n42 Fibonacci\n51 Filibuster\n52 Förutseende\n54 Fafner\n55 Femfemman\n56 Fjalar\n57 Fimbul\n58 Fatal\n59 Fritiof\n60 Fredag\n61 Fulbia\n62 Figaro\n63 Fter\n64 Fyran\n65 Frukt\n66 Födde\n67 Fnark\n68 Flirp\n69 Fiasko\n70 Flera\n71 Funilla\n72 Fillhouse\n73 Fadäs\n74 Förutan\n75 Finans\n76 Filur\n77 Fräck\n78 Fyffes\n79 Fnusk\n80 Fuktig\n81 Flykting\n82 Fiqus\n83 Fikon\n84 Filmjölk\n85 Fortsätt!\n86 Flyter\n87 Fnöske\n88 Flora\n89 Fagott\n90 FemFel\n91 Fjortis\n92 Fido\n93 Fromhet\n94 Flaxa\n95 Ferdinand\n96 Felande Länken\n97 Fängsel\n98 Folkdans\n99 Fulöl\n00 Formfranska\n01 Flykta!\n02 Fusklapp\n03 Fetvadd\n04 FanFar\n05 Flörtfrisk\n06 Friskus\n07 Fokus\n08 Førspel\n09 Falsklarm\n10 Framfusig\n11 Frappera\n12 Fumla\n13 Frågvis?\n14 Folkvett\n15 Fanclub\n16 Fuskbygge\n17 Förarlös\n18 Flingsalt\n19 Fasett"
+					"text": "Alla: För det var i vår ungdoms fagraste vår,\nvi drack varandra till och vi sade \"gutår\".\nOch alla så dricka vi nu <Foo> till,\n\nFoo: Och <Foo> säger inte nej därtill...\n\nVid <Foo> insättes n-m, där n=aktuellt årtal, m=0, 1, 2...\n35 Fux\n42 Fibonacci\n51 Filibuster\n52 Förutseende\n54 Fafner\n55 Femfemman\n56 Fjalar\n57 Fimbul\n58 Fatal\n59 Fritiof\n60 Fredag\n61 Fulbia\n62 Figaro\n63 Fter\n64 Fyran\n65 Frukt\n66 Födde\n67 Fnark\n68 Flirp\n69 Fiasko\n70 Flera\n71 Funilla\n72 Fillhouse\n73 Fadäs\n74 Förutan\n75 Finans\n76 Filur\n77 Fräck\n78 Fyffes\n79 Fnusk\n80 Fuktig\n81 Flykting\n82 Fiqus\n83 Fikon\n84 Filmjölk\n85 Fortsätt!\n86 Flyter\n87 Fnöske\n88 Flora\n89 Fagott\n90 FemFel\n91 Fjortis\n92 Fido\n93 Fromhet\n94 Flaxa\n95 Ferdinand\n96 Felande Länken\n97 Fängsel\n98 Folkdans\n99 Fulöl\n00 Formfranska\n01 Flykta!\n02 Fusklapp\n03 Fetvadd\n04 FanFar\n05 Flörtfrisk\n06 Friskus\n07 Fokus\n08 Førspel\n09 Falsklarm\n10 Framfusig\n11 Frappera\n12 Fumla\n13 Frågvis\n14 Folkvett\n15 Fanclub\n16 Fuskbygge\n17 Förarlös\n18 Flingsalt\n19 Fasett\n20 Fotnot"
 				},
 				{
 					"title": "De Brevitate Vitae (Gaudeamus)",
@@ -1919,6 +1930,7 @@
 			"μ1",
 			"μ2",
 			"μ3",
+			"µπ",
 			"μ4",
 			"μ5",
 			"μ6",
@@ -1943,6 +1955,7 @@
 			"ν15",
 			"ν16",
 			"ν17",
+			"ν18",
 			"ν37,5"
 		],
 		[
