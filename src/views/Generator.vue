@@ -111,6 +111,7 @@ export default defineComponent({
 .generator {
   width: 40%;
   right: 0;
+  min-width: 8cm;
 }
 
 table.songbook tr:active {background-color: unset;}

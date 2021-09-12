@@ -10,7 +10,7 @@ type Hit = {
 
 function rate (keyword: RegExp, song: Song): number {
   return (+(song.title.search(keyword) > -1) * 10 +
-    +(song.text.search(keyword) > -1) * 5 +
+    +(song.text !== undefined && song.text.search(keyword) > -1) * 5 +
     +((song.melody || '').search(keyword) > -1) * 3 +
     +((song.author || '').search(keyword) > -1) * 2)
 }

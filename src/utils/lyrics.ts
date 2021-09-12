@@ -2,10 +2,18 @@ import lyrics from '@/assets/lyrics.json'
 
 export type Song = {
   title: string,
-  author: string,
-  melody: string,
-  text: string,
   index: string,
+  author?: string,
+  melody?: string,
+  mxl?: string,
+  text: string,
+} | { // We need either mxl or text to be defined.
+  title: string,
+  index: string,
+  author?: string,
+  melody?: string,
+  mxl: string,
+  text?: string,
 }
 
 export type Chapter = {
@@ -14,18 +22,7 @@ export type Chapter = {
   songs: Song[],
 }
 
-export const chapters: Chapter[] = lyrics.map((c) => {
-  return {
-    ...c,
-    songs: c.songs.map((song): Song => {
-      return {
-        ...song,
-        author: song.author || '',
-        melody: song.melody || ''
-      }
-    })
-  }
-})
+export const chapters: Chapter[] = lyrics
 
 /* Old parser, for the old lyrics.json format.
 type LyricsFile = {

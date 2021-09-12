@@ -1801,7 +1801,8 @@
                 "author": "Dum-Dum 1977",
                 "melody": "Katyuscha",
                 "text": "Här på festen stiger åter glammet\nSången börjar, tentan bortglömd är\nLyss min strupe Du plågas utav dammet\nFrukta ej ty hjälpen är just här\nibland oss\nHöj pokalen, dess flöde känns som sammet\nDrick till det som Bacchi vapen lär.\n\nKänn, Osquarulda, känn hur blodet hettar\nOsquarulda orsak till det är\nTimmar skrider och dygdens bojor lättar\nFest och glädje kärleksflamman när\nmen minns att\nBlott ej synen en hungrig kärlek mättar\nDrick till det som Venus' vapen lär.\n\nFYSIKER, gasqueropen de har skallat\nLikt musik från någon högre sfär\nTentans piska för länge har oss vallat\nTrotsa den och studiernas misär\nmed lärdom\nFrån de makter som ytterst har oss kallat\nBacchus, Venus värdar hos oss är\noch vänner\nBacchi nektar ej Venus' flamma släcker\nSKÅL för det Fysiks skyddsgudar lär.\n\n\nUnder sista versen står fysiker, men inga andra, upp. \"Osquarulda\" kan bytas mot \"Osquar\" eller \"Osqulda\" efter behag.",
-                "index": "ο1"
+                "index": "ο1",
+                "mxl": "mxl/omikron1.mxl"
             },
             {
                 "title": "Årskursernas hederssång",
@@ -1948,6 +1949,32 @@
                 "melody": "Stad i ljus",
                 "text": "Min resa var mot solen,\nlångt bort från alla mötesrum.\nDär brunchen är oändlig,\nmin första charter kommer aldrig att ta slut.\n\nJag ville se miraklet,\noch höra skrik från nyfött liv.\nBli buren av en styrka,\noch visiteras för de tror att jag har kniv.\n\nPlan i grus, i ett land utan namn.\nGe mig vin, svindyra snacks är värt.\n\nOch så när allt förändrats,\nnär vingar inte längre finns.\nSå ser jag oss tillsammans\noch då är resan slut, det enda som vi minns.\n\n||: Plan i hus, i ett land utan namn.\nRädda ditt liv, innan du räddar den bredvid. :||",
                 "index": "σ19.14"
+            }
+        ]
+    },
+    {
+        "chapter": "Noter",
+        "prefix": "Ωω",
+        "songs": [
+            {
+                "title": "Du gamla du fria",
+                "index": "ω1",
+                "mxl": "mxl/omega1.mxl"
+            },
+            {
+                "title": "Kungssången",
+                "index": "ω2",
+                "mxl": "mxl/omega2.mxl"
+            },
+            {
+                "title": "Lyft ditt välförsedda glas",
+                "index": "ω5",
+                "mxl": "mxl/omega5.mxl"
+            },
+            {
+                "title": "Längtan till landet",
+                "index": "ω6",
+                "mxl": "mxl/omega6.mxl"
             }
         ]
     }

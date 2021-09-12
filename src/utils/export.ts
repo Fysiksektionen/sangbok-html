@@ -62,7 +62,7 @@ export function getContentTeX(songs: Song[], d: DownloadSettings[]): string {
     content.push('}\n')
 
     if (d[0].settings[3].value && songs[i].melody) {
-      const melodyContent = (songs[i].melody
+      const melodyContent = ((songs[i].melody || '')
         .split('\n').filter(function (line) {
           return !d[1].settings[0].value || line.indexOf('notkapitlet') === -1
         }).join('\\hfil\\\\*\n\\hfil '))
@@ -227,7 +227,7 @@ export function getContentTeX(songs: Song[], d: DownloadSettings[]): string {
         )
       } else if (item[1] == 9 && item[2] == 15) // Stad i ljus
       { addDefaultText(songs[i].text.split(/\n\n\n/g)[0]) } else { */
-      addDefaultText(songs[i].text)
+      addDefaultText(songs[i].text || '') // TODO: Catch empty texts, that is, someone tried to add a sheet music song to a sångblad.
       // }
       break
     }

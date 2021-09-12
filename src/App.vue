@@ -58,6 +58,25 @@ div.main h2 {
     padding-top: 0.75em;
 }
 
+.button {
+    text-align: center;
+    font-size: 1em;
+    font-family: "EB Garamond", serif;
+
+    border-width: 0;
+    $navbutton-spacing: 12px;
+    border-radius: $navbutton-spacing;
+    margin: $navbutton-spacing $navbutton-spacing/2;
+    padding: $navbutton-spacing;
+
+    background-color: rgba(128, 128, 128, 0.10);
+    &:active {background-color: rgba(128, 128, 128, 0.30);}
+}
+
+.night .button {
+  color: white;
+}
+
 /* Tables, etc. */
 table.songbook {
     font-size: 1.2em;

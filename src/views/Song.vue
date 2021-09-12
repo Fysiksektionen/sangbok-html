@@ -3,37 +3,41 @@
 <template>
   <Navbar :parent="goToParent"/>
   <div class="main">
-    <div class="lyrics">
+    <div class="lyrics" v-if="song().text">
+      <button v-if="song().mxl && song().text" @click="showMxl = !showMxl" style="float:left" class="button">{{ showMxl ? 'Dölj noter' : 'Visa noter'}}</button>
+      <SheetMusicRenderer v-if="song().mxl && (!song().text || showMxl)" :src="song().mxl"/>
       <h2>{{song().title}}</h2>
       <div v-if="song().melody" class="melody" v-html="toHTML(song().melody)"></div>
       <div class="textcontainer" v-html="toHTML(song().text)" v-bind:class="{'larger': $store.state.settings.larger}"></div>
       <div v-if="song().author" class="author" v-html="toHTML(song().author)"></div>
       <NavButtons :chapterid="$route.params.chapterId" :songid="$route.params.songId"/>
     </div>
-    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, defineAsyncComponent } from 'vue'
 import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
 import NavButtons from '@/components/SongNavButtons.vue'
-import { chapters } from '@/utils/lyrics.ts'
+import { chapters, Song } from '@/utils/lyrics.ts'
 
 export default defineComponent({
   name: 'SongView',
   components: {
     Navbar,
-    NavButtons
+    NavButtons,
+    SheetMusicRenderer: defineAsyncComponent(() => import('@/components/SheetMusicRenderer.vue'))
   },
   data() {
     return {
       chapters: chapters,
       // TODO: This is an ugly fix for the song not updating when pressing NavButtons. It can probably be done using computed()
-      song: () => chapters[(this as any).$route.params.chapterId].songs[(this as any).$route.params.songId]
+      song: () => chapters[(this as any).$route.params.chapterId].songs[(this as any).$route.params.songId] as Song,
+      showMxl: false
     }
   },
   methods: {
-    toHTML (text: string):string {
+    toHTML (text: string): string {
       return text.replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/\n/igm, '<br />')
     },
     goToParent () { // this.$store.state.query is set if the user came from search. If that's the case, send them back to the search page, else go to the chapter page.
