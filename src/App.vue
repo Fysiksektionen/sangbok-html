@@ -15,6 +15,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@use "sass:math";
 /* Colors */
 /* $f-orange: #FF642B;
 $f-orange-light: #FB9C74;
@@ -66,7 +67,7 @@ div.main h2 {
     border-width: 0;
     $navbutton-spacing: 12px;
     border-radius: $navbutton-spacing;
-    margin: $navbutton-spacing $navbutton-spacing/2;
+    margin: $navbutton-spacing math.div($navbutton-spacing, 2);
     padding: $navbutton-spacing;
 
     background-color: rgba(128, 128, 128, 0.10);

@@ -3,13 +3,15 @@
 <template>
   <Navbar :parent="goToParent"/>
   <div class="main">
-    <div class="lyrics" v-if="song().text">
+    <div class="lyrics">
       <button v-if="song().mxl && song().text" @click="showMxl = !showMxl" style="float:left" class="button">{{ showMxl ? 'Dölj noter' : 'Visa noter'}}</button>
       <SheetMusicRenderer v-if="song().mxl && (!song().text || showMxl)" :src="song().mxl"/>
-      <h2>{{song().title}}</h2>
-      <div v-if="song().melody" class="melody" v-html="toHTML(song().melody)"></div>
-      <div class="textcontainer" v-html="toHTML(song().text)" v-bind:class="{'larger': $store.state.settings.larger}"></div>
-      <div v-if="song().author" class="author" v-html="toHTML(song().author)"></div>
+      <div v-if="song().text">
+        <h2>{{song().title}}</h2>
+        <div v-if="song().melody" class="melody" v-html="toHTML(song().melody)"></div>
+        <div class="textcontainer" v-html="toHTML(song().text)" v-bind:class="{'larger': $store.state.settings.larger}"></div>
+        <div v-if="song().author" class="author" v-html="toHTML(song().author)"></div>
+      </div>
       <NavButtons :chapterid="$route.params.chapterId" :songid="$route.params.songId"/>
     </div>
   </div>

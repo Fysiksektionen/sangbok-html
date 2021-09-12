@@ -50,7 +50,7 @@ export default defineComponent({
       } else {
         throw new Error('OSMD is undefined despite osmd.load call.')
       }
-    }).catch((e) => { this.err = e; this.loading = false })
+    }).catch((e: Error) => { this.err = e.message; this.loading = false })
   },
   methods: {
     async zoom (factor: number) {
@@ -83,7 +83,7 @@ export default defineComponent({
   }
 
   a {
-    color: adjust-color(#f60, $lightness:-15);  /* TODO: Define elsewhere */
+    color: adjust-color(#f60, $lightness:-15%);  /* TODO: Define elsewhere */
   }
 </style>
 
@@ -93,7 +93,7 @@ export default defineComponent({
   .night div#osmd-container svg {
     & text {fill: $gray}
     & path {stroke: $gray; fill: $gray}
-    &>path {stroke: adjust-color($gray, $lightness:-25); fill: $gray}
+    &>path {stroke: adjust-color($gray, $lightness:-25%); fill: $gray}
     & rect:not(:first-child) {fill: $gray}
   }
 </style>
