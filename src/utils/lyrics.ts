@@ -14,6 +14,20 @@ export type Chapter = {
   songs: Song[],
 }
 
+export const chapters: Chapter[] = lyrics.map((c) => {
+  return {
+    ...c,
+    songs: c.songs.map((song): Song => {
+      return {
+        ...song,
+        author: song.author || '',
+        melody: song.melody || ''
+      }
+    })
+  }
+})
+
+/* Old parser, for the old lyrics.json format.
 type LyricsFile = {
   chapters: {
     chapter: string,
@@ -48,7 +62,7 @@ function loadLyrics(): Chapter[] {
       })
     })
   }
+  console.log(JSON.stringify(out))
   return out
 }
-
-export const chapters = loadLyrics()
+*/
