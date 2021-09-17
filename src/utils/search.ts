@@ -41,7 +41,6 @@ export function search (s: string, chapters: Chapter[]): Hit[] | null { // TODO:
       const indexes = { chapterindex: i, songindex: j }
 
       // Träff i olika egenskaper ger olika mycket poäng
-      // TODO: gör en funktion för rating/subrating.
       let rating: number = 10 * rate(regexedText, song)
 
       let missing = 0

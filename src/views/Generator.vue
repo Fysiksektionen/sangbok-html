@@ -38,7 +38,7 @@ export default defineComponent({
   },
   props: ['songid', 'chapterid'],
   methods: {
-    add() { // TODO: Duplicate-check.
+    add() { // TODO: Check for duplicates before adding.
       if (this.$route.params.songId !== undefined && this.$route.params.chapterId !== undefined) { // Song
         const songId = parseInt(this.$route.params.songId as string)
         const chapterId = parseInt(this.$route.params.chapterId as string)

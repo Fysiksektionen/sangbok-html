@@ -5,23 +5,26 @@ name: ESLint
 
 on:
   push:
-    branches: [ main ]
+    paths:
+      - '**.vue'
+      - '**.ts'
+      - '**.js'
+      - '**.json'
+      - '.eslintrc'
+      - '.editorconfig'
+      - '**/lint.yml'
   pull_request:
     branches: [ main ]
 
 jobs:
   lint:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js 16.x
       uses: actions/setup-node@v2
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 16.x
         cache: 'npm'
     - name: Install packages
       run: npm ci
@@ -29,3 +32,4 @@ jobs:
       run: npx vue-cli-service lint --no-fix
     - name: Strict lint
       run: npx vue-cli-service lint --no-fix --max-warnings 0
+      continue-on-error: true

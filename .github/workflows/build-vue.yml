@@ -5,7 +5,12 @@ name: Build
 
 on:
   push:
-    branches: [ main, vue ]
+    paths:
+      - '**.vue'
+      - '**.ts'
+      - '**.js'
+      - '**.json'
+      - '**/build-vue.yml'
   pull_request:
     branches: [ main, vue ]
 
@@ -13,6 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
+      max-parallel: 1
       matrix:
         node-version: [14.x, 16.x]
 
