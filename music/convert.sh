@@ -1,7 +1,8 @@
 export QT_QPA_PLATFORM=offscreen
 
-SCALE_FACTORS=(1 2 3 4)
-FORMATS=("svg") # eg. ("svg" "pdf")
+SCALE_FACTORS=(1 1.25 1.5 1.75 2 3 4)
+
+mkdir -p svg
 
 for path in mscz/*.mscz
 do
@@ -12,12 +13,8 @@ do
 
     for sf in "${SCALE_FACTORS[@]}"
     do
-        for f in "${FORMATS[@]}"
-        do
-            mkdir -p $f
-            sed -e "s/<Spatium>[0-9]\.[0-9]*<\/Spatium>/<Spatium>$sf<\/Spatium>/g" "tmp/${file//mscz/mscx}" > "tmp/${file//mscz/tmp.mscx}"
-            mscore3 --export-to "$f/${file//.mscz/}.$sf.$f" "tmp/${file//mscz/tmp.mscx}" --force
-        done
+        sed -e "s/<Spatium>[0-9]\.[0-9]*<\/Spatium>/<Spatium>$sf<\/Spatium>/g" "tmp/${file//mscz/mscx}" > "tmp/${file//mscz/tmp.mscx}"
+        mscore3 --export-to "svg/${file//.mscz/}.$sf.svg" "tmp/${file//mscz/tmp.mscx}" --force
     done
 done
 
