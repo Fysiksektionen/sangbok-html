@@ -4,6 +4,7 @@ SCALE_FACTORS=(1 1.25 1.5 1.75 2 3 4)
 
 mkdir -p svg
 
+
 for path in mscz/*.mscz
 do
     file=$(basename "$path")
@@ -14,8 +15,18 @@ do
     for sf in "${SCALE_FACTORS[@]}"
     do
         sed -e "s/<Spatium>[0-9]\.[0-9]*<\/Spatium>/<Spatium>$sf<\/Spatium>/g" "tmp/${file//mscz/mscx}" > "tmp/${file//mscz/tmp.mscx}"
-        mscore3 --export-to "svg/${file//.mscz/}.$sf.svg" "tmp/${file//mscz/tmp.mscx}" --force
+        mscore3 --export-to "svg/${file//.mscz/}-sf$sf.svg" "tmp/${file//mscz/tmp.mscx}" --force
     done
 done
 
+cd svg
+svgs="["
+for file in *.svg
+do
+    svgs="$svgs\"$file\","
+done
+svgs="${svgs%?}]"
+
+cd ..
+echo $svgs > svgs.json
 rm -rf tmp

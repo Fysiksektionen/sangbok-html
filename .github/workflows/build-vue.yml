@@ -39,6 +39,10 @@ jobs:
       with:
         name: music-svgs
         path: public/msvg
+    - name: Unpack sheet music artifacts
+      working-directory: public/msvg
+      run: mv svgs.json ../../src/assets/mvsvgs.json
+
     - name: build
       run: npx vue-cli-service build
     - name: Archive production artifacts
@@ -70,6 +74,9 @@ jobs:
     - name: Compress svg:s
       working-directory: ./music
       run: ./compress.sh
+    - name: Perpare for export
+      working-directory: ./music
+      run: mv svgs.json svg
     - name: Archive production artifacts
       uses: actions/upload-artifact@v2
       with:

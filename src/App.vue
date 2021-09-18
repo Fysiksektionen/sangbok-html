@@ -72,6 +72,7 @@ div.main h2 {
 
     background-color: rgba(128, 128, 128, 0.10);
     &:active {background-color: rgba(128, 128, 128, 0.30);}
+    &.disabled {opacity: 0.5;}
 }
 
 .night .button {

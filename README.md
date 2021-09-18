@@ -11,7 +11,7 @@ Se [issues](https://github.com/Fysiksektionen/sangbok-html/issues). Saker som ka
 
 ## Hur du kör detta projekt
 ### Utveckling
-Installera [Node.js 16](https://nodejs.org) om du inte redan har det. Klona sedan repot, och kör `npm install` i rotmappen. Utvecklingsservern körs sedan med `npm start`. Andra kommandon är:
+Installera [Node.js 16](https://nodejs.org) om du inte redan har det. Klona sedan repot, och kör `npm install` i rotmappen. Gå sedan till mappen `music` och kör `./build.sh`. Utvecklingsservern körs sedan i huvudmappen med `npm start`. Andra kommandon är:
 * `npm run build` - kompilera projektet.
 * `npm run lint` - lintar och fixar källkoden.
 

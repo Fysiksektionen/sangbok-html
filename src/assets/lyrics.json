@@ -1801,8 +1801,7 @@
                 "author": "Dum-Dum 1977",
                 "melody": "Katyuscha",
                 "text": "Här på festen stiger åter glammet\nSången börjar, tentan bortglömd är\nLyss min strupe Du plågas utav dammet\nFrukta ej ty hjälpen är just här\nibland oss\nHöj pokalen, dess flöde känns som sammet\nDrick till det som Bacchi vapen lär.\n\nKänn, Osquarulda, känn hur blodet hettar\nOsquarulda orsak till det är\nTimmar skrider och dygdens bojor lättar\nFest och glädje kärleksflamman när\nmen minns att\nBlott ej synen en hungrig kärlek mättar\nDrick till det som Venus' vapen lär.\n\nFYSIKER, gasqueropen de har skallat\nLikt musik från någon högre sfär\nTentans piska för länge har oss vallat\nTrotsa den och studiernas misär\nmed lärdom\nFrån de makter som ytterst har oss kallat\nBacchus, Venus värdar hos oss är\noch vänner\nBacchi nektar ej Venus' flamma släcker\nSKÅL för det Fysiks skyddsgudar lär.\n\n\nUnder sista versen står fysiker, men inga andra, upp. \"Osquarulda\" kan bytas mot \"Osquar\" eller \"Osqulda\" efter behag.",
-                "index": "ο1",
-                "mxl": "mxl/omikron1.mxl"
+                "index": "ο1"
             },
             {
                 "title": "Årskursernas hederssång",
@@ -1959,22 +1958,22 @@
             {
                 "title": "Du gamla du fria",
                 "index": "ω1",
-                "mxl": "mxl/omega1.mxl"
+                "msvg": "1. Du gamla du fria"
             },
             {
                 "title": "Kungssången",
                 "index": "ω2",
-                "mxl": "mxl/omega2.mxl"
+                "msvg": "2. Kungssången"
             },
             {
                 "title": "Lyft ditt välförsedda glas",
                 "index": "ω5",
-                "mxl": "mxl/omega5.mxl"
+                "msvg": "5. Lyft ditt välförsedda glas"
             },
             {
                 "title": "Längtan till landet",
                 "index": "ω6",
-                "mxl": "mxl/omega6.mxl"
+                "msvg": "6. Längtan till landet"
             }
         ]
     }

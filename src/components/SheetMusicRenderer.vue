@@ -1,10 +1,12 @@
 <!-- TODO: Add license notices for OSMD and VexFlow.-->
 <template>
-  <div v-if="!loading && !err">
-    <button class="button" @click="zoom(0.8)">&#128269;-</button>
-    <button class="button" @click="zoom(1.25)">&#128269;+</button>
+  <div class="zoombuttoncontainer">
+    <button class="button" @click="zoom(-1)" v-bind:class="{'disabled': zoomIdx == 0}">&#128269;-</button>
+    <button class="button" @click="zoom(1)" v-bind:class="{'disabled': zoomIdx == getZoomLevels().length-1}">&#128269;+</button>
   </div>
-  <div id="osmd-container"></div>
+  <div v-for="img, key in getImages()" v-bind:key="key">
+    <img v-bind:src="img">
+  </div>
   <h2 v-if="loading" class="loading">Läser in noter...</h2>
   <div v-if="err" class="err">
     <h2>Kunde inte läsa in noterna.</h2>
@@ -13,57 +15,52 @@
   </div>
   <p class="notice">
     Notvisaren är experimentell.
-    <br>
-    Drivs av <a href="https://opensheetmusicdisplay.org">OpenSheetMusicDisplay</a> & <a href="https://www.vexflow.com">VexFlow</a>.
   </p>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay'
+import svglist from '@/assets/msvgs.json'
 
 export default defineComponent({
   name: 'SheetMusicRenderer',
   props: ['src'],
   data () {
     return {
-      osmd: undefined as (OpenSheetMusicDisplay | undefined),
       store: this.$store,
-      err: undefined as (string | undefined),
-      loading: true
+      zoomIdx: 3, // TODO: Choose based on screen size
     }
   },
-  mounted() {
-    this.osmd = new OpenSheetMusicDisplay('osmd-container', { // For options, see https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/blob/master/src/OpenSheetMusicDisplay/OSMDOptions.ts
-      autoResize: true, // just an example for an option, no option is necessary.
-      backend: 'svg',
-      drawTitle: true,
-      drawLyrics: true,
-      drawMeasureNumbersOnlyAtSystemStart: true,
-      defaultFontFamily: 'EB Garamond'
-    })
-    this.osmd.load(this.$props.src).then(() => {
-      this.loading = false
-      if (this.osmd) {
-        this.osmd.zoom = (window.innerWidth > 960) ? 1.0 : 0.4096
-        this.osmd.render()
-      } else {
-        throw new Error('OSMD is undefined despite osmd.load call.')
-      }
-    }).catch((e: Error) => { this.err = e.message; this.loading = false })
-  },
-  methods: {
-    async zoom (factor: number) {
-      if (this.osmd) {
-        this.osmd.zoom *= factor
-        setTimeout(() => this.osmd && this.osmd.render(), 0) // TODO: There has to be a cleaner way to do this.
-      }
+  // mounted() {},
+  methods: {// TODO: Most of these can be pre-computed, and put in data.
+    getImages (): string[] {
+      let curSongSvgs = svglist.filter(s => { return s.indexOf(this.$props.src) > -1 })
+      let curSongSvgsWithZoom = curSongSvgs.filter(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ["", ""])[1] === this.getZoomLevels()[this.zoomIdx])
+      console.log(this.getZoomLevels())
+      return curSongSvgsWithZoom.map(s => "msvg/" + s)
+    },
+    getZoomLevels () {
+      let curSongSvgs = svglist.filter(s => { return s.indexOf(this.$props.src) > -1 })
+      let zoomLevels = [...new Set(curSongSvgs.map(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ["", ""])[1]))]
+      return zoomLevels.sort()
+    },
+    zoom (z: number) {
+      this.zoomIdx += z
+      this.zoomIdx = Math.max(0, Math.min(this.zoomIdx, this.getZoomLevels().length - 1))
     }
   }
 })
 </script>
 
 <style scoped lang="scss">
+  img {
+    width: 100%;
+  }
+
+  .night img {
+    filter: invert(0.6);/* Originally #c2ad99*/
+  }
+
   .err {
     text-align: center;
     & p {

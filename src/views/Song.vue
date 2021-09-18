@@ -4,8 +4,8 @@
   <Navbar :parent="goToParent"/>
   <div class="main">
     <div class="lyrics">
-      <button v-if="song().mxl && song().text" @click="showMxl = !showMxl" style="float:left" class="button">{{ showMxl ? 'Dölj noter' : 'Visa noter'}}</button>
-      <SheetMusicRenderer v-if="song().mxl && (!song().text || showMxl)" :src="song().mxl"/>
+      <button v-if="song().msvg && song().text" @click="showMsvg = !showMsvg" style="float:left" class="button">{{ showMsvg ? 'Dölj noter' : 'Visa noter'}}</button>
+      <SheetMusicRenderer v-if="song().msvg && (!song().text || showMsvg)" :src="song().msvg"/>
       <div v-if="song().text">
         <h2>{{song().title}}</h2>
         <div v-if="song().melody" class="melody" v-html="toHTML(song().melody)"></div>
@@ -35,7 +35,7 @@ export default defineComponent({
       chapters: chapters,
       // TODO: This is an ugly fix for the song not updating when pressing NavButtons. It can probably be done using computed()
       song: () => chapters[(this as any).$route.params.chapterId].songs[(this as any).$route.params.songId] as Song,
-      showMxl: false
+      showMsvg: false
     }
   },
   methods: {

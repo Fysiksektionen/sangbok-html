@@ -5,14 +5,14 @@ export type Song = {
   index: string,
   author?: string,
   melody?: string,
-  mxl?: string,
+  msvg?: string,
   text: string,
 } | { // We need either mxl or text to be defined.
   title: string,
   index: string,
   author?: string,
   melody?: string,
-  mxl: string,
+  msvg: string,
   text?: string,
 }
 
