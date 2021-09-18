@@ -28,20 +28,19 @@ export default defineComponent({
   data () {
     return {
       store: this.$store,
-      zoomIdx: 3, // TODO: Choose based on screen size
+      zoomIdx: 3 // TODO: Choose based on screen size
     }
   },
   // mounted() {},
-  methods: {// TODO: Most of these can be pre-computed, and put in data.
+  methods: { // TODO: Most of these can be pre-computed, and put in data.
     getImages (): string[] {
-      let curSongSvgs = svglist.filter(s => { return s.indexOf(this.$props.src) > -1 })
-      let curSongSvgsWithZoom = curSongSvgs.filter(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ["", ""])[1] === this.getZoomLevels()[this.zoomIdx])
-      console.log(this.getZoomLevels())
-      return curSongSvgsWithZoom.map(s => "msvg/" + s)
+      const curSongSvgs = svglist.filter(s => { return s.indexOf(this.$props.src) > -1 })
+      const curSongSvgsWithZoom = curSongSvgs.filter(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ['', ''])[1] === this.getZoomLevels()[this.zoomIdx])
+      return curSongSvgsWithZoom.map(s => 'msvg/' + s)
     },
     getZoomLevels () {
-      let curSongSvgs = svglist.filter(s => { return s.indexOf(this.$props.src) > -1 })
-      let zoomLevels = [...new Set(curSongSvgs.map(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ["", ""])[1]))]
+      const curSongSvgs = svglist.filter(s => { return s.indexOf(this.$props.src) > -1 })
+      const zoomLevels = [...new Set(curSongSvgs.map(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ['', ''])[1]))]
       return zoomLevels.sort()
     },
     zoom (z: number) {
