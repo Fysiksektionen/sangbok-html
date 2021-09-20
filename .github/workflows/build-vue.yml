@@ -21,7 +21,6 @@ jobs:
     name: Build vue
     needs: sheet-music
     strategy:
-      max-parallel: 1
       matrix:
         node-version: [14.x, 16.x]
 
@@ -46,6 +45,7 @@ jobs:
     - name: build
       run: npx vue-cli-service build
     - name: Archive production artifacts
+      if: ${{ matrix.node-version == '16.x' }}
       uses: actions/upload-artifact@v2
       with:
         name: dist
@@ -68,12 +68,9 @@ jobs:
       run: npm install -g svgo
     - name: Install MuseScore 3
       run: sudo apt-get update && sudo apt-get install musescore3
-    - name: Convert mscz to svg
+    - name: Convert mscz to compressed svg.s
       working-directory: ./music
-      run: ./convert.sh
-    - name: Compress svg:s
-      working-directory: ./music
-      run: ./compress.sh
+      run: ./convert.sh --compress --no-move
     - name: Perpare for export
       working-directory: ./music
       run: mv svgs.json svg
