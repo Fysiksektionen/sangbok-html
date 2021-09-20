@@ -8,13 +8,14 @@ import { defineComponent, defineAsyncComponent } from 'vue'
 
 export default defineComponent({
   name: 'Sångbok',
-  components: { // load Generator component and generator helper functions asynchronously.
+  components: { // Only load Generator component and generator helper functions on-demand.
     GeneratorView: defineAsyncComponent(() => import('@/views/Generator.vue'))
   }
 })
 </script>
 
 <style lang="scss">
+@use "sass:math";
 /* Colors */
 /* $f-orange: #FF642B;
 $f-orange-light: #FB9C74;
@@ -57,6 +58,38 @@ div.main h2 {
     padding: 0;
     padding-top: 0.75em;
 }
+
+.button {
+    text-align: center;
+    font-size: 1em;
+    font-family: "EB Garamond", serif;
+
+    border-width: 0;
+    $navbutton-spacing: 12px;
+    border-radius: $navbutton-spacing;
+    margin: $navbutton-spacing math.div($navbutton-spacing, 2);
+    padding: $navbutton-spacing;
+
+    background-color: rgba(128, 128, 128, 0.10);
+    &:active {background-color: rgba(128, 128, 128, 0.30);}
+    &.disabled {opacity: 0.5;}
+}
+
+.night .button {
+  color: white;
+}
+
+/* Forms */
+.toggle {
+      float: right;
+      width: 0.8em;
+      height: 0.8em;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 0.4em;
+      margin-top: 0.3em;
+      padding: 0;
+  }
 
 /* Tables, etc. */
 table.songbook {

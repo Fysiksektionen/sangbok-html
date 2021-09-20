@@ -6,6 +6,16 @@
 build
 dist
 
+.mscbackup
+music/svg
+music/tmp
+public/msvg
+
+## Copyrighted stuff (potentially)
+*Amanda Lundbom*.mscz
+*Paradhymn*.mscz
+X*.mscz
+
 ##
 ## GitHub Node template
 ##

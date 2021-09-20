@@ -10,7 +10,7 @@ type Hit = {
 
 function rate (keyword: RegExp, song: Song): number {
   return (+(song.title.search(keyword) > -1) * 10 +
-    +(song.text.search(keyword) > -1) * 5 +
+    +(song.text !== undefined && song.text.search(keyword) > -1) * 5 +
     +((song.melody || '').search(keyword) > -1) * 3 +
     +((song.author || '').search(keyword) > -1) * 2)
 }
@@ -41,7 +41,6 @@ export function search (s: string, chapters: Chapter[]): Hit[] | null { // TODO:
       const indexes = { chapterindex: i, songindex: j }
 
       // Träff i olika egenskaper ger olika mycket poäng
-      // TODO: gör en funktion för rating/subrating.
       let rating: number = 10 * rate(regexedText, song)
 
       let missing = 0

@@ -1,17 +1,25 @@
 # This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Build
+name: Build Vue
 
 on:
   push:
-    branches: [ main, vue ]
+    paths:
+      - '**.vue'
+      - '**.ts'
+      - '**.js'
+      - '**.json'
+      - '**.mscz'
+      - '**/build-vue.yml'
   pull_request:
     branches: [ main, vue ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: Build vue
+    needs: sheet-music
     strategy:
       matrix:
         node-version: [14.x, 16.x]
@@ -25,11 +33,49 @@ jobs:
         cache: 'npm'
     - name: Install packages
       run: npm ci
+    - name: Fetch sheet music artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: music-svgs
+        path: public/msvg
+    - name: Unpack sheet music artifacts
+      working-directory: public/msvg
+      run: mv svgs.json ../../src/assets/msvgs.json
+
     - name: build
       run: npx vue-cli-service build
     - name: Archive production artifacts
+      if: ${{ matrix.node-version == '16.x' }}
       uses: actions/upload-artifact@v2
       with:
         name: dist
         path: |
           dist
+
+  
+  sheet-music:
+    runs-on: ubuntu-latest
+    name: Generate sheet music resources
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16.x
+        cache: 'npm'
+    - name: Install svgo
+      run: npm install -g svgo
+    - name: Install MuseScore 3
+      run: sudo apt-get update && sudo apt-get install musescore3
+    - name: Convert mscz to compressed svg.s
+      working-directory: ./music
+      run: ./convert.sh --compress --no-move
+    - name: Perpare for export
+      working-directory: ./music
+      run: mv svgs.json svg
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: music-svgs
+        path: music/svg

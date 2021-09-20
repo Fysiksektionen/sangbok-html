@@ -2,10 +2,18 @@ import lyrics from '@/assets/lyrics.json'
 
 export type Song = {
   title: string,
-  author: string,
-  melody: string,
-  text: string,
   index: string,
+  author?: string,
+  melody?: string,
+  msvg?: string,
+  text: string,
+} | { // We need either mxl or text to be defined.
+  title: string,
+  index: string,
+  author?: string,
+  melody?: string,
+  msvg: string,
+  text?: string,
 }
 
 export type Chapter = {
@@ -14,6 +22,9 @@ export type Chapter = {
   songs: Song[],
 }
 
+export const chapters: Chapter[] = lyrics
+
+/* Old parser, for the old lyrics.json format.
 type LyricsFile = {
   chapters: {
     chapter: string,
@@ -48,7 +59,7 @@ function loadLyrics(): Chapter[] {
       })
     })
   }
+  console.log(JSON.stringify(out))
   return out
 }
-
-export const chapters = loadLyrics()
+*/
