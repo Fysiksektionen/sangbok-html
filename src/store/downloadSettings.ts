@@ -27,7 +27,39 @@ export type DownloadSettings = {
   settings: DownloadSetting[]
 }
 
-export const downloadSettings: DownloadSettings[] = [
+export const downloadSettings: {[key: string]: DownloadSettings} = {
+  general: {
+    title: 'Allmänt',
+    settings: [{
+      text: 'Titel på förstasida',
+      type: 'string',
+      value: 'Sångblad'
+    }, {
+      text: 'Logga på förstasida',
+      type: 'bool',
+      value: true
+    }, {
+      text: 'Datum på förstasida',
+      type: 'bool',
+      value: true
+    }, {
+      text: 'Inkludera melodi',
+      type: 'bool',
+      value: true
+    }, {
+      text: 'Inkludera författare',
+      type: 'bool',
+      value: false
+    }, {
+      text: 'Ta bort notiser om notkapitlet',
+      type: 'bool',
+      value: true
+    }]
+  }
+}
+
+// eslint-disable @typescript-eslint/no-unused-vars
+const downloadSettingsOld: DownloadSettings[] = [
   {
     title: 'Allmänt',
     settings: [{

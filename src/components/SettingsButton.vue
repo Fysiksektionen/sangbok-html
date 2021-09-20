@@ -15,15 +15,5 @@ export default defineComponent({
 </script>
 
 <style scoped lang="css">
-  .toggle {
-      float: right;
-      width: 0.8em;
-      height: 0.8em;
-      border-width: 1px;
-      border-style: solid;
-      border-radius: 0.4em;
-      margin-top: 0.3em;
-      padding: 0;
-  }
   div.setting {padding: 0.8em 0;}
 </style>

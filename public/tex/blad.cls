@@ -1,9 +1,9 @@
 
 % Filename: blad.cls
 % Author: Arno Lepisk (2003, v 1.0)
-%         Oskar Rune (2021, v 1.1)
+%         Oskar Rune (2021, v 1.1.1)
 % 
-% Version: 1.1
+% Version: 1.1.1
 
 % This is a LaTeX2e document class.
 
@@ -19,6 +19,7 @@
 
 \RequirePackage[swedish]{babel}
 \RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
 
 \RequirePackage{latexsym}
 \RequirePackage{calc}
@@ -26,6 +27,9 @@
 \RequirePackage{ifthen}
 
 \RequirePackage{verbatim}
+
+\RequirePackage{amsmath,amsfonts,amssymb,graphicx}
+\RequirePackage{svg}
 
 %
 % Layout

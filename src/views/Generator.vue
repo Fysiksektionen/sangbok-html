@@ -1,6 +1,7 @@
 <template>
   <div class="generator">
     <h2>Sångbladsskaparen</h2>
+    <p style="text-align: center;">Är för närvarande experimentell.</p>
     <table class="songbook">
       <tr v-for="songIdxs, listIdx in generatorSongs" v-bind:key="listIdx">
         <td class="name">{{ chapters[songIdxs[0]].songs[songIdxs[1]].title }}</td>
@@ -14,26 +15,38 @@
       <div @click="go" title="Öppna i Overleaf">☁</div>
       <div @click="alert('Ej implementerad ännu.')" title="Ladda ner" class="disabled">↓</div>
     </div>
-    <p style="text-align: center;">Sångbladsskaparen är för närvarande experimentell.</p>
+    <div class="generatorsettings">
+      <h2>Sångbladsinställningar</h2>
+      <div>
+        <h3>Allmänt</h3>
+        <div class="setting" v-for="setting, idx in generalSettings" v-bind:key="idx">
+          {{setting.text}}
+          <input v-if="setting.type=='string'" placeholder="Text" type="text" v-model="setting.value" />
+          <div v-if="setting.type=='bool'" @click="setting.value=!setting.value"
+            class="toggle border-orange" v-bind:class="{'bg-orange': setting.value}"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { getContentTeX } from '@/utils/export.ts'
+import { getContentTeX } from '@/utils/export/contentTeX.ts'
+import { getMainTeX } from '@/utils/export/mainTeX.ts'
+import openInOverleaf from '@/utils/export/overleaf.ts'
 import { chapters, Song } from '@/utils/lyrics.ts'
-import { mainTex, blad, logga } from '@/assets/tex/resources.ts'
+import { generalSettings, GeneralSettings } from '@/utils/export/generalSettings.ts'
 
 type SongIndex = [number, number]
 
 export default defineComponent({
   name: 'GeneratorView',
   data () {
-    // TODO: Perhaps should be stored using $store.
-    const gs: SongIndex[] = []
     return {
-      generatorSongs: gs,
-      chapters: chapters
+      generatorSongs: [] as SongIndex[], // TODO: Perhaps should be stored using $store.
+      chapters: chapters,
+      generalSettings: generalSettings as GeneralSettings
     }
   },
   props: ['songid', 'chapterid'],
@@ -68,40 +81,17 @@ export default defineComponent({
       }
       return out
     },
-    go () {
+    go: async function() {
       const songs = (this.generatorSongs.length === 0) ? chapters.map(c => c.songs).flat() : this.getSongs(this.generatorSongs)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const content = getContentTeX(songs, (this as any).$store.state.settings.download)
 
-      var form = document.createElement('form')
-      form.setAttribute('method', 'post')
-      form.setAttribute('action', 'https://www.overleaf.com/docs')
-      form.setAttribute('target', '_blank')
-
-      const files: {[key: string]: string} = {
-        'main.tex': mainTex,
-        'blad.cls': blad,
-        'logga.svg': logga,
-        'content.tex': content
+      const files: {[key: string]: string} = {// TODO Load asynchronously, that is, don't use await right here.
+        'main.tex': getMainTeX(this.generalSettings),
+        'blad.cls': await (await fetch("tex/blad.cls")).text(),
+        'logga.svg': await (await fetch("tex/logga.svg")).text(),
+        'content.tex': getContentTeX(songs, this.generalSettings)
       }
 
-      for (const [key, value] of Object.entries(files)) {
-        const name = document.createElement('input')
-        name.setAttribute('type', 'hidden')
-        name.setAttribute('name', 'snip_name[]')
-        name.setAttribute('value', key)
-
-        const content = document.createElement('input')
-        content.setAttribute('type', 'hidden')
-        content.setAttribute('name', 'snip[]')
-        content.setAttribute('value', value)
-
-        form.appendChild(name)
-        form.appendChild(content)
-      }
-
-      document.body.appendChild(form)
-      form.submit()
+      openInOverleaf(files)
     }
   }
 })
@@ -112,7 +102,32 @@ export default defineComponent({
   width: 40%;
   right: 0;
   min-width: 8cm;
+
+  & .generatorsettings {
+    padding: 0.5cm;
+  }
+
+  & .setting {
+    margin-bottom: 0.8em;
+    & input {
+    float: right;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 0.3em;
+    padding-left: 0.5em !important;
+    padding-right: 0.5em !important;
+    height: 1.8em;
+    text-align: right;
+    }
+  }
 }
+
+.night .generator .setting input {
+    color: white;
+    background-color: #444;
+}
+
+
 
 table.songbook tr:active {background-color: unset;}
 

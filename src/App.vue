@@ -8,7 +8,7 @@ import { defineComponent, defineAsyncComponent } from 'vue'
 
 export default defineComponent({
   name: 'Sångbok',
-  components: { // load Generator component and generator helper functions asynchronously.
+  components: { // Only load Generator component and generator helper functions on-demand.
     GeneratorView: defineAsyncComponent(() => import('@/views/Generator.vue'))
   }
 })
@@ -78,6 +78,18 @@ div.main h2 {
 .night .button {
   color: white;
 }
+
+/* Forms */
+.toggle {
+      float: right;
+      width: 0.8em;
+      height: 0.8em;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 0.4em;
+      margin-top: 0.3em;
+      padding: 0;
+  }
 
 /* Tables, etc. */
 table.songbook {

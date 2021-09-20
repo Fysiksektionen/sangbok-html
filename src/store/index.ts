@@ -1,5 +1,4 @@
 import { createStore } from 'vuex'
-import { downloadSettings } from './downloadSettings'
 
 export default createStore({
   state: {
@@ -7,8 +6,7 @@ export default createStore({
       translate: false,
       night: true,
       larger: false,
-      generator: false,
-      download: downloadSettings
+      generator: false
     },
     query: ''
   },
