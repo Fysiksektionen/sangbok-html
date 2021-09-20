@@ -20,9 +20,3 @@ export type NumberSetting = {
 }
 
 export type DownloadSetting = BoolSetting | StringSetting | NumberSetting
-
-export type DownloadSettings = {
-  title: string,
-  indexes?: [number, number][],
-  settings: DownloadSetting[]
-}

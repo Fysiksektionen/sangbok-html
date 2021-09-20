@@ -1,4 +1,14 @@
-import { BoolSetting, StringSetting } from './settings'
+type BoolSetting = {
+  text: string,
+  type: 'bool',
+  value: boolean
+}
+
+type StringSetting = {
+  text: string,
+  type: 'string',
+  value: string
+}
 
 export type GeneralSettings = {
   title: StringSetting,

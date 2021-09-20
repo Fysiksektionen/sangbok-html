@@ -1,15 +1,14 @@
 import { Song } from '../lyrics'
 import { getDefaultText, escapeAll } from './escapes'
 import { GeneralSettings } from './generalSettings'
+import { SpecificDownloadSettings } from './specificSettings'
 
-export function getContentTeX(songs: Song[], gs: GeneralSettings): string {
+export default function getContentTeX(songs: Song[], gs: GeneralSettings, ss: SpecificDownloadSettings[]): string {
   const content: string[] = []
-
-  const addDefaultText = function (text: string) { content.push(getDefaultText(text)) }
 
   // Main loop
   for (const song of songs) {
-    if (song.text === '') {
+    if (!song.text) {
       console.log(`Song with empty text. Ignoring: ${song.index}`)
       continue
     }
@@ -20,6 +19,7 @@ export function getContentTeX(songs: Song[], gs: GeneralSettings): string {
       '}\n'
     )
 
+    // TODO: Extract to separate function
     if (gs.showMelody.value && song.melody) { // TODO: Include melodies and smn:s even if showMelody is false, but as comments.
       const melodyContent = ((song.melody || '')
         .split('\n').filter(function (line) {
@@ -35,9 +35,23 @@ export function getContentTeX(songs: Song[], gs: GeneralSettings): string {
       }
     }
 
-    // TODO: Add song-specific settings
-    addDefaultText(song.text || '')
+    let sscount = 0
+    // Song-specific settings
+    for (const setting of ss) {
+      if (setting.indexes.indexOf(song.index) > -1) {
+        content.push(setting.processor(song.text, setting.settings))
+        sscount++
+      }
+    }
 
+    if (sscount === 0) { // No specific settings were used
+      content.push(getDefaultText(song.text))
+    } else if (sscount > 1) {
+      alert(`Fler än en specialinställning användes för låt (see what I did there xD) ${song.index}. Det är dags att skicka ett surt mail till lämplig projektledare, eller webmaster.`)
+    }
+
+
+    // TODO: Extract into separate function
     if (gs.showAuthor.value && song.author !== undefined) {
       content.push(
         '\\\\* \\vspace*{0.1cm}\n',

@@ -1,6 +1,6 @@
 import { GeneralSettings } from './generalSettings'
 
-export function getMainTeX(gs: GeneralSettings): string {
+export default function getMainTeX(gs: GeneralSettings): string {
   const out: string[] = []
   out.push(
     '\\documentclass[a4paper, titlepage]{blad}\n',

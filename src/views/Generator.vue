@@ -25,6 +25,19 @@
           <div v-if="setting.type=='bool'" @click="setting.value=!setting.value"
             class="toggle border-orange" v-bind:class="{'bg-orange': setting.value}"></div>
         </div>
+        <div v-for="settinggroup, gidx in specificSettings" v-bind:key="gidx">
+          <div v-if="settingIsVisible(settinggroup)">
+            <h3>{{settinggroup.title}}</h3>
+            <div class="setting" v-for="setting, idx in settinggroup.settings" v-bind:key="idx">
+              {{setting.text}}
+              <input v-if="setting.type=='number'" v-bind:placeholder="setting.placeholder" type="number"
+                v-model="setting.value" v-bind:min="setting.min" v-bind:max="setting.max"/>
+              <input v-if="setting.type=='string'" placeholder="Text" type="text" v-model="setting.value" />
+              <div v-if="setting.type=='bool'" @click="setting.value=!setting.value"
+                class="toggle border-orange" v-bind:class="{'bg-orange': setting.value}"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -32,11 +45,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { getContentTeX } from '@/utils/export/contentTeX.ts'
-import { getMainTeX } from '@/utils/export/mainTeX.ts'
+import getContentTeX from '@/utils/export/contentTeX.ts'
+import getMainTeX from '@/utils/export/mainTeX.ts'
 import openInOverleaf from '@/utils/export/overleaf.ts'
 import { chapters, Song } from '@/utils/lyrics.ts'
 import { generalSettings, GeneralSettings } from '@/utils/export/generalSettings.ts'
+import { specificSettings, SpecificDownloadSettings } from '@/utils/export/specificSettings.ts'
+import { DownloadSetting } from '@/utils/export/settings.ts'
 
 type SongIndex = [number, number]
 
@@ -46,7 +61,8 @@ export default defineComponent({
     return {
       generatorSongs: [] as SongIndex[], // TODO: Perhaps should be stored using $store.
       chapters: chapters,
-      generalSettings: generalSettings as GeneralSettings
+      generalSettings: generalSettings as GeneralSettings,
+      specificSettings: specificSettings as SpecificDownloadSettings[]
     }
   },
   props: ['songid', 'chapterid'],
@@ -81,14 +97,18 @@ export default defineComponent({
       }
       return out
     },
+    settingIsVisible(setting: SpecificDownloadSettings): boolean {
+      const currentIndicesGreek = this.getSongs(this.generatorSongs).map((s: Song) => s.index)
+      return [...setting.indexes].filter((i: string) => currentIndicesGreek.indexOf(i) > -1).length > 0
+    },
     go: async function() {
       const songs = (this.generatorSongs.length === 0) ? chapters.map(c => c.songs).flat() : this.getSongs(this.generatorSongs)
 
-      const files: {[key: string]: string} = {// TODO Load asynchronously, that is, don't use await right here.
+      const files: {[key: string]: string} = { // TODO Load asynchronously, that is, don't use await right here.
         'main.tex': getMainTeX(this.generalSettings),
-        'blad.cls': await (await fetch("tex/blad.cls")).text(),
-        'logga.svg': await (await fetch("tex/logga.svg")).text(),
-        'content.tex': getContentTeX(songs, this.generalSettings)
+        'blad.cls': await (await fetch('tex/blad.cls')).text(),
+        'logga.svg': await (await fetch('tex/logga.svg')).text(),
+        'content.tex': getContentTeX(songs, this.generalSettings, this.specificSettings)
       }
 
       openInOverleaf(files)
@@ -126,8 +146,6 @@ export default defineComponent({
     color: white;
     background-color: #444;
 }
-
-
 
 table.songbook tr:active {background-color: unset;}
 
