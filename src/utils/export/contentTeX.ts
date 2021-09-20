@@ -50,7 +50,6 @@ export default function getContentTeX(songs: Song[], gs: GeneralSettings, ss: Sp
       alert(`Fler än en specialinställning användes för låt (see what I did there xD) ${song.index}. Det är dags att skicka ett surt mail till lämplig projektledare, eller webmaster.`)
     }
 
-
     // TODO: Extract into separate function
     if (gs.showAuthor.value && song.author !== undefined) {
       content.push(

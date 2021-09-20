@@ -5,15 +5,17 @@
     <table class="songbook">
       <tr v-for="songIdxs, listIdx in generatorSongs" v-bind:key="listIdx">
         <td class="name">{{ chapters[songIdxs[0]].songs[songIdxs[1]].title }}</td>
-        <td class="operation up" v-bind:class="{ 'disabled': listIdx == 0 }" @click="listIdx > 0 && move(listIdx, -1)">▲</td>
-        <td class="operation down" v-bind:class="{ 'disabled': listIdx == generatorSongs.length-1 }" @click="listIdx < generatorSongs.length && move(listIdx, 1)">▼</td>
+        <td class="operation up" v-bind:class="{ 'disabled': listIdx == 0 }" @click="listIdx > 0 && move(listIdx, -1)">▲
+        </td>
+        <td class="operation down" v-bind:class="{ 'disabled': listIdx == generatorSongs.length-1 }"
+          @click="listIdx < generatorSongs.length && move(listIdx, 1)">▼</td>
         <td class="operation delete" @click="generatorSongs.splice(listIdx, 1)">✖</td>
       </tr>
     </table>
     <div class="generatorbuttons">
       <div v-bind:class="{ 'disabled': !canAdd() }" @click="add()" title="Lägg till">+</div>
-      <div @click="go" title="Öppna i Overleaf">☁</div>
-      <div @click="alert('Ej implementerad ännu.')" title="Ladda ner" class="disabled">↓</div>
+      <div @click="go('overleaf')" title="Öppna i Overleaf">☁</div>
+      <div @click="go('zip')" title="Ladda ner">↓</div>
     </div>
     <div class="generatorsettings">
       <h2>Sångbladsinställningar</h2>
@@ -22,8 +24,8 @@
         <div class="setting" v-for="setting, idx in generalSettings" v-bind:key="idx">
           {{setting.text}}
           <input v-if="setting.type=='string'" placeholder="Text" type="text" v-model="setting.value" />
-          <div v-if="setting.type=='bool'" @click="setting.value=!setting.value"
-            class="toggle border-orange" v-bind:class="{'bg-orange': setting.value}"></div>
+          <div v-if="setting.type=='bool'" @click="setting.value=!setting.value" class="toggle border-orange"
+            v-bind:class="{'bg-orange': setting.value}"></div>
         </div>
         <div v-for="settinggroup, gidx in specificSettings" v-bind:key="gidx">
           <div v-if="settingIsVisible(settinggroup)">
@@ -31,10 +33,10 @@
             <div class="setting" v-for="setting, idx in settinggroup.settings" v-bind:key="idx">
               {{setting.text}}
               <input v-if="setting.type=='number'" v-bind:placeholder="setting.placeholder" type="number"
-                v-model="setting.value" v-bind:min="setting.min" v-bind:max="setting.max"/>
+                v-model="setting.value" v-bind:min="setting.min" v-bind:max="setting.max" />
               <input v-if="setting.type=='string'" placeholder="Text" type="text" v-model="setting.value" />
-              <div v-if="setting.type=='bool'" @click="setting.value=!setting.value"
-                class="toggle border-orange" v-bind:class="{'bg-orange': setting.value}"></div>
+              <div v-if="setting.type=='bool'" @click="setting.value=!setting.value" class="toggle border-orange"
+                v-bind:class="{'bg-orange': setting.value}"></div>
             </div>
           </div>
         </div>
@@ -48,16 +50,16 @@ import { defineComponent } from 'vue'
 import getContentTeX from '@/utils/export/contentTeX.ts'
 import getMainTeX from '@/utils/export/mainTeX.ts'
 import openInOverleaf from '@/utils/export/overleaf.ts'
+import downloadZip from '@/utils/export/zip.ts'
 import { chapters, Song } from '@/utils/lyrics.ts'
 import { generalSettings, GeneralSettings } from '@/utils/export/generalSettings.ts'
 import { specificSettings, SpecificDownloadSettings } from '@/utils/export/specificSettings.ts'
-import { DownloadSetting } from '@/utils/export/settings.ts'
 
-type SongIndex = [number, number]
+  type SongIndex = [number, number]
 
 export default defineComponent({
   name: 'GeneratorView',
-  data () {
+  data() {
     return {
       generatorSongs: [] as SongIndex[], // TODO: Perhaps should be stored using $store.
       chapters: chapters,
@@ -79,15 +81,15 @@ export default defineComponent({
         }
       }
     },
-    move (index: number, direction: number) {
+    move(index: number, direction: number) {
       var temp = this.generatorSongs[index]
       this.generatorSongs[index] = this.generatorSongs[index + direction]
       this.generatorSongs[index + direction] = temp
     },
-    canAdd () { // TODO: Move to computed
+    canAdd() { // TODO: Move to computed
       return (// TODO: Don't rely on $route.params for state identification. (Also applies to add())
         (this.$route.params.songId !== undefined && this.$route.params.chapterId !== undefined) ||
-        (this.$route.params.cid !== undefined)
+          (this.$route.params.cid !== undefined)
       )
     },
     getSongs(indices: SongIndex[]): Song[] {
@@ -101,7 +103,7 @@ export default defineComponent({
       const currentIndicesGreek = this.getSongs(this.generatorSongs).map((s: Song) => s.index)
       return [...setting.indexes].filter((i: string) => currentIndicesGreek.indexOf(i) > -1).length > 0
     },
-    go: async function() {
+    go: async function (method: 'zip' | 'overleaf') {
       const songs = (this.generatorSongs.length === 0) ? chapters.map(c => c.songs).flat() : this.getSongs(this.generatorSongs)
 
       const files: {[key: string]: string} = { // TODO Load asynchronously, that is, don't use await right here.
@@ -111,71 +113,87 @@ export default defineComponent({
         'content.tex': getContentTeX(songs, this.generalSettings, this.specificSettings)
       }
 
-      openInOverleaf(files)
+      switch (method) {
+      case 'overleaf':
+        openInOverleaf(files)
+        break
+      case 'zip':
+        downloadZip(files)
+        break
+      }
     }
   }
 })
 </script>
 
 <style scoped lang="scss">
-.generator {
-  width: 40%;
-  right: 0;
-  min-width: 8cm;
+  .generator {
+    width: 40%;
+    right: 0;
+    min-width: 8cm;
 
-  & .generatorsettings {
-    padding: 0.5cm;
-  }
-
-  & .setting {
-    margin-bottom: 0.8em;
-    & input {
-    float: right;
-    background-color: #f0f0f0;
-    border: none;
-    border-radius: 0.3em;
-    padding-left: 0.5em !important;
-    padding-right: 0.5em !important;
-    height: 1.8em;
-    text-align: right;
+    & .generatorsettings {
+      padding: 0.5cm;
     }
-  }
-}
 
-.night .generator .setting input {
-    color: white;
-    background-color: #444;
-}
+    & .setting {
+      margin-bottom: 0.8em;
 
-table.songbook tr:active {background-color: unset;}
-
-  .operation:hover:not(.disabled) {cursor:pointer;}
-  .operation.disabled {color:#333}
-
-  .generatorbuttons {
-        padding-bottom: 20px;
-        text-align: center;
-
-        &> div {
-          display: inline-block;
-          background-color: rgba(128, 128, 128, 0.10);
-
-          $navbutton-spacing: 12px;
-          border-radius: $navbutton-spacing;
-          margin: $navbutton-spacing;
-          padding: $navbutton-spacing;
-          width: calc(33% - 4 * #{$navbutton-spacing});
-
-          color: #f60;
-          font-size: 2em;
-
-          &:hover:not(.disabled) {
-            cursor:pointer;
-          }
-          &.disabled {
-            background-color: rgba(128, 128, 128, 0.80);
-            color: unset;
-          }
+      & input {
+        float: right;
+        background-color: #f0f0f0;
+        border: none;
+        border-radius: 0.3em;
+        padding-left: 0.5em !important;
+        padding-right: 0.5em !important;
+        height: 1.8em;
+        text-align: right;
       }
     }
-  </style>
+  }
+
+  .night .generator .setting input {
+    color: white;
+    background-color: #444;
+  }
+
+  table.songbook tr:active {
+    background-color: unset;
+  }
+
+  .operation:hover:not(.disabled) {
+    cursor: pointer;
+  }
+
+  .operation.disabled {
+    color: #333
+  }
+
+  .generatorbuttons {
+    padding-bottom: 20px;
+    text-align: center;
+
+    &>div {
+      display: inline-block;
+      background-color: rgba(128, 128, 128, 0.10);
+
+      $navbutton-spacing: 12px;
+      border-radius: $navbutton-spacing;
+      margin: $navbutton-spacing;
+      padding: $navbutton-spacing;
+      width: calc(33% - 4 * #{$navbutton-spacing});
+
+      color: #f60;
+      font-size: 2em;
+
+      &:hover:not(.disabled) {
+        cursor: pointer;
+      }
+
+      &.disabled {
+        background-color: rgba(128, 128, 128, 0.80);
+        color: unset;
+      }
+    }
+  }
+</style>
