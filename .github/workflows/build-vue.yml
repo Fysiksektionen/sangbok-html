@@ -40,7 +40,7 @@ jobs:
         path: public/msvg
     - name: Unpack sheet music artifacts
       working-directory: public/msvg
-      run: mv svgs.json ../../src/assets/mvsvgs.json
+      run: mv svgs.json ../../src/assets/msvgs.json
 
     - name: build
       run: npx vue-cli-service build
