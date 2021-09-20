@@ -1,3 +1,5 @@
+rm svg/*.svg
+
 ./convert.sh
 ./compress.sh
 

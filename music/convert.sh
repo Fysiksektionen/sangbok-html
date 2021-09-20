@@ -15,7 +15,7 @@ do
     for sf in "${SCALE_FACTORS[@]}"
     do
         sed -e "s/<Spatium>[0-9]\.[0-9]*<\/Spatium>/<Spatium>$sf<\/Spatium>/g" "tmp/${file//mscz/mscx}" > "tmp/${file//mscz/tmp.mscx}"
-        mscore3 --export-to "svg/${file//.mscz/}-sf$sf.svg" "tmp/${file//mscz/tmp.mscx}" --force
+        mscore3 --export-to "svg/${file//.mscz/}-sf$sf.svg" "tmp/${file//mscz/tmp.mscx}" --force --trim-image 140
     done
 done
 
