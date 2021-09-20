@@ -11,9 +11,11 @@ Se [issues](https://github.com/Fysiksektionen/sangbok-html/issues). Saker som ka
 
 ## Hur du kör detta projekt
 ### Utveckling
-Installera [Node.js 16](https://nodejs.org) om du inte redan har det. Klona sedan repot, och kör `npm install` i rotmappen. Gå sedan till mappen `music` och kör `./build.sh`. Utvecklingsservern körs sedan i huvudmappen med `npm start`. Andra kommandon är:
+Installera [Node.js 16](https://nodejs.org) om du inte redan har det. Klona sedan repot, och kör `npm install` i rotmappen. Gå sedan till mappen `music` och kör `./convert.sh`*. Utvecklingsservern körs sedan i huvudmappen med `npm start`. Andra kommandon är:
 * `npm run build` - kompilera projektet.
 * `npm run lint` - lintar och fixar källkoden.
+
+\* Detta steg kräver MuseScore 3 och bash. Har du inte MuseScore, kan du gå till den senaste [build-körningen](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml), och ladda ner `music-svgs`. svg-filerna läggs sedan i `public/msvg`, och `svgs.json` flyttas till `src/assets/msvgs.json`.
 
 ### Körning
 Gå till den senaste [build-körningen](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml), skrolla ner till artifacts, och klicka på `dist` för att ladda ner en zip-fil med statiskt innehåll.
