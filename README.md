@@ -39,3 +39,19 @@ Noter som förmodligen är upphovsrättsskyddade:
 * Sveriges flagga (Upphovsrätten innehas av [Hugo Alfvénfonden](http://www.musakad.se/omakademien/organisation/stifelserochfonder/hugoalfvenfonden.601.html))
 * Porthos visa
 * Amanda Lundbom
+
+Att lägga till (övriga):
+* Punschen kommer
+* Månvisa
+* Vikingen
+* Härjavisan (upphovsrätten går ut 28 augusti 2022)
+* Jag har aldrig vart på snusen
+* Auld lang syne
+* Marseljäsen
+* En sockerbagare
+* Te deum
+* Väva vadmal
+* Var redo
+* Gubben Noak (eller Gubben Noach)
+* Karl Alfred boy (kolla upphovsrätt)
+* Typ hela lambda-kapitlet
