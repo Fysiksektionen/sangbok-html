@@ -13,6 +13,7 @@
             </td>
             <td class="name">
               {{ chapters[hit.song.chapterindex].songs[hit.song.songindex].title }}
+              <span v-if="chapters[hit.song.chapterindex].songs[hit.song.songindex].msvg" class="sheetmusicicon">𝄞</span>
             </td>
         </tr>
         <tr class="nohits"><td>Inga sånger hittades.</td></tr>
@@ -22,8 +23,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { search } from '@/utils/search.ts'
-import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
+import { useStore } from 'vuex'
+import { key } from '@/store'
+
+import { search } from '@/utils/search.ts' // @ is an alias to /src
+import Navbar from '@/components/Navbar.vue'
 import SearchBox from '@/components/SearchBox.vue'
 import { chapters } from '@/utils/lyrics.ts'
 
@@ -45,8 +49,7 @@ export default defineComponent({
     if (this !== undefined) {
       // If $store.state.query is set, the Song view will go back to the search page.
       // If it is set to '', the Song view goes back to the Chapter view.
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (this as any).$store.commit('setQuery', this.$route.params.query)
+      useStore(key).commit('setQuery', this.$route.params.query)
     }
   }
 })

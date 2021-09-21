@@ -9,7 +9,11 @@ import { defineComponent, defineAsyncComponent } from 'vue'
 export default defineComponent({
   name: 'Sångbok',
   components: { // Only load Generator component and generator helper functions on-demand.
-    GeneratorView: defineAsyncComponent(() => import('@/views/Generator.vue'))
+    GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue'))
+  },
+  created () {
+    // TODO: Ugly fix that removes body night class if stored settings.night === false.
+    document.body.className = (JSON.parse(window.localStorage.getItem('vuex') || '{"settings":{"night": true}}').settings.night === true) ? 'night' : ''
   }
 })
 </script>
@@ -116,6 +120,10 @@ table.songbook {
 
     & .index {padding-left: 1em;}
     & .name {padding-left: 1em;padding-right: 0.5em;}
+    & .sheetmusicicon {
+      float: right;
+      margin-right: 0.5em;
+    }
 }
 
 .night table.songbook tr {
