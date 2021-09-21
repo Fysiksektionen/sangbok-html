@@ -46,11 +46,17 @@ do
         fi
         for tmpfile in tmp/*.mscx # Find whatever the .mscx file is called.
         do
-            sed -e "s/<Spatium>[0-9]\.[0-9]*<\/Spatium>/<Spatium>$sf<\/Spatium>/g" "$tmpfile" > "tmp/${file//mscz/tmp.mscx}" || exit 3
+            sed -e "s/<Spatium>[0-9]\.[0-9]*<\/Spatium>/<Spatium>$sf<\/Spatium>/g" "$tmpfile" \
+                | sed -e "s/<pageHeight>[0-9]*\.[0-9]*<\/pageHeight>/<pageHeight>1000<\/pageHeight>/g" \
+                > "tmp/${file//mscz/tmp.mscx}" \
+                || exit 3
             mscore3 --export-to "svg/${file//.mscz/}${csum:0:8}-sf$sf.svg" "tmp/${file//mscz/tmp.mscx}" --force --trim-image 140 || exit 1;
         done
     done
 done
+
+# Cleanup
+rm -rf tmp
 
 ##
 ## Compress svg:s
