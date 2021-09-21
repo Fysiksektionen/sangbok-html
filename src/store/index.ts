@@ -1,5 +1,7 @@
 import { createStore } from 'vuex'
 
+import createPersistedState from 'vuex-persistedstate'
+
 export default createStore({
   state: {
     settings: {
@@ -19,8 +21,7 @@ export default createStore({
       state.query = query
     }
   },
-  actions: {
-  },
-  modules: {
-  }
+  actions: {},
+  modules: {},
+  plugins: [createPersistedState({})]
 })

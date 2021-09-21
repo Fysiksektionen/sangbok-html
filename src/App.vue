@@ -10,6 +10,10 @@ export default defineComponent({
   name: 'Sångbok',
   components: { // Only load Generator component and generator helper functions on-demand.
     GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue'))
+  },
+  created () {
+    // TODO: Ugly fix that removes body night class if stored settings.night === false.
+    document.body.className = (JSON.parse(window.localStorage.getItem('vuex') || '{"settings":{"night": true}}').settings.night === true) ? 'night' : ''
   }
 })
 </script>
