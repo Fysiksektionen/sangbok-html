@@ -23,8 +23,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useStore } from 'vuex'
-import { key } from '@/store'
 
 import { search } from '@/utils/search.ts' // @ is an alias to /src
 import Navbar from '@/components/Navbar.vue'
