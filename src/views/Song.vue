@@ -30,7 +30,7 @@ export default defineComponent({
   components: {
     Navbar,
     NavButtons,
-    SheetMusicRenderer: defineAsyncComponent(() => import('@/components/SheetMusicRenderer.vue'))
+    SheetMusicRenderer: defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer" */ '@/components/SheetMusicRenderer.vue'))
   },
   data() {
     return {

@@ -33,6 +33,7 @@ do
 
     for sf in "${SCALE_FACTORS[@]}"
     do
+        # TODO: if we are using hash, and a generated image has already been found, don't regenerate it unless we force it with a flag.
         if [[ ! $*\  == *--no-hash\ * ]]; then csum="" else; csum="."$(sha1sum "mscz/$file");fi
         sed -e "s/<Spatium>[0-9]\.[0-9]*<\/Spatium>/<Spatium>$sf<\/Spatium>/g" "tmp/${file//mscz/mscx}" > "tmp/${file//mscz/tmp.mscx}"
         mscore3 --export-to "svg/${file//.mscz/}-sf$sf${csum:0:8}.svg" "tmp/${file//mscz/tmp.mscx}" --force --trim-image 140

@@ -9,7 +9,7 @@ import { defineComponent, defineAsyncComponent } from 'vue'
 export default defineComponent({
   name: 'Sångbok',
   components: { // Only load Generator component and generator helper functions on-demand.
-    GeneratorView: defineAsyncComponent(() => import('@/views/Generator.vue'))
+    GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue'))
   }
 })
 </script>
