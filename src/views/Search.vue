@@ -44,13 +44,6 @@ export default defineComponent({
     return {
       chapters: chapters
     }
-  },
-  created() {
-    if (this !== undefined) {
-      // If $store.state.query is set, the Song view will go back to the search page.
-      // If it is set to '', the Song view goes back to the Chapter view.
-      useStore(key).commit('setQuery', this.$route.params.query)
-    }
   }
 })
 </script>

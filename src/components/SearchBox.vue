@@ -6,6 +6,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useStore } from 'vuex'
+import { key } from '@/store'
 
 export default defineComponent({
   name: 'SearchBox',
@@ -15,11 +17,15 @@ export default defineComponent({
       query2: this.$props.query || ''
     }
   },
+  setup () {
+    return { store: useStore(key) }
+  },
   methods: {
     search (evt: Event) {
       evt.preventDefault()
       if (this !== undefined) {
         this.$router.push('/search/' + this.query2)
+        this.store.commit('setQuery', this.query2)
       }
     }
   }
