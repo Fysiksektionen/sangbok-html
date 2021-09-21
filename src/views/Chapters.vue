@@ -21,6 +21,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useStore } from 'vuex'
+import { key } from '@/store'
+
 import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
 import SearchBox from '@/components/SearchBox.vue'
 import { chapters } from '@/utils/lyrics.ts'
@@ -37,10 +40,7 @@ export default defineComponent({
     }
   },
   created() {
-    if (this !== undefined) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (this as any).$store.commit('setQuery', '')
-    }
+    useStore(key).commit('setQuery', '')
   },
   methods: {
     greek2latin (greek: string): string {

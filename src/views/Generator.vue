@@ -47,13 +47,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
+import { chapters, Song } from '@/utils/lyrics.ts'
+import { generalSettings, GeneralSettings } from '@/utils/export/generalSettings.ts'
+import { specificSettings, SpecificDownloadSettings } from '@/utils/export/specificSettings.ts'
+
 import getContentTeX from '@/utils/export/contentTeX.ts'
 import getMainTeX from '@/utils/export/mainTeX.ts'
 import openInOverleaf from '@/utils/export/overleaf.ts'
 import downloadZip from '@/utils/export/zip.ts'
-import { chapters, Song } from '@/utils/lyrics.ts'
-import { generalSettings, GeneralSettings } from '@/utils/export/generalSettings.ts'
-import { specificSettings, SpecificDownloadSettings } from '@/utils/export/specificSettings.ts'
 
   type SongIndex = [number, number]
 

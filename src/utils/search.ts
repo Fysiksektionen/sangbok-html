@@ -32,8 +32,7 @@ export function search (s: string, chapters: Chapter[]): Hit[] | null { // TODO:
     })
   const regexedText = new RegExp(regexEscape(text), 'igm')
 
-  // eslint-disable-next-line
-  let hits = []
+  const hits = []
 
   for (const i in chapters) {
     for (const j in chapters[i].songs) {

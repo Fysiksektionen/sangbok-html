@@ -7,12 +7,6 @@
   <div v-for="img, key in getImages()" v-bind:key="key">
     <img v-bind:src="img">
   </div>
-  <h2 v-if="loading" class="loading">Läser in noter...</h2>
-  <div v-if="err" class="err">
-    <h2>Kunde inte läsa in noterna.</h2>
-    <p><i>{{err}}</i></p>
-    <p>URL: {{$props.src}}</p>
-  </div>
   <p class="notice">
     Notvisaren är experimentell.
   </p>
@@ -27,7 +21,6 @@ export default defineComponent({
   props: ['src'],
   data () {
     return {
-      store: this.$store,
       zoomIdx: 3 // TODO: Choose based on screen size
     }
   },

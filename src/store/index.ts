@@ -1,8 +1,22 @@
-import { createStore } from 'vuex'
+import { InjectionKey } from 'vue'
+import { createStore, Store } from 'vuex'
 
 import createPersistedState from 'vuex-persistedstate'
 
-export default createStore({
+// Store state typing
+export interface State {
+  settings: {
+    translate: boolean,
+    night: boolean,
+    larger: boolean,
+    generator: boolean
+  },
+  query: string
+}
+
+export const key: InjectionKey<Store<State>> = Symbol('storage')
+
+export default createStore<State>({
   state: {
     settings: {
       translate: false,
@@ -21,7 +35,7 @@ export default createStore({
       state.query = query
     }
   },
-  actions: {},
-  modules: {},
+  // actions: {},
+  // modules: {},
   plugins: [createPersistedState({})]
 })
