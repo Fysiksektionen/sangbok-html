@@ -4,11 +4,13 @@
   <Navbar :parent="goToParent"/>
   <div class="main">
     <div class="lyrics">
-      <button v-if="song().msvg && song().text" @click="showMsvg = !showMsvg" style="float:left" class="button">{{ showMsvg ? 'Dölj noter' : 'Visa noter'}}</button>
+      <button v-if="song().msvg && song().text" @click="showMsvg = !showMsvg" class="button musicbutton">{{ showMsvg ? 'Dölj noter' : 'Visa noter'}}</button>
       <SheetMusicRenderer v-if="song().msvg && (!song().text || showMsvg)" :src="song().msvg"/>
       <div v-if="song().text">
-        <h2>{{song().title}}</h2>
-        <div v-if="song().melody" class="melody" v-html="toHTML(song().melody)"></div>
+        <div class="titlecontainer">
+          <h2>{{song().title}}</h2>
+          <div v-if="song().melody" class="melody" v-html="toHTML(song().melody)"></div>
+        </div>
         <div class="textcontainer" v-html="toHTML(song().text)" v-bind:class="{'larger': $store.state.settings.larger}"></div>
         <div v-if="song().author" class="author" v-html="toHTML(song().author)"></div>
       </div>
@@ -61,6 +63,15 @@ export default defineComponent({
 div.lyrics {
   margin-left: 1%;
   margin-right: 1%;
+}
+
+div.titlecontainer {
+  margin: auto auto;
+  width: max-content;
+}
+
+button.button.musicbutton {
+  float: left;
 }
 
 .melody, .author {

@@ -13,6 +13,7 @@
             </td>
             <td class="name">
               {{ song.title }}
+              <span v-if="song.msvg" class="sheetmusicicon">𝄞</span>
             </td>
         </tr>
     </table>

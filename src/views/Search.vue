@@ -13,6 +13,7 @@
             </td>
             <td class="name">
               {{ chapters[hit.song.chapterindex].songs[hit.song.songindex].title }}
+              <span v-if="chapters[hit.song.chapterindex].songs[hit.song.songindex].msvg" class="sheetmusicicon">𝄞</span>
             </td>
         </tr>
         <tr class="nohits"><td>Inga sånger hittades.</td></tr>

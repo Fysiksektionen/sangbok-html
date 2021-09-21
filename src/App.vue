@@ -116,6 +116,10 @@ table.songbook {
 
     & .index {padding-left: 1em;}
     & .name {padding-left: 1em;padding-right: 0.5em;}
+    & .sheetmusicicon {
+      float: right;
+      margin-right: 0.5em;
+    }
 }
 
 .night table.songbook tr {
