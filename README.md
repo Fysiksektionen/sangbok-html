@@ -39,6 +39,7 @@ Noter som förmodligen är upphovsrättsskyddade:
 * Sveriges flagga (Upphovsrätten innehas av [Hugo Alfvénfonden](http://www.musakad.se/omakademien/organisation/stifelserochfonder/hugoalfvenfonden.601.html))
 * Porthos visa
 * Amanda Lundbom
+* Röda kavalleriet (D. Pokrass)
 
 Att lägga till (övriga):
 * Punschen kommer

@@ -7,6 +7,10 @@
   <div v-for="img, key in getImages()" v-bind:key="key">
     <img v-bind:src="img">
   </div>
+  <div v-if="getImages().length == 0">
+    <h2>Fel</h2>
+    <p style="text-align: center;">Inga noter hittades, trots att de borde finnas. Skicka ett surt mail till webmaster eller sångbokens projektledare.</p>
+  </div>
   <p class="notice">
     Notvisaren är experimentell.
   </p>
