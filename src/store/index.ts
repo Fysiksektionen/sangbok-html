@@ -2,6 +2,7 @@ import { InjectionKey } from 'vue'
 import { createStore, Store } from 'vuex'
 
 import createPersistedState from 'vuex-persistedstate'
+import { generatorModule, GeneratorState } from './generator'
 
 // Store state typing
 export interface State {
@@ -11,7 +12,8 @@ export interface State {
     larger: boolean,
     generator: boolean
   },
-  query: string
+  query: string,
+  generator: GeneratorState
 }
 
 export const key: InjectionKey<Store<State>> = Symbol('storage')
@@ -25,7 +27,7 @@ export default createStore<State>({
       generator: false
     },
     query: ''
-  },
+  } as State, // We need to explicity say that this qualifies as State, since the generator property is loaded through a module.
   mutations: {
     toggleSetting (state, key: 'translate' | 'night' | 'larger' | 'generator') {
       state.settings[key] = !(state.settings[key])
@@ -36,6 +38,6 @@ export default createStore<State>({
     }
   },
   // actions: {},
-  // modules: {},
+  modules: { generator: generatorModule },
   plugins: [createPersistedState({})]
 })

@@ -1,5 +1,7 @@
 import lyrics from '@/assets/lyrics.json'
 
+export type SongIndex = [number, number]
+
 export type Song = {
   title: string,
   index: string,
@@ -23,6 +25,14 @@ export type Chapter = {
 }
 
 export const chapters: Chapter[] = lyrics
+
+export function getSongsByIndices(indices: SongIndex[]): Song[] {
+  const out: Song[] = []
+  for (const songIndex of indices) {
+    out.push(chapters[songIndex[0]].songs[songIndex[1]])
+  }
+  return out
+}
 
 /* Old parser, for the old lyrics.json format.
 type LyricsFile = {
