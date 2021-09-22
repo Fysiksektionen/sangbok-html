@@ -1,4 +1,3 @@
-<!-- TODO: Add license notices for OSMD and VexFlow.-->
 <template>
   <div class="zoombuttoncontainer">
     <button class="button" @click="zoom(-1)" v-bind:class="{'disabled': zoomIdx == 0}">&#128269;-</button>

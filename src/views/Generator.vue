@@ -26,7 +26,8 @@
           <div @click="switchIfBool(setting)">
             {{setting.text}}
             <input v-if="setting.type=='string'" placeholder="Text" type="text" v-model="setting.value" />
-            <div v-if="setting.type=='bool'" class="toggle border-orange" v-bind:class="{'bg-orange': setting.value}"></div>
+            <div v-if="setting.type=='bool'" class="toggle border-orange" v-bind:class="{'bg-orange': setting.value}">
+            </div>
           </div>
         </div>
         <div v-for="settinggroup, gidx in specificSettings" v-bind:key="gidx">
@@ -38,7 +39,8 @@
               <input v-if="setting.type=='number'" v-bind:placeholder="setting.placeholder" type="number"
                 v-model="setting.value" v-bind:min="setting.min" v-bind:max="setting.max" />
               <input v-if="setting.type=='string'" placeholder="Text" type="text" v-model="setting.value" />
-              <div v-if="setting.type=='bool'" class="toggle border-orange" v-bind:class="{'bg-orange': setting.value}"></div>
+              <div v-if="setting.type=='bool'" class="toggle border-orange" v-bind:class="{'bg-orange': setting.value}">
+              </div>
             </div>
           </div>
         </div>
@@ -60,7 +62,7 @@ import getMainTeX from '@/utils/export/mainTeX.ts'
 import openInOverleaf from '@/utils/export/overleaf.ts'
 import downloadZip from '@/utils/export/zip.ts'
 
-type SongIndex = [number, number]
+  type SongIndex = [number, number]
 
 export default defineComponent({
   name: 'GeneratorView',
@@ -74,15 +76,15 @@ export default defineComponent({
   },
   props: ['songid', 'chapterid'],
   methods: {
-    add() { // TODO: Check for duplicates before adding.
+    add() {
       if (this.$route.params.songId !== undefined && this.$route.params.chapterId !== undefined) { // Song
         const songId = parseInt(this.$route.params.songId as string)
         const chapterId = parseInt(this.$route.params.chapterId as string)
-        this.generatorSongs.push([chapterId, songId])
+        this.songHasBeenAdded(songId, chapterId) || this.generatorSongs.push([songId, chapterId])
       } else if (this.$route.params.cid !== undefined) { // Chapter
-        const cid = parseInt(this.$route.params.cid as string)
-        for (let i = 0; i < this.chapters[cid].songs.length; i++) {
-          this.generatorSongs.push([cid, i])
+        const chapterId = parseInt(this.$route.params.cid as string)
+        for (let songId = 0; songId < this.chapters[chapterId].songs.length; songId++) {
+          this.songHasBeenAdded(chapterId, songId) || this.generatorSongs.push([chapterId, songId])
         }
       }
     },
@@ -91,11 +93,22 @@ export default defineComponent({
       this.generatorSongs[index] = this.generatorSongs[index + direction]
       this.generatorSongs[index + direction] = temp
     },
-    canAdd() { // TODO: Move to computed
-      return (// TODO: Don't rely on $route.params for state identification. (Also applies to add())
-        (this.$route.params.songId !== undefined && this.$route.params.chapterId !== undefined) ||
-          (this.$route.params.cid !== undefined)
-      )
+    canAdd(): boolean { // TODO: Move to computed
+      if (this.$route.params.songId !== undefined && this.$route.params.chapterId !== undefined) { // Song
+        return !this.songHasBeenAdded(parseInt(this.$route.params.songId as string), parseInt(this.$route.params.chapterId as string))
+      } else if (this.$route.params.cid !== undefined) { // Chapter
+        // TODO: Return false if all songs in a given chapter has been added.
+        return true
+      } else { return false }
+    },
+    songHasBeenAdded(chapterid: number, songid: number): boolean {
+      // TODO: Can probably be done in a more vectorized fashion
+      for (const indices of this.generatorSongs) {
+        if (indices[0] === chapterid && indices[1] === songid) {
+          return true
+        }
+      }
+      return false
     },
     switchIfBool(setting: DownloadSetting): void {
       setting.value = !setting.value
@@ -114,7 +127,7 @@ export default defineComponent({
     go: async function (method: 'zip' | 'overleaf') {
       const songs = (this.generatorSongs.length === 0) ? chapters.map(c => c.songs).flat() : this.getSongs(this.generatorSongs)
 
-      const files: {[key: string]: string} = { // TODO Load asynchronously, that is, don't use await right here.
+      const files: { [key: string]: string } = { // TODO Load asynchronously, that is, don't use await right here.
         'main.tex': getMainTeX(this.generalSettings),
         'blad.cls': await (await fetch('tex/blad.cls')).text(),
         'logga.svg': await (await fetch('tex/logga.svg')).text(),
