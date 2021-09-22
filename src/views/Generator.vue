@@ -1,3 +1,4 @@
+<!-- TODO: This should probably be split into smaller components... -->
 <template>
   <div class="generator">
     <h2>Sångbladsskaparen</h2>
@@ -22,21 +23,22 @@
       <div>
         <h3>Allmänt</h3>
         <div class="setting" v-for="setting, idx in generalSettings" v-bind:key="idx">
-          {{setting.text}}
-          <input v-if="setting.type=='string'" placeholder="Text" type="text" v-model="setting.value" />
-          <div v-if="setting.type=='bool'" @click="setting.value=!setting.value" class="toggle border-orange"
-            v-bind:class="{'bg-orange': setting.value}"></div>
+          <div @click="switchIfBool(setting)">
+            {{setting.text}}
+            <input v-if="setting.type=='string'" placeholder="Text" type="text" v-model="setting.value" />
+            <div v-if="setting.type=='bool'" class="toggle border-orange" v-bind:class="{'bg-orange': setting.value}"></div>
+          </div>
         </div>
         <div v-for="settinggroup, gidx in specificSettings" v-bind:key="gidx">
-          <div v-if="settingIsVisible(settinggroup)">
+          <div v-if="settingIsVisible(settinggroup) && settinggroup.settings.length > 0">
             <h3>{{settinggroup.title}}</h3>
-            <div class="setting" v-for="setting, idx in settinggroup.settings" v-bind:key="idx">
+            <div class="setting" v-for="setting, idx in settinggroup.settings" v-bind:key="idx"
+              @click="switchIfBool(setting)">
               {{setting.text}}
               <input v-if="setting.type=='number'" v-bind:placeholder="setting.placeholder" type="number"
                 v-model="setting.value" v-bind:min="setting.min" v-bind:max="setting.max" />
               <input v-if="setting.type=='string'" placeholder="Text" type="text" v-model="setting.value" />
-              <div v-if="setting.type=='bool'" @click="setting.value=!setting.value" class="toggle border-orange"
-                v-bind:class="{'bg-orange': setting.value}"></div>
+              <div v-if="setting.type=='bool'" class="toggle border-orange" v-bind:class="{'bg-orange': setting.value}"></div>
             </div>
           </div>
         </div>
@@ -49,6 +51,7 @@
 import { defineComponent } from 'vue'
 
 import { chapters, Song } from '@/utils/lyrics.ts'
+import { DownloadSetting } from '@/utils/export/settings.ts'
 import { generalSettings, GeneralSettings } from '@/utils/export/generalSettings.ts'
 import { specificSettings, SpecificDownloadSettings } from '@/utils/export/specificSettings.ts'
 
@@ -57,7 +60,7 @@ import getMainTeX from '@/utils/export/mainTeX.ts'
 import openInOverleaf from '@/utils/export/overleaf.ts'
 import downloadZip from '@/utils/export/zip.ts'
 
-  type SongIndex = [number, number]
+type SongIndex = [number, number]
 
 export default defineComponent({
   name: 'GeneratorView',
@@ -93,6 +96,9 @@ export default defineComponent({
         (this.$route.params.songId !== undefined && this.$route.params.chapterId !== undefined) ||
           (this.$route.params.cid !== undefined)
       )
+    },
+    switchIfBool(setting: DownloadSetting): void {
+      setting.value = !setting.value
     },
     getSongs(indices: SongIndex[]): Song[] {
       const out: Song[] = []

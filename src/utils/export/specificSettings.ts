@@ -1,13 +1,37 @@
 import { escapeAll, getDefaultText } from './escapes'
-import { DownloadSetting } from './settings'
+import { DownloadSetting, NumberSetting } from './settings'
 
 export type SpecificDownloadSettings = {
   title: string,
   indexes: string[], // TODO: using string indices is very encoding-sensitive. There should be a better way.
+  // Also, title could be fetched directly from the indexes
   settings: DownloadSetting[],
   processor: (lyrics: string, settings: DownloadSetting[]) => string
 }
 
+/*
+ * Generic preprocessors
+ */
+function truncateVerses(lyrics: string, settings: DownloadSetting[], splitsPerVerse?: number): string {
+  const setting = settings[0] as NumberSetting
+  if (setting.max !== undefined) {
+    return getDefaultText(lyrics
+      .split('\n\n')
+      .slice(0, (setting.value || setting.max) * (splitsPerVerse || 1))
+      .join('\n\n')
+    )
+  } else {
+    throw TypeError('A non-numeric setting was passed to truncateVerses().')
+  }
+}
+
+function trailingInfo(lyrics: string, settings: DownloadSetting[]): string {
+  return (settings[0].value) ? getDefaultText(lyrics) : getDefaultText(lyrics.split(/\n\n\n/g)[0])
+}
+
+/*
+ * Specific preprocessors
+ */
 function arskursernas(lyrics: string, settings: DownloadSetting[]): string { // TODO: Cleanup
   console.log(settings)
   const content = [] as string[]
@@ -31,6 +55,26 @@ function arskursernas(lyrics: string, settings: DownloadSetting[]): string { // 
 
   return content.concat(yearsContent).join('')
 }
+
+function ogamlaklang(lyrics: string, settings: DownloadSetting[]): string { // TODO: This code is kinda ugly...
+  if (settings[0].value) {
+    if (settings[1].value) {
+      return getDefaultText(lyrics.replace(/KÄRNAN/g, '\\textbf{KÄRNAN}'))
+    } else {
+      return (lyrics.replace(/KÄRNAN/g, '\\textbf{KÄRNAN}').split(/\n\n\n/g)[0])
+    }
+  } else {
+    if (settings[1].value) {
+      return (lyrics)
+    } else {
+      return getDefaultText(lyrics.split(/\n\n\n/g)[0])
+    }
+  }
+}
+
+/*
+ * Bring it all together
+ */
 
 export const specificSettings: SpecificDownloadSettings[] = [{
   title: 'Årskursernas hederssång',
@@ -91,7 +135,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
     value: true
   }],
   processor: (lyrics: string, settings: DownloadSetting[]) => ((settings[0].value) ? '\\texttt{' + getDefaultText(lyrics) + '}' : getDefaultText(lyrics))
-}/*, {
+}, {
   title: 'Fredmans sång n:o 21 - Måltidssång',
   indexes: ['λ1'],
   settings: [{
@@ -102,7 +146,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
     max: 8,
     placeholder: 'Antal'
   }],
-  processor: (lyrics) => lyrics
+  processor: (lyrics: string, settings: DownloadSetting[]) => truncateVerses(lyrics, settings, 2)
 }, {
   title: 'Fredmans epistel n:o 48',
   indexes: ['λ3'],
@@ -114,7 +158,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
     max: 7,
     placeholder: 'Antal'
   }],
-  processor: (lyrics) => lyrics
+  processor: truncateVerses
 }, {
   title: 'Molltoner från Norrland',
   indexes: ['λ4'],
@@ -126,7 +170,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
     max: 6,
     placeholder: 'Antal'
   }],
-  processor: (lyrics) => lyrics
+  processor: truncateVerses
 }, {
   title: 'O gamla klang och jubeltid',
   indexes: ['ο∞'],
@@ -139,7 +183,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
     type: 'bool',
     value: false
   }],
-  processor: (lyrics) => lyrics
+  processor: ogamlaklang
 }, {
   title: 'Vodka, vodka',
   indexes: ['δ8b'],
@@ -148,7 +192,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
     type: 'bool',
     value: true
   }],
-  processor: (lyrics) => lyrics
+  processor: trailingInfo
 }, {
   title: 'Sista punschvisan',
   indexes: ['ζ∞'],
@@ -157,7 +201,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
     type: 'bool',
     value: false
   }],
-  processor: (lyrics) => lyrics
+  processor: trailingInfo
 }, {
   title: 'Jag var full en gång',
   indexes: ['θ2'],
@@ -166,7 +210,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
     type: 'bool',
     value: true
   }],
-  processor: (lyrics) => lyrics
+  processor: trailingInfo
 }, {
   title: 'Dom som är nyktra',
   indexes: ['θ6'],
@@ -175,7 +219,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
     type: 'bool',
     value: true
   }],
-  processor: (lyrics) => lyrics
+  processor: trailingInfo
 }, {
   title: 'Konglig Fysiks Paradhymn',
   indexes: ['ο1'],
@@ -184,7 +228,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
     type: 'bool',
     value: false
   }],
-  processor: (lyrics) => lyrics
+  processor: trailingInfo
 }, {
   title: 'Hyllningsvisa',
   indexes: ['μ5'],
@@ -193,7 +237,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
     type: 'bool',
     value: true
   }],
-  processor: (lyrics) => lyrics
+  processor: (lyrics: string, settings: DownloadSetting[]) => (settings[0].value) ? getDefaultText(lyrics.replace(/</g, '\\textit{').replace(/>/g, '}')) : getDefaultText(lyrics.split(/\n\n\n/g)[0]) + getDefaultText('\n\nDessa tekniska lik!!! Barampam!')
 }, {
   title: 'ODE till en husvagn',
   indexes: ['ι8'],
@@ -202,5 +246,28 @@ export const specificSettings: SpecificDownloadSettings[] = [{
     type: 'bool',
     value: false
   }],
-  processor: (lyrics) => lyrics
-} */]
+  processor: (lyrics: string, settings: DownloadSetting[]): string => {
+    if (settings[0].value) {
+      const verses = lyrics.split(/\n\n/g)
+      verses[4] = '\\begin{flalign*}m\\ddot{x}+c\\dot{x}+kx&=mg\n\\dot{x}&=A\\omega_n\\cos{\\omega_n t}\n\\tau&=\\frac{2\\pi}{\\omega_n}\n\\omega_n&=\\sqrt{\\frac{k}{m}}\\end{flalign*}'
+      return getDefaultText(verses.join('\n\n'))
+    } else { return getDefaultText(lyrics) }
+  }
+},
+// Songs with no settings, but special processing
+{
+  title: 'Aris summavisa',
+  indexes: ['ι13'],
+  settings: [],
+  processor: (lyrics: string) => getDefaultText(lyrics.replace('trollat bort n', 'trollat bort \\(n\\)').replace('Maclaurin av ln', 'Maclaurin av \\(\\ln\\)'))
+}, {
+  title: 'Liten visa om Gram-Schmidts metod',
+  indexes: ['ι15'],
+  settings: [],
+  processor: (lyrics: string) => getDefaultText(lyrics.replace(/M/g, '\\(M\\)').replace('vektor a', 'vektor \\(\\boldsymbol{a}\\)'))
+}, {
+  title: 'Stad i ljus',
+  indexes: ['κ15'],
+  settings: [],
+  processor: (lyrics: string) => getDefaultText(lyrics.split(/\n\n\n/g)[0])
+}]
