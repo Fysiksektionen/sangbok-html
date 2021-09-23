@@ -85,9 +85,9 @@ export default defineComponent({
     swipeHandler(direction: string) {
       const songId = parseInt(this.$route.params.songId as string)
       const chapterId = parseInt(this.$route.params.chapterId as string)
-      if (direction === 'left' && chapters[chapterId].songs.length - 1 > songId) {
+      if (direction === 'right' && chapters[chapterId].songs.length - 1 > songId) {
         this.$router.push('/chapter/' + chapterId + '/song/' + (songId + 1))
-      } else if (direction === 'right' && songId > 0) {
+      } else if (direction === 'left' && songId > 0) {
         this.$router.push('/chapter/' + this.$route.params.chapterId + '/song/' + (songId - 1))
       }
     },
