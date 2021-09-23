@@ -38,13 +38,14 @@ import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
 import NavButtons from '@/components/SongNavButtons.vue'
 import { chapters, Song } from '@/utils/lyrics.ts'
 
-const getXFromEvent = (e: Event): number | undefined => {
+const getCoordsFromEvent = (e: Event): [number, number] | [undefined, undefined] => {
   if (e.constructor.name === 'TouchEvent') {
-    return (e as TouchEvent).touches[0].pageX
+    const touch = (e as TouchEvent).touches[0]
+    return [touch.clientX, touch.clientY]
   } else if (e.constructor.name === 'MouseEvent') {
-    return (e as MouseEvent).pageX
+    return [(e as MouseEvent).clientX, (e as MouseEvent).clientY]
   }
-  return undefined
+  return [undefined, undefined]
 }
 
 export default defineComponent({
@@ -62,7 +63,7 @@ export default defineComponent({
       // TODO: This is an ugly fix for the song not updating when pressing NavButtons. It can probably be done using computed()
       song: () => chapters[param2int(route.params.chapterId)].songs[param2int(route.params.songId)] as Song,
       showMsvg: false,
-      touchX: undefined as number | undefined,
+      touchCoords: [undefined, undefined] as [number, number] | [undefined, undefined],
       showSwipeIndicator: 'none' as 'left' | 'none' | 'right'
     }
   },
@@ -96,17 +97,25 @@ export default defineComponent({
       this.showSwipeIndicator = 'none'
     },
     pressHandler(e: Event) {
-      this.touchX = getXFromEvent(e)
+      this.touchCoords = getCoordsFromEvent(e)
     },
     dragHandler(e: Event) {
-      const x = getXFromEvent(e)
-      if (this.touchX !== undefined && x !== undefined) {
-        if (this.touchX - x > 30) {
-          this.showSwipeIndicator = 'right'
-        } else if (this.touchX - x < -30) {
-          this.showSwipeIndicator = 'left'
+      const [x, y] = getCoordsFromEvent(e)
+      if (this.touchCoords[0] !== undefined && this.touchCoords[1] !== undefined && x !== undefined && y !== undefined) {
+        // Absolute angle of touch path, relative to the vertical line.
+        const phi = Math.abs(Math.atan2(this.touchCoords[0] - x, this.touchCoords[1] - y))
+        if (Math.PI / 4 <= phi && phi <= 3 * Math.PI / 4) {
+          if (this.touchCoords[0] - x > 30) {
+            this.showSwipeIndicator = 'right'
+            return
+          } else if (this.touchCoords[0] - x < -30) {
+            this.showSwipeIndicator = 'left'
+            return
+          }
         }
       }
+      // The catch-all-other case
+      this.showSwipeIndicator = 'none'
     }
   }
 })
