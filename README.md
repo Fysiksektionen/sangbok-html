@@ -19,40 +19,7 @@ Installera [Node.js 16](https://nodejs.org) om du inte redan har det. Klona seda
 
 ### Körning
 Gå till den senaste [build-körningen](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml), skrolla ner till artifacts, och klicka på `dist` för att ladda ner en zip-fil med statiskt innehåll.
-
 <!-- See [Configuration Reference](https://cli.vuejs.org/config/). -->
 
-## Noter och upphovsrätt
-Det är inte säkert att det är upphovsrättsligt korrekt att ha med alla noter öppet på hemsidan.
-Noter som vi i princip garanterat kan ha:
-* Du gamla du fria
-* Längtan till landet
-* Smedsvisa
-* Molltoner från Norrland (aka. Vårvindar friska)
-* Studentsången
-* O gamla klang och jubeltid
-* Lyft ditt välförsedda glas (Ding dong Merrily on high. Arrat av Charles Wood)
-* Kungssången
-
-Noter som förmodligen är upphovsrättsskyddade:
-* Nu grönskar det (egentligen är texten upphovsrättsskyddad, men...)
-* Sveriges flagga (Upphovsrätten innehas av [Hugo Alfvénfonden](http://www.musakad.se/omakademien/organisation/stifelserochfonder/hugoalfvenfonden.601.html))
-* Porthos visa
-* Amanda Lundbom
-* Röda kavalleriet (D. Pokrass)
-
-Att lägga till (övriga):
-* Punschen kommer
-* Månvisa
-* Vikingen
-* Härjavisan (upphovsrätten går ut 28 augusti 2022)
-* Jag har aldrig vart på snusen
-* Auld lang syne
-* Marseljäsen
-* En sockerbagare
-* Te deum
-* Väva vadmal
-* Var redo
-* Gubben Noak (eller Gubben Noach)
-* Karl Alfred boy (kolla upphovsrätt)
-* Typ hela lambda-kapitlet
+### Noter
+Se [music/Readme.md](music/Readme.md)
