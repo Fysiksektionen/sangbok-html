@@ -24,6 +24,7 @@
       "indent": ["warn", 2],
       "no-multiple-empty-lines": "warn",
 
+      "one-var": "warn",
       "prefer-const": "warn",
       "no-unused-vars": "warn",
       "no-use-before-define": "warn",

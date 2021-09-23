@@ -1,3 +1,4 @@
+<!-- The top navbar. Closely tied with the Dropdown component (see Settings.vue). -->
 <template>
   <div class="navbar bg-orange">
     <div style="float: left;" v-if="parent" @click="parent">
@@ -9,18 +10,19 @@
       <button @click="showSettings=false" v-if="showSettings"><img src="../assets/x.png" alt="Close settings" /></button>
     </div>
   </div>
-  <Dropdown :show="showSettings"/>
+  <transition name="dropdown">
+    <Dropdown style="transition: all 0.2s ease-out;" v-if="showSettings"/>
+  </transition>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import Dropdown from '@/components/Settings.vue'
+import { defineComponent, defineAsyncComponent } from 'vue'
 
 export default defineComponent({
   name: 'Navbar',
   props: ['parent'],
   components: {
-    Dropdown
+    Dropdown: defineAsyncComponent(() => import(/* webpackChunkName: "dropdown" */ '@/components/Settings.vue'))
   },
   data () {
     return {
@@ -32,6 +34,12 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.dropdown-enter-from, .dropdown-leave-to {/* See hard-coded style property to set transition speed. */
+  /* TODO: Set dropdown speeds using classes. */
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
 img {height: 1em;}
 
 button {
