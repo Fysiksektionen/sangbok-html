@@ -168,7 +168,7 @@ export default defineComponent({
 
   div.titlecontainer {
     margin: auto auto;
-    width: max-content;
+    width: fit-content;
   }
 
   button.button.musicbutton {
