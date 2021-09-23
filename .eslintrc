@@ -21,9 +21,11 @@
       "keyword-spacing": "warn",
       "object-curly-spacing": "warn",
       "block-spacing": "warn",
+      "space-infix-ops": "warn",
 
       "indent": ["warn", 2],
       "no-multiple-empty-lines": "warn",
+      "padded-blocks": "warn",
 
       "one-var": "warn",
       "prefer-const": "warn",
