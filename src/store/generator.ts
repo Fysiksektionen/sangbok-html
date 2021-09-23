@@ -18,6 +18,7 @@ export const generatorModule = {
   getters: {
     songHasBeenAdded: (state: GeneratorState) => (chapterid: number, songid: number): boolean => {
       // TODO: Can probably be done in a more vectorized fashion
+      console.log("SHBA", chapterid, songid)
       for (const indices of state.generatorSongs) {
         if (indices[0] === chapterid && indices[1] === songid) {
           return true
@@ -45,6 +46,11 @@ export const generatorModule = {
     },
     delete: (state: GeneratorState, listIdx: number): void => {
       state.generatorSongs.splice(listIdx, 1)
+    },
+    clear: (state: GeneratorState): void => {
+      // This may seem like a stupid way to clear an array, but vuex only keeps track of changes to the set array.
+      // If we create a new array, vuex, won't recognize that it's been updated.
+      state.generatorSongs.splice(0, state.generatorSongs.length)
     },
     // TODO: These are kinda ugly...
     updateGeneralSettings: (state: GeneratorState, gs: GeneralSettings): void => { state.generalSettings = gs },

@@ -2,12 +2,19 @@
 <template>
   <div class="generator">
     <h2>Sångbladsskaparen</h2>
-    <p style="text-align: center;">Är för närvarande experimentell.</p>
 
-    <table class="songbook">
+    <div class="generatorbuttons">
+      <div v-bind:class="{ 'disabled': !canAdd() }" @click="add()" title="Lägg till">+</div>
+      <div v-bind:class="{ 'disabled': generatorSongs.length == 0 }" @click="$store.commit('clear');" title="Ta bort alla">🗑</div>
+      <div @click="go('overleaf')" title="Öppna i Overleaf"><img src="../assets/overleaf_logo.svg" /></div>
+      <div @click="go('zip')" title="Ladda ner zip-fil med TeX">↓</div>
+    </div>
+
+    <table class="songbook" v-if="generatorSongs.length > 0">
       <tr v-for="songIdxs, listIdx in generatorSongs" v-bind:key="listIdx">
         <td class="name">{{ chapters[songIdxs[0]].songs[songIdxs[1]].title }}</td>
-        <td class="operation up" v-bind:class="{ 'disabled': listIdx == 0 }" @click="$store.commit('move', {index: listIdx, direction: -1})">▲
+        <td class="operation up" v-bind:class="{ 'disabled': listIdx == 0 }"
+          @click="$store.commit('move', {index: listIdx, direction: -1})">▲
         </td>
         <td class="operation down" v-bind:class="{ 'disabled': listIdx == generatorSongs.length-1 }"
           @click="$store.commit('move', {index: listIdx, direction: 1})">▼</td>
@@ -15,13 +22,8 @@
       </tr>
     </table>
 
-    <div class="generatorbuttons">
-      <div v-bind:class="{ 'disabled': !canAdd() }" @click="add()" title="Lägg till">+</div>
-      <div @click="go('overleaf')" title="Öppna i Overleaf">☁</div>
-      <div @click="go('zip')" title="Ladda ner">↓</div>
-    </div>
-
     <div class="generatorsettings">
+      <hr>
       <h2>Sångbladsinställningar</h2>
       <div>
 
@@ -52,90 +54,98 @@
 
       </div>
     </div>
+
+    <p style="font-size:0.75em;color:gray; text-align: center;">
+      Sångbladsskaparen är experimentell.<br />
+      Overleafs logotyp tillhör Writelatex Ltd. Denna sida är ej affilierad med Overleaf.
+    </p>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { useRoute, RouteLocationNormalized } from 'vue-router'
-import { useStore } from 'vuex'
-import { key } from '@/store'
+  import { defineComponent } from 'vue'
+  import { useRoute, RouteLocationNormalized } from 'vue-router'
+  import { useStore } from 'vuex'
+  import { key } from '@/store'
 
-import { chapters, getSongsByIndices } from '@/utils/lyrics'
-import { DownloadSetting } from '@/utils/export/settings'
+  import { chapters, getSongsByIndices } from '@/utils/lyrics'
+  import { DownloadSetting } from '@/utils/export/settings'
 
-import getContentTeX from '@/utils/export/contentTeX'
-import getMainTeX from '@/utils/export/mainTeX'
-import openInOverleaf from '@/utils/export/overleaf'
-import downloadZip from '@/utils/export/zip'
+  import getStage from '@/utils/stageChecker'
+  import getContentTeX from '@/utils/export/contentTeX'
+  import getMainTeX from '@/utils/export/mainTeX'
+  import openInOverleaf from '@/utils/export/overleaf'
+  import downloadZip from '@/utils/export/zip'
 
-export default defineComponent({
-  name: 'GeneratorView',
-  data() {
-    return {
-      chapters: chapters,
-      generatorSongs: useStore(key).state.generator.generatorSongs,
-      generalSettings: useStore(key).state.generator.generalSettings,
-      specificSettings: useStore(key).state.generator.specificSettings
-    }
-  },
-  setup () { return { store: useStore(key) } },
-  props: ['songid', 'chapterid'],
-  methods: {
-    add() {
-      const route: RouteLocationNormalized = this.$route
-      if (route.params.songId !== undefined && route.params.chapterId !== undefined) { // Song
-        const songId = parseInt(route.params.songId as string)
-        const chapterId = parseInt(route.params.chapterId as string)
-        this.store.commit('add', [chapterId, songId])
-      } else if (route.params.cid !== undefined) { // Chapter
-        const chapterId = parseInt(route.params.cid as string)
-        for (let songId = 0; songId < this.chapters[chapterId].songs.length; songId++) {
+  export default defineComponent({
+    name: 'GeneratorView',
+    data() {
+      return {
+        chapters: chapters,
+        generatorSongs: useStore(key).state.generator.generatorSongs,
+        generalSettings: useStore(key).state.generator.generalSettings,
+        specificSettings: useStore(key).state.generator.specificSettings
+      }
+    },
+    setup() { return { store: useStore(key) } },
+    props: ['songid', 'chapterid'],
+    methods: {
+      add() {
+        const route: RouteLocationNormalized = this.$route
+        if (getStage(route) === 'song') { // TODO: Use a switch here isntead of if-else if
+          const songId = parseInt(route.params.songId as string)
+          const chapterId = parseInt(route.params.chapterId as string)
           this.store.commit('add', [chapterId, songId])
+        } else if (getStage(route) === 'chapter') {
+          const chapterId = parseInt(route.params.cid as string)
+          for (let songId = 0; songId < this.chapters[chapterId].songs.length; songId++) {
+            this.store.commit('add', [chapterId, songId])
+          }
+        }
+      },
+      canAdd(): boolean { // TODO: Move to computed
+        const route: RouteLocationNormalized = useRoute()
+        if (getStage(route) === 'song') {
+          const songId = parseInt(route.params.songId as string)
+          const chapterId = parseInt(route.params.chapterId as string)
+          return !this.store.getters.songHasBeenAdded(chapterId, songId)
+        } else if (getStage(route) === 'chapter') {
+          // TODO: Return false if all songs in a given chapter has been added.
+          return true
+        } else { return false }
+      },
+      switchIfBool(setting: DownloadSetting): boolean { // Returns true if setting was changed.
+        if (setting.type === 'bool') {
+          setting.value = !setting.value
+          return true
+        } else { return false }
+      },
+      go: async function (method: 'zip' | 'overleaf') {
+        const songs = (this.store.state.generator.generatorSongs.length === 0) ? chapters.map(c => c.songs).flat() : getSongsByIndices(this.store.state.generator.generatorSongs)
+
+        const files: { [key: string]: string } = { // TODO Load asynchronously, that is, don't use await right here.
+          'main.tex': getMainTeX(this.generalSettings),
+          'blad.cls': await (await fetch('tex/blad.cls')).text(),
+          'logga.svg': await (await fetch('tex/logga.svg')).text(),
+          'content.tex': getContentTeX(songs, this.generalSettings, this.specificSettings)
+        }
+
+        switch (method) {
+          case 'overleaf':
+            openInOverleaf(files)
+            break
+          case 'zip':
+            downloadZip(files)
+            break
         }
       }
-    },
-    canAdd(): boolean { // TODO: Move to computed
-      const route: RouteLocationNormalized = useRoute()
-      if (route.params.songId !== undefined && route.params.chapterId !== undefined) { // Song
-        const songId = parseInt(route.params.songId as string)
-        const chapterId = parseInt(route.params.chapterId as string)
-        return !this.store.getters.songHasBeenAdded(songId, chapterId)
-      } else if (route.params.cid !== undefined) { // Chapter
-        // TODO: Return false if all songs in a given chapter has been added.
-        return true
-      } else { return false }
-    },
-    switchIfBool(setting: DownloadSetting): boolean { // Returns true if setting was changed.
-      if (setting.type === 'bool') {
-        setting.value = !setting.value
-        return true
-      } else { return false }
-    },
-    go: async function (method: 'zip' | 'overleaf') {
-      const songs = (this.store.state.generator.generatorSongs.length === 0) ? chapters.map(c => c.songs).flat() : getSongsByIndices(this.store.state.generator.generatorSongs)
-
-      const files: { [key: string]: string } = { // TODO Load asynchronously, that is, don't use await right here.
-        'main.tex': getMainTeX(this.generalSettings),
-        'blad.cls': await (await fetch('tex/blad.cls')).text(),
-        'logga.svg': await (await fetch('tex/logga.svg')).text(),
-        'content.tex': getContentTeX(songs, this.generalSettings, this.specificSettings)
-      }
-
-      switch (method) {
-      case 'overleaf':
-        openInOverleaf(files)
-        break
-      case 'zip':
-        downloadZip(files)
-        break
-      }
     }
-  }
-})
+  })
 </script>
 
 <style scoped lang="scss">
+  hr {border: none; border-top: 1px solid gray;}
+
   .generator {
     width: 40%;
     right: 0;
@@ -170,6 +180,11 @@ export default defineComponent({
     background-color: unset;
   }
 
+  table.songbook {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+  }
+
   .operation:hover:not(.disabled) {
     cursor: pointer;
   }
@@ -179,7 +194,6 @@ export default defineComponent({
   }
 
   .generatorbuttons {
-    padding-bottom: 20px;
     text-align: center;
 
     &>div {
@@ -190,10 +204,15 @@ export default defineComponent({
       border-radius: $navbutton-spacing;
       margin: $navbutton-spacing;
       padding: $navbutton-spacing;
-      width: calc(33% - 4 * #{$navbutton-spacing});
+      width: calc(25% - 4 * #{$navbutton-spacing});
+      min-width: 1cm;
 
       color: #f60;
       font-size: 2em;
+
+      & img {
+        max-height: 32px;
+      }
 
       &:hover:not(.disabled) {
         cursor: pointer;
