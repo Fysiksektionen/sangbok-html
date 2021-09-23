@@ -1,8 +1,9 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteLocationNormalized, RouteLocationRaw, RouteRecordRaw } from 'vue-router'
 import Chapters from '../views/Chapters.vue'
 import Chapter from '../views/Chapter.vue'
 import Song from '../views/Song.vue'
 import Search from '../views/Search.vue'
+import { chapters } from '@/utils/lyrics'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -11,12 +12,12 @@ const routes: Array<RouteRecordRaw> = [
     component: Chapters
   },
   {
-    path: '/chapter/:cid',
+    path: '/chapter/:cid(\\d+)',
     name: 'Chapter',
     component: Chapter
   },
   {
-    path: '/chapter/:chapterId/song/:songId',
+    path: '/chapter/:chapterId(\\d+)/song/:songId(\\d+)',
     name: 'Song',
     component: Song
   },
@@ -36,6 +37,23 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+
+router.beforeEach((to: RouteLocationNormalized) => {
+  if (to.name === 'Chapter') {
+    const cid = parseInt(to.params.cid as string)
+    if (cid >= chapters.length) {
+      console.warn(`Chapter id ${cid} is too large. Redirecting to home.`)
+      return '/' as RouteLocationRaw
+    }
+  } else if (to.name === 'Song') {
+    const cid = parseInt(to.params.chapterId as string)
+    const sid = parseInt(to.params.songId as string)
+    if (cid >= chapters.length || sid >= chapters[cid].songs.length) {
+      console.warn(`Chapter id ${cid} or song id ${sid} is too large. Redirecting to home.`)
+      return '/' as RouteLocationRaw
+    }
+  }
 })
 
 export default router

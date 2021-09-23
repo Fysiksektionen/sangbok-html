@@ -20,6 +20,7 @@
       "comma-dangle": "warn",
       "keyword-spacing": "warn",
       "object-curly-spacing": "warn",
+      "block-spacing": "warn",
 
       "indent": ["warn", 2],
       "no-multiple-empty-lines": "warn",
