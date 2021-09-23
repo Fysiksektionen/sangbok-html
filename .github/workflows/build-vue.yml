@@ -29,7 +29,6 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x, 16.x]
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -47,14 +46,13 @@ jobs:
     - name: Unpack sheet music artifacts
       working-directory: public/msvg
       run: mv svgs.json ../../src/assets/msvgs.json
-
     - name: build
       run: npx vue-cli-service build
     - name: Archive production artifacts
-      if: ${{ matrix.node-version == '16.x' }}
       uses: actions/upload-artifact@v2
+      if: ${{ matrix.node-version == '16.x' }}
       with:
-        name: dist
+        name: dist-node-${{ matrix.node-version }}
         path: |
           dist
 
@@ -74,14 +72,14 @@ jobs:
       run: npm install -g svgo
     - name: Install MuseScore 3
       run: sudo apt-get update && sudo apt-get install musescore3
-    - name: Convert mscz to non-compressed svg.s
+    - name: Convert mscz to non-compressed svg:s
       working-directory: ./music
       run: ./convert.sh --no-move
-      if: ${{ github.event.inputs.skip-compression }}
-    - name: Convert mscz to compressed svg.s
+      if: ${{ contains(github.event.inputs.skip-compression, 'true') }}
+    - name: Convert mscz to compressed svg:s
       working-directory: ./music
       run: ./convert.sh --compress --no-move
-      if: ${{ !github.event.inputs.skip-compression }}
+      if: ${{ !contains(github.event.inputs.skip-compression, 'true') }}
     - name: Perpare for export
       working-directory: ./music
       run: mv svgs.json svg
