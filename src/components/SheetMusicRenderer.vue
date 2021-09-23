@@ -72,6 +72,7 @@ export default defineComponent({
   .notice {
     text-align: center;
     font-size: 75%;
+    color: gray;
   }
 
   a {
