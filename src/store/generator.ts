@@ -18,7 +18,7 @@ export const generatorModule = {
   getters: {
     songHasBeenAdded: (state: GeneratorState) => (chapterid: number, songid: number): boolean => {
       // TODO: Can probably be done in a more vectorized fashion
-      console.log("SHBA", chapterid, songid)
+      console.log('SHBA', chapterid, songid)
       for (const indices of state.generatorSongs) {
         if (indices[0] === chapterid && indices[1] === songid) {
           return true

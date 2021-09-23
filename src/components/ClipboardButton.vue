@@ -24,7 +24,7 @@ export default defineComponent({
   computed: {
     isSongStage () {
       return getStage(this.$route) === 'song'
-    },
+    }
   },
   methods: { // TODO: Move to computed
     lyrics () {

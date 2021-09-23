@@ -63,84 +63,84 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { useRoute, RouteLocationNormalized } from 'vue-router'
-  import { useStore } from 'vuex'
-  import { key } from '@/store'
+import { defineComponent } from 'vue'
+import { useRoute, RouteLocationNormalized } from 'vue-router'
+import { useStore } from 'vuex'
+import { key } from '@/store'
 
-  import { chapters, getSongsByIndices } from '@/utils/lyrics'
-  import { DownloadSetting } from '@/utils/export/settings'
+import { chapters, getSongsByIndices } from '@/utils/lyrics'
+import { DownloadSetting } from '@/utils/export/settings'
 
-  import getStage from '@/utils/stageChecker'
-  import getContentTeX from '@/utils/export/contentTeX'
-  import getMainTeX from '@/utils/export/mainTeX'
-  import openInOverleaf from '@/utils/export/overleaf'
-  import downloadZip from '@/utils/export/zip'
+import getStage from '@/utils/stageChecker'
+import getContentTeX from '@/utils/export/contentTeX'
+import getMainTeX from '@/utils/export/mainTeX'
+import openInOverleaf from '@/utils/export/overleaf'
+import downloadZip from '@/utils/export/zip'
 
-  export default defineComponent({
-    name: 'GeneratorView',
-    data() {
-      return {
-        chapters: chapters,
-        generatorSongs: useStore(key).state.generator.generatorSongs,
-        generalSettings: useStore(key).state.generator.generalSettings,
-        specificSettings: useStore(key).state.generator.specificSettings
+export default defineComponent({
+  name: 'GeneratorView',
+  data() {
+    return {
+      chapters: chapters,
+      generatorSongs: useStore(key).state.generator.generatorSongs,
+      generalSettings: useStore(key).state.generator.generalSettings,
+      specificSettings: useStore(key).state.generator.specificSettings
+    }
+  },
+  setup() { return { store: useStore(key) } },
+  props: ['songid', 'chapterid'],
+  methods: {
+    add() {
+      const route: RouteLocationNormalized = this.$route
+      if (getStage(route) === 'song') { // TODO: Use a switch here isntead of if-else if
+        const songId = parseInt(route.params.songId as string)
+        const chapterId = parseInt(route.params.chapterId as string)
+        this.store.commit('add', [chapterId, songId])
+      } else if (getStage(route) === 'chapter') {
+        const chapterId = parseInt(route.params.cid as string)
+        for (let songId = 0; songId < this.chapters[chapterId].songs.length; songId++) {
+          this.store.commit('add', [chapterId, songId])
+        }
       }
     },
-    setup() { return { store: useStore(key) } },
-    props: ['songid', 'chapterid'],
-    methods: {
-      add() {
-        const route: RouteLocationNormalized = this.$route
-        if (getStage(route) === 'song') { // TODO: Use a switch here isntead of if-else if
-          const songId = parseInt(route.params.songId as string)
-          const chapterId = parseInt(route.params.chapterId as string)
-          this.store.commit('add', [chapterId, songId])
-        } else if (getStage(route) === 'chapter') {
-          const chapterId = parseInt(route.params.cid as string)
-          for (let songId = 0; songId < this.chapters[chapterId].songs.length; songId++) {
-            this.store.commit('add', [chapterId, songId])
-          }
-        }
-      },
-      canAdd(): boolean { // TODO: Move to computed
-        const route: RouteLocationNormalized = useRoute()
-        if (getStage(route) === 'song') {
-          const songId = parseInt(route.params.songId as string)
-          const chapterId = parseInt(route.params.chapterId as string)
-          return !this.store.getters.songHasBeenAdded(chapterId, songId)
-        } else if (getStage(route) === 'chapter') {
-          // TODO: Return false if all songs in a given chapter has been added.
-          return true
-        } else { return false }
-      },
-      switchIfBool(setting: DownloadSetting): boolean { // Returns true if setting was changed.
-        if (setting.type === 'bool') {
-          setting.value = !setting.value
-          return true
-        } else { return false }
-      },
-      go: async function (method: 'zip' | 'overleaf') {
-        const songs = (this.store.state.generator.generatorSongs.length === 0) ? chapters.map(c => c.songs).flat() : getSongsByIndices(this.store.state.generator.generatorSongs)
+    canAdd(): boolean { // TODO: Move to computed
+      const route: RouteLocationNormalized = useRoute()
+      if (getStage(route) === 'song') {
+        const songId = parseInt(route.params.songId as string)
+        const chapterId = parseInt(route.params.chapterId as string)
+        return !this.store.getters.songHasBeenAdded(chapterId, songId)
+      } else if (getStage(route) === 'chapter') {
+        // TODO: Return false if all songs in a given chapter has been added.
+        return true
+      } else { return false }
+    },
+    switchIfBool(setting: DownloadSetting): boolean { // Returns true if setting was changed.
+      if (setting.type === 'bool') {
+        setting.value = !setting.value
+        return true
+      } else { return false }
+    },
+    go: async function (method: 'zip' | 'overleaf') {
+      const songs = (this.store.state.generator.generatorSongs.length === 0) ? chapters.map(c => c.songs).flat() : getSongsByIndices(this.store.state.generator.generatorSongs)
 
-        const files: { [key: string]: string } = { // TODO Load asynchronously, that is, don't use await right here.
-          'main.tex': getMainTeX(this.generalSettings),
-          'blad.cls': await (await fetch('tex/blad.cls')).text(),
-          'logga.svg': await (await fetch('tex/logga.svg')).text(),
-          'content.tex': getContentTeX(songs, this.generalSettings, this.specificSettings)
-        }
+      const files: { [key: string]: string } = { // TODO Load asynchronously, that is, don't use await right here.
+        'main.tex': getMainTeX(this.generalSettings),
+        'blad.cls': await (await fetch('tex/blad.cls')).text(),
+        'logga.svg': await (await fetch('tex/logga.svg')).text(),
+        'content.tex': getContentTeX(songs, this.generalSettings, this.specificSettings)
+      }
 
-        switch (method) {
-          case 'overleaf':
-            openInOverleaf(files)
-            break
-          case 'zip':
-            downloadZip(files)
-            break
-        }
+      switch (method) {
+      case 'overleaf':
+        openInOverleaf(files)
+        break
+      case 'zip':
+        downloadZip(files)
+        break
       }
     }
-  })
+  }
+})
 </script>
 
 <style scoped lang="scss">
