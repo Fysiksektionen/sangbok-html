@@ -101,14 +101,16 @@ export default defineComponent({
     },
     dragHandler(e: Event) {
       const [x, y] = getCoordsFromEvent(e)
+      const songId = parseInt(this.$route.params.songId as string)
+      const chapterId = parseInt(this.$route.params.chapterId as string)
       if (this.touchCoords[0] !== undefined && this.touchCoords[1] !== undefined && x !== undefined && y !== undefined) {
         // Absolute angle of touch path, relative to the vertical line.
         const phi = Math.abs(Math.atan2(this.touchCoords[0] - x, this.touchCoords[1] - y))
         if (Math.PI / 4 <= phi && phi <= 3 * Math.PI / 4) {
-          if (this.touchCoords[0] - x > 30) {
+          if (this.touchCoords[0] - x > 30 && chapters[chapterId].songs.length - 1 > songId) {
             this.showSwipeIndicator = 'right'
             return
-          } else if (this.touchCoords[0] - x < -30) {
+          } else if (this.touchCoords[0] - x < -30 && songId > 0) {
             this.showSwipeIndicator = 'left'
             return
           }
