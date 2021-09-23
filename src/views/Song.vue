@@ -19,11 +19,18 @@
       <NavButtons :chapterid="$route.params.chapterId" :songid="$route.params.songId" />
     </div>
     <transition name="swipe-right">
-    <div class="swipe-indicator right" v-if="showSwipeIndicator=='right'"><img src="../assets/back.png"
-      style="transform: scaleX(-1);" /></div>
+      <div class="swipe-indicator right bg-orange" v-if="showSwipeIndicator.includes('right')"
+        v-bind:class="{'disabled': showSwipeIndicator.includes('x')}">
+        <img src="../assets/back.png" style="transform: scaleX(-1);" v-if="!showSwipeIndicator.includes('x')" />
+        {{ showSwipeIndicator.includes('x') ? "⊘" : "" }}
+      </div>
     </transition>
     <transition name="swipe-left">
-      <div class="swipe-indicator left" v-if="showSwipeIndicator=='left'"><img src="../assets/back.png" /></div>
+      <div class="swipe-indicator left bg-orange" v-if="showSwipeIndicator.includes('left')"
+        v-bind:class="{'disabled': showSwipeIndicator.includes('x')}">
+        <img src="../assets/back.png" v-if="!showSwipeIndicator.includes('x')" />
+        {{ showSwipeIndicator.includes('x') ? "⊘" : "" }}
+      </div>
     </transition>
   </div>
 </template>
@@ -37,6 +44,8 @@ import { key } from '@/store'
 import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
 import NavButtons from '@/components/SongNavButtons.vue'
 import { chapters, Song } from '@/utils/lyrics.ts'
+
+  type SwipeIndicatorState = 'xleft' | 'left' | 'none' | 'right' | 'xright'
 
 const getCoordsFromEvent = (e: Event): [number, number] | [undefined, undefined] => {
   if (e.constructor.name === 'TouchEvent') {
@@ -64,7 +73,7 @@ export default defineComponent({
       song: () => chapters[param2int(route.params.chapterId)].songs[param2int(route.params.songId)] as Song,
       showMsvg: false,
       touchCoords: [undefined, undefined] as [number, number] | [undefined, undefined],
-      showSwipeIndicator: 'none' as 'left' | 'none' | 'right'
+      showSwipeIndicator: 'none' as SwipeIndicatorState
     }
   },
   setup() {
@@ -107,11 +116,11 @@ export default defineComponent({
         // Absolute angle of touch path, relative to the vertical line.
         const phi = Math.abs(Math.atan2(this.touchCoords[0] - x, this.touchCoords[1] - y))
         if (Math.PI / 4 <= phi && phi <= 3 * Math.PI / 4) {
-          if (this.touchCoords[0] - x > 30 && chapters[chapterId].songs.length - 1 > songId) {
-            this.showSwipeIndicator = 'right'
+          if (this.touchCoords[0] - x > 30) {
+            this.showSwipeIndicator = (chapters[chapterId].songs.length - 1 > songId) ? 'right' : 'xright'
             return
-          } else if (this.touchCoords[0] - x < -30 && songId > 0) {
-            this.showSwipeIndicator = 'left'
+          } else if (this.touchCoords[0] - x < -30) {
+            this.showSwipeIndicator = (songId > 0) ? 'left' : 'xleft'
             return
           }
         }
@@ -128,12 +137,15 @@ export default defineComponent({
     transition: all 0.3s ease-out;
     position: fixed;
     top: 30%;
-    background-color: #f60;
     border-radius: 4cm;
     height: 4cm;
     width: 4cm;
     line-height: 4cm;
     opacity: 0.5;
+
+    &.disabled {
+      background-color: gray;
+    }
 
     &.right {
       right: -3cm;
@@ -147,16 +159,20 @@ export default defineComponent({
     }
 
     &>img {
-      height: 0.5em;
+      height: 1em;
+      vertical-align: middle;
     }
   }
 
   /* TODO: Find a solution to this that does not involve !important. */
-  .swipe-right-enter-from , .swipe-right-leave-to {
+  .swipe-right-enter-from,
+  .swipe-right-leave-to {
     right: -4cm !important;
     opacity: 0 !important;
   }
-  .swipe-left-enter-from , .swipe-left-leave-to {
+
+  .swipe-left-enter-from,
+  .swipe-left-leave-to {
     left: -4cm !important;
     opacity: 0 !important;
   }
