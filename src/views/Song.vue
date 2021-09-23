@@ -42,7 +42,7 @@ const getCoordsFromEvent = (e: Event): [number, number] | [undefined, undefined]
   if (e.constructor.name === 'TouchEvent') {
     const touch = (e as TouchEvent).touches[0]
     return [touch.clientX, touch.clientY]
-  } else if (e.constructor.name === 'MouseEvent') {
+  } else if (process.env.NODE_ENV === 'development' && e.constructor.name === 'MouseEvent') { // We only accept MouseEvents as swipe events in development mode.
     return [(e as MouseEvent).clientX, (e as MouseEvent).clientY]
   }
   return [undefined, undefined]
