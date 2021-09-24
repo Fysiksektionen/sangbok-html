@@ -1,21 +1,60 @@
-import { Chapter, Song } from './lyrics'
+import Fuse from 'fuse.js'
+import { chapters, Song } from './lyrics'
 
-type Hit = {
-  song: {
-    chapterindex: string;
-    songindex: string;
-  },
-  rating: number
+type SongHit = Song & {
+  chapterindex: number,
+  songindex: number
 }
 
-function rate (keyword: RegExp, song: Song): number {
+const options = {
+  includeScore: true,
+  isCaseSensitive: false,
+  shouldSort: true,
+  // includeMatches: false,
+  // findAllMatches: false,
+  minMatchCharLength: 3,
+  // location: 0,
+  threshold: 0.2, // 0 makes the algorithm super picky, 1 matches almost anything. 0.2 seems fairly ok.
+  // distance: 100,
+  // useExtendedSearch: false,
+  ignoreLocation: true,
+  // ignoreFieldNorm: false,
+  keys: [
+    {
+      name: 'title',
+      weight: 10
+    },
+    {
+      name: 'author',
+      weight: 1
+    },
+    {
+      name: 'melody',
+      weight: 1
+    },
+    {
+      name: 'text',
+      weight: 1
+    }
+  ]
+}
+
+const db = chapters.map((c, cid) => c.songs.map((s, sid) => { return { ...s, chapterindex: cid, songindex: sid } as SongHit })).flat()
+const fuse = new Fuse(db, options)
+
+export function search(s: string): Fuse.FuseResult<SongHit>[] {
+  return fuse.search(s)
+}
+
+/*
+function rate(keyword: RegExp, song: Song): number {
   return (+(song.title.search(keyword) > -1) * 10 +
     +(song.text !== undefined && song.text.search(keyword) > -1) * 5 +
     +((song.melody || '').search(keyword) > -1) * 3 +
     +((song.author || '').search(keyword) > -1) * 2)
 }
 
-export function search (s: string, chapters: Chapter[]): Hit[] | null { // TODO: Type-declare songs and output.
+export function search (s: string, chapters: Chapter[]): Hit[] | null {
   if (s.trim().length === 0) { return null }
 
   // http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript
@@ -59,3 +98,4 @@ export function search (s: string, chapters: Chapter[]): Hit[] | null { // TODO:
   hits.sort((a, b) => b.rating - a.rating)
   return hits
 }
+*/

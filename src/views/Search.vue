@@ -5,15 +5,15 @@
   <div class="main">
     <SearchBox :query="$route.params.query"/>
     <table class="songbook">
-        <tr v-for="(hit, idx) in search($route.params.query, chapters)"
-            @click="$router.push('/chapter/'+hit.song.chapterindex+'/song/'+hit.song.songindex)"
+        <tr v-for="(hit, idx) in search($route.params.query)"
+            @click="$router.push('/chapter/'+hit.item.chapterindex+'/song/'+hit.item.songindex)"
             v-bind:key="idx">
             <td class="index">
-              {{ chapters[hit.song.chapterindex].songs[hit.song.songindex].index }}
+              {{ chapters[hit.item.chapterindex].songs[hit.item.songindex].index }}
             </td>
             <td class="name">
-              {{ chapters[hit.song.chapterindex].songs[hit.song.songindex].title }}
-              <span v-if="chapters[hit.song.chapterindex].songs[hit.song.songindex].msvg" class="sheetmusicicon">𝄞</span>
+              {{ chapters[hit.item.chapterindex].songs[hit.item.songindex].title }}
+              <span v-if="chapters[hit.item.chapterindex].songs[hit.item.songindex].msvg" class="sheetmusicicon">𝄞</span>
             </td>
         </tr>
         <tr class="nohits"><td>Inga sånger hittades.</td></tr>
