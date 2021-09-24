@@ -9,6 +9,7 @@ dist
 .mscbackup
 music/svg
 music/tmp
+music/deflate
 public/msvg
 
 ## Copyrighted stuff (potentially)

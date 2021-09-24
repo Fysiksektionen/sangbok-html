@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 ##
 ## Help printout
 ##
@@ -6,6 +8,7 @@ if [[ $*\  == *--help\ * || $*\  == *-h\ * ]]; then
     echo -e "Konverterar .mscz-filer i mscz-mappen till svg:er, vilka lagras i mappen svg/. Bör köras från music/-mappen."
     echo -e "\nFlaggor:"
     echo -e "\t-c, --compress\tKomprimera svg-filerna"
+    echo -e "\t-f, --force\tTvinga omgenerering av existerande filer"
     echo -e "\t--no-hash\tInkludera inte en checksum i filnamnet"
     echo -e "\t--no-json\tStrunta i att generera svgs.json"
     echo -e "\t--no-move\tFlytta inte filerna till deras målmappar (för användning med Vue)"
@@ -15,7 +18,10 @@ fi
 
 # Cleanup and directory creation
 mkdir -p svg
-rm svg/*.svg
+if [[ $*\  == *--force\ * ]]; then
+    rm svg/*.svg
+fi
+
 
 ##
 ## Generate svg:s
@@ -43,6 +49,10 @@ do
             csum=""
         else
             csum="."$(sha1sum "mscz/$file")
+            if ls svg/*${csum:0:8}-sf$sf-*.svg > /dev/null 2>&1
+            then
+                continue
+            fi
         fi
         for tmpfile in tmp/*.mscx # Find whatever the .mscx file is called.
         do
