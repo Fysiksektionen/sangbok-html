@@ -22,6 +22,11 @@ const routes: Array<RouteRecordRaw> = [
     component: Song
   },
   {
+    path: '/song/:songIndex',
+    name: 'SongByIndex',
+    component: Song
+  },
+  {
     path: '/search/:query',
     name: 'Search',
     component: Search

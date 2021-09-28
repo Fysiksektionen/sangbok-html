@@ -1,10 +1,5 @@
 import Fuse from 'fuse.js'
-import { chapters, Song } from './lyrics'
-
-type SongHit = Song & {
-  chapterindex: number,
-  songindex: number
-}
+import { songs, SongHit } from './lyrics'
 
 const options = {
   includeScore: true,
@@ -35,12 +30,15 @@ const options = {
     {
       name: 'text',
       weight: 1
+    },
+    {
+      name: 'index',
+      weight: 1
     }
   ]
 }
 
-const db = chapters.map((c, cid) => c.songs.map((s, sid) => { return { ...s, chapterindex: cid, songindex: sid } as SongHit })).flat()
-const fuse = new Fuse(db, options)
+const fuse = new Fuse(songs, options)
 
 export function search(s: string): Fuse.FuseResult<SongHit>[] {
   return fuse.search(s)

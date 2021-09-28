@@ -16,7 +16,7 @@
         </div>
         <div v-if="song().author" class="author" v-html="toHTML(song().author)"></div>
       </div>
-      <NavButtons :chapterid="$route.params.chapterId" :songid="$route.params.songId" />
+      <NavButtons v-if="$route.name=='Song'" :chapterid="$route.params.chapterId" :songid="$route.params.songId" />
     </div>
     <transition name="swipe-right">
       <div class="swipe-indicator right bg-orange" v-if="showSwipeIndicator.includes('right')"
@@ -43,7 +43,7 @@ import { key } from '@/store'
 
 import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
 import NavButtons from '@/components/SongNavButtons.vue'
-import { chapters, Song } from '@/utils/lyrics.ts'
+import { chapters, Song, getSongByStringIndex } from '@/utils/lyrics.ts'
 
   type SwipeIndicatorState = 'xleft' | 'left' | 'none' | 'right' | 'xright'
 
@@ -70,7 +70,14 @@ export default defineComponent({
     return {
       chapters: chapters,
       // TODO: This is an ugly fix for the song not updating when pressing NavButtons. It can probably be done using computed()
-      song: () => chapters[param2int(route.params.chapterId)].songs[param2int(route.params.songId)] as Song,
+      song: () => {
+        if(route.name === "SongByIndex") {
+          console.log(getSongByStringIndex(route.params.songIndex as string))
+          return getSongByStringIndex(route.params.songIndex as string)
+        } else {
+          return chapters[param2int(route.params.chapterId)].songs[param2int(route.params.songId)] as Song
+        }
+      },
       showMsvg: false,
       touchCoords: [undefined, undefined] as [number, number] | [undefined, undefined],
       showSwipeIndicator: 'none' as SwipeIndicatorState

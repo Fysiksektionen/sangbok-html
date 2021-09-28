@@ -1,4 +1,5 @@
 import lyrics from '@/assets/lyrics.json'
+import leo from '@/assets/addons/leo.json'
 
 export type SongIndex = [number, number]
 
@@ -7,15 +8,19 @@ export type Song = {
   index: string,
   author?: string,
   melody?: string,
+  unlock?: string, // Required keyword (regexp) to see this in the search engine.
+} & ({
   msvg?: string,
-  text: string,
-} | { // We need either mxl or text to be defined.
-  title: string,
-  index: string,
-  author?: string,
-  melody?: string,
+  text: string}
+  |
+  { // We need either mxl or text to be defined.
   msvg: string,
   text?: string,
+})
+
+export type SongHit = Song & {
+  chapterindex?: number,
+  songindex?: number
 }
 
 export type Chapter = {
@@ -25,6 +30,7 @@ export type Chapter = {
 }
 
 export const chapters: Chapter[] = lyrics
+export const songs: Song[] = (chapters.map((c, cid) => c.songs.map((s, sid) => { return { ...s, chapterindex: cid, songindex: sid } as SongHit })).flat().concat(leo.songs as Song[]))
 
 export function getSongsByIndices(indices: SongIndex[]): Song[] {
   const out: Song[] = []
@@ -34,42 +40,9 @@ export function getSongsByIndices(indices: SongIndex[]): Song[] {
   return out
 }
 
-/* Old parser, for the old lyrics.json format.
-type LyricsFile = {
-  chapters: {
-    chapter: string,
-    prefix: string,
-    songs: {
-      title: string,
-      author?: string | null,
-      melody?: string | null,
-      text: string,
-    }[]
-  }[],
-  indexes: string[][]
+export function getSongByStringIndex(idx: string): Song | undefined {
+  const hits = songs.filter(s => s.index === idx)
+  if (hits.length > 0) {
+    return hits[0]
+  } else return undefined
 }
-
-function loadLyrics(): Chapter[] {
-  const db: LyricsFile = lyrics
-  // TODO: Double-check if const is actually preferred.
-  // eslint-disable-next-line prefer-const
-  let out: Chapter[] = []
-
-  for (const i in db.chapters) {
-    out.push({
-      chapter: db.chapters[i].chapter,
-      prefix: db.chapters[i].prefix,
-      songs: db.chapters[i].songs.map((song, idx): Song => {
-        return {
-          ...song,
-          author: !song.author ? '' : song.author,
-          melody: !song.melody ? '' : song.melody,
-          index: db.indexes[i][idx]
-        }
-      })
-    })
-  }
-  console.log(JSON.stringify(out))
-  return out
-}
-*/

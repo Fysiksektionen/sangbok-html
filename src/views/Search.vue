@@ -6,14 +6,14 @@
     <SearchBox :query="$route.params.query"/>
     <table class="songbook">
         <tr v-for="(hit, idx) in search($route.params.query)"
-            @click="$router.push('/chapter/'+hit.item.chapterindex+'/song/'+hit.item.songindex)"
+            @click="goto(hit)"
             v-bind:key="idx">
             <td class="index">
-              {{ chapters[hit.item.chapterindex].songs[hit.item.songindex].index }}
+              {{ hit.item.index }}
             </td>
             <td class="name">
-              {{ chapters[hit.item.chapterindex].songs[hit.item.songindex].title }}
-              <span v-if="chapters[hit.item.chapterindex].songs[hit.item.songindex].msvg" class="sheetmusicicon">𝄞</span>
+              {{ hit.item.title }}
+              <span v-if="hit.item.msvg" class="sheetmusicicon">𝄞</span>
             </td>
         </tr>
         <tr class="nohits"><td>Inga sånger hittades.</td></tr>
@@ -23,11 +23,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Fuse from 'fuse.js'
 
 import { search } from '@/utils/search.ts' // @ is an alias to /src
 import Navbar from '@/components/Navbar.vue'
 import SearchBox from '@/components/SearchBox.vue'
-import { chapters } from '@/utils/lyrics.ts'
+import { chapters, SongHit } from '@/utils/lyrics.ts'
 
 export default defineComponent({
   name: 'Search',
@@ -36,7 +37,14 @@ export default defineComponent({
     SearchBox
   },
   methods: {
-    search: search
+    search: search,
+    goto (hit: Fuse.FuseResult<SongHit>) {
+      if(hit.item.chapterindex && hit.item.songindex) {
+        this.$router.push('/chapter/'+hit.item.chapterindex+'/song/'+hit.item.songindex)
+      } else {
+        this.$router.push('/song/'+hit.item.index)
+      }
+    }
   },
   data() {
     return {
