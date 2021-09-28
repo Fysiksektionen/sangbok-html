@@ -3,6 +3,9 @@
     <SettingsButton :setting="'translate'">Latinska kapitelnamn</SettingsButton>
     <SettingsButton :setting="'night'">Mörk bakgrund</SettingsButton>
     <SettingsButton :setting="'larger'">Större sångtext</SettingsButton>
+    <SettingsSwitch :setting="'touchAction'" :values="{'none': 'Inga', 'zoom': 'Zooma', 'swipe': 'Svep', 'all': 'Alla'}">
+      Touchfunktioner
+    </SettingsSwitch>
     <SettingsButton :setting="'generator'">Skapa sångblad</SettingsButton>
     <ClipboardButton/>
   </div>
@@ -11,6 +14,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import SettingsButton from '@/components/SettingsButton.vue'
+import SettingsSwitch from '@/components/SettingsSwitch.vue'
 import ClipboardButton from '@/components/ClipboardButton.vue'
 
 export default defineComponent({
@@ -18,7 +22,8 @@ export default defineComponent({
   props: ['show'],
   components: {
     SettingsButton,
-    ClipboardButton
+    ClipboardButton,
+    SettingsSwitch
   }
 })
 </script>

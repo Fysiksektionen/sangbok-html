@@ -43,19 +43,8 @@ import { key } from '@/store'
 
 import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
 import NavButtons from '@/components/SongNavButtons.vue'
+import { SwipeIndicatorState, getCoordsFromEvent } from '@/utils/swipe.ts'
 import { chapters, Song } from '@/utils/lyrics.ts'
-
-  type SwipeIndicatorState = 'xleft' | 'left' | 'none' | 'right' | 'xright'
-
-const getCoordsFromEvent = (e: Event): [number, number] | [undefined, undefined] => {
-  if (e.constructor.name === 'TouchEvent') {
-    const touch = (e as TouchEvent).touches[0]
-    return [touch.clientX, touch.clientY]
-  } else if (process.env.NODE_ENV === 'development' && e.constructor.name === 'MouseEvent') { // We only accept MouseEvents as swipe events in development mode.
-    return [(e as MouseEvent).clientX, (e as MouseEvent).clientY]
-  }
-  return [undefined, undefined]
-}
 
 export default defineComponent({
   name: 'SongView',
@@ -105,10 +94,11 @@ export default defineComponent({
       this.swipeHandler(this.showSwipeIndicator)
       this.showSwipeIndicator = 'none'
     },
-    pressHandler(e: Event) {
-      this.touchCoords = getCoordsFromEvent(e)
-    },
+    pressHandler(e: Event) {this.touchCoords = getCoordsFromEvent(e)},
     dragHandler(e: Event) {
+      if (['swipe', 'all'].indexOf(this.store.state.settings.touchAction) === -1) {
+        return
+      }
       const [x, y] = getCoordsFromEvent(e)
       const songId = parseInt(this.$route.params.songId as string)
       const chapterId = parseInt(this.$route.params.chapterId as string)
@@ -133,50 +123,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-  div.swipe-indicator {
-    transition: all 0.3s ease-out;
-    position: fixed;
-    top: 30%;
-    border-radius: 4cm;
-    height: 4cm;
-    width: 4cm;
-    line-height: 4cm;
-    opacity: 0.5;
-
-    &.disabled {
-      background-color: gray;
-    }
-
-    &.right {
-      right: -3cm;
-      padding-left: 1cm;
-    }
-
-    &.left {
-      left: -3cm;
-      padding-right: 1cm;
-      text-align: right;
-    }
-
-    &>img {
-      height: 1em;
-      vertical-align: middle;
-    }
-  }
-
-  /* TODO: Find a solution to this that does not involve !important. */
-  .swipe-right-enter-from,
-  .swipe-right-leave-to {
-    right: -4cm !important;
-    opacity: 0 !important;
-  }
-
-  .swipe-left-enter-from,
-  .swipe-left-leave-to {
-    left: -4cm !important;
-    opacity: 0 !important;
-  }
-
   div.lyrics {
     margin-left: 1%;
     margin-right: 1%;
