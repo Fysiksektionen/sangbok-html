@@ -94,7 +94,7 @@ export default defineComponent({
       this.swipeHandler(this.showSwipeIndicator)
       this.showSwipeIndicator = 'none'
     },
-    pressHandler(e: Event) {this.touchCoords = getCoordsFromEvent(e)},
+    pressHandler(e: Event) { this.touchCoords = getCoordsFromEvent(e) },
     dragHandler(e: Event) {
       if (['swipe', 'all'].indexOf(this.store.state.settings.touchAction) === -1) {
         return

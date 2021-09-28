@@ -133,7 +133,6 @@ table.songbook {
   &:first-child {box-shadow: 0 1px 5px #111;}
 }
 
-
 div.swipe-indicator {
     transition: all 0.3s ease-out;
     position: fixed;

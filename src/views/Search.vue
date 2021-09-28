@@ -28,48 +28,48 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
-  import { search } from '@/utils/search.ts' // @ is an alias to /src
-  import Navbar from '@/components/Navbar.vue'
-  import SearchBox from '@/components/SearchBox.vue'
-  import { SwipeIndicatorState, getCoordsFromEvent, genericDragHandler } from '@/utils/swipe.ts'
-  import { chapters } from '@/utils/lyrics.ts'
+import { search } from '@/utils/search.ts' // @ is an alias to /src
+import Navbar from '@/components/Navbar.vue'
+import SearchBox from '@/components/SearchBox.vue'
+import { SwipeIndicatorState, getCoordsFromEvent, genericDragHandler } from '@/utils/swipe.ts'
+import { chapters } from '@/utils/lyrics.ts'
 
-  export default defineComponent({
-    name: 'Search',
-    components: {
-      Navbar,
-      SearchBox
+export default defineComponent({
+  name: 'Search',
+  components: {
+    Navbar,
+    SearchBox
+  },
+  methods: {
+    search: search,
+    swipeHandler(direction: string) {
+      if (direction === 'left') { this.$router.push('/') }
     },
-    methods: {
-      search: search,
-      swipeHandler(direction: string) {
-        if (direction === 'left') { this.$router.push('/') }
-      },
-      releaseHandler() {
-        this.swipeHandler(this.showSwipeIndicator)
-        this.showSwipeIndicator = 'none'
-      },
-      pressHandler(e: Event) { this.touchCoords = getCoordsFromEvent(e) },
-      dragHandler(e: Event) {
-        if (['swipe', 'all'].indexOf(this.store.state.settings.touchAction) === -1) { return }
-        this.showSwipeIndicator = genericDragHandler(this.touchCoords, getCoordsFromEvent(e))
-      }
+    releaseHandler() {
+      this.swipeHandler(this.showSwipeIndicator)
+      this.showSwipeIndicator = 'none'
     },
-    data() {
-      return {
-        chapters: chapters,
-        touchCoords: [undefined, undefined] as [number, number] | [undefined, undefined],
-        showSwipeIndicator: 'none' as SwipeIndicatorState
-      }
-    },
-    setup() {
-      return { store: useStore(key) }
+    pressHandler(e: Event) { this.touchCoords = getCoordsFromEvent(e) },
+    dragHandler(e: Event) {
+      if (['swipe', 'all'].indexOf(this.store.state.settings.touchAction) === -1) { return }
+      this.showSwipeIndicator = genericDragHandler(this.touchCoords, getCoordsFromEvent(e))
     }
-  })
+  },
+  data() {
+    return {
+      chapters: chapters,
+      touchCoords: [undefined, undefined] as [number, number] | [undefined, undefined],
+      showSwipeIndicator: 'none' as SwipeIndicatorState
+    }
+  },
+  setup() {
+    return { store: useStore(key) }
+  }
+})
 </script>
 
 <style scoped lang="scss">

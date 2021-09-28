@@ -47,9 +47,9 @@ export default defineComponent({
       showSwipeIndicator: 'none' as SwipeIndicatorState
     }
   },
-    setup() {
-      return { store: useStore(key) }
-    },
+  setup() {
+    return { store: useStore(key) }
+  },
   methods: {
     swipeHandler(direction: string) {
       if (direction === 'left') { this.$router.push('/') }
