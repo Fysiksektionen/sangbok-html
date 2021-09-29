@@ -35,7 +35,7 @@ $f-green: #197F2A;
 $f-onyx: #221F20; */
 
 /* Color classes. Used by views and components */
-.bg-orange {background-color: #f60;}
+.bg-orange {background-color: #f60;color: #000;}
 .border-orange {border-color: #f60;}
 
 /* Layout */

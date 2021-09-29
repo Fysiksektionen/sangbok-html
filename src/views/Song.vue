@@ -96,7 +96,7 @@ export default defineComponent({
     },
     pressHandler(e: Event) { this.touchCoords = getCoordsFromEvent(e) },
     dragHandler(e: Event) {
-      if (['swipe', 'all'].indexOf(this.store.state.settings.touchAction) === -1) {
+      if (['swipe', 'all'].indexOf(this.store.state.settings.touchAction) === -1 || window.visualViewport.scale > 1) {
         return
       }
       const [x, y] = getCoordsFromEvent(e)

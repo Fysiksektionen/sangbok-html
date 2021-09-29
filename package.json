@@ -1,6 +1,6 @@
 {
   "name": "sangbok",
-  "version": "1.0.0rc4",
+  "version": "1.0.0rc5",
   "private": true,
   "scripts": {
     "start": "vue-cli-service serve",

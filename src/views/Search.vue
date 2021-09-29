@@ -2,7 +2,7 @@
 
 <template>
   <Navbar :parent="() => $router.push('/')" />
-  <div class="main" v-touch:release="releaseHandler" v-touch:press="pressHandler" v-touch:drag="dragHandler">
+  <div class="main" v-touch:release="releaseHandler" v-touch:press="pressHandler" v-touch:drag="dragHandler" v-bind:style="onlyAllowZoomOut">
     <SearchBox :query="$route.params.query" />
     <table class="songbook">
       <tr v-for="(hit, idx) in search($route.params.query)"
@@ -35,7 +35,7 @@ import { key } from '@/store'
 import { search } from '@/utils/search.ts' // @ is an alias to /src
 import Navbar from '@/components/Navbar.vue'
 import SearchBox from '@/components/SearchBox.vue'
-import { SwipeIndicatorState, getCoordsFromEvent, genericDragHandler } from '@/utils/swipe.ts'
+import { SwipeIndicatorState, getCoordsFromEvent, genericDragHandler, onlyAllowZoomOut } from '@/utils/swipe.ts'
 import { chapters } from '@/utils/lyrics.ts'
 
 export default defineComponent({
@@ -55,15 +55,18 @@ export default defineComponent({
     },
     pressHandler(e: Event) { this.touchCoords = getCoordsFromEvent(e) },
     dragHandler(e: Event) {
-      if (['swipe', 'all'].indexOf(this.store.state.settings.touchAction) === -1) { return }
+      this.onlyAllowZoomOut = onlyAllowZoomOut()
+      if (['swipe', 'all'].indexOf(this.store.state.settings.touchAction) === -1 || window.visualViewport.scale > 1) { return }
       this.showSwipeIndicator = genericDragHandler(this.touchCoords, getCoordsFromEvent(e))
     }
   },
   data() {
     return {
       chapters: chapters,
+
       touchCoords: [undefined, undefined] as [number, number] | [undefined, undefined],
-      showSwipeIndicator: 'none' as SwipeIndicatorState
+      showSwipeIndicator: 'none' as SwipeIndicatorState,
+      onlyAllowZoomOut: onlyAllowZoomOut()
     }
   },
   setup() {

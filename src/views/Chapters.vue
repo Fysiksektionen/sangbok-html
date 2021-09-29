@@ -2,7 +2,7 @@
 
 <template>
   <Navbar/>
-  <div class="main">
+  <div class="main" v-touch:drag="dragHandler" v-bind:style="onlyAllowZoomOut">
     <SearchBox/>
     <table class="songbook">
         <tr v-for="(chapter, idx) in chapters"
@@ -25,6 +25,7 @@ import { useStore } from 'vuex'
 import { key } from '@/store'
 
 import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
+import { onlyAllowZoomOut } from '@/utils/swipe.ts'
 import SearchBox from '@/components/SearchBox.vue'
 import { chapters } from '@/utils/lyrics.ts'
 
@@ -36,13 +37,18 @@ export default defineComponent({
   },
   data() {
     return {
-      chapters: chapters
+      chapters: chapters,
+
+      onlyAllowZoomOut: onlyAllowZoomOut()
     }
   },
   created() {
     useStore(key).commit('setQuery', '')
   },
   methods: {
+    dragHandler () {
+      this.onlyAllowZoomOut = onlyAllowZoomOut()
+    },
     greek2latin (greek: string): string {
       const dict: { [key: string]: string } = {
         Αα: 'Alfa',

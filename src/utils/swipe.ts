@@ -24,3 +24,7 @@ export function genericDragHandler(touchCoords: [number, number] | [undefined, u
   }
   return 'none'
 }
+
+export function onlyAllowZoomOut(): {'touchAction': string} | Record<string, never> {
+  return { touchAction: (window.visualViewport.scale > 1) ? 'manipulation' : 'pan-y' }
+}
