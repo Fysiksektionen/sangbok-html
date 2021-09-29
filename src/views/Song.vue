@@ -6,10 +6,11 @@
       :left="($route.params.songId > 0) ? 'allow' : 'disallow'"
       :right="(this.chapters[$route.params.chapterId].songs.length - 1 > $route.params.songId) ? 'allow' : 'disallow'">
     <div class="main">
-      <div class="lyrics" v-touch:release="releaseHandler" v-touch:press="pressHandler" v-touch:drag="dragHandler">
-        <button v-if="song().msvg && song().text" @click="showMsvg = !showMsvg" class="button musicbutton">{{ showMsvg ?
-          'Dölj noter' : 'Visa noter'}}</button>
+      <div class="lyrics">
+        <button v-if="song().msvg && song().text" @click="showMsvg = !showMsvg" class="button musicbutton">
+          {{ showMsvg ? 'Dölj noter' : 'Visa noter'}}</button>
         <SheetMusicRenderer v-if="song().msvg && (!song().text || showMsvg)" :src="song().msvg" />
+        <div class="song-index">{{song().index}}</div>
         <div v-if="song().text">
           <div class="titlecontainer" v-bind:style="{'minHeight':(song().msvg && !showMsvg ? '5em' : undefined)}">
             <h2>{{song().title}}</h2>
@@ -86,6 +87,15 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+  .song-index {
+    float: right;
+    margin: 24px;
+    margin-top: 12px;
+    font-size: 1.5em;
+    opacity: 0.8;
+    letter-spacing: 1px;
+  }
+
   div.lyrics {
     margin-left: 1%;
     margin-right: 1%;

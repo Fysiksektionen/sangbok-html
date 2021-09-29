@@ -75,7 +75,7 @@ div.main h2 {
     padding: $navbutton-spacing;
 
     background-color: rgba(128, 128, 128, 0.10);
-    &:active {background-color: rgba(128, 128, 128, 0.30);}
+    &:active:not(.disabled):not(.static) {background-color: rgba(128, 128, 128, 0.30);}
     &.disabled {opacity: 0.5;}
 }
 
