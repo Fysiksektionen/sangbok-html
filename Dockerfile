@@ -24,9 +24,8 @@ RUN for file in dist/**/*; do \
     done
 
 # Finale
-FROM nginx:stable-alpine
-
-#RUN apk add --no-cache nginx-mod-http-brotli
+# FROM nginx:stable-alpine
+FROM fholzer/nginx-brotli:latest
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=frontend-build /app/dist /usr/share/nginx/html/sangbok
