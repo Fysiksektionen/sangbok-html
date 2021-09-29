@@ -3,6 +3,7 @@
 ##
 .vscode
 .idea
+docker.sh
 build
 dist
 
