@@ -2,29 +2,26 @@
 
 <template>
   <Navbar :parent="() => $router.push('/')" />
-  <div class="main" v-touch:release="releaseHandler" v-touch:press="pressHandler" v-touch:drag="dragHandler" v-bind:style="onlyAllowZoomOut">
-    <SearchBox :query="$route.params.query" />
-    <table class="songbook">
-      <tr v-for="(hit, idx) in search($route.params.query)"
-        @click="$router.push('/chapter/'+hit.item.chapterindex+'/song/'+hit.item.songindex)" v-bind:key="idx">
-        <td class="index">
-          {{ chapters[hit.item.chapterindex].songs[hit.item.songindex].index }}
-        </td>
-        <td class="name">
-          {{ chapters[hit.item.chapterindex].songs[hit.item.songindex].title }}
-          <span v-if="chapters[hit.item.chapterindex].songs[hit.item.songindex].msvg" class="sheetmusicicon">𝄞</span>
-        </td>
-      </tr>
-      <tr class="nohits">
-        <td>Inga sånger hittades.</td>
-      </tr>
-    </table>
-    <transition name="swipe-left">
-      <div class="swipe-indicator left bg-orange" v-if="showSwipeIndicator.includes('left')">
-        <img src="../assets/back.png"/>
-      </div>
-    </transition>
-  </div>
+  <Swiper :swipeHandler="swipeHandler" :right="'hide'">
+    <div class="main">
+      <SearchBox :query="$route.params.query" />
+      <table class="songbook">
+        <tr v-for="(hit, idx) in search($route.params.query)"
+          @click="$router.push('/chapter/'+hit.item.chapterindex+'/song/'+hit.item.songindex)" v-bind:key="idx">
+          <td class="index">
+            {{ chapters[hit.item.chapterindex].songs[hit.item.songindex].index }}
+          </td>
+          <td class="name">
+            {{ chapters[hit.item.chapterindex].songs[hit.item.songindex].title }}
+            <span v-if="chapters[hit.item.chapterindex].songs[hit.item.songindex].msvg" class="sheetmusicicon">𝄞</span>
+          </td>
+        </tr>
+        <tr class="nohits">
+          <td>Inga sånger hittades.</td>
+        </tr>
+      </table>
+    </div>
+  </Swiper>
 </template>
 
 <script lang="ts">
@@ -35,38 +32,24 @@ import { key } from '@/store'
 import { search } from '@/utils/search.ts' // @ is an alias to /src
 import Navbar from '@/components/Navbar.vue'
 import SearchBox from '@/components/SearchBox.vue'
-import { SwipeIndicatorState, getCoordsFromEvent, genericDragHandler, onlyAllowZoomOut } from '@/utils/swipe.ts'
+import Swiper from '@/components/Swiper.vue'
+import { SwipeIndicatorState } from '@/utils/swipe.ts'
 import { chapters } from '@/utils/lyrics.ts'
 
 export default defineComponent({
   name: 'Search',
   components: {
     Navbar,
+    Swiper,
     SearchBox
   },
   methods: {
     search: search,
-    swipeHandler(direction: string) {
-      if (direction === 'left') { this.$router.push('/') }
-    },
-    releaseHandler() {
-      this.swipeHandler(this.showSwipeIndicator)
-      this.showSwipeIndicator = 'none'
-    },
-    pressHandler(e: Event) { this.touchCoords = getCoordsFromEvent(e) },
-    dragHandler(e: Event) {
-      this.onlyAllowZoomOut = onlyAllowZoomOut()
-      if (['swipe', 'all'].indexOf(this.store.state.settings.touchAction) === -1 || window.visualViewport.scale > 1) { return }
-      this.showSwipeIndicator = genericDragHandler(this.touchCoords, getCoordsFromEvent(e))
-    }
+    swipeHandler(direction: SwipeIndicatorState) { if (direction === 'left') { this.$router.push('/') } }
   },
   data() {
     return {
-      chapters: chapters,
-
-      touchCoords: [undefined, undefined] as [number, number] | [undefined, undefined],
-      showSwipeIndicator: 'none' as SwipeIndicatorState,
-      onlyAllowZoomOut: onlyAllowZoomOut()
+      chapters: chapters
     }
   },
   setup() {

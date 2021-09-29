@@ -38,7 +38,6 @@ export default defineComponent({
   data() {
     return {
       chapters: chapters,
-
       onlyAllowZoomOut: onlyAllowZoomOut()
     }
   },
@@ -46,9 +45,7 @@ export default defineComponent({
     useStore(key).commit('setQuery', '')
   },
   methods: {
-    dragHandler () {
-      this.onlyAllowZoomOut = onlyAllowZoomOut()
-    },
+    dragHandler () { this.onlyAllowZoomOut = onlyAllowZoomOut() },
     greek2latin (greek: string): string {
       const dict: { [key: string]: string } = {
         Αα: 'Alfa',

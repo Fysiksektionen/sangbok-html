@@ -2,27 +2,24 @@
 
 <template>
   <Navbar :parent="() => $router.push('/')"/>
-  <div class="main" v-touch:release="releaseHandler" v-touch:press="pressHandler" v-touch:drag="dragHandler" v-bind:style="onlyAllowZoomOut">
-    <h2>{{chapter.chapter}}</h2>
-    <table class="songbook">
-        <tr v-for="(song, idx) in chapter.songs"
-            @click="$router.push('/chapter/'+$route.params.cid+'/song/'+idx)"
-            v-bind:key="idx">
-            <td class="index">
-              {{ song.index }}
-            </td>
-            <td class="name">
-              {{ song.title }}
-              <span v-if="song.msvg" class="sheetmusicicon">𝄞</span>
-            </td>
-        </tr>
-    </table>
-  </div>
-  <transition name="swipe-left">
-    <div class="swipe-indicator left bg-orange" v-if="showSwipeIndicator.includes('left')">
-      <img src="../assets/back.png"/>
+  <Swiper :swipeHandler="swipeHandler" :right="'hide'">
+    <div class="main">
+      <h2>{{chapter.chapter}}</h2>
+      <table class="songbook">
+          <tr v-for="(song, idx) in chapter.songs"
+              @click="$router.push('/chapter/'+$route.params.cid+'/song/'+idx)"
+              v-bind:key="idx">
+              <td class="index">
+                {{ song.index }}
+              </td>
+              <td class="name">
+                {{ song.title }}
+                <span v-if="song.msvg" class="sheetmusicicon">𝄞</span>
+              </td>
+          </tr>
+      </table>
     </div>
-  </transition>
+  </Swiper>
 </template>
 
 <script lang="ts">
@@ -31,40 +28,26 @@ import { useStore } from 'vuex'
 import { key } from '@/store'
 
 import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
-import { SwipeIndicatorState, getCoordsFromEvent, genericDragHandler, onlyAllowZoomOut } from '@/utils/swipe.ts'
+import Swiper from '@/components/Swiper.vue'
+import { SwipeIndicatorState } from '@/utils/swipe.ts'
 import { chapters } from '@/utils/lyrics.ts'
 
 export default defineComponent({
   name: 'ChapterView',
   components: {
-    Navbar
+    Navbar,
+    Swiper
   },
   data() {
     return {
-      chapter: chapters[parseInt(this.$route.params.cid as string)],
-
-      touchCoords: [undefined, undefined] as [number, number] | [undefined, undefined],
-      showSwipeIndicator: 'none' as SwipeIndicatorState,
-      onlyAllowZoomOut: onlyAllowZoomOut()
+      chapter: chapters[parseInt(this.$route.params.cid as string)]
     }
   },
   setup() {
     return { store: useStore(key) }
   },
   methods: {
-    swipeHandler(direction: string) {
-      if (direction === 'left') { this.$router.push('/') }
-    },
-    releaseHandler() {
-      this.swipeHandler(this.showSwipeIndicator)
-      this.showSwipeIndicator = 'none'
-    },
-    pressHandler(e: Event) { this.touchCoords = getCoordsFromEvent(e) },
-    dragHandler(e: Event) {
-      this.onlyAllowZoomOut = onlyAllowZoomOut()
-      if (['swipe', 'all'].indexOf(this.store.state.settings.touchAction) === -1 || window.visualViewport.scale > 1) { return }
-      this.showSwipeIndicator = genericDragHandler(this.touchCoords, getCoordsFromEvent(e))
-    }
+    swipeHandler (direction: SwipeIndicatorState) { (direction === 'left') && this.$router.push('/') }
   }
 })
 </script>

@@ -2,37 +2,28 @@
 
 <template>
   <Navbar :parent="goToParent" />
-  <div class="main">
-    <div class="lyrics" v-touch:release="releaseHandler" v-touch:press="pressHandler" v-touch:drag="dragHandler">
-      <button v-if="song().msvg && song().text" @click="showMsvg = !showMsvg" class="button musicbutton">{{ showMsvg ?
-        'Dölj noter' : 'Visa noter'}}</button>
-      <SheetMusicRenderer v-if="song().msvg && (!song().text || showMsvg)" :src="song().msvg" />
-      <div v-if="song().text">
-        <div class="titlecontainer" v-bind:style="{'minHeight':(song().msvg && !showMsvg ? '5em' : undefined)}">
-          <h2>{{song().title}}</h2>
-          <div v-if="song().melody" class="melody" v-html="toHTML(song().melody)"></div>
+  <Swiper :swipeHandler="swipeHandler" :allowZoom="true"
+      :left="($route.params.songId > 0) ? 'allow' : 'disallow'"
+      :right="(this.chapters[$route.params.chapterId].songs.length - 1 > $route.params.songId) ? 'allow' : 'disallow'">
+    <div class="main">
+      <div class="lyrics" v-touch:release="releaseHandler" v-touch:press="pressHandler" v-touch:drag="dragHandler">
+        <button v-if="song().msvg && song().text" @click="showMsvg = !showMsvg" class="button musicbutton">{{ showMsvg ?
+          'Dölj noter' : 'Visa noter'}}</button>
+        <SheetMusicRenderer v-if="song().msvg && (!song().text || showMsvg)" :src="song().msvg" />
+        <div v-if="song().text">
+          <div class="titlecontainer" v-bind:style="{'minHeight':(song().msvg && !showMsvg ? '5em' : undefined)}">
+            <h2>{{song().title}}</h2>
+            <div v-if="song().melody" class="melody" v-html="toHTML(song().melody)"></div>
+          </div>
+          <div class="textcontainer" v-html="toHTML(song().text)"
+            v-bind:class="{'larger': $store.state.settings.larger}">
+          </div>
+          <div v-if="song().author" class="author" v-html="toHTML(song().author)"></div>
         </div>
-        <div class="textcontainer" v-html="toHTML(song().text)" v-bind:class="{'larger': $store.state.settings.larger}">
-        </div>
-        <div v-if="song().author" class="author" v-html="toHTML(song().author)"></div>
+        <NavButtons :chapterid="$route.params.chapterId" :songid="$route.params.songId" />
       </div>
-      <NavButtons :chapterid="$route.params.chapterId" :songid="$route.params.songId" />
     </div>
-    <transition name="swipe-right">
-      <div class="swipe-indicator right bg-orange" v-if="showSwipeIndicator.includes('right')"
-        v-bind:class="{'disabled': showSwipeIndicator.includes('x')}">
-        <img src="../assets/back.png" style="transform: scaleX(-1);" v-if="!showSwipeIndicator.includes('x')" />
-        {{ showSwipeIndicator.includes('x') ? "⊘" : "" }}
-      </div>
-    </transition>
-    <transition name="swipe-left">
-      <div class="swipe-indicator left bg-orange" v-if="showSwipeIndicator.includes('left')"
-        v-bind:class="{'disabled': showSwipeIndicator.includes('x')}">
-        <img src="../assets/back.png" v-if="!showSwipeIndicator.includes('x')" />
-        {{ showSwipeIndicator.includes('x') ? "⊘" : "" }}
-      </div>
-    </transition>
-  </div>
+  </Swiper>
 </template>
 
 <script lang="ts">
@@ -43,12 +34,14 @@ import { key } from '@/store'
 
 import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
 import NavButtons from '@/components/SongNavButtons.vue'
-import { SwipeIndicatorState, getCoordsFromEvent } from '@/utils/swipe.ts'
+import Swiper from '@/components/Swiper.vue'
+import { SwipeIndicatorState } from '@/utils/swipe.ts'
 import { chapters, Song } from '@/utils/lyrics.ts'
 
 export default defineComponent({
   name: 'SongView',
   components: {
+    Swiper,
     Navbar,
     NavButtons,
     SheetMusicRenderer: defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer" */ '@/components/SheetMusicRenderer.vue'))
@@ -60,9 +53,7 @@ export default defineComponent({
       chapters: chapters,
       // TODO: This is an ugly fix for the song not updating when pressing NavButtons. It can probably be done using computed()
       song: () => chapters[param2int(route.params.chapterId)].songs[param2int(route.params.songId)] as Song,
-      showMsvg: false,
-      touchCoords: [undefined, undefined] as [number, number] | [undefined, undefined],
-      showSwipeIndicator: 'none' as SwipeIndicatorState
+      showMsvg: false
     }
   },
   setup() {
@@ -81,7 +72,7 @@ export default defineComponent({
         }
       }
     },
-    swipeHandler(direction: string) {
+    swipeHandler(direction: SwipeIndicatorState) {
       const songId = parseInt(this.$route.params.songId as string)
       const chapterId = parseInt(this.$route.params.chapterId as string)
       if (direction === 'right' && chapters[chapterId].songs.length - 1 > songId) {
@@ -89,34 +80,6 @@ export default defineComponent({
       } else if (direction === 'left' && songId > 0) {
         this.$router.push('/chapter/' + this.$route.params.chapterId + '/song/' + (songId - 1))
       }
-    },
-    releaseHandler() {
-      this.swipeHandler(this.showSwipeIndicator)
-      this.showSwipeIndicator = 'none'
-    },
-    pressHandler(e: Event) { this.touchCoords = getCoordsFromEvent(e) },
-    dragHandler(e: Event) {
-      if (['swipe', 'all'].indexOf(this.store.state.settings.touchAction) === -1 || window.visualViewport.scale > 1) {
-        return
-      }
-      const [x, y] = getCoordsFromEvent(e)
-      const songId = parseInt(this.$route.params.songId as string)
-      const chapterId = parseInt(this.$route.params.chapterId as string)
-      if (this.touchCoords[0] !== undefined && this.touchCoords[1] !== undefined && x !== undefined && y !== undefined) {
-        // Absolute angle of touch path, relative to the vertical line.
-        const phi = Math.abs(Math.atan2(this.touchCoords[0] - x, this.touchCoords[1] - y))
-        if (Math.PI / 4 <= phi && phi <= 3 * Math.PI / 4) {
-          if (this.touchCoords[0] - x > 30) {
-            this.showSwipeIndicator = (chapters[chapterId].songs.length - 1 > songId) ? 'right' : 'xright'
-            return
-          } else if (this.touchCoords[0] - x < -30) {
-            this.showSwipeIndicator = (songId > 0) ? 'left' : 'xleft'
-            return
-          }
-        }
-      }
-      // The catch-all-other case
-      this.showSwipeIndicator = 'none'
     }
   }
 })

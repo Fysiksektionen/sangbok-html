@@ -132,48 +132,4 @@ table.songbook {
   &:active {background-color: #444;}
   &:first-child {box-shadow: 0 1px 5px #111;}
 }
-
-div.swipe-indicator {
-    transition: all 0.3s ease-out;
-    position: fixed;
-    top: 30%;
-    border-radius: 4cm;
-    height: 4cm;
-    width: 4cm;
-    line-height: 4cm;
-    opacity: 0.5;
-
-    &.disabled {
-      background-color: gray;
-    }
-
-    &.right {
-      right: -3cm;
-      padding-left: 1cm;
-    }
-
-    &.left {
-      left: -3cm;
-      padding-right: 1cm;
-      text-align: right;
-    }
-
-    &>img {
-      height: 1em;
-      vertical-align: middle;
-    }
-  }
-
-  /* TODO: Find a solution to this that does not involve !important. */
-  .swipe-right-enter-from,
-  .swipe-right-leave-to {
-    right: -4cm !important;
-    opacity: 0 !important;
-  }
-
-  .swipe-left-enter-from,
-  .swipe-left-leave-to {
-    left: -4cm !important;
-    opacity: 0 !important;
-  }
 </style>
