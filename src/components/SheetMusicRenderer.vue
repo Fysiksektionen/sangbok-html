@@ -24,7 +24,7 @@ export default defineComponent({
   props: ['src'],
   data () {
     return {
-      zoomIdx: 3 // TODO: Choose based on screen size
+      zoomIdx: Math.min((window.matchMedia('only screen and (max-width: 760px)').matches) ? 5 : 3, this.getZoomLevels().length - 1)
     }
   },
   // mounted() {},
