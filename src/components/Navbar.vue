@@ -43,7 +43,7 @@ export default defineComponent({
   opacity: 0;
 }
 
-img {height: 1em;}
+img {height: 1em;width: 1em;}
 
 button {
     background-color: transparent;

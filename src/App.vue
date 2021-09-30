@@ -22,6 +22,8 @@ export default defineComponent({
 
 <style lang="scss">
 @use "sass:math";
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+
 /* Colors */
 /* $f-orange: #FF642B;
 $f-orange-light: #FB9C74;
