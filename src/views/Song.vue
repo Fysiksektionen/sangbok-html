@@ -45,7 +45,7 @@ export default defineComponent({
     Swiper,
     Navbar,
     NavButtons,
-    SheetMusicRenderer: defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer" */ '@/components/SheetMusicRenderer.vue'))
+    SheetMusicRenderer: defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer", webpackPrefetch: true */ '@/components/SheetMusicRenderer.vue'))
   },
   data() {
     const route: RouteLocationNormalized = useRoute()

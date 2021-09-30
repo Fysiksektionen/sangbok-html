@@ -8,8 +8,11 @@ import { defineComponent, defineAsyncComponent } from 'vue'
 
 export default defineComponent({
   name: 'Sångbok',
-  components: { // Only load Generator component and generator helper functions on-demand.
-    GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue'))
+  components: {
+    GeneratorView: defineAsyncComponent(() => import( // Only load Generator component and generator helper functions on-demand.
+      /* webpackPrefetch: false, webpackChunkName: "generator" */
+      '@/views/Generator.vue')
+    )
   },
   created () {
     // TODO: Ugly fix that removes body night class if stored settings.night === false.
@@ -43,7 +46,7 @@ body {
     margin: 0;
     margin-top: 2.2em;
     transition: 0.1s background-color ease-in-out;
-    font-family: 'EB Garamond', serif;
+    font-family: 'EB Garamond', Garamond, serif;
 
     &.night {
       /* TODO: Since <body> is outside of Vue's scope, the night class is set through an ugly fix in the @/store/index.ts file. This can probably be made more elegantly. */

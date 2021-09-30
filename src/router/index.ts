@@ -5,6 +5,11 @@ import Song from '../views/Song.vue'
 import Search from '../views/Search.vue'
 import { chapters } from '@/utils/lyrics'
 
+// Certain components may benefit from async loading. For now (v1.0) this adds about 3 KiB to the total size (transferred)
+// while reducing the entrypoint size by about 30 KiB. Hence the difference is pretty negligible for now, especially since
+// all users will use the Song component, and most will use the Search component.
+// import { defineAsyncComponent } from 'vue'
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -20,19 +25,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/chapter/:chapterId(\\d+)/song/:songId(\\d+)',
     name: 'Song',
     component: Song
+    // component: defineAsyncComponent(() => import(/* webpackChunkName: "songview", webpackPreload: true */ '../views/Song.vue'))
   },
   {
     path: '/search/:query',
     name: 'Search',
     component: Search
+    // component: defineAsyncComponent(() => import(/* webpackChunkName: "searchview", webpackPreload: true */ '../views/Search.vue'))
   },
   { path: '/:pathMatch(.*)*', redirect: '/' } // Redirect 404:s to the start page.
 ]
-
-// for route level code-splitting
-// that generates a separate chunk (about.[hash].js) for this route
-// which is lazy-loaded when the route is visited, use the below code in the routes constant above.
-// component: () => import('../views/Generator.vue')
 
 const router = createRouter({
   history: createWebHashHistory(),
