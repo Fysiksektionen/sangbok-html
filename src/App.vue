@@ -136,4 +136,7 @@ table.songbook {
   &:active {background-color: #444;}
   &:first-child {box-shadow: 0 1px 5px #111;}
 }
+
+ol>li {margin-top: 0.75em}
+.textcontainer>p {line-height: 1.5em;font-size: 1.1em;}
 </style>

@@ -62,7 +62,12 @@ export default defineComponent({
   },
   methods: {
     toHTML(text: string): string {
-      return text.replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/\n/igm, '<br />')
+      const ALLOWED_TAGS = ['li', 'ol', 'ul', 'b', 'p', 'i', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+      let out = text.replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/\n/igm, '<br />')
+      for (const tag of ALLOWED_TAGS) {
+        out = out.replace(new RegExp(`&lt;(/)?${tag}&gt;`, 'mig'), `<$1${tag}>`)
+      }
+      return out
     },
     goToParent() { // store.state.query is set if the user came from search. If that's the case, send them back to the search page, else go to the chapter page.
       if (this !== undefined) {
