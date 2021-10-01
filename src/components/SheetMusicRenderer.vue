@@ -4,12 +4,13 @@
     <button class="button" @click="zoom(1)" v-bind:class="{'disabled': zoomIdx == getZoomLevels().length-1}">&#128269;+</button>
   </div>
   <div v-for="img, key in getImages()" v-bind:key="key">
-    <img v-bind:src="img">
+    <img v-bind:src="img" alt="Loading..." @load="isLoading=false">
   </div>
   <div v-if="getImages().length == 0">
     <h2>Fel</h2>
     <p style="text-align: center;">Inga noter hittades, trots att de borde finnas. Skicka ett surt mail till webmaster eller sångbokens projektledare.</p>
   </div>
+  <div v-if="isLoading"><h2>Laddar...</h2></div>
   <p class="notice">
     Notvisaren är experimentell.
   </p>
@@ -24,7 +25,8 @@ export default defineComponent({
   props: ['src'],
   data () {
     return {
-      zoomIdx: Math.min((window.matchMedia('only screen and (max-width: 760px)').matches) ? 5 : 3, this.getZoomLevels().length - 1)
+      zoomIdx: Math.min((window.matchMedia('only screen and (max-width: 760px)').matches) ? 5 : 3, this.getZoomLevels().length - 1),
+      isLoading: true
     }
   },
   // mounted() {},
