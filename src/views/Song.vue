@@ -11,7 +11,7 @@
           {{ showMsvg ? 'Dölj noter' : 'Visa noter'}}</button>
         <SheetMusicRenderer v-if="song().msvg && (!song().text || showMsvg)" :src="song().msvg" />
         <div class="song-index" v-if="song().text && !showMsvg">{{song().index}}</div>
-        <div v-if="song().text && !showMsvg">
+        <div v-if="song().text && (!showMsvg || !song().msvg)">
           <div class="titlecontainer" v-bind:style="{'minHeight':(song().msvg && !showMsvg ? '5em' : undefined)}">
             <h2>{{song().title}}</h2>
             <div v-if="song().melody" class="melody" v-html="toHTML(song().melody)"></div>
