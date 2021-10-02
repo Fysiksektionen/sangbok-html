@@ -1207,7 +1207,8 @@
                 "author": "",
                 "melody": "Studentsången",
                 "text": "W     kg    m     Wb    s\nΩm    T     A     rad\nCd    S     N     s\nΩ     A     m     Lx     dB\n°C    W/m²\nJ/kg   H     V     C\nkg/m³ mol\nm/s²  m/s²  F!",
-                "index": "ι1"
+                "index": "ι1",
+                "msvg": "i1. Systeme International"
             },
             {
                 "title": "Integralkalkylens fader",
@@ -1327,7 +1328,8 @@
                 "author": "",
                 "melody": "Studentsången",
                 "text": "Sn   As   B   Pt   Br\nNa   Tl   Pr\nP   Pd   N   Cr\nEr   I   Xe   Nd\nGd   Hg   Pb   Zr\nPa   Fe   Bi   Cl   Rn\nV   C   Se   Mo\nAl   Si   Ar\nAl   Si   Ar\nU!",
-                "index": "ι16"
+                "index": "ι16",
+                "msvg": "i16. Kemisången"
             },
             {
                 "title": "Imperial system",
