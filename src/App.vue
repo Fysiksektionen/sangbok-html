@@ -1,17 +1,21 @@
 <template>
+  <Navbar :hideBackButton="$route.meta.hideBackButton"/>
+  <div class="flex-row">
     <router-view/>
     <GeneratorView v-if="$store.state.settings.generator"/>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue'
+import Navbar from '@/components/Navbar.vue'
 
 export default defineComponent({
   name: 'Sångbok',
   components: {
     // Only load Generator component and generator helper functions on-demand.
-    GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue')
-    )
+    GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue')),
+    Navbar
   },
   created () {
     // TODO: Ugly fix that removes body night class if stored settings.night === false.
@@ -45,7 +49,6 @@ $f-onyx: #221F20; */
 /* Layout */
 body {
     margin: 0;
-    margin-top: 2.2em;
     transition: 0.1s background-color ease-in-out;
     font-family: 'EB Garamond', Garamond, serif;
 
@@ -56,7 +59,8 @@ body {
     }
 }
 
-#app {display: flex;}
+.flex-row {display: flex; flex-direction: row;}
+.flex-col, #app {display: flex; flex-direction: column;}
 div.main {width: 100%;}
 
 /* General */

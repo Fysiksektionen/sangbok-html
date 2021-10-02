@@ -1,7 +1,6 @@
 <!-- View to list all songs in a chapter. -->
 
 <template>
-  <Navbar :parent="goToParent" />
   <Swiper :swipeHandler="swipeHandler" :allowZoom="true"
       :left="($route.params.songId > 0) ? 'allow' : 'disallow'"
       :right="(this.chapters[$route.params.chapterId].songs.length - 1 > $route.params.songId) ? 'allow' : 'disallow'">
@@ -33,8 +32,7 @@ import { useRoute, RouteLocationNormalized } from 'vue-router'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
-import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
-import NavButtons from '@/components/SongNavButtons.vue'
+import NavButtons from '@/components/SongNavButtons.vue' // @ is an alias to /src
 import Swiper from '@/components/Swiper.vue'
 import { SwipeIndicatorState } from '@/utils/swipe.ts'
 import { chapters, Song } from '@/utils/lyrics.ts'
@@ -43,7 +41,6 @@ export default defineComponent({
   name: 'SongView',
   components: {
     Swiper,
-    Navbar,
     NavButtons,
     SheetMusicRenderer: defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer", webpackPrefetch: true */ '@/components/SheetMusicRenderer.vue'))
   },

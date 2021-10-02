@@ -1,7 +1,6 @@
 <!-- View to list all songs in a chapter. -->
 
 <template>
-  <Navbar :parent="() => $router.push('/')" />
   <Swiper :swipeHandler="swipeHandler" :right="'hide'">
     <div class="main">
       <SearchBox :query="$route.params.query" />
@@ -30,7 +29,6 @@ import { useStore } from 'vuex'
 import { key } from '@/store'
 
 import { search } from '@/utils/search.ts' // @ is an alias to /src
-import Navbar from '@/components/Navbar.vue'
 import SearchBox from '@/components/SearchBox.vue'
 import Swiper from '@/components/Swiper.vue'
 import { SwipeIndicatorState } from '@/utils/swipe.ts'
@@ -39,7 +37,6 @@ import { chapters } from '@/utils/lyrics.ts'
 export default defineComponent({
   name: 'Search',
   components: {
-    Navbar,
     Swiper,
     SearchBox
   },

@@ -1,7 +1,6 @@
 <!-- View to list all songs in a chapter. -->
 
 <template>
-  <Navbar :parent="() => $router.push('/')"/>
   <Swiper :swipeHandler="swipeHandler" :right="'hide'">
     <div class="main">
       <h2>{{chapter.chapter}}</h2>
@@ -27,15 +26,13 @@ import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
-import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
-import Swiper from '@/components/Swiper.vue'
+import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
 import { SwipeIndicatorState } from '@/utils/swipe.ts'
 import { chapters } from '@/utils/lyrics.ts'
 
 export default defineComponent({
   name: 'ChapterView',
   components: {
-    Navbar,
     Swiper
   },
   data() {

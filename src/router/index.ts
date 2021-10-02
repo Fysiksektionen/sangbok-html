@@ -14,7 +14,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: Chapters
+    component: Chapters,
+    meta: { hideBackButton: true }
   },
   {
     path: '/chapter/:cid(\\d+)',
