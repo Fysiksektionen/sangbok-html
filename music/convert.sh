@@ -78,9 +78,13 @@ if [[ $*\  == *--compress\ *  || $*\  == *-c\ * ]]; then
     cd svg
     for file in *.svg
     do
-        echo -e " - \e[34m$file\e[0m"
-        svgo -i "$file" || echo -e "\e[31mKomprimering misslyckades\e[0m för $file."
-        #scour -i "$file" -o "${file%.*}.min.svg" || echo -e "\e[31mKomprimering misslyckades\e[0m för $file."
+        # echo -e " - \e[34m$file\e[0m"
+        if [[ $file =~ ".min.svg" ]]; then
+            echo -e "$file is already minified."
+        else
+            svgo --input "$file" --output "${file//.svg/.min.svg}" --multipass || echo -e "\e[31mKomprimering misslyckades\e[0m för $file."
+            rm "$file" # Remove old file
+        fi
     done
     cd ..
 fi
