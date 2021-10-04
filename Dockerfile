@@ -28,4 +28,6 @@ RUN for file in dist/**/*; do \
 FROM fholzer/nginx-brotli:latest
 
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=frontend-build /app/dist /usr/share/nginx/html/sangbok
+COPY --from=frontend-build /app/dist /usr/share/nginx/html
+RUN ln -s /usr/share/nginx/html/ /usr/share/nginx/html/sangbok
+RUN ln -s /usr/share/nginx/html/ /usr/share/nginx/html/sangbok2
