@@ -28,7 +28,7 @@ export default createStore<State>({
       night: true,
       larger: false,
       generator: false,
-      touchAction: 'swipe'
+      touchAction: 'all'
     },
     query: ''
   } as State, // We need to explicity say that this qualifies as State, since the generator property is loaded through a module.

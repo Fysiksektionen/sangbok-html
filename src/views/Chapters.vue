@@ -1,7 +1,6 @@
 <!-- Main chapter list view-->
 
 <template>
-  <Navbar/>
   <div class="main" v-touch:drag="dragHandler" v-bind:style="onlyAllowZoomOut">
     <SearchBox/>
     <table class="songbook">
@@ -24,15 +23,13 @@ import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
-import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
-import { onlyAllowZoomOut } from '@/utils/swipe.ts'
+import { onlyAllowZoomOut } from '@/utils/swipe.ts' // @ is an alias to /src
 import SearchBox from '@/components/SearchBox.vue'
 import { chapters } from '@/utils/lyrics.ts'
 
 export default defineComponent({
   name: 'ChaptersView',
   components: {
-    Navbar,
     SearchBox
   },
   data() {

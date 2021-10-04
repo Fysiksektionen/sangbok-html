@@ -1,7 +1,7 @@
 <!-- The top navbar. Closely tied with the Dropdown component (see Settings.vue). -->
 <template>
   <div class="navbar bg-orange">
-    <div style="float: left;" v-if="parent" @click="parent">
+    <div style="float: left;" v-if="!hideBackButton" @click="() => $router.go(-1)">
       <button><img src="../assets/back.png" alt="Go back" /></button>
     </div>
     <div class="title">Sångboken</div>
@@ -16,13 +16,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue'
+// Async-loading dropdown only saves about 1 KiB of entrypoint size. Its benefit is negligible.
+import { defineComponent /* , defineAsyncComponent */ } from 'vue'
+import Dropdown from '@/components/Settings.vue'
 
 export default defineComponent({
   name: 'Navbar',
-  props: ['parent'],
+  props: ['hideBackButton'],
   components: {
-    Dropdown: defineAsyncComponent(() => import(/* webpackChunkName: "dropdown" */ '@/components/Settings.vue'))
+    Dropdown: Dropdown
+    // Dropdown: defineAsyncComponent(() => import(/* webpackChunkName: "dropdown", webpackPreload: true */ '@/components/Settings.vue'))
   },
   data () {
     return {
@@ -51,12 +54,11 @@ button {
 }
 
 .navbar {
-    position: fixed;
-    left: 0;
-    right: 0;
+    position: sticky;
+    width: 100%;
     top: 0;
     height: 2.3em;
-    z-index: 10;
+    z-index: 100;
 }
 
 .title {

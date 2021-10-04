@@ -1,15 +1,21 @@
 <template>
+  <Navbar :hideBackButton="$route.meta.hideBackButton"/>
+  <div class="flex-row">
     <router-view/>
     <GeneratorView v-if="$store.state.settings.generator"/>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue'
+import Navbar from '@/components/Navbar.vue'
 
 export default defineComponent({
   name: 'Sångbok',
-  components: { // Only load Generator component and generator helper functions on-demand.
-    GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue'))
+  components: {
+    // Only load Generator component and generator helper functions on-demand.
+    GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue')),
+    Navbar
   },
   created () {
     // TODO: Ugly fix that removes body night class if stored settings.night === false.
@@ -20,6 +26,8 @@ export default defineComponent({
 
 <style lang="scss">
 @use "sass:math";
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+
 /* Colors */
 /* $f-orange: #FF642B;
 $f-orange-light: #FB9C74;
@@ -41,9 +49,8 @@ $f-onyx: #221F20; */
 /* Layout */
 body {
     margin: 0;
-    margin-top: 2.2em;
     transition: 0.1s background-color ease-in-out;
-    font-family: 'EB Garamond', serif;
+    font-family: 'EB Garamond', Garamond, serif;
 
     &.night {
       /* TODO: Since <body> is outside of Vue's scope, the night class is set through an ugly fix in the @/store/index.ts file. This can probably be made more elegantly. */
@@ -52,7 +59,8 @@ body {
     }
 }
 
-#app {display: flex;}
+.flex-row {display: flex; flex-direction: row;}
+.flex-col, #app {display: flex; flex-direction: column;}
 div.main {width: 100%;}
 
 /* General */
@@ -132,4 +140,7 @@ table.songbook {
   &:active {background-color: #444;}
   &:first-child {box-shadow: 0 1px 5px #111;}
 }
+
+ol>li {margin-top: 0.75em}
+.textcontainer>p {line-height: 1.5em;font-size: 1.1em;}
 </style>

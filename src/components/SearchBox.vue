@@ -24,7 +24,11 @@ export default defineComponent({
     search (evt: Event) {
       evt.preventDefault()
       if (this !== undefined) {
-        this.$router.push('/search/' + this.query2)
+        if (this.$route.name === 'Home') {
+          this.$router.push('/search/' + this.query2)
+        } else {
+          this.$router.replace('/search/' + this.query2)
+        }
         this.store.commit('setQuery', this.query2)
       }
     }

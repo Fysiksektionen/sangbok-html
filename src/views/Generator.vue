@@ -6,7 +6,7 @@
     <div class="generatorbuttons">
       <div v-bind:class="{ 'disabled': !canAdd() }" @click="add()" title="Lägg till">+</div>
       <div v-bind:class="{ 'disabled': generatorSongs.length == 0 }" @click="$store.commit('clear');" title="Ta bort alla">🗑</div>
-      <div @click="go('overleaf')" title="Öppna i Overleaf"><img src="../assets/overleaf_logo.svg" /></div>
+      <div @click="go('overleaf')" title="Öppna i Overleaf"><!--img src="../assets/overleaf_logo.svg" /-->🖉</div>
       <div @click="go('zip')" title="Ladda ner zip-fil med TeX">↓</div>
     </div>
 
@@ -57,7 +57,8 @@
 
     <p style="font-size:0.75em;color:gray; text-align: center;">
       Sångbladsskaparen är experimentell.<br />
-      Overleafs logotyp tillhör Writelatex Ltd. Denna sida är ej affilierad med Overleaf.
+      Pennikonen öppnar latex-källan i Overleaf.
+      <!--Overleafs logotyp tillhör Writelatex Ltd. Denna sida är ej affilierad med Overleaf.-->
     </p>
   </div>
 </template>
