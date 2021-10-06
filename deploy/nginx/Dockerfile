@@ -19,6 +19,10 @@ RUN npm run build
 
 # TODO: Use brotli with nginx-brunzip instead.
 # Disable this when using apache
+RUN for file in dist/*; do \
+        gzip "$file" --best; \
+        touch "$file"; \
+    done
 RUN for file in dist/**/*; do \
         gzip "$file" --best; \
         touch "$file"; \
@@ -29,7 +33,7 @@ RUN for file in dist/**/*; do \
 # FROM nginx:stable-alpine
 FROM fholzer/nginx-brotli:latest
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY deploy/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --from=frontend-build /app/dist /usr/share/nginx/html
 # COPY --from=frontend-build /app/dist /usr/local/apache2/htdocs/
 

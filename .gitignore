@@ -1,11 +1,12 @@
 ##
 ## Custom
 ##
+.devcontainer
 .vscode
 .idea
-docker.sh
 build
 dist
+load_test.js
 
 .mscbackup
 music/svg
