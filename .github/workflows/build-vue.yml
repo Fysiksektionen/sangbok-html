@@ -168,12 +168,13 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: | 
             type=raw,value=latest-statigz,enable=${{ github.ref == 'refs/heads/main' }}
+            type=raw,value=statigz,enable=${{ github.ref == 'refs/heads/main' }}
             type=raw,value=edge-statigz,enable=${{ github.ref == 'refs/heads/vue' }}
             type=sha
       - name: Build and push Docker image (statigz)
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          file: deploy/nginx/Dockerfile
+          file: deploy/statigz/Dockerfile
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta_statigz.outputs.tags }}

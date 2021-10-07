@@ -8,9 +8,10 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/vearutop/statigz"
-	"github.com/vearutop/statigz/brotli"
+	"sangbok-statigz/statigz"
 )
+
+const colorReset = "\033[0m"
 
 // Declare your embedded assets.
 
@@ -38,7 +39,19 @@ func formatStatus(code int) string {
 		color = "\033[31m" // Red
 	}
 
-	return fmt.Sprintf("%s%d\033[0m", color, code) // can also include http.StatusText(code)
+	return fmt.Sprintf("%s%d%s", color, code, colorReset) // can also include http.StatusText(code)
+}
+
+func formatEncoding(encoding string) string {
+	if encoding == "br" {
+		return "\033[32mbr\033[0m"
+	} else if encoding == "gzip" {
+		return "\033[33mgz\033[0m"
+	} else if encoding == "" {
+		return "\033[31mna\033[0m"
+	} else {
+		return "\033[31m?\033[0m"
+	}
 }
 
 // Injects headers, and handles logging
@@ -50,15 +63,16 @@ func handle(h http.Handler) http.Handler {
 			// Add Cache header to files with the above prefixes.
 			lrw.Header().Add("Cache-Control", "public, max-age=2592000")
 		}
+
 		// Other headers
 		// w.Header().Add("Content-Security-Policy", "font-src https://fonts.gstatic.com; script-src self;")
+		// lrw.Header().Add("Server", "statigz")
 
 		// Let statigz do the rest.
-		lrw.Header().Add("Server", "statigz")
 		h.ServeHTTP(lrw, r)
 
 		// Log request information (to stdout). Use bash pipes to redirect it elsewhere.
-		log.Default().Printf("%s - %s - %s %s", formatStatus(lrw.statusCode), r.RemoteAddr, r.Method, r.RequestURI)
+		log.Default().Printf("%s - %s - %s - %s %s", formatStatus(lrw.statusCode), formatEncoding(w.Header().Get("Content-Encoding")), r.RemoteAddr, r.Method, r.RequestURI)
 	})
 }
 
@@ -71,6 +85,7 @@ var st embed.FS
 
 func main() {
 	log.Default().Print("Listening on port 80.")
+	// statigz.SkipCompressionExt = []string{".gz", ".gif", ".jpg", ".png", ".webp"}
 	// Retrieve sub directory.
 	sub, err := fs.Sub(st, "dist")
 	if err != nil {
@@ -78,7 +93,9 @@ func main() {
 	}
 
 	// Plug static assets handler to your server or router.
-	err = http.ListenAndServe(":80", handle(statigz.FileServer(sub.(fs.ReadDirFS), brotli.AddEncoding)))
+	server := statigz.FileServer(sub.(fs.ReadDirFS))
+	statigz.EncodeOnInit(server)
+	err = http.ListenAndServe(":80", handle(server))
 	if err != nil {
 		log.Fatal(err)
 	}

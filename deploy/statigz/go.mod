@@ -2,4 +2,4 @@ module sangbok-statigz
 
 go 1.16
 
-require github.com/vearutop/statigz v1.1.5
+require github.com/andybalholm/brotli v1.0.3
