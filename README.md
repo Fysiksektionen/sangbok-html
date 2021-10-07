@@ -24,9 +24,9 @@ Gå till den senaste [build-körningen](https://github.com/Fysiksektionen/sangbo
 Containrarna är taggade efter vilken branch de kommer från, dvs.
 * `latest` - från `main`
 * `edge` - från `vue`
+Dessa containrar är [nginx](https://www.nginx.com)-baserade, och innehåller förkomprimerade filer i både brotli- och gzip-format.
 
-Utöver detta innehåller taggen något av suffixen
-* `nginx` - [nginx](https://www.nginx.com)-baserad. Innehåller förkomprimerade filer i både brotli- och gzip-format (rekommenderad).
+Utöver detta finns några suffix om användaren mot förmodan skulle vilja ha en mindre container på bekostnad av prestandan.
 * `nginx-gz` - [nginx](https://www.nginx.com)-baserad. Innehåller förkomprimerade förkomprimerade filer gzip-format.
 * `statigz` - [statigz](https://pkg.go.dev/github.com/vearutop/statigz)-baserad. Innehåller förkomprimerade filer i brotli-format.
 
