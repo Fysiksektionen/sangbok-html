@@ -172,7 +172,6 @@ jobs:
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
             type=edge,branch=vue
             type=ref,event=branch
-            type=sha
           flavor: |
             suffix=${{ matrix.suffix }}
       - name: Build and push Docker image (${{ matrix.server }} with ${{ matrix.compression }} precompression)
