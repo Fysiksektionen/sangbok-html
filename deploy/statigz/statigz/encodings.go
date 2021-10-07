@@ -34,7 +34,7 @@ func GzipEncoding() Encoding {
 		},
 		Encoder: func(r io.Reader) ([]byte, error) {
 			res := bytes.NewBuffer(nil)
-			w := gzip.NewWriter(res)
+			w, _ := gzip.NewWriterLevel(res, 6) // -1 for default, 1-9 for custom compression level. 4-6 seems to be a sweet spot.
 
 			if _, err := io.Copy(w, r); err != nil {
 				return nil, err

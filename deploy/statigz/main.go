@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"time"
 
 	"sangbok-statigz/statigz"
 )
@@ -42,11 +43,13 @@ func formatStatus(code int) string {
 	return fmt.Sprintf("%s%d%s", color, code, colorReset) // can also include http.StatusText(code)
 }
 
-func formatEncoding(encoding string) string {
+func formatEncoding(encoding string, statusCode int) string {
 	if encoding == "br" {
 		return "\033[32mbr\033[0m"
 	} else if encoding == "gzip" {
 		return "\033[33mgz\033[0m"
+	} else if encoding == "" && 300 <= statusCode && statusCode < 400 {
+		return "\033[32mna\033[0m"
 	} else if encoding == "" {
 		return "\033[31mna\033[0m"
 	} else {
@@ -57,6 +60,7 @@ func formatEncoding(encoding string) string {
 // Injects headers, and handles logging
 func handle(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
 		lrw := NewLoggingResponseWriter(w)
 
 		if strings.HasSuffix(r.URL.Path, ".js") || strings.HasSuffix(r.URL.Path, ".css") || strings.HasSuffix(r.URL.Path, ".min.svg") {
@@ -71,8 +75,9 @@ func handle(h http.Handler) http.Handler {
 		// Let statigz do the rest.
 		h.ServeHTTP(lrw, r)
 
+		elapsed := time.Since(start)
 		// Log request information (to stdout). Use bash pipes to redirect it elsewhere.
-		log.Default().Printf("%s - %s - %s - %s %s", formatStatus(lrw.statusCode), formatEncoding(w.Header().Get("Content-Encoding")), r.RemoteAddr, r.Method, r.RequestURI)
+		log.Default().Printf("%s - %s - %s - %s - %s %s", formatStatus(lrw.statusCode), formatEncoding(w.Header().Get("Content-Encoding"), lrw.statusCode), elapsed, r.RemoteAddr, r.Method, r.RequestURI)
 	})
 }
 
@@ -94,7 +99,6 @@ func main() {
 
 	// Plug static assets handler to your server or router.
 	server := statigz.FileServer(sub.(fs.ReadDirFS))
-	statigz.EncodeOnInit(server)
 	err = http.ListenAndServe(":80", handle(server))
 	if err != nil {
 		log.Fatal(err)

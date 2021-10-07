@@ -39,27 +39,12 @@ type Server struct {
 	// Encodings contains supported encodings, default GzipEncoding.
 	Encodings []Encoding
 
-	// EncodeOnInit encodes files that does not have encoded version on Server init.
-	// This allows embedding uncompressed files and still leverage one time compression
-	// for multiple requests.
-	// Enabling this option can degrade startup performance and memory usage in case
-	// of large embeddings, use with caution.
-	EncodeOnInit bool
-
 	info map[string]fileInfo
 	fs   fs.ReadDirFS
 }
 
-const (
-	// minSizeToEncode is minimal file size to apply encoding in runtime, 1KiB.
-	minSizeToEncode = 1024
-
-	// minCompressionRatio is a minimal compression ratio to serve encoded data, 97%.
-	minCompressionRatio = 0.97
-)
-
-// SkipCompressionExt lists file extensions of data that is already compressed.
-var SkipCompressionExt = []string{".gz", ".br", ".gif", ".jpg", ".png", ".webp"}
+// SkipCompressionExt lists file extensions of data that is not dynamically recompressed.
+var SkipCompressionExt = []string{".gz", ".br", ".gif", ".jpg", ".png", ".webp", ".map"}
 
 // FileServer creates an instance of Server from file system.
 //
@@ -87,70 +72,7 @@ func FileServer(fs fs.ReadDirFS, options ...func(server *Server)) *Server {
 		panic(err)
 	}
 
-	if s.EncodeOnInit {
-		err := s.encodeFiles()
-		if err != nil {
-			panic(err)
-		}
-	}
-
 	return &s
-}
-
-func (s *Server) encodeFiles() error {
-	for _, enc := range s.Encodings {
-		if enc.Encoder == nil {
-			continue
-		}
-
-		for fn, i := range s.info {
-			isEncoded := false
-
-			for _, ext := range SkipCompressionExt {
-				if strings.HasSuffix(fn, ext) {
-					isEncoded = true
-
-					break
-				}
-			}
-
-			if isEncoded {
-				continue
-			}
-
-			if _, found := s.info[fn+enc.FileExt]; found {
-				continue
-			}
-
-			// Skip encoding of small data.
-			if i.size < minSizeToEncode {
-				continue
-			}
-
-			f, err := s.fs.Open(fn)
-			if err != nil {
-				return err
-			}
-
-			b, err := enc.Encoder(f)
-			if err != nil {
-				return err
-			}
-
-			// Skip encoding for non-compressible data.
-			if float64(len(b))/float64(i.size) > minCompressionRatio {
-				continue
-			}
-
-			s.info[fn+enc.FileExt] = fileInfo{
-				hash:    i.hash + enc.FileExt,
-				size:    len(b),
-				content: b[0:len(b):len(b)],
-			}
-		}
-	}
-
-	return nil
 }
 
 func (s *Server) hashDir(p string) error {
@@ -287,6 +209,27 @@ func (s *Server) minEnc(accessEncoding string, fn string) (fileInfo, Encoding) {
 	return minInfo, minEnc
 }
 
+// Re-encoding helpers
+func (s *Server) getAcceptedEncoding(accessEncoding string) *Encoding {
+	for _, enc := range s.Encodings {
+		if !strings.Contains(accessEncoding, enc.ContentEncoding) {
+			continue
+		}
+		return &enc
+	}
+	return nil
+}
+
+// Returns false if a filename as extensions in SkipCompressionExt.
+func shouldRecompress(fn string) bool {
+	for _, ext := range SkipCompressionExt {
+		if strings.HasSuffix(fn, ext) {
+			return false
+		}
+	}
+	return true
+}
+
 // ServeHTTP serves static files.
 //
 // For compatibility with std http.FileServer:
@@ -307,7 +250,7 @@ func (s *Server) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	}
 
 	fn := strings.TrimPrefix(req.URL.Path, "/")
-	ae := req.Header.Get("Accept-Encoding")
+	ae := strings.ToLower(req.Header.Get("Accept-Encoding"))
 
 	if s.info[fn].isDir {
 		localRedirect(rw, req, path.Base(req.URL.Path)+"/")
@@ -323,7 +266,7 @@ func (s *Server) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	rw.Header().Add("Vary", "Accept-Encoding")
 
 	if ae != "" {
-		minInfo, minEnc := s.minEnc(strings.ToLower(ae), fn)
+		minInfo, minEnc := s.minEnc(ae, fn)
 
 		if minInfo.hash != "" {
 			// Copy compressed data into response.
@@ -350,9 +293,22 @@ func (s *Server) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 
 		info.hash += "U"
 		info.size = 0
-		s.serve(rw, req, fn, enc.FileExt, "", info, enc.Decoder)
-
-		return
+		tgtEnc := s.getAcceptedEncoding(ae) // We assume that this will never be the same as enc, since that would (hopefully have returned)
+		if tgtEnc != nil && &tgtEnc.ContentEncoding != &enc.ContentEncoding && shouldRecompress(fn) {
+			// Attempt re-encoding (usually brotli -> gzip)
+			s.serve(rw, req, fn, enc.FileExt, tgtEnc.ContentEncoding, info, func(r io.Reader) (io.Reader, error) {
+				uncompressed, err := enc.Decoder(r)
+				if err != nil {
+					return nil, err
+				}
+				b, err := tgtEnc.Encoder(uncompressed)
+				return bytes.NewReader(b), err
+			})
+			return
+		} else { // Return decompressed
+			s.serve(rw, req, fn, enc.FileExt, "", info, enc.Decoder)
+			return
+		}
 	}
 
 	http.NotFound(rw, req)
@@ -370,15 +326,6 @@ func OnError(onErr func(rw http.ResponseWriter, r *http.Request, err error)) fun
 	return func(server *Server) {
 		server.OnError = onErr
 	}
-}
-
-// EncodeOnInit enables runtime encoding for unencoded files to allow compression
-// for uncompressed embedded files.
-//
-// Enabling this option can degrade startup performance and memory usage in case
-// of large embeddings, use with caution.
-func EncodeOnInit(server *Server) {
-	server.EncodeOnInit = true
 }
 
 // localRedirect gives a Moved Permanently response.
