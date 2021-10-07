@@ -136,6 +136,8 @@ func (s *Server) serve(rw http.ResponseWriter, req *http.Request, fn, suf, enc s
 	ctype := mime.TypeByExtension(filepath.Ext(fn))
 	if ctype == "" {
 		ctype = "application/octet-stream" // Prevent unreliable Content-Type detection on compressed data.
+	} else if ctype == "" && filepath.Ext(fn) == ".ico" {
+		ctype = "image/x-icon"
 	}
 
 	rw.Header().Set("Content-Type", ctype)

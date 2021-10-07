@@ -43,6 +43,7 @@ RUN go build -o ./server ./main.go
 ## Finale
 ##
 FROM alpine:latest
+EXPOSE 80
 WORKDIR /app
 COPY --from=backend-build /build/server /app/server
 ENTRYPOINT /app/server

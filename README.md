@@ -20,10 +20,11 @@ Installera [Node.js 16](https://nodejs.org) om du inte redan har det. Klona seda
 ### Körning
 Gå till den senaste [build-körningen](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml), skrolla ner till artifacts, och klicka på `dist` för att ladda ner en zip-fil med statiskt innehåll. Alternativt kan Docker användas, via `docker pull ghcr.io/fysiksektionen/sangbok-html:main`. Denna container exponerar port 80 till vilken HTTP-requests kan skickas. Requestsen måste skickas till `/sangbok/`, annars returneras 404.
 #### Docker-taggar
-Nginx-baserade. Noter är förkomprimerade med gzip. Klarar sig på 8mb RAM, men trivs bäst med 20.
+[Nginx](https://www.nginx.com)-baserade. Noter är förkomprimerade med gzip. Klarar sig på 8mb RAM, men trivs bäst med 20.
 * `latest` - från `main`
 * `edge` - från `vue`
-[Statigz](https://pkg.go.dev/github.com/vearutop/statigz)-baserade. Noter är förkomprimerade med brotli (ca. 30% mindre än gzip). Kräver mer RAM, minst 16mb.
+
+[Statigz](https://pkg.go.dev/github.com/vearutop/statigz)-baserade. Kräver minst 16mb RAM och klarar ca. 70% av den arbetsbörda som nginx klarar av. Dock servar denna filer förkomprimerade med brotli, vilka är ca. 30% mindre än motsvarande gzip-filer.
 * `latest-statigz` - från `main`
 * `edge-statigz` - från `vue`
 <!-- See [Configuration Reference](https://cli.vuejs.org/config/). -->
