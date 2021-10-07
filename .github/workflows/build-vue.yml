@@ -12,6 +12,7 @@ on:
       - '**.json'
       - '**.mscz'
       - '**.conf'
+      - '**.go'
       - 'Dockerfile'
       - '.Dockerignore'
       - '**/build-vue.yml'

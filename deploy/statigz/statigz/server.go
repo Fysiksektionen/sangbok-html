@@ -244,7 +244,7 @@ func (s *Server) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	}
 
 	if strings.HasSuffix(req.URL.Path, "/index.html") {
-		localRedirect(rw, req, "./")
+		LocalRedirect(rw, req, "./")
 
 		return
 	}
@@ -253,7 +253,7 @@ func (s *Server) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	ae := strings.ToLower(req.Header.Get("Accept-Encoding"))
 
 	if s.info[fn].isDir {
-		localRedirect(rw, req, path.Base(req.URL.Path)+"/")
+		LocalRedirect(rw, req, path.Base(req.URL.Path)+"/")
 
 		return
 	}
@@ -328,11 +328,11 @@ func OnError(onErr func(rw http.ResponseWriter, r *http.Request, err error)) fun
 	}
 }
 
-// localRedirect gives a Moved Permanently response.
+// LocalRedirect gives a Moved Permanently response.
 // It does not convert relative paths to absolute paths like Redirect does.
 //
 // Copied go1.17/src/net/http/fs.go:685.
-func localRedirect(w http.ResponseWriter, r *http.Request, newPath string) {
+func LocalRedirect(w http.ResponseWriter, r *http.Request, newPath string) {
 	if q := r.URL.RawQuery; q != "" {
 		newPath += "?" + q
 	}

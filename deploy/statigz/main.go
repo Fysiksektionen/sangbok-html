@@ -57,11 +57,25 @@ func formatEncoding(encoding string, statusCode int) string {
 	}
 }
 
-// Injects headers, and handles logging
+// Injects headers, handles logging and subdirectories.
 func handle(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		stripPrefixes := []string{"/sangbok/", "/sangbok2/", "/sangbokgz/"}
+
 		start := time.Now()
 		lrw := NewLoggingResponseWriter(w)
+
+		var h2 http.Handler
+		for _, prefix := range stripPrefixes {
+			if strings.HasPrefix(r.URL.Path, prefix) {
+				h2 = http.StripPrefix(prefix, h)
+			} else if strings.TrimSuffix(prefix, "/") == r.URL.Path {
+				statigz.LocalRedirect(w, r, prefix)
+			}
+		}
+		if h2 == nil {
+			h2 = h
+		}
 
 		if strings.HasSuffix(r.URL.Path, ".js") || strings.HasSuffix(r.URL.Path, ".css") || strings.HasSuffix(r.URL.Path, ".min.svg") {
 			// Add Cache header to files with the above prefixes.
@@ -73,7 +87,7 @@ func handle(h http.Handler) http.Handler {
 		// lrw.Header().Add("Server", "statigz")
 
 		// Let statigz do the rest.
-		h.ServeHTTP(lrw, r)
+		h2.ServeHTTP(lrw, r)
 
 		elapsed := time.Since(start)
 		// Log request information (to stdout). Use bash pipes to redirect it elsewhere.
