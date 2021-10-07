@@ -35,6 +35,7 @@ WORKDIR /build
 
 # Prefetch packages, for caching.
 COPY deploy/statigz/ .
+COPY --from=frontend-build /app/dist dist
 RUN go mod download && go mod tidy
 RUN go build -o ./server ./main.go
 
@@ -43,6 +44,5 @@ RUN go build -o ./server ./main.go
 ##
 FROM alpine:latest
 WORKDIR /app
-COPY --from=frontend-build /app/dist /app/dist
 COPY --from=backend-build /build/server /app/server
 ENTRYPOINT /app/server
