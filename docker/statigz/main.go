@@ -71,6 +71,8 @@ func handle(h http.Handler) http.Handler {
 				h2 = http.StripPrefix(prefix, h)
 			} else if strings.TrimSuffix(prefix, "/") == r.URL.Path {
 				statigz.LocalRedirect(w, r, prefix)
+				log.Default().Printf("%s - %s - %s - %s - %s %s", formatStatus(301), formatEncoding("", 301), time.Since(start), r.RemoteAddr, r.Method, r.RequestURI)
+				return
 			}
 		}
 		if h2 == nil {
@@ -89,9 +91,8 @@ func handle(h http.Handler) http.Handler {
 		// Let statigz do the rest.
 		h2.ServeHTTP(lrw, r)
 
-		elapsed := time.Since(start)
 		// Log request information (to stdout). Use bash pipes to redirect it elsewhere.
-		log.Default().Printf("%s - %s - %s - %s - %s %s", formatStatus(lrw.statusCode), formatEncoding(w.Header().Get("Content-Encoding"), lrw.statusCode), elapsed, r.RemoteAddr, r.Method, r.RequestURI)
+		log.Default().Printf("%s - %s - %s - %s - %s %s", formatStatus(lrw.statusCode), formatEncoding(w.Header().Get("Content-Encoding"), lrw.statusCode), time.Since(start), r.RemoteAddr, r.Method, r.RequestURI)
 	})
 }
 

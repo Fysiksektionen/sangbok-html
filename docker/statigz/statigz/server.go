@@ -134,10 +134,13 @@ func (s *Server) serve(rw http.ResponseWriter, req *http.Request, fn, suf, enc s
 	}
 
 	ctype := mime.TypeByExtension(filepath.Ext(fn))
-	if ctype == "" {
-		ctype = "application/octet-stream" // Prevent unreliable Content-Type detection on compressed data.
-	} else if ctype == "" && filepath.Ext(fn) == ".ico" {
+	// Some variants of go doesn't recognize these types (alpine?)
+	if ctype == "" && filepath.Ext(fn) == ".ico" {
 		ctype = "image/x-icon"
+	} else if ctype == "" && filepath.Ext(fn) == ".map" {
+		ctype = "application/json"
+	} else if ctype == "" {
+		ctype = "application/octet-stream" // Prevent unreliable Content-Type detection on compressed data.
 	}
 
 	rw.Header().Set("Content-Type", ctype)
