@@ -1,7 +1,9 @@
 <template>
   <div class="settings">
     <SettingsButton :setting="'translate'">Latinska kapitelnamn</SettingsButton>
-    <SettingsButton :setting="'night'">Mörk bakgrund</SettingsButton>
+    <SettingsSwitch :setting="'theme'" :values="themes">
+      Tema
+    </SettingsSwitch>
     <SettingsButton :setting="'larger'">Större sångtext</SettingsButton>
     <SettingsSwitch :setting="'touchAction'" :values="{'none': 'Inga', 'zoom': 'Zooma', 'swipe': 'Svep', 'all': 'Alla'}">
       Touchfunktioner
@@ -16,10 +18,16 @@ import { defineComponent } from 'vue'
 import SettingsButton from '@/components/SettingsButton.vue'
 import SettingsSwitch from '@/components/SettingsSwitch.vue'
 import ClipboardButton from '@/components/ClipboardButton.vue'
+import { themes } from '@/themes'
 
 export default defineComponent({
   name: 'Settings',
   props: ['show'],
+  data () {
+    return {
+      themes: themes
+    }
+  },
   components: {
     SettingsButton,
     ClipboardButton,

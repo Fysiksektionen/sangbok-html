@@ -50,12 +50,17 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+  /* Themes */
+  body.night {@import '../themes/night.scss';@import './SheetMusicRenderer.scss';}
+  body.day {@import '../themes/day.scss';@import './SheetMusicRenderer.scss';}
+  body.galaxy {@import '../themes/galaxy.scss';@import './SheetMusicRenderer.scss';}
+  body.fancy {@import '../themes/fancy.scss';@import './SheetMusicRenderer.scss';}
+  body.halloween {@import '../themes/halloween.scss';@import './SheetMusicRenderer.scss';}
+
+
+  /* Layout */
   img {
     width: 100%;
-  }
-
-  .night img {
-    filter: invert(0.6);/* Originally #c2ad99*/
   }
 
   .err {
@@ -74,21 +79,5 @@ export default defineComponent({
   .notice {
     text-align: center;
     font-size: 75%;
-    color: gray;
-  }
-
-  a {
-    color: adjust-color(#f60, $lightness:-15%);  /* TODO: Define elsewhere */
-  }
-</style>
-
-<style lang="scss">
-  /* Needs to be non-scoped, since the svg is dynamically generated, outside of the control of Vue. */
-  $gray: darken(#d9ccbf, 12%);
-  .night div#osmd-container svg {
-    & text {fill: $gray}
-    & path {stroke: $gray; fill: $gray}
-    &>path {stroke: adjust-color($gray, $lightness:-25%); fill: $gray}
-    & rect:not(:first-child) {fill: $gray}
   }
 </style>

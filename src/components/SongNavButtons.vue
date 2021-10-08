@@ -3,7 +3,7 @@
 
 <template>
   <div class="navbuttons">
-    <div v-if="parseInt(songid) > 0"
+    <div class="button" v-if="parseInt(songid) > 0"
       @click="$router.replace('/chapter/'+chapterid+'/song/'+(parseInt(songid)-1))">
       <div>{{chapters[chapterid].songs[parseInt(songid)-1].title}}</div>
       <div>
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="filler" v-if="parseInt(songid) == 0"></div>
-    <div v-if="chapters[chapterid].songs[parseInt(songid)+1]"
+    <div class="button" v-if="chapters[chapterid].songs[parseInt(songid)+1]"
       @click="$router.replace('/chapter/'+chapterid+'/song/'+(parseInt(songid)+1))">
       <div>{{chapters[chapterid].songs[parseInt(songid)+1].title}}</div>
       <div>
@@ -47,15 +47,12 @@ export default defineComponent({
 
     &> div {
       display: inline-block;
-      background-color: rgba(128, 128, 128, 0.10);
 
       $navbutton-spacing: 12px;
       border-radius: $navbutton-spacing;
       margin: $navbutton-spacing;
       padding: $navbutton-spacing;
       width: calc(50% - 4 * #{$navbutton-spacing});
-
-      &:active {background-color: rgba(128, 128, 128, 0.30);}
 
       &> div{
           width: 100%;

@@ -37,7 +37,13 @@ export default defineComponent({
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="css">
+<style scoped lang="scss">
+body.night {@import '../themes/night.scss';@import './SearchBox.scss';}
+body.day {@import '../themes/day.scss';@import './SearchBox.scss';}
+body.galaxy {@import '../themes/galaxy.scss';@import './SearchBox.scss';}
+body.fancy {@import '../themes/fancy.scss';@import './SearchBox.scss';}
+body.halloween {@import '../themes/halloween.scss';@import './SearchBox.scss';}
+
 form {width: 100%; text-align: center;}
 
 input[type=search] {
@@ -46,14 +52,8 @@ input[type=search] {
         /*border: 1px solid #aaa;*/
         border: 0;
         height: 1.8em;
-        background-color: #f0f0f0;
         border-radius: 0.3em;
         padding-left: 0.5em !important;
         padding-right: 0.5em !important;
     }
-
-.night input[type="search"] {
-    color: white;
-    background-color: #444;
-}
 </style>

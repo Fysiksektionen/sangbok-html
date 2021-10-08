@@ -4,14 +4,14 @@
     v-bind:style="onlyAllowZoomOut">
     <slot></slot>
     <transition name="swipe-right">
-      <div class="swipe-indicator right bg-orange" v-if="showSwipeIndicator.includes('right')"
+      <div class="swipe-indicator right bg-highlight" v-if="showSwipeIndicator.includes('right')"
         v-bind:class="{'disabled': showSwipeIndicator.includes('x')}">
         <img src="../assets/back.png" style="transform: scaleX(-1);" v-if="!showSwipeIndicator.includes('x')" />
         {{ showSwipeIndicator.includes('x') ? "⊘" : "" }}
       </div>
     </transition>
     <transition name="swipe-left">
-      <div class="swipe-indicator left bg-orange" v-if="showSwipeIndicator.includes('left')"
+      <div class="swipe-indicator left bg-highlight" v-if="showSwipeIndicator.includes('left')"
         v-bind:class="{'disabled': showSwipeIndicator.includes('x')}">
         <img src="../assets/back.png" v-if="!showSwipeIndicator.includes('x')" />
         {{ showSwipeIndicator.includes('x') ? "⊘" : "" }}
@@ -81,6 +81,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+  @import './Swiper.scss';
   .swiper {
     width: 100%;
     padding: 0;
@@ -97,10 +98,6 @@ export default defineComponent({
     width: 4cm;
     line-height: 4cm;
     opacity: 0.5;
-
-    &.disabled {
-      background-color: gray;
-    }
 
     &.right {
       right: -3cm;

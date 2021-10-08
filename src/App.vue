@@ -9,6 +9,7 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue'
 import Navbar from '@/components/Navbar.vue'
+import { themes } from '@/themes'
 
 export default defineComponent({
   name: 'Sångbok',
@@ -18,8 +19,14 @@ export default defineComponent({
     Navbar
   },
   created () {
-    // TODO: Ugly fix that removes body night class if stored settings.night === false.
-    document.body.className = (JSON.parse(window.localStorage.getItem('vuex') || '{"settings":{"night": true}}').settings.night === true) ? 'night' : ''
+    // TODO: Ugly fix that removes body night class if stored settings.night === false. Also done in store.
+    const theme = JSON.parse(window.localStorage.getItem('vuex') || '{"settings":{"theme": undefined}}').settings.theme
+    if (theme !== undefined && Object.keys(themes).indexOf(theme) !== -1) {
+      document.body.className = theme
+    } else {
+      document.body.className = 'night'
+    }
+
   }
 })
 </script>
@@ -27,36 +34,45 @@ export default defineComponent({
 <style lang="scss">
 @use "sass:math";
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+@import './themes/fancy.global.scss';
 
-/* Colors */
-/* $f-orange: #FF642B;
-$f-orange-light: #FB9C74;
-$f-orange-lighter: #F7D48C;
-$f-porcelain: #f5f4f4;
-$f-navy: #132a3e;
-$f-gray-violet: #2f3b4b;
-$f-gray-navy: #3B5262;
-$f-gray-turqoise: #829899;
-$f-blue: #1757A3;
-$f-sky: #58a7cb;
-$f-green: #197F2A;
-$f-onyx: #221F20; */
-
-/* Color classes. Used by views and components */
-.bg-orange {background-color: #f60;color: #000;}
-.border-orange {border-color: #f60;}
+/* Theming */
+body.night {
+  @import './themes/night.scss';
+  @import './App.scss';
+  background: $body-background;
+  color: $text-color;
+}
+body.day {
+  @import './themes/day.scss';
+  @import './App.scss';
+  background: $body-background;
+  color: $text-color;
+}
+body.galaxy {
+  @import './themes/galaxy.scss';
+  @import './App.scss';
+  background: $body-background;
+  color: $text-color;
+}
+body.fancy {
+  @import './themes/fancy.scss';
+  @import './App.scss';
+  background: $body-background;
+  color: $text-color;
+}
+body.halloween {
+  @import './themes/halloween.scss';
+  @import './App.scss';
+  background: $body-background;
+  color: $text-color;
+}
 
 /* Layout */
 body {
     margin: 0;
     transition: 0.1s background-color ease-in-out;
     font-family: 'EB Garamond', Garamond, serif;
-
-    &.night {
-      /* TODO: Since <body> is outside of Vue's scope, the night class is set through an ugly fix in the @/store/index.ts file. This can probably be made more elegantly. */
-      background-color: #222;
-      color: #ddd;
-    }
 }
 
 .flex-row {display: flex; flex-direction: row;}
@@ -87,10 +103,6 @@ div.main h2 {
     &.disabled {opacity: 0.5;}
 }
 
-.night .button {
-  color: white;
-}
-
 /* Forms */
 .toggle {
       float: right;
@@ -119,12 +131,6 @@ table.songbook {
       height: 3em;
       vertical-align: middle;
     }
-    & tr {
-      box-shadow: 0 2px 3px #aaa;
-      border-bottom: 1px solid #aaa;
-      &:active {background-color: #f3f3f3;}
-      &:first-child {box-shadow: 0 1px 5px #aaa;}
-    }
 
     & .index {padding-left: 1em;}
     & .name {padding-left: 1em;padding-right: 0.5em;}
@@ -132,13 +138,6 @@ table.songbook {
       float: right;
       margin-right: 0.5em;
     }
-}
-
-.night table.songbook tr {
-  box-shadow: 0 2px 3px #111;
-  border-bottom: 1px solid #111;
-  &:active {background-color: #444;}
-  &:first-child {box-shadow: 0 1px 5px #111;}
 }
 
 ol>li {margin-top: 0.75em}

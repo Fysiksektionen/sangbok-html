@@ -1,6 +1,6 @@
 <!-- The top navbar. Closely tied with the Dropdown component (see Settings.vue). -->
 <template>
-  <div class="navbar bg-orange">
+  <div class="navbar">
     <div style="float: left;" v-if="!hideBackButton" @click="() => $router.go(-1)">
       <button><img src="../assets/back.png" alt="Go back" /></button>
     </div>
@@ -37,6 +37,12 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+body.night {@import '../themes/night.scss';@import './Navbar.scss';}
+body.day {@import '../themes/day.scss';@import './Navbar.scss';}
+body.galaxy {@import '../themes/galaxy.scss';@import './Navbar.scss';}
+body.fancy {@import '../themes/fancy.scss';@import './Navbar.scss';}
+body.halloween {@import '../themes/halloween.scss';@import './Navbar.scss';}
+
 .dropdown-enter-from, .dropdown-leave-to {/* See hard-coded style property to set transition speed. */
   /* TODO: Set dropdown speeds using classes. */
   transform: translateY(-100%);
@@ -50,7 +56,6 @@ button {
     height: 100%;
     border: 0;
     padding: 0.8em 0.8em;
-    &:active {background-color: rgba(255, 255, 255, 0.20);}
 }
 
 .navbar {
@@ -66,7 +71,6 @@ button {
     position: absolute;
     width: 100%;
     text-align: center;
-    color: white;
     font-weight: bold;
     font-size: 1.1em;
     padding-top: 0.4em;
@@ -79,10 +83,8 @@ button {
     right: 0;
     padding: 0.5em;
     padding-bottom: 0;
-    background-color: #fff;
     font-family: 'EB Garamond', serif;
     font-size: 1.2em;
-    box-shadow: 0 0 14px black;
     transition: top 0.3s ease-in-out;
     z-index: 9;
 
@@ -92,16 +94,11 @@ button {
     }
 }
 
-.night .settings {
-    color: #ddd;
-    background-color: #222;
-}
 .settings .copy .checkmark {
     float: right;
     width: 0.8em;
     height: 0.8em;
     padding: 0;
     margin-right: 0.1em;
-    color: #0E0;
 }
 </style>

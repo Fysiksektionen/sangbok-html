@@ -32,7 +32,7 @@
           <div @click="switchIfBool(setting) && $store.commit('updateGeneralSettings', generalSettings)">
             {{setting.text}}
             <input v-if="setting.type=='string'" placeholder="Text" type="text" v-model="setting.value" />
-            <div v-if="setting.type=='bool'" class="toggle border-orange" v-bind:class="{'bg-orange': setting.value}">
+            <div v-if="setting.type=='bool'" class="toggle border-highlight" v-bind:class="{'bg-highlight': setting.value}">
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
               <input v-if="setting.type=='number'" v-bind:placeholder="setting.placeholder" type="number"
                 v-model="setting.value" v-bind:min="setting.min" v-bind:max="setting.max" />
               <input v-if="setting.type=='string'" placeholder="Text" type="text" v-model="setting.value" />
-              <div v-if="setting.type=='bool'" class="toggle border-orange" v-bind:class="{'bg-orange': setting.value}">
+              <div v-if="setting.type=='bool'" class="toggle border-highlight" v-bind:class="{'bg-highlight': setting.value}">
               </div>
             </div>
           </div>
@@ -144,8 +144,15 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss">
-  hr {border: none; border-top: 1px solid gray;}
+<style lang="scss" scoped>
+/* Theming */
+body.night {@import '../themes/night.scss';@import './Generator.scss';}
+body.day {@import '../themes/day.scss';@import './Generator.scss';}
+body.galaxy {@import '../themes/galaxy.scss';@import './Generator.scss';}
+body.fancy {@import '../themes/fancy.scss';@import './Generator.scss';}
+body.halloween {@import '../themes/halloween.scss';@import './Generator.scss';}
+
+hr {border: none; border-top: 1px solid gray;}
 
   .generator {
     width: 40%;
@@ -170,11 +177,6 @@ export default defineComponent({
         text-align: right;
       }
     }
-  }
-
-  .night .generator .setting input {
-    color: white;
-    background-color: #444;
   }
 
   table.songbook tr:active {
@@ -208,7 +210,6 @@ export default defineComponent({
       width: calc(25% - 4 * #{$navbutton-spacing});
       min-width: 1cm;
 
-      color: #f60;
       font-size: 2em;
 
       & img {
@@ -225,4 +226,5 @@ export default defineComponent({
       }
     }
   }
+
 </style>

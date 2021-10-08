@@ -88,7 +88,7 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
   .song-index {
     float: right;
     margin: 24px;

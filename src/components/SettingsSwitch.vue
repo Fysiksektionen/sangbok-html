@@ -3,8 +3,8 @@
     <slot></slot>
     <div class="switch">
       <span v-for="val, key in $props.values" v-bind:key="key"
-        class="border-orange "
-        v-bind:class="{'bg-orange': $store.state.settings[$props.setting]===key}"
+        class="border-highlight"
+        v-bind:class="{'bg-highlight': $store.state.settings[$props.setting]===key}"
         @click="$store.commit('setSetting', {key: $props.setting, value: key})">
         {{val}}
       </span>

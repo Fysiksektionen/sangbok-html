@@ -1,0 +1,19 @@
+@use "sass:math";
+/* This file should only be used for theme color specification. */
+/* Color classes. Used by views and components */
+.bg-highlight {background-color: $highlight-color;color: $highlight-text-color;}
+.border-highlight {border-color: $highlight-color;}
+
+.button {
+  color: $text-color;
+  background-color: $button-color;
+  &:active:not(.disabled):not(.static) {background-color: $active-button-color;}
+}
+
+table.songbook tr {
+  box-shadow: 0 2px 3px $row-shadow-color;
+  border-bottom: 1px solid #111;
+  background-color: $row-background;
+  &:active {background-color: $secondary-background;}
+  &:first-child {box-shadow: 0 1px 5px $row-shadow-color;}
+}

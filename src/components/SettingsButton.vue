@@ -1,7 +1,7 @@
 <template>
   <div @click="$store.commit('toggleSetting', $props.setting)" class="setting">
     <slot></slot>
-    <div class="toggle border-orange" v-bind:class="{'bg-orange': $store.state.settings[$props.setting]}"></div>
+    <div class="toggle border-highlight" v-bind:class="{'bg-highlight': $store.state.settings[$props.setting]}"></div>
   </div>
 </template>
 
