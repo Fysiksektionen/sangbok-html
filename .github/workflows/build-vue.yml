@@ -130,14 +130,14 @@ jobs:
         variant: [nginx, nginx-gz, statigz]
         include:
           - variant: nginx-gz
-            suffix: -nginx-gz
+            suffix: -slim-nginx
             compression: gzip
             server: nginx
           - variant: nginx
             compression: redundant gzip/brotli
             server: nginx
           - variant: statigz
-            suffix: -statigz
+            suffix: -slim
             compression: brotli
             server: statigz
     permissions:

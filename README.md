@@ -24,13 +24,13 @@ Gå till den senaste [build-körningen](https://github.com/Fysiksektionen/sangbo
 Containrarna är taggade efter vilken branch de kommer från, dvs.
 * `latest` - från `main`
 * `edge` - från `vue`
-Dessa containrar är [nginx](https://www.nginx.com)-baserade, och innehåller förkomprimerade filer i både brotli- och gzip-format.
+Dessa containrar är [nginx](https://www.nginx.com)-baserade, och innehåller förkomprimerade filer i både brotli- och gzip-format. Brotli-filerna är ca. 30% mindre än motsvarande gzip-filer.
 
 Utöver detta finns några suffix om användaren mot förmodan skulle vilja ha en mindre container på bekostnad av prestandan.
-* `nginx-gz` - [nginx](https://www.nginx.com)-baserad. Innehåller förkomprimerade förkomprimerade filer gzip-format.
-* `statigz` - [statigz](https://pkg.go.dev/github.com/vearutop/statigz)-baserad. Innehåller förkomprimerade filer i brotli-format.
+* `slim-nginx` - [nginx](https://www.nginx.com)-baserad. Innehåller endast förkomprimerade filer i gzip-format.
+* `slim` - [statigz](https://pkg.go.dev/github.com/vearutop/statigz)-baserad. Innehåller endast förkomprimerade filer i brotli-format. 
 
-De [nginx](https://www.nginx.com)-baserade presterar generellt sett bättre, med mindre RAM. De klarar sig bra på 8mb RAM, men kan dra nytta av upp till ca. 20mb. `nginx-pc` är den "bästa" containern i alla avseenden, med undantaget att containern är större än de andra två. `nginx-gz` kommer i praktiken alltid att serva gzip-komprimerade filer, vilka är ca. 40-50% större än motsvarande brotli-komprimerade filer (även om den "kan" omkomprimera gzip -> brotli, görs detta endast om klienten har stöd för brotli men inte gzip, vilket i praktiken aldrig inträffar). `statigz`-containrarna är optimerade för att serva brotli-komprimerade filer. Det finns egentligen ingen anledning att använda denna framför `nginx-pc` om en inte har platsbrist på servern.Statigz kräver minst 16mb ram, och gärna uppemot 48mb.
+De [nginx](https://www.nginx.com)-baserade presterar generellt sett bättre, och kräver mindre RAM. De klarar sig bra på 8mb RAM, men kan dra nytta av upp till ca. 20mb. `slim`-containrarna är optimerade för att serva brotli-komprimerade filer. Det finns egentligen ingen anledning att använda `slim`-containrarna framför den vanliga om en inte har platsbrist på servern. Statigz-containern kräver 16mb ram, och trivs bäst med ca. 48mb.
 
 <!-- See [Configuration Reference](https://cli.vuejs.org/config/). -->
 
