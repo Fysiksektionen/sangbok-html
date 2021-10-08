@@ -1,0 +1,38 @@
+/* Contains theme processing for all components. */
+/* Since this is imported, begin each identifier with &. */
+
+& .navbar {
+    background: $navbar-background;
+
+    & button:active {background-color: rgba(255, 255, 255, 0.20);}
+
+    & .title {
+        color: white;
+    }
+}
+
+& .component-settings {
+    color: $text-color;
+    background: $dropdown-background;
+    box-shadow: 0 0 14px black;
+    & .copy .checkmark {
+        color: $success;
+    }
+}
+
+& .component-search {
+    input[type="search"] {
+        color: $secondary-text-color;
+        background-color: $secondary-background;
+    }
+}
+
+& .component-sheet-music-renderer {
+    & img {
+        filter: $sheet-music-filter;/* Originally #c2ad99 for night theme*/
+    }
+
+    & .notice {
+        color: rgba($text-color, 0.6);
+    }
+}

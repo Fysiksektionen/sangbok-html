@@ -14,3 +14,12 @@ $row-background: initial;
 
 $button-color: rgba(128, 128, 128, 0.10);
 $active-button-color: rgba(128, 128, 128, 0.30);
+
+body.night {
+    background-size: contain !important;
+    background: $body-background;
+    color: $text-color;
+
+    @import "../components/index.scss";
+    @import "../views/index.scss";
+}

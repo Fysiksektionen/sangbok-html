@@ -1,11 +1,13 @@
 $text-color: #333;
 $secondary-text-color: $text-color;
-$body-background: #fff;
 $secondary-background: #f1f1f1;
+
 $highlight-color: #f60;
 $highlight-text-color: #000;
+
 $navbar-background: $highlight-color;
-$dropdown-background: $body-background;
+$dropdown-background: #fff;
+
 $sheet-music-filter: none;
 $success: #0E0;
 
@@ -14,3 +16,11 @@ $row-background: initial;
 
 $button-color: rgba(128, 128, 128, 0.10);
 $active-button-color: rgba(128, 128, 128, 0.30);
+
+body.day {
+    background-color: #fff;
+    color: $text-color;
+
+    @import "../components/index.scss";
+    @import "../views/index.scss";
+}

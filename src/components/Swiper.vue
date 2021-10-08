@@ -1,6 +1,6 @@
 <!-- Component for handling swipes. -->
 <template>
-  <div class="swiper" v-touch:release="releaseHandler" v-touch:press="pressHandler" v-touch:drag="dragHandler"
+  <div class="component-swiper" v-touch:release="releaseHandler" v-touch:press="pressHandler" v-touch:drag="dragHandler"
     v-bind:style="onlyAllowZoomOut">
     <slot></slot>
     <transition name="swipe-right">
@@ -81,15 +81,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-  @import './Swiper.scss';
-  .swiper {
+
+  .component-swiper {
     width: 100%;
     padding: 0;
     margin: 0;
     border: none;
-  }
-
-  div.swipe-indicator {
+    & div.swipe-indicator {
     transition: all 0.3s ease-out;
     position: fixed;
     top: 30%;
@@ -114,18 +112,21 @@ export default defineComponent({
       height: 1em;
       vertical-align: middle;
     }
+
+    &.disabled {background-color: gray;}
   }
 
   /* TODO: Find a solution to this that does not involve !important. */
-  .swipe-right-enter-from,
-  .swipe-right-leave-to {
+  & .swipe-right-enter-from,
+  & .swipe-right-leave-to {
     right: -4cm !important;
     opacity: 0 !important;
   }
 
-  .swipe-left-enter-from,
-  .swipe-left-leave-to {
+  & .swipe-left-enter-from,
+  & .swipe-left-leave-to {
     left: -4cm !important;
     opacity: 0 !important;
   }
+}
 </style>

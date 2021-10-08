@@ -8,16 +8,16 @@ import { generatorModule, GeneratorState } from './generator'
 export interface State {
   settings: {
     translate: boolean,
-    theme: 'day' | 'night' | 'galaxy' | 'halloween',
+    theme: string,
     larger: boolean,
     generator: boolean,
-    touchAction: 'none' | 'swipe' | 'zoom' | 'all'
+    touchAction: string // 'none' | 'swipe' | 'zoom' | 'all'
   },
   query: string,
   generator: GeneratorState
 }
 
-type SetSettingProps = {key: 'touchAction', value: 'none' | 'swipe' | 'zoom' | 'all'} | {key: 'theme', value: 'day' | 'night' | 'galaxy' | 'halloween'}
+type SetSettingProps = {key: 'touchAction' | 'theme', value: string}
 
 export const key: InjectionKey<Store<State>> = Symbol('storage')
 
@@ -37,7 +37,7 @@ export default createStore<State>({
       state.settings[key] = !(state.settings[key])
     },
     setSetting (state, props: SetSettingProps) {
-      (state.settings[props.key] as any) = props.value
+      state.settings[props.key] = props.value
 
       // On update
       document.body.style.touchAction = (['zoom', 'all'].indexOf(state.settings.touchAction) === -1) ? 'pan-x pan-y' : ''

@@ -1,5 +1,5 @@
 <template>
-  <div class="settings">
+  <div class="component-settings">
     <SettingsButton :setting="'translate'">Latinska kapitelnamn</SettingsButton>
     <SettingsSwitch :setting="'theme'" :values="themes">
       Tema
@@ -36,8 +36,29 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss">
-.settings {/* TODO: don't hard-code top positions. */
+<style lang="scss">
+.component-settings {/* TODO: don't hard-code top positions. */
   top: 1.5em;
-}
+      position: fixed;
+      left: 0;
+      right: 0;
+      padding: 0.5em;
+      padding-bottom: 0;
+      font-family: 'EB Garamond', serif;
+      font-size: 1.2em;
+      transition: top 0.3s ease-in-out;
+      z-index: 9;
+
+      &>div{
+          width: 100%;
+          padding: 0.8em 0;
+      }
+      & .copy .checkmark {
+        float: right;
+        width: 0.8em;
+        height: 0.8em;
+        padding: 0;
+        margin-right: 0.1em;
+    }
+  }
 </style>

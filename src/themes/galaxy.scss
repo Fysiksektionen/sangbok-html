@@ -29,3 +29,12 @@ $row-background: inherit;
 
 $button-color: rgba($f-gray-violet, 0.4);
 $active-button-color: rgba($f-gray-violet, 0.7);
+
+body.galaxy {
+    background-size: contain !important;
+    background: $body-background;
+    color: $text-color;
+
+    @import "../components/index.scss";
+    @import "../views/index.scss";
+}

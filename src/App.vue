@@ -26,7 +26,6 @@ export default defineComponent({
     } else {
       document.body.className = 'night'
     }
-
   }
 })
 </script>
@@ -34,39 +33,13 @@ export default defineComponent({
 <style lang="scss">
 @use "sass:math";
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
-@import './themes/fancy.global.scss';
 
-/* Theming */
-body.night {
-  @import './themes/night.scss';
-  @import './App.scss';
-  background: $body-background;
-  color: $text-color;
-}
-body.day {
-  @import './themes/day.scss';
-  @import './App.scss';
-  background: $body-background;
-  color: $text-color;
-}
-body.galaxy {
-  @import './themes/galaxy.scss';
-  @import './App.scss';
-  background: $body-background;
-  color: $text-color;
-}
-body.fancy {
-  @import './themes/fancy.scss';
-  @import './App.scss';
-  background: $body-background;
-  color: $text-color;
-}
-body.halloween {
-  @import './themes/halloween.scss';
-  @import './App.scss';
-  background: $body-background;
-  color: $text-color;
-}
+/* TODO: Load these on-demand. */
+@import './themes/night.scss';
+@import './themes/day.scss';
+@import './themes/galaxy.scss';
+@import './themes/fancy.scss';
+/* @import './themes/.scss'; */
 
 /* Layout */
 body {

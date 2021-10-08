@@ -1,6 +1,6 @@
 <!-- TODO: This should probably be split into smaller components... -->
 <template>
-  <div class="generator">
+  <div class="view-generator">
     <h2>Sångbladsskaparen</h2>
 
     <div class="generatorbuttons">
@@ -144,20 +144,14 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
-/* Theming */
-body.night {@import '../themes/night.scss';@import './Generator.scss';}
-body.day {@import '../themes/day.scss';@import './Generator.scss';}
-body.galaxy {@import '../themes/galaxy.scss';@import './Generator.scss';}
-body.fancy {@import '../themes/fancy.scss';@import './Generator.scss';}
-body.halloween {@import '../themes/halloween.scss';@import './Generator.scss';}
+<style lang="scss">
 
-hr {border: none; border-top: 1px solid gray;}
-
-  .generator {
+  .view-generator {
     width: 40%;
     right: 0;
     min-width: 8cm;
+
+    & hr {border: none; border-top: 1px solid gray;}
 
     & .generatorsettings {
       padding: 0.5cm;

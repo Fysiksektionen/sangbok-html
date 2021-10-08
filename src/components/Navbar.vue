@@ -36,69 +36,38 @@ export default defineComponent({
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-body.night {@import '../themes/night.scss';@import './Navbar.scss';}
-body.day {@import '../themes/day.scss';@import './Navbar.scss';}
-body.galaxy {@import '../themes/galaxy.scss';@import './Navbar.scss';}
-body.fancy {@import '../themes/fancy.scss';@import './Navbar.scss';}
-body.halloween {@import '../themes/halloween.scss';@import './Navbar.scss';}
-
+<style lang="scss">
 .dropdown-enter-from, .dropdown-leave-to {/* See hard-coded style property to set transition speed. */
-  /* TODO: Set dropdown speeds using classes. */
-  transform: translateY(-100%);
-  opacity: 0;
-}
-
-img {height: 1em;}
-
-button {
-    background-color: transparent;
-    height: 100%;
-    border: 0;
-    padding: 0.8em 0.8em;
-}
+    /* TODO: Set dropdown speeds using classes. */
+    transform: translateY(-100%);
+    opacity: 0;
+  }
 
 .navbar {
-    position: sticky;
-    width: 100%;
-    top: 0;
-    height: 2.3em;
-    z-index: 100;
-}
+      position: sticky;
+      width: 100%;
+      top: 0;
+      height: 2.3em;
+      z-index: 100;
 
-.title {
-    font-family: "Lato", sans-serif;
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.1em;
-    padding-top: 0.4em;
-    z-index: -1;
-}
+  & img {height: 1em;}
 
-.settings {
-    position: fixed;
-    left: 0;
-    right: 0;
-    padding: 0.5em;
-    padding-bottom: 0;
-    font-family: 'EB Garamond', serif;
-    font-size: 1.2em;
-    transition: top 0.3s ease-in-out;
-    z-index: 9;
+  & button {
+      background-color: transparent;
+      height: 100%;
+      border: 0;
+      padding: 0.8em 0.8em;
+  }
 
-    & div{
-        width: 100%;
-        padding: 0.8em 0;
-    }
-}
-
-.settings .copy .checkmark {
-    float: right;
-    width: 0.8em;
-    height: 0.8em;
-    padding: 0;
-    margin-right: 0.1em;
+  & .title {
+      font-family: "Lato", sans-serif;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.1em;
+      padding-top: 0.4em;
+      z-index: -1;
+  }
 }
 </style>

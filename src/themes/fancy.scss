@@ -16,3 +16,25 @@ $row-background: inherit;
 
 $button-color: #5b2b9930;
 $active-button-color: #5b2b9970;
+
+@import url('https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap'); //  'Ballet', 'Pinyon Script'
+body.fancy,
+body.fancy .title,
+body.fancy input[type=search],
+body.fancy .setting,
+body.fancy .button {
+    font-family: 'Fleur De Leah', 'GFS Didot';
+}
+
+body.fancy .song-index, body.fancy .index {
+    font-family: 'GFS Didot';
+}
+
+body.fancy {
+    background-size: contain !important;
+    background: $body-background;
+    color: $text-color;
+
+    @import "../components/index.scss";
+    @import "../views/index.scss";
+}

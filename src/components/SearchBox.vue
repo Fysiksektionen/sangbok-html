@@ -1,5 +1,5 @@
 <template>
-  <form @submit="search">
+  <form @submit="search" class="component-search">
     <input type="search" v-model="query2" placeholder="Sök i sångboken" />
   </form>
 </template>
@@ -38,12 +38,6 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-body.night {@import '../themes/night.scss';@import './SearchBox.scss';}
-body.day {@import '../themes/day.scss';@import './SearchBox.scss';}
-body.galaxy {@import '../themes/galaxy.scss';@import './SearchBox.scss';}
-body.fancy {@import '../themes/fancy.scss';@import './SearchBox.scss';}
-body.halloween {@import '../themes/halloween.scss';@import './SearchBox.scss';}
-
 form {width: 100%; text-align: center;}
 
 input[type=search] {
