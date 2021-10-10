@@ -113,3 +113,8 @@ if [[ ! $*\  == *--no-move\ * ]]; then
     cp svgs.json ../src/assets/msvgs.json
     cp svg/* ../public/msvg/
 fi
+
+if [[ $*\  == *--force\ * && $*\  == *--compress\ * ]]; then
+    echo -e "\e[1;32mSkapar cache.\e[0m"
+    tar -cJf svg.tar.lzma svg/*
+fi

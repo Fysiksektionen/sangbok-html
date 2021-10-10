@@ -1336,7 +1336,8 @@
                 "author": "Skriven till Sektionens 75-årsjubileum\n2007-11-15 av GM²N",
                 "melody": "Studentsången",
                 "text": "ft   kp   K   bu   B\n''   Gb   Oe   lb   rdr   std\nst   msk   kn   E\nFr   krm   c   cSt\n°F\npt   -   ''   '\nat\nhk   nmi\nM   Ci   dptr   cal\nmvp   mvp   ha!",
-                "index": "ι17"
+                "index": "ι17",
+                "msvg": "i17. Imperial system"
             },
             {
                 "title": "Jag gillar meken",
@@ -1980,54 +1981,7 @@
                 "index": "σ19.14"
             }
         ]
-    },
-    {
-        "chapter": "Noter",
-        "prefix": "Ωω",
-        "songs": [
-            {
-                "title": "Du gamla du fria",
-                "index": "ω1",
-                "msvg": "1. Du gamla du fria"
-            },
-            {
-                "title": "Kungssången",
-                "index": "ω2",
-                "msvg": "2. Kungssången"
-            },
-            {
-                "title": "Lyft ditt välförsedda glas",
-                "index": "ω5",
-                "msvg": "5. Lyft ditt välförsedda glas"
-            },
-            {
-                "title": "Längtan till landet",
-                "index": "ω6",
-                "msvg": "6. Längtan till landet"
-            },
-            {
-                "title": "Smedsvisa från Uppland",
-                "index": "ω8",
-                "msvg": "8. Smedsvisa"
-            },
-            {
-                "title": "Molltoner från Norrland",
-                "index": "ω9",
-                "msvg": "9. Molltoner från Norrland"
-            },
-            {
-                "title": "Studentsången",
-                "index": "ω11",
-                "msvg": "11. Studentsången"
-            },
-            {
-                "title": "O gamla klang och jubeltid",
-                "index": "ω∞",
-                "msvg": "∞. O gamla klang och jubeltid"
-            }
-        ]
-    },
-    {
+    },{
         "chapter": "Kalasteori 101",
         "prefix": "𝕋𝕥",
         "songs": [

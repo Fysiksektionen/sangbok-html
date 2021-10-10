@@ -23,16 +23,20 @@ body.fancy .title,
 body.fancy input[type=search],
 body.fancy .setting,
 body.fancy .button {
-    font-family: 'Fleur De Leah', 'GFS Didot';
+    font-family: 'Fleur De Leah', 'GFS Didot', 'EB Garamond', serif;
 }
 
 body.fancy .song-index, body.fancy .index {
-    font-family: 'GFS Didot';
+    font-family: 'GFS Didot', 'EB Garamond', serif;
 }
 
 body.fancy {
-    background-size: contain !important;
-    background: $body-background;
+    background-size: contain;
+    background-image: url('/gast.svg');
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #000;
     color: $text-color;
 
     @import "../components/index.scss";
