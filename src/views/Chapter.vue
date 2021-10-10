@@ -12,7 +12,7 @@
                 {{ song.index }}
               </td>
               <td class="name">
-                {{ song.title }}
+                <span v-html="song.title"></span>
                 <span v-if="song.msvg" class="sheetmusicicon">𝄞</span>
               </td>
           </tr>

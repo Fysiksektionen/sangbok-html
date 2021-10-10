@@ -11,7 +11,7 @@
             {{ chapters[hit.item.chapterindex].songs[hit.item.songindex].index }}
           </td>
           <td class="name">
-            {{ chapters[hit.item.chapterindex].songs[hit.item.songindex].title }}
+            <span v-html="chapters[hit.item.chapterindex].songs[hit.item.songindex].title "></span>
             <span v-if="chapters[hit.item.chapterindex].songs[hit.item.songindex].msvg" class="sheetmusicicon">𝄞</span>
           </td>
         </tr>
