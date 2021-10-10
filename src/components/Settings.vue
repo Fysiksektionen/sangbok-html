@@ -44,7 +44,6 @@ export default defineComponent({
       right: 0;
       padding: 0.5em;
       padding-bottom: 0;
-      font-family: 'EB Garamond', serif;
       font-size: 1.2em;
       transition: top 0.3s ease-in-out;
       z-index: 9;

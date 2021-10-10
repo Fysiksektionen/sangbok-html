@@ -39,6 +39,7 @@ export default defineComponent({
 @import './themes/day.scss';
 @import './themes/galaxy.scss';
 @import './themes/fancy.scss';
+@import './themes/neo.scss';
 /* @import './themes/.scss'; */
 
 /* Layout */
@@ -63,7 +64,6 @@ div.main h2 {
 .button {
     text-align: center;
     font-size: 1em;
-    font-family: "EB Garamond", serif;
 
     border-width: 0;
     $navbutton-spacing: 12px;

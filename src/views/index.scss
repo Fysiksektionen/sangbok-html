@@ -5,7 +5,8 @@
 & .border-highlight {border-color: $highlight-color;}
 
 & .button {
-  color: $text-color;
+  font-family: inherit;
+  color: $button-text-color;
   background-color: $button-color;
   &:active:not(.disabled):not(.static) {background-color: $active-button-color;}
 }
