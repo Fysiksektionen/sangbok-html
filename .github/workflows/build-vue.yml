@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Build Vue
+name: Build
 
 on:
   push:
@@ -11,15 +11,25 @@ on:
       - '**.js'
       - '**.json'
       - '**.mscz'
+      - '**.conf'
+      - '**.go'
+      - 'Dockerfile'
+      - '.Dockerignore'
       - '**/build-vue.yml'
   pull_request:
     branches: [ main, vue ]
   workflow_dispatch:
-    inputs:
-      skip-compression:
-        description: "Skip svg optimization (faster) (this setting doesn't work)"
-        required: true
-        default: "false"
+    # inputs:
+    #   skip-compression:
+    #     description: "Skip svg optimization (faster) (this setting doesn't work)"
+    #     required: true
+    #     default: "false"
+
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: fysiksektionen/sangbok-html
 
 jobs:
   build:
@@ -70,14 +80,17 @@ jobs:
       run: npm install -g svgo
     - name: Install MuseScore 3
       run: sudo apt-get update && sudo apt-get install musescore3
-    - name: Convert mscz to non-compressed svg:s
+    - name: Unpack cached svg:s
+      run: rm -rf svg && tar -xJf svg.tar.lzma
       working-directory: ./music
-      run: ./convert.sh --no-move --force
-      if: ${{ contains(github.event.inputs.skip-compression, 'true') }}
-    - name: Convert mscz to compressed svg:s
+    - name: Convert mscz to compressed svg:s (from cache)
+      working-directory: ./music
+      run: ./convert.sh --compress --no-move
+      if: ${{ github.ref != 'refs/heads/main' }}
+    - name: Convert mscz to compressed svg:s (from scratch)
       working-directory: ./music
       run: ./convert.sh --compress --no-move --force
-      if: ${{ !contains(github.event.inputs.skip-compression, 'true') }}
+      if: ${{ github.ref == 'refs/heads/main' }}
     - name: Perpare for export
       working-directory: ./music
       run: mv svgs.json svg
@@ -93,6 +106,8 @@ jobs:
     needs: sheet-music
     steps:
     - uses: actions/checkout@v2
+    - name: Install Zopfli
+      run: sudo apt-get install -y zopfli
     - name: Fetch sheet music artifacts
       uses: actions/download-artifact@v2
       with:
@@ -101,3 +116,69 @@ jobs:
     - name: Benchmark
       working-directory: .github/workflows
       run: ./compression-benchmark.sh
+  
+  ##
+  ## Docker build
+  ##
+  docker:
+    runs-on: ubuntu-latest
+    name: Build Docker containers
+    needs: sheet-music
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [nginx, nginx-gz, statigz]
+        include:
+          - variant: nginx-gz
+            suffix: -slim-nginx
+            compression: gzip
+            server: nginx
+          - variant: nginx
+            compression: redundant gzip/brotli
+            server: nginx
+          - variant: statigz
+            suffix: -slim
+            compression: brotli
+            server: statigz
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Fetch sheet music artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: music-svgs
+          path: public/msvg
+      - name: Unpack sheet music artifacts
+        working-directory: public/msvg
+        run: mv svgs.json ../../src/assets/msvgs.json
+      # Login against a Docker registry except on PR(https://github.com/docker/login-action)
+      - name: Log into registry ${{ env.REGISTRY }}
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      # Extract metadata (tags, labels) for Docker (https://github.com/docker/metadata-action)
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: | 
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
+            type=edge,branch=vue
+            type=ref,event=branch
+          flavor: |
+            suffix=${{ matrix.suffix }}
+      - name: Build and push Docker image (${{ matrix.server }} with ${{ matrix.compression }} precompression)
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          file: docker/${{ matrix.variant }}/Dockerfile
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

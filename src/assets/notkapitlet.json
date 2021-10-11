@@ -1,0 +1,47 @@
+// Används ej, då noterna lagts direkt i övriga kapitel.
+{
+    "chapter": "Noter",
+    "prefix": "Ωω",
+    "songs": [
+        {
+            "title": "Du gamla du fria",
+            "index": "ω1",
+            "msvg": "1. Du gamla du fria"
+        },
+        {
+            "title": "Kungssången",
+            "index": "ω2",
+            "msvg": "2. Kungssången"
+        },
+        {
+            "title": "Lyft ditt välförsedda glas",
+            "index": "ω5",
+            "msvg": "5. Lyft ditt välförsedda glas"
+        },
+        {
+            "title": "Längtan till landet",
+            "index": "ω6",
+            "msvg": "6. Längtan till landet"
+        },
+        {
+            "title": "Smedsvisa från Uppland",
+            "index": "ω8",
+            "msvg": "8. Smedsvisa"
+        },
+        {
+            "title": "Molltoner från Norrland",
+            "index": "ω9",
+            "msvg": "9. Molltoner från Norrland"
+        },
+        {
+            "title": "Studentsången",
+            "index": "ω11",
+            "msvg": "11. Studentsången"
+        },
+        {
+            "title": "O gamla klang och jubeltid",
+            "index": "ω∞",
+            "msvg": "∞. O gamla klang och jubeltid"
+        }
+    ]
+},

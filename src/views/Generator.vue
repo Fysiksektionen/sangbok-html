@@ -1,12 +1,12 @@
 <!-- TODO: This should probably be split into smaller components... -->
 <template>
-  <div class="generator">
+  <div class="view-generator">
     <h2>Sångbladsskaparen</h2>
 
     <div class="generatorbuttons">
       <div v-bind:class="{ 'disabled': !canAdd() }" @click="add()" title="Lägg till">+</div>
       <div v-bind:class="{ 'disabled': generatorSongs.length == 0 }" @click="$store.commit('clear');" title="Ta bort alla">🗑</div>
-      <div @click="go('overleaf')" title="Öppna i Overleaf"><img src="../assets/overleaf_logo.svg" /></div>
+      <div @click="go('overleaf')" title="Öppna i Overleaf"><!--img src="../assets/overleaf_logo.svg" /-->🖉</div>
       <div @click="go('zip')" title="Ladda ner zip-fil med TeX">↓</div>
     </div>
 
@@ -32,7 +32,7 @@
           <div @click="switchIfBool(setting) && $store.commit('updateGeneralSettings', generalSettings)">
             {{setting.text}}
             <input v-if="setting.type=='string'" placeholder="Text" type="text" v-model="setting.value" />
-            <div v-if="setting.type=='bool'" class="toggle border-orange" v-bind:class="{'bg-orange': setting.value}">
+            <div v-if="setting.type=='bool'" class="toggle border-highlight" v-bind:class="{'bg-highlight': setting.value}">
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
               <input v-if="setting.type=='number'" v-bind:placeholder="setting.placeholder" type="number"
                 v-model="setting.value" v-bind:min="setting.min" v-bind:max="setting.max" />
               <input v-if="setting.type=='string'" placeholder="Text" type="text" v-model="setting.value" />
-              <div v-if="setting.type=='bool'" class="toggle border-orange" v-bind:class="{'bg-orange': setting.value}">
+              <div v-if="setting.type=='bool'" class="toggle border-highlight" v-bind:class="{'bg-highlight': setting.value}">
               </div>
             </div>
           </div>
@@ -57,7 +57,8 @@
 
     <p style="font-size:0.75em;color:gray; text-align: center;">
       Sångbladsskaparen är experimentell.<br />
-      Overleafs logotyp tillhör Writelatex Ltd. Denna sida är ej affilierad med Overleaf.
+      Pennikonen öppnar latex-källan i Overleaf.
+      <!--Overleafs logotyp tillhör Writelatex Ltd. Denna sida är ej affilierad med Overleaf.-->
     </p>
   </div>
 </template>
@@ -143,13 +144,14 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss">
-  hr {border: none; border-top: 1px solid gray;}
+<style lang="scss">
 
-  .generator {
+  .view-generator {
     width: 40%;
     right: 0;
     min-width: 8cm;
+
+    & hr {border: none; border-top: 1px solid gray;}
 
     & .generatorsettings {
       padding: 0.5cm;
@@ -169,11 +171,6 @@ export default defineComponent({
         text-align: right;
       }
     }
-  }
-
-  .night .generator .setting input {
-    color: white;
-    background-color: #444;
   }
 
   table.songbook tr:active {
@@ -207,7 +204,6 @@ export default defineComponent({
       width: calc(25% - 4 * #{$navbutton-spacing});
       min-width: 1cm;
 
-      color: #f60;
       font-size: 2em;
 
       & img {
@@ -224,4 +220,5 @@ export default defineComponent({
       }
     }
   }
+
 </style>

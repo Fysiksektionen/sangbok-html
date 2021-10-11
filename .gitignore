@@ -1,15 +1,18 @@
 ##
 ## Custom
 ##
+.devcontainer
 .vscode
 .idea
 build
 dist
+load_test.js
 
 .mscbackup
 music/svg
 music/tmp
 music/deflate
+music/more.txt
 public/msvg
 
 ## Copyrighted stuff (potentially)

@@ -1,0 +1,26 @@
+$text-color: #ddd;
+$secondary-text-color: #fff;
+$body-background: #222;
+$secondary-background: #444;
+$highlight-color: #f60;
+$highlight-text-color: #000;
+$navbar-background: $highlight-color;
+$dropdown-background: $body-background;
+$sheet-music-filter: invert(0.6);
+$success: #0E0;
+
+$row-shadow-color: #111;
+$row-background: initial;
+
+$button-color: rgba(128, 128, 128, 0.10);
+$button-text-color: $text-color;
+$active-button-color: rgba(128, 128, 128, 0.30);
+
+body.night {
+    background-size: contain !important;
+    background: $body-background;
+    color: $text-color;
+
+    @import "../components/index.scss";
+    @import "../views/index.scss";
+}

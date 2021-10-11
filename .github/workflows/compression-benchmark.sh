@@ -29,6 +29,8 @@ getResults () {
         main "bzip2" "-$q" ".bz2" "bzip2-$q" "\e[34mBZip2 q$q"
         main "lzma" "-$q" ".lzma" "lzma-$q" "\e[36mLZMA q$q"
     done
+    # Zopfli is slightly better than gzip, but on the order of 100x slower (with --i15)
+    # main "zopfli" "--i2" ".gz" "zf-gz-2" "\e[37mZopfli i2"
 }
 
 getResults | sort -g

@@ -48,12 +48,14 @@ do
         if [[ $*\  == *--no-hash\ * ]]; then
             csum=""
         else
+            # Check if another file with the same checksum exists.
             csum="."$(sha1sum "mscz/$file")
             if ls svg/*${csum:0:8}-sf$sf-*.svg > /dev/null 2>&1
             then
                 continue
             fi
         fi
+        
         for tmpfile in tmp/*.mscx # Find whatever the .mscx file is called.
         do
             sed -e "s/<Spatium>[0-9]\.[0-9]*<\/Spatium>/<Spatium>$sf<\/Spatium>/g" "$tmpfile" \
@@ -76,9 +78,13 @@ if [[ $*\  == *--compress\ *  || $*\  == *-c\ * ]]; then
     cd svg
     for file in *.svg
     do
-        echo -e " - \e[34m$file\e[0m"
-        svgo -i "$file" || echo -e "\e[31mKomprimering misslyckades\e[0m för $file."
-        #scour -i "$file" -o "${file%.*}.min.svg" || echo -e "\e[31mKomprimering misslyckades\e[0m för $file."
+        # echo -e " - \e[34m$file\e[0m"
+        if [[ $file =~ ".min.svg" ]]; then
+            echo -e "$file is already minified."
+        else
+            svgo --input "$file" --output "${file//.svg/.min.svg}" --multipass || echo -e "\e[31mKomprimering misslyckades\e[0m för $file."
+            rm "$file" # Remove old file
+        fi
     done
     cd ..
 fi
@@ -106,4 +112,9 @@ if [[ ! $*\  == *--no-move\ * ]]; then
 
     cp svgs.json ../src/assets/msvgs.json
     cp svg/* ../public/msvg/
+fi
+
+if [[ $*\  == *--force\ * && $*\  == *--compress\ * ]]; then
+    echo -e "\e[1;32mSkapar cache.\e[0m"
+    tar -cJf svg.tar.lzma svg/*
 fi

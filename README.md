@@ -18,7 +18,20 @@ Installera [Node.js 16](https://nodejs.org) om du inte redan har det. Klona seda
 \* Detta steg kräver MuseScore 3 och bash. Har du inte MuseScore, kan du gå till den senaste [build-körningen](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml), och ladda ner `music-svgs`. svg-filerna läggs sedan i `public/msvg`, och `svgs.json` flyttas till `src/assets/msvgs.json`.
 
 ### Körning
-Gå till den senaste [build-körningen](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml), skrolla ner till artifacts, och klicka på `dist` för att ladda ner en zip-fil med statiskt innehåll.
+Gå till den senaste [build-körningen](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml), skrolla ner till artifacts, och klicka på `dist` för att ladda ner en zip-fil med statiskt innehåll. Alternativt kan Docker användas, via `docker pull ghcr.io/fysiksektionen/sangbok-html:main`. Denna container exponerar port 80 till vilken HTTP-requests kan skickas. Requestsen måste skickas till `/sangbok/`, annars returneras 404.
+
+#### Docker-containrar
+Containrarna är taggade efter vilken branch de kommer från, dvs.
+* `latest` - från `main`
+* `edge` - från `vue`
+Dessa containrar är [nginx](https://www.nginx.com)-baserade, och innehåller förkomprimerade filer i både brotli- och gzip-format. Brotli-filerna är ca. 30% mindre än motsvarande gzip-filer.
+
+Utöver detta finns några suffix om användaren mot förmodan skulle vilja ha en mindre container på bekostnad av prestandan.
+* `slim-nginx` - [nginx](https://www.nginx.com)-baserad. Innehåller endast förkomprimerade filer i gzip-format.
+* `slim` - [statigz](https://pkg.go.dev/github.com/vearutop/statigz)-baserad. Innehåller endast förkomprimerade filer i brotli-format. 
+
+De [nginx](https://www.nginx.com)-baserade presterar generellt sett bättre, och kräver mindre RAM. De klarar sig bra på 8mb RAM, men kan dra nytta av upp till ca. 20mb. `slim`-containrarna är optimerade för att serva brotli-komprimerade filer. Det finns egentligen ingen anledning att använda `slim`-containrarna framför den vanliga om en inte har platsbrist på servern. Statigz-containern kräver 16mb ram, och trivs bäst med ca. 48mb.
+
 <!-- See [Configuration Reference](https://cli.vuejs.org/config/). -->
 
 ### Noter

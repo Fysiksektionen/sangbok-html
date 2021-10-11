@@ -1,58 +1,56 @@
 <template>
+  <Navbar :hideBackButton="$route.meta.hideBackButton"/>
+  <div class="flex-row">
     <router-view/>
     <GeneratorView v-if="$store.state.settings.generator"/>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue'
+import Navbar from '@/components/Navbar.vue'
+import { themes } from '@/themes'
 
 export default defineComponent({
   name: 'Sångbok',
-  components: { // Only load Generator component and generator helper functions on-demand.
-    GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue'))
+  components: {
+    // Only load Generator component and generator helper functions on-demand.
+    GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue')),
+    Navbar
   },
   created () {
-    // TODO: Ugly fix that removes body night class if stored settings.night === false.
-    document.body.className = (JSON.parse(window.localStorage.getItem('vuex') || '{"settings":{"night": true}}').settings.night === true) ? 'night' : ''
+    // TODO: Ugly fix that removes body night class if stored settings.night === false. Also done in store.
+    const theme = JSON.parse(window.localStorage.getItem('vuex') || '{"settings":{"theme": undefined}}').settings.theme
+    if (theme !== undefined && Object.keys(themes).indexOf(theme) !== -1) {
+      document.body.className = theme
+    } else {
+      document.body.className = 'night'
+    }
   }
 })
 </script>
 
 <style lang="scss">
 @use "sass:math";
-/* Colors */
-/* $f-orange: #FF642B;
-$f-orange-light: #FB9C74;
-$f-orange-lighter: #F7D48C;
-$f-porcelain: #f5f4f4;
-$f-navy: #132a3e;
-$f-gray-violet: #2f3b4b;
-$f-gray-navy: #3B5262;
-$f-gray-turqoise: #829899;
-$f-blue: #1757A3;
-$f-sky: #58a7cb;
-$f-green: #197F2A;
-$f-onyx: #221F20; */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
 
-/* Color classes. Used by views and components */
-.bg-orange {background-color: #f60;}
-.border-orange {border-color: #f60;}
+/* TODO: Load these on-demand. */
+@import './themes/night.scss';
+@import './themes/day.scss';
+@import './themes/galaxy.scss';
+@import './themes/fancy.scss';
+@import './themes/neo.scss';
+/* @import './themes/.scss'; */
 
 /* Layout */
 body {
     margin: 0;
-    margin-top: 2.2em;
     transition: 0.1s background-color ease-in-out;
-    font-family: 'EB Garamond', serif;
-
-    &.night {
-      /* TODO: Since <body> is outside of Vue's scope, the night class is set through an ugly fix in the @/store/index.ts file. This can probably be made more elegantly. */
-      background-color: #222;
-      color: #ddd;
-    }
+    font-family: 'EB Garamond', Garamond, serif;
 }
 
-#app {display: flex;}
+.flex-row {display: flex; flex-direction: row;}
+.flex-col, #app {display: flex; flex-direction: column;}
 div.main {width: 100%;}
 
 /* General */
@@ -66,7 +64,6 @@ div.main h2 {
 .button {
     text-align: center;
     font-size: 1em;
-    font-family: "EB Garamond", serif;
 
     border-width: 0;
     $navbutton-spacing: 12px;
@@ -75,12 +72,8 @@ div.main h2 {
     padding: $navbutton-spacing;
 
     background-color: rgba(128, 128, 128, 0.10);
-    &:active {background-color: rgba(128, 128, 128, 0.30);}
+    &:active:not(.disabled):not(.static) {background-color: rgba(128, 128, 128, 0.30);}
     &.disabled {opacity: 0.5;}
-}
-
-.night .button {
-  color: white;
 }
 
 /* Forms */
@@ -111,12 +104,6 @@ table.songbook {
       height: 3em;
       vertical-align: middle;
     }
-    & tr {
-      box-shadow: 0 2px 3px #aaa;
-      border-bottom: 1px solid #aaa;
-      &:active {background-color: #f3f3f3;}
-      &:first-child {box-shadow: 0 1px 5px #aaa;}
-    }
 
     & .index {padding-left: 1em;}
     & .name {padding-left: 1em;padding-right: 0.5em;}
@@ -126,10 +113,6 @@ table.songbook {
     }
 }
 
-.night table.songbook tr {
-  box-shadow: 0 2px 3px #111;
-  border-bottom: 1px solid #111;
-  &:active {background-color: #444;}
-  &:first-child {box-shadow: 0 1px 5px #111;}
-}
+ol>li {margin-top: 0.75em}
+.textcontainer>p {line-height: 1.5em;font-size: 1.1em;}
 </style>

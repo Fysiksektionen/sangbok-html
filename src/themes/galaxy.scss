@@ -1,0 +1,54 @@
+/* Colors */
+$f-red: rgb(220, 53, 69);
+$f-orange: #FF642B;
+$f-orange-light: #FB9C74;
+$f-orange-lighter: #F7D48C;
+$f-porcelain: #f5f4f4;
+$f-white: #f8f9fa;
+$f-light: rgb(240, 240, 240);
+$f-navy: #132a3e;
+$f-dark: #102537;
+$f-darker: #093144;
+$f-darkest: #062432;
+$f-gray-violet: #2f3b4b;
+$f-gray-dark: #343a40;
+$f-gray-navy: #3B5262;
+$f-gray-turqoise: #829899;
+$f-blue: #1757A3;
+$f-sky: #58a7cb;
+$f-green: #197F2A;
+$f-onyx: #221F20;
+
+
+$text-color: #ddd;
+$secondary-text-color: $text-color;
+$body-background: $f-onyx;
+$secondary-background: lighten($f-onyx, 10%);
+$highlight-color: $f-gray-navy;
+$highlight-text-color: $text-color;
+$navbar-background: $highlight-color;
+$dropdown-background: $body-background;
+$sheet-music-filter: invert(0.8);
+$success: $f-green;
+
+
+$row-shadow-color: $secondary-background;
+$row-background: inherit;
+
+$button-color: rgba($f-gray-violet, 0.4);
+$button-text-color: $text-color;
+$active-button-color: rgba($f-gray-violet, 0.7);
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap');
+body.galaxy {
+    background: $body-background;
+    color: $text-color;
+
+    font-family: 'Libre Franklin', 'Arial', sans-serif;
+    & .navbar .title {font-family: 'Libre Franklin', 'Arial', sans-serif;}
+    
+    & .component-settings {font-size: 1.1em;}
+
+    @import "../components/index.scss";
+    @import "../views/index.scss";
+}

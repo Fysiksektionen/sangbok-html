@@ -1,38 +1,29 @@
 <!-- View to list all songs in a chapter. -->
 
 <template>
-  <Navbar :parent="goToParent" />
-  <div class="main">
-    <div class="lyrics" v-touch:release="releaseHandler" v-touch:press="pressHandler" v-touch:drag="dragHandler">
-      <button v-if="song().msvg && song().text" @click="showMsvg = !showMsvg" class="button musicbutton">{{ showMsvg ?
-        'Dölj noter' : 'Visa noter'}}</button>
-      <SheetMusicRenderer v-if="song().msvg && (!song().text || showMsvg)" :src="song().msvg" />
-      <div v-if="song().text">
-        <div class="titlecontainer" v-bind:style="{'minHeight':(song().msvg && !showMsvg ? '5em' : undefined)}">
-          <h2>{{song().title}}</h2>
-          <div v-if="song().melody" class="melody" v-html="toHTML(song().melody)"></div>
+  <Swiper :swipeHandler="swipeHandler" :allowZoom="true"
+      :left="($route.params.songId > 0) ? 'allow' : 'disallow'"
+      :right="(this.chapters[$route.params.chapterId].songs.length - 1 > $route.params.songId) ? 'allow' : 'disallow'">
+    <div class="main">
+      <div class="lyrics">
+        <button v-if="song().msvg && song().text" @click="showMsvg = !showMsvg" class="button musicbutton">
+          {{ showMsvg ? 'Dölj noter' : 'Visa noter'}}</button>
+        <SheetMusicRenderer v-if="song().msvg && (!song().text || showMsvg)" :src="song().msvg" />
+        <div class="song-index" v-if="song().text && !showMsvg">{{song().index}}</div>
+        <div v-if="song().text && (!showMsvg || !song().msvg)">
+          <div class="titlecontainer" v-bind:style="{'minHeight':(song().msvg && !showMsvg ? '5em' : undefined)}">
+            <h2>{{song().title}}</h2>
+            <div v-if="song().melody" class="melody" v-html="toHTML(song().melody)"></div>
+          </div>
+          <div class="textcontainer" v-html="toHTML(song().text)"
+            v-bind:class="{'larger': $store.state.settings.larger}">
+          </div>
+          <div v-if="song().author" class="author" v-html="toHTML(song().author)"></div>
         </div>
-        <div class="textcontainer" v-html="toHTML(song().text)" v-bind:class="{'larger': $store.state.settings.larger}">
-        </div>
-        <div v-if="song().author" class="author" v-html="toHTML(song().author)"></div>
+        <NavButtons  v-if="$route.name=='Song'" :chapterid="$route.params.chapterId" :songid="$route.params.songId" />
       </div>
-      <NavButtons v-if="$route.name=='Song'" :chapterid="$route.params.chapterId" :songid="$route.params.songId" />
     </div>
-    <transition name="swipe-right">
-      <div class="swipe-indicator right bg-orange" v-if="showSwipeIndicator.includes('right')"
-        v-bind:class="{'disabled': showSwipeIndicator.includes('x')}">
-        <img src="../assets/back.png" style="transform: scaleX(-1);" v-if="!showSwipeIndicator.includes('x')" />
-        {{ showSwipeIndicator.includes('x') ? "⊘" : "" }}
-      </div>
-    </transition>
-    <transition name="swipe-left">
-      <div class="swipe-indicator left bg-orange" v-if="showSwipeIndicator.includes('left')"
-        v-bind:class="{'disabled': showSwipeIndicator.includes('x')}">
-        <img src="../assets/back.png" v-if="!showSwipeIndicator.includes('x')" />
-        {{ showSwipeIndicator.includes('x') ? "⊘" : "" }}
-      </div>
-    </transition>
-  </div>
+  </Swiper>
 </template>
 
 <script lang="ts">
@@ -41,28 +32,18 @@ import { useRoute, RouteLocationNormalized } from 'vue-router'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
+import { SwipeIndicatorState } from '@/utils/swipe'
+import Swiper from '@/components/Swiper.vue'
 import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
 import NavButtons from '@/components/SongNavButtons.vue'
 import { chapters, Song, getSongByStringIndex } from '@/utils/lyrics.ts'
 
-  type SwipeIndicatorState = 'xleft' | 'left' | 'none' | 'right' | 'xright'
-
-const getCoordsFromEvent = (e: Event): [number, number] | [undefined, undefined] => {
-  if (e.constructor.name === 'TouchEvent') {
-    const touch = (e as TouchEvent).touches[0]
-    return [touch.clientX, touch.clientY]
-  } else if (process.env.NODE_ENV === 'development' && e.constructor.name === 'MouseEvent') { // We only accept MouseEvents as swipe events in development mode.
-    return [(e as MouseEvent).clientX, (e as MouseEvent).clientY]
-  }
-  return [undefined, undefined]
-}
-
 export default defineComponent({
   name: 'SongView',
   components: {
-    Navbar,
+    Swiper,
     NavButtons,
-    SheetMusicRenderer: defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer" */ '@/components/SheetMusicRenderer.vue'))
+    SheetMusicRenderer: defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer", webpackPrefetch: true */ '@/components/SheetMusicRenderer.vue'))
   },
   data() {
     const route: RouteLocationNormalized = useRoute()
@@ -78,9 +59,7 @@ export default defineComponent({
           return chapters[param2int(route.params.chapterId)].songs[param2int(route.params.songId)] as Song
         }
       },
-      showMsvg: false,
-      touchCoords: [undefined, undefined] as [number, number] | [undefined, undefined],
-      showSwipeIndicator: 'none' as SwipeIndicatorState
+      showMsvg: false
     }
   },
   setup() {
@@ -88,7 +67,12 @@ export default defineComponent({
   },
   methods: {
     toHTML(text: string): string {
-      return text.replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/\n/igm, '<br />')
+      const ALLOWED_TAGS = ['li', 'ol', 'ul', 'b', 'p', 'i', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+      let out = text.replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/\n/igm, '<br />')
+      for (const tag of ALLOWED_TAGS) {
+        out = out.replace(new RegExp(`&lt;(/)?${tag}&gt;`, 'mig'), `<$1${tag}>`)
+      }
+      return out
     },
     goToParent() { // store.state.query is set if the user came from search. If that's the case, send them back to the search page, else go to the chapter page.
       if (this !== undefined) {
@@ -99,89 +83,27 @@ export default defineComponent({
         }
       }
     },
-    swipeHandler(direction: string) {
+    swipeHandler(direction: SwipeIndicatorState) {
       const songId = parseInt(this.$route.params.songId as string)
       const chapterId = parseInt(this.$route.params.chapterId as string)
       if (direction === 'right' && chapters[chapterId].songs.length - 1 > songId) {
-        this.$router.push('/chapter/' + chapterId + '/song/' + (songId + 1))
+        this.$router.replace('/chapter/' + chapterId + '/song/' + (songId + 1))
       } else if (direction === 'left' && songId > 0) {
-        this.$router.push('/chapter/' + this.$route.params.chapterId + '/song/' + (songId - 1))
+        this.$router.replace('/chapter/' + this.$route.params.chapterId + '/song/' + (songId - 1))
       }
-    },
-    releaseHandler() {
-      this.swipeHandler(this.showSwipeIndicator)
-      this.showSwipeIndicator = 'none'
-    },
-    pressHandler(e: Event) {
-      this.touchCoords = getCoordsFromEvent(e)
-    },
-    dragHandler(e: Event) {
-      const [x, y] = getCoordsFromEvent(e)
-      const songId = parseInt(this.$route.params.songId as string)
-      const chapterId = parseInt(this.$route.params.chapterId as string)
-      if (this.touchCoords[0] !== undefined && this.touchCoords[1] !== undefined && x !== undefined && y !== undefined) {
-        // Absolute angle of touch path, relative to the vertical line.
-        const phi = Math.abs(Math.atan2(this.touchCoords[0] - x, this.touchCoords[1] - y))
-        if (Math.PI / 4 <= phi && phi <= 3 * Math.PI / 4) {
-          if (this.touchCoords[0] - x > 30) {
-            this.showSwipeIndicator = (chapters[chapterId].songs.length - 1 > songId) ? 'right' : 'xright'
-            return
-          } else if (this.touchCoords[0] - x < -30) {
-            this.showSwipeIndicator = (songId > 0) ? 'left' : 'xleft'
-            return
-          }
-        }
-      }
-      // The catch-all-other case
-      this.showSwipeIndicator = 'none'
     }
   }
 })
 </script>
 
-<style scoped lang="scss">
-  div.swipe-indicator {
-    transition: all 0.3s ease-out;
-    position: fixed;
-    top: 30%;
-    border-radius: 4cm;
-    height: 4cm;
-    width: 4cm;
-    line-height: 4cm;
-    opacity: 0.5;
-
-    &.disabled {
-      background-color: gray;
-    }
-
-    &.right {
-      right: -3cm;
-      padding-left: 1cm;
-    }
-
-    &.left {
-      left: -3cm;
-      padding-right: 1cm;
-      text-align: right;
-    }
-
-    &>img {
-      height: 1em;
-      vertical-align: middle;
-    }
-  }
-
-  /* TODO: Find a solution to this that does not involve !important. */
-  .swipe-right-enter-from,
-  .swipe-right-leave-to {
-    right: -4cm !important;
-    opacity: 0 !important;
-  }
-
-  .swipe-left-enter-from,
-  .swipe-left-leave-to {
-    left: -4cm !important;
-    opacity: 0 !important;
+<style lang="scss" scoped>
+  .song-index {
+    float: right;
+    margin: 24px;
+    margin-top: 12px;
+    font-size: 1.5em;
+    opacity: 0.8;
+    letter-spacing: 1px;
   }
 
   div.lyrics {

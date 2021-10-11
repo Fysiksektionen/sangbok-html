@@ -1,5 +1,5 @@
 <template>
-  <form @submit="search">
+  <form @submit="search" class="component-search">
     <input type="search" v-model="query2" placeholder="Sök i sångboken" />
   </form>
 </template>
@@ -24,7 +24,11 @@ export default defineComponent({
     search (evt: Event) {
       evt.preventDefault()
       if (this !== undefined) {
-        this.$router.push('/search/' + this.query2)
+        if (this.$route.name === 'Home') {
+          this.$router.push('/search/' + this.query2)
+        } else {
+          this.$router.replace('/search/' + this.query2)
+        }
         this.store.commit('setQuery', this.query2)
       }
     }
@@ -33,7 +37,7 @@ export default defineComponent({
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="css">
+<style scoped lang="scss">
 form {width: 100%; text-align: center;}
 
 input[type=search] {
@@ -42,14 +46,8 @@ input[type=search] {
         /*border: 1px solid #aaa;*/
         border: 0;
         height: 1.8em;
-        background-color: #f0f0f0;
         border-radius: 0.3em;
         padding-left: 0.5em !important;
         padding-right: 0.5em !important;
     }
-
-.night input[type="search"] {
-    color: white;
-    background-color: #444;
-}
 </style>
