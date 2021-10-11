@@ -45,10 +45,12 @@ export default defineComponent({
   methods: {
     search: search,
     goto (hit: Fuse.FuseResult<SongHit>) {
-      if(hit.item.chapterindex && hit.item.songindex) {
-        this.$router.push('/chapter/'+hit.item.chapterindex+'/song/'+hit.item.songindex)
+      if (hit.item.chapterindex && hit.item.songindex) {
+        this.$router.push('/chapter/' + hit.item.chapterindex + '/song/' + hit.item.songindex)
+      } else if (hit.item.chapterindex && !hit.item.songindex) {
+        this.$router.push('/chapter/' + hit.item.index)
       } else {
-        this.$router.push('/song/'+hit.item.index)
+        this.$router.push('/song/' + hit.item.index)
       }
     },
     swipeHandler(direction: SwipeIndicatorState) { if (direction === 'left') { this.$router.push('/') } }

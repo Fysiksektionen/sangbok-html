@@ -1,7 +1,6 @@
 {
   "chapter": "Visor till Leo",
   "prefix": "Lℓ",
-  "comment": "Det här var ett extra kapitel som låg i app.old.js. Det bör integreras som easter-egg. Denna kommentar bör även tas bort.",
   "songs": [
     {
       "title": "Leos visa",

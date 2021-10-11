@@ -1,5 +1,6 @@
 import Fuse from 'fuse.js'
 import { songs, SongHit } from './lyrics'
+import keys from '@/assets/addons/searchKeys.json'
 
 const options = {
   includeScore: true,
@@ -39,7 +40,18 @@ const options = {
 }
 
 const fuse = new Fuse(songs, options)
+const addons = new Fuse(keys, {
+  includeScore: true,
+  isCaseSensitive: false,
+  minMatchCharLength: 3,
+  threshold: 0.1, // 0 makes the algorithm super picky, 1 matches almost anything. 0.2 seems fairly ok.
+  ignoreLocation: true,
+  keys: [
+    { name: 'title', weight: 10 },
+    { name: 'index', weight: 1 }
+  ]
+})
 
 export function search(s: string): Fuse.FuseResult<SongHit>[] {
-  return fuse.search(s)
+  return fuse.search(s).concat(addons.search(s))
 }

@@ -1,5 +1,6 @@
 import lyrics from '@/assets/lyrics.json'
 import leo from '@/assets/addons/leo.json'
+import extraSongs from '@/assets/addons/songs.json'
 
 export type SongIndex = [number, number]
 
@@ -30,7 +31,9 @@ export type Chapter = {
 }
 
 export const chapters: Chapter[] = lyrics
-export const songs: Song[] = (chapters.map((c, cid) => c.songs.map((s, sid) => { return { ...s, chapterindex: cid, songindex: sid } as SongHit })).flat().concat(leo.songs as Song[]))
+
+// List of songs for search
+export const songs: Song[] = (chapters.map((c, cid) => c.songs.map((s, sid) => { return { ...s, chapterindex: cid, songindex: sid } as SongHit })).flat()).concat(extraSongs as Song[])
 
 export function getSongsByIndices(indices: SongIndex[]): Song[] {
   const out: Song[] = []
@@ -41,7 +44,18 @@ export function getSongsByIndices(indices: SongIndex[]): Song[] {
 }
 
 export function getSongByStringIndex(idx: string): Song | undefined {
-  const hits = songs.filter(s => s.index === idx)
+  // List of all songs (for viewing. Includes easter eggs.)
+  const allSongs: Song[] = songs.concat(leo.songs as Song[])
+  const hits = allSongs.filter(s => s.index === idx)
+  if (hits.length > 0) {
+    return hits[0]
+  } else return undefined
+}
+
+export function getChapterByStringIndex(idx: string): Chapter | undefined {
+  // List of all songs (for viewing. Includes easter eggs.)
+  const cs: Chapter[] = chapters.concat([leo as Chapter])
+  const hits = cs.filter(c => c.prefix === idx)
   if (hits.length > 0) {
     return hits[0]
   } else return undefined

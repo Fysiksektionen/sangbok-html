@@ -6,7 +6,7 @@
       <h2>{{chapter.chapter}}</h2>
       <table class="songbook">
           <tr v-for="(song, idx) in chapter.songs"
-              @click="$router.push('/chapter/'+$route.params.cid+'/song/'+idx)"
+              @click="clickHandler(song, idx)"
               v-bind:key="idx">
               <td class="index">
                 {{ song.index }}
@@ -28,23 +28,35 @@ import { key } from '@/store'
 
 import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
 import { SwipeIndicatorState } from '@/utils/swipe.ts'
-import { chapters } from '@/utils/lyrics.ts'
+import { chapters, getChapterByStringIndex, Chapter, Song } from '@/utils/lyrics.ts'
 
 export default defineComponent({
   name: 'ChapterView',
   components: {
     Swiper
   },
-  data() {
-    return {
-      chapter: chapters[parseInt(this.$route.params.cid as string)]
+  computed: {
+    chapter () {
+      if (this.$route.name === 'ChapterByIndex') {
+        // console.log(getChapterByStringIndex(this.$route.params.chapterIndex as string))
+        return getChapterByStringIndex(this.$route.params.chapterIndex as string) as Chapter
+      } else {
+        return chapters[parseInt(this.$route.params.cid as string)] as Chapter
+      }
     }
   },
   setup() {
     return { store: useStore(key) }
   },
   methods: {
-    swipeHandler (direction: SwipeIndicatorState) { (direction === 'left') && this.$router.push('/') }
+    swipeHandler (direction: SwipeIndicatorState) { (direction === 'left') && this.$router.push('/') },
+    clickHandler (song: Song, idx: number) {
+      if (this.$route.name === 'ChapterByIndex') {
+        this.$router.push('/chapter/' + this.chapter.prefix + '/song/' + idx)
+      } else {
+        this.$router.push('/chapter/' + this.$route.params.cid + '/song/' + idx)
+      }
+    }
   }
 })
 </script>

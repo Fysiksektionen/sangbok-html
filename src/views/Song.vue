@@ -2,8 +2,8 @@
 
 <template>
   <Swiper :swipeHandler="swipeHandler" :allowZoom="true"
-      :left="($route.params.songId > 0) ? 'allow' : 'disallow'"
-      :right="(this.chapters[$route.params.chapterId].songs.length - 1 > $route.params.songId) ? 'allow' : 'disallow'">
+      :left="($route.name=='SongByIndex') ? 'hide' : ($route.params.songId > 0) ? 'allow' : 'disallow'"
+      :right="($route.name=='SongByIndex') ? 'hide' : (chapter.songs.length - 1 > $route.params.songId) ? 'allow' : 'disallow'">
     <div class="main">
       <div class="lyrics">
         <button v-if="song().msvg && song().text" @click="showMsvg = !showMsvg" class="button musicbutton">
@@ -20,7 +20,7 @@
           </div>
           <div v-if="song().author" class="author" v-html="toHTML(song().author)"></div>
         </div>
-        <NavButtons  v-if="$route.name=='Song'" :chapterid="$route.params.chapterId" :songid="$route.params.songId" />
+        <NavButtons v-if="chapter" :chapter="chapter" :chapterid="$route.params.chapterId" :songid="$route.params.songId" />
       </div>
     </div>
   </Swiper>
@@ -32,11 +32,12 @@ import { useRoute, RouteLocationNormalized } from 'vue-router'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
-import { SwipeIndicatorState } from '@/utils/swipe'
 import Swiper from '@/components/Swiper.vue'
-import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
+import { SwipeIndicatorState } from '@/utils/swipe'
 import NavButtons from '@/components/SongNavButtons.vue'
-import { chapters, Song, getSongByStringIndex } from '@/utils/lyrics.ts'
+import { chapters, Song, getSongByStringIndex, getChapterByStringIndex } from '@/utils/lyrics.ts'
+
+const param2int = (s: string | string[]): number => parseInt((typeof s === 'string') ? s : s[0])
 
 export default defineComponent({
   name: 'SongView',
@@ -47,14 +48,15 @@ export default defineComponent({
   },
   data() {
     const route: RouteLocationNormalized = useRoute()
-    const param2int = (s: string | string[]): number => parseInt((typeof s === 'string') ? s : s[0])
     return {
-      chapters: chapters,
+      chapter: (route.name === 'SongByIndex') ? undefined : (route.name === 'SongByChapterIndex') ? getChapterByStringIndex(route.params.chapterIndex as string) : chapters[param2int(route.params.chapterId)],
       // TODO: This is an ugly fix for the song not updating when pressing NavButtons. It can probably be done using computed()
       song: () => {
-        if(route.name === "SongByIndex") {
-          console.log(getSongByStringIndex(route.params.songIndex as string))
+        if (route.name === 'SongByIndex') {
           return getSongByStringIndex(route.params.songIndex as string)
+        } else if (route.name === 'SongByChapterIndex') {
+          const ch = getChapterByStringIndex(route.params.chapterIndex as string)
+          if (ch) { return ch.songs[param2int(route.params.songId)] }
         } else {
           return chapters[param2int(route.params.chapterId)].songs[param2int(route.params.songId)] as Song
         }
@@ -85,11 +87,13 @@ export default defineComponent({
     },
     swipeHandler(direction: SwipeIndicatorState) {
       const songId = parseInt(this.$route.params.songId as string)
-      const chapterId = parseInt(this.$route.params.chapterId as string)
-      if (direction === 'right' && chapters[chapterId].songs.length - 1 > songId) {
-        this.$router.replace('/chapter/' + chapterId + '/song/' + (songId + 1))
+      const chapter = this.chapter
+      if (!chapter) return
+      const chapterId = (this.$route.params.chapterId === undefined) ? chapter.prefix : this.$route.params.chapterId
+      if (direction === 'right' && chapter.songs.length - 1 > songId) {
+        this.$router.replace('/chapter/' + (chapterId || chapter.prefix) + '/song/' + (songId + 1))
       } else if (direction === 'left' && songId > 0) {
-        this.$router.replace('/chapter/' + this.$route.params.chapterId + '/song/' + (songId - 1))
+        this.$router.replace('/chapter/' + (chapterId || chapter.prefix) + '/song/' + (songId - 1))
       }
     }
   }

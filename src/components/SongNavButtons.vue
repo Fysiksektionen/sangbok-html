@@ -4,36 +4,36 @@
 <template>
   <div class="navbuttons">
     <div class="button" v-if="parseInt(songid) > 0"
-      @click="$router.replace('/chapter/'+chapterid+'/song/'+(parseInt(songid)-1))">
-      <div>{{chapters[chapterid].songs[parseInt(songid)-1].title}}</div>
+      @click="$router.replace('/chapter/'+chapterPrefix+'/song/'+(parseInt(songid)-1))">
+      <div>{{chapter.songs[parseInt(songid)-1].title}}</div>
       <div>
         <img src="../assets/back.png"/> &nbsp;
-        {{chapters[chapterid].songs[parseInt(songid)-1].index}}
+        {{chapter.songs[parseInt(songid)-1].index}}
       </div>
     </div>
     <div class="filler" v-if="parseInt(songid) == 0"></div>
-    <div class="button" v-if="chapters[chapterid].songs[parseInt(songid)+1]"
-      @click="$router.replace('/chapter/'+chapterid+'/song/'+(parseInt(songid)+1))">
-      <div>{{chapters[chapterid].songs[parseInt(songid)+1].title}}</div>
+    <div class="button" v-if="chapter.songs[parseInt(songid)+1]"
+      @click="$router.replace('/chapter/'+chapterPrefix+'/song/'+(parseInt(songid)+1))">
+      <div>{{chapter.songs[parseInt(songid)+1].title}}</div>
       <div>
-        {{chapters[chapterid].songs[parseInt(songid)+1].index}} &nbsp;
+        {{chapter.songs[parseInt(songid)+1].index}} &nbsp;
         <img src="../assets/back.png" style="transform: scaleX(-1);"/>
       </div>
     </div>
-    <div class="filler" v-if="parseInt(songid) == chapters[chapterid].songs.length-1"></div>
+    <div class="filler" v-if="parseInt(songid) == chapter.songs.length-1"></div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { chapters } from '@/utils/lyrics.ts'
+// import { chapters } from '@/utils/lyrics.ts'
 
 export default defineComponent({
   name: 'Navbar',
-  props: ['songid', 'chapterid'],
-  data() {
-    return {
-      chapters: chapters
+  props: ['songid', 'chapter', 'chapterid'],
+  computed: {
+    chapterPrefix () {
+      return (this.$props.chapterid === undefined) ? this.$props.chapter.prefix : this.$props.chapterid
     }
   }
 })
