@@ -1904,6 +1904,41 @@
         "prefix": "Σσ",
         "songs": [
             {
+                "title": "Brev från nØllan",
+                "author": "Alex Hamben, F-19\nEttans fest 2019",
+                "melody": "Brev från Kolonien",
+                "text": "Hejsan FRum, hejsan Styret,\nhär är brev från nØllepyret.\nVi har kul i Konsulatet,\nvi står tjugoåtta schlemmiga nØllan i en\n\nvidsträckt kö till mikrougnar,\nnØllan väsnas, för vi hungrar.\nStackars fysiker som står bredvid oss,\nde dränker bäst sin sorg med en stor flaska rom.\n\nVi har roligt, vill jag lova,\nbara plugga, aldrig sova.\nOch när tenta-P, äntligen är slut,\nja då vill jag gasqua och få mig en redig sup.\n\nI Konsulatet, finns det snapsglas.\nUt i skogen finns det lustgas,\nsom man köper av en kul typ,\ntill ockerpriser, så nu är min plånbok tom, typ.\n\nEn bakfylla, jag sent glömmer.\nIn på toan, magen tömmer\nut sitt innehåll, utan förbehåll,\nsvär att jag aldrig igen ska dricka alkohol.\n\nNu har jag snart, slut på pengar,\ntill den 25:e, jag ivrigt längtar.\nOch när CSN har betalats ut,\nja då bränner jag drygt hälften på kurslitteratur!\n\nJag fick hål i, mina tänder,\ngodisskåpet, sånt som händer...\nMin diet består mest av Billys\noch om jag tröttnar finns det snabbnudlar\n från Willy’s.\n\nI Konsulatet, är alla snälla,\njag ser inga skäl att gnälla.\nTack till Styret, nämnderna och allt\noch särskilt fkm* som höjer min promillehalt!",
+                "index": "σ20.1"
+            },
+            {
+                "title": "van der Waals",
+                "author": "Felix Bengtsson, Alex Hamben\n & Marve Grönblad Vesterinen, F-19\nTentagasque 1 2019 - Gasque för fulla segel!",
+                "melody": "Wondervall",
+                "text": "Kvasistatisk, isoterm, reversibel, adiabat,\nkontinuerligt i jämvikt, ger approximativt resultat.\nOfta antar vi ideal gas,\nmen räcker inte det,\nvad gör man då?\n\nP plus\na gånger N över V i parantes kvadrat\ngånger\nV minus Nb ska va lika med NkT.\nOm man kan räkna van der Waals\nkommer tentan gå bra,\nhoppas jag...\n\nPartikeltätheten är hög och trycket är mäktigt\nsystemets temperatur är otillräcklig.\nDet finns många fall när man\nbehöver räkna på dig,\nmen jag vet ej hur.\n\nFör PV…\nÄr ungefär lika med NkT,\nför en ideal gas.\nmen inte van der Waals!",
+                "index": "σ20.2"
+            },
+            {
+                "title": "Potatiskanon",
+                "author": "Frida Grönberg & Rebecca Remling, F-19\nTentagasque 2 2020 - Sagan om Kons",
+                "melody": "Punschkanon (gökvisa)",
+                "text": "\"Herrar\":\n\n||: Potato, potato, potato, all kinds of :||\n\n\"Damer\":\n\nWhen we have potatoes\nwhat with them can we do?\nBoil ’em, mash’em, stick ’em in a stew.\n\n||: Potatoes! Potatoes! Even more more potatoes  :||",
+                "index": "σ20.3"
+            },
+            {
+                "title": "Sjörövar-π",
+                "author": "Nicole Hedblom F-17 & Björn Magnusson\nTentagasque 4 2020 - TGZoom",
+                "melody": "Sjörövarfabbe",
+                "text": "3 komma 14 ett fem ni',\nBörjar den långa följden av π.\nDess decimaler blir inte ϕ,\ndetta är en sång om π!\n\n2 6 5 35 åttini',\nså fortsätter följden av π.\nVi vet hur man beräknar π,\nnyttja lite trolleri.\n\nTa en cirkel och mät runt den,\ndra ett streck tvärs över ringen,\ndela dessa så får du nåntin’\nså kan du beräkna π!\n\nMen då,\nvad står på?\nDecimalerna blir bara mera små.\nOj då,\nvad står på?\nOj oj oj, oj oj oj,\noj, oj, oj, oj, oj, oj, oj, oj!\n\nDet är nåt man måste förstå,\näven om siffrorna inte är få,\nminskar dess värde ju fler man får,\ndärför estimeras π\n\nSkrik: “till 3!”",
+                "index": "σ20.4"
+            },
+            {
+                "title": "Numme, numme, hej!",
+                "author": "William Laius Lundgren\n & Gustav von Knorring, F-18\nTentagasque 4 2020 - TGZoom",
+                "melody": "Dragostea din tei",
+                "text": "||: Maiahi-Maiaho, Maiaha-maiahaha :||\n\nHallå? Salut!\nHar ni hört om, en kurs?\nDär man kan\nlösa allting, numeriskt, på en dator.\n\nEuler framåt,\nnumme, numme, hej!\nNumme, numme, hej!\nNumme numme, numme, yay!\nDatorn räknar ut allting åt dig\nså länge algoritmen sköter sig.\n\nEuler bakåt,\nnumme, numme, hej!\nNumme, numme, hej!\nNumme numme numme, yay!\nDiskret integration hjälper dig\nnär trapetsmetoden sköter sig.\n\nNewton Raphson\nnumme, numme, hej!\nNumme, numme, hej!\nNumme numme numme, yay!\nFixpunkts metoden kan hjälpa dig\nNär x löses ut implicit-yay!\n\nRunge Kutta,\nnumme, numme, hej!\nNumme, numme, hej!\nNumme numme numme, yay!",
+                "index": "σ20.5"
+            },
+            {
                 "title": "Balladen om enhörningen och nubben hon tog",
                 "author": "Anton Åkesson, F-14, Stuggasquen 2018",
                 "melody": "Balladen om Theobald Thor",
