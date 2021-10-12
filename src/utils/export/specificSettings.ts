@@ -33,7 +33,7 @@ function trailingInfo(lyrics: string, settings: DownloadSetting[]): string {
  * Specific preprocessors
  */
 function arskursernas(lyrics: string, settings: DownloadSetting[]): string { // TODO: Cleanup
-  console.log(settings)
+  // console.log(settings)
   const content = [] as string[]
   const description = lyrics.split('\n').filter(line => /^(?!\d\d)/.test(line))
   const years = lyrics.split('\n').filter(line => /^\d\d/.test(line))

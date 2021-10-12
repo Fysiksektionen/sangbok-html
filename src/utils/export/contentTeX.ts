@@ -9,7 +9,7 @@ export default function getContentTeX(songs: Song[], gs: GeneralSettings, ss: Sp
   // Main loop
   for (const song of songs) {
     if (!song.text) {
-      console.log(`Song with empty text. Ignoring: ${song.index}`)
+      console.warn(`Song with empty text. Ignoring: ${song.index}`)
       continue
     }
 

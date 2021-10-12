@@ -82,6 +82,6 @@ export function greek2latin2 (greek: string): string {
   Object.keys(dict).forEach((key) => {
     out = out.replace(key, dict[key])
   })
-  console.log(greek, out)
+  // console.log(greek, out)
   return out
 }
