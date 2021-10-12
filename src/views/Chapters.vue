@@ -43,27 +43,7 @@ export default defineComponent({
   },
   methods: {
     dragHandler () { this.onlyAllowZoomOut = onlyAllowZoomOut() },
-    greek2latin (greek: string): string {
-      const dict: { [key: string]: string } = {
-        Αα: 'Alfa',
-        Ββ: 'Beta',
-        Γγ: 'Gamma',
-        Δδ: 'Delta',
-        Εε: 'Epsilon',
-        Ζζ: 'Zeta',
-        Ηη: 'Eta',
-        Θθ: 'Theta',
-        Ιι: 'Iota',
-        Κκ: 'Kappa',
-        Λλ: 'Lambda',
-        Μμ: 'My',
-        Νν: 'Ny',
-        Οο: 'Omikron',
-        Σσ: 'Sigma',
-        Lℓ: 'Leo' // TODO: Why?
-      }
-      return dict[greek]
-    }
+    greek2latin: greek2latin,
   }
 })
 </script>
