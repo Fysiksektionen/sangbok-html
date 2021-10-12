@@ -170,7 +170,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: | 
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
-            type=edge,branch=vue
+            type=edge,branch=dev
             type=ref,event=branch
           flavor: |
             suffix=${{ matrix.suffix }}

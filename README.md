@@ -1,5 +1,5 @@
 # Sångboken för webben
-[![Build](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml/badge.svg?branch=vue)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml) [![ESLint](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/lint.yml/badge.svg?branch=vue)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/lint.yml)
+[![Build](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml/badge.svg?branch=main)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml) [![ESLint](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/lint.yml)
 
 Sångboken, för hemsidan. Work-in-progress. Detta är alltså _inte_ [den version](https://f.kth.se/sangbok/) som ligger uppe på hemsidan nu (se [Helmers repo](https://github.com/HelmerNylen/sangbok-f) för koden till den). Vill du se hur det går, ligger en hyfsat uppdaterad version [här](https://f-sangbok-3cf6d8.netlify.app). Vill du hänga på, eller har fler förslag på vad som kan förbättras är det bara att hojta till 😊.  
 / Oskar
@@ -23,7 +23,7 @@ Gå till den senaste [build-körningen](https://github.com/Fysiksektionen/sangbo
 #### Docker-containrar
 Containrarna är taggade efter vilken branch de kommer från, dvs.
 * `latest` - från `main`
-* `edge` - från `vue`
+* `edge` - från `dev`
 Dessa containrar är [nginx](https://www.nginx.com)-baserade, och innehåller förkomprimerade filer i både brotli- och gzip-format. Brotli-filerna är ca. 30% mindre än motsvarande gzip-filer.
 
 Utöver detta finns några suffix om användaren mot förmodan skulle vilja ha en mindre container på bekostnad av prestandan.
