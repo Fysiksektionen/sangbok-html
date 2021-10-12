@@ -20,22 +20,10 @@ const options = {
       name: 'title',
       weight: 10
     },
-    {
-      name: 'author',
-      weight: 1
-    },
-    {
-      name: 'melody',
-      weight: 1
-    },
-    {
-      name: 'text',
-      weight: 1
-    },
-    {
-      name: 'index',
-      weight: 1
-    },
+    'author',
+    'melody',
+    'text',
+    'index',
     {
       name: 'tags',
       weight: 0.5

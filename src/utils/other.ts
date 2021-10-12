@@ -59,3 +59,29 @@ export function greek2latin (greek: string): string {
   })
   return out
 }
+
+export function greek2latin2 (greek: string): string {
+  const dict: { [key: string]: string } = {
+    α: 'a',
+    β: 'b',
+    γ: 'g',
+    δ: 'd',
+    ε: 'e',
+    ζ: 'z',
+    η: 'h',
+    θ: 't',
+    ι: 'i',
+    κ: 'k',
+    λ: 'l',
+    μ: 'm',
+    ν: 'n',
+    ο: 'o',
+    σ: 's'
+  }
+  let out = greek
+  Object.keys(dict).forEach((key) => {
+    out = out.replace(key, dict[key])
+  })
+  console.log(greek, out)
+  return out
+}
