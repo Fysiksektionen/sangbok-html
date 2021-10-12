@@ -1,3 +1,5 @@
+import { greek2latin } from './other'
+
 import lyrics from '@/assets/lyrics.json'
 import leo from '@/assets/addons/leo.json'
 import extraSongs from '@/assets/addons/songs.json'
@@ -21,7 +23,8 @@ export type Song = {
 
 export type SongHit = Song & {
   chapterindex?: number,
-  songindex?: number
+  songindex?: number,
+  tags?: string
 }
 
 export type Chapter = {
@@ -33,7 +36,7 @@ export type Chapter = {
 export const chapters: Chapter[] = lyrics
 
 // List of songs for search
-export const songs: Song[] = (chapters.map((c, cid) => c.songs.map((s, sid) => { return { ...s, chapterindex: cid, songindex: sid } as SongHit })).flat()).concat(extraSongs as Song[])
+export const songs: Song[] = (chapters.map((c, cid) => c.songs.map((s, sid) => { return { ...s, chapterindex: cid, songindex: sid, tags: greek2latin(s.index) } as SongHit })).flat()).concat(extraSongs as Song[])
 
 export function getSongsByIndices(indices: SongIndex[]): Song[] {
   const out: Song[] = []

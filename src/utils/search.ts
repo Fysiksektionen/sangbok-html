@@ -35,6 +35,10 @@ const options = {
     {
       name: 'index',
       weight: 1
+    },
+    {
+      name: 'tags',
+      weight: 0.5
     }
   ]
 }
@@ -53,5 +57,5 @@ const addons = new Fuse(keys, {
 })
 
 export function search(s: string): Fuse.FuseResult<SongHit>[] {
-  return fuse.search(s).concat(addons.search(s))
+  return fuse.search(s).concat(addons.search(s)).sort((x, y) => { return (x.score || 0) - (y.score || 0) })
 }

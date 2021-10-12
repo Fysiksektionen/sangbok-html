@@ -24,6 +24,7 @@ import { useStore } from 'vuex'
 import { key } from '@/store'
 
 import { onlyAllowZoomOut } from '@/utils/swipe.ts' // @ is an alias to /src
+import { greekPrefix2latin } from '@/utils/other'
 import SearchBox from '@/components/SearchBox.vue'
 import { chapters } from '@/utils/lyrics.ts'
 
@@ -43,7 +44,7 @@ export default defineComponent({
   },
   methods: {
     dragHandler () { this.onlyAllowZoomOut = onlyAllowZoomOut() },
-    greek2latin: greek2latin,
+    greek2latin: greekPrefix2latin
   }
 })
 </script>
