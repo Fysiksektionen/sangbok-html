@@ -43,6 +43,9 @@ body.neo {
     background-color: $f-white;
     color: $text-color;
     font-family: 'Libre Franklin', 'Arial', sans-serif;
+    letter-spacing: 0.01em;
+    word-spacing: 0.02em;
+    
     & .navbar .title {font-family: 'Libre Franklin', 'Arial', sans-serif;}
     & table.songbook tr:nth-child(odd) {background-color: $f-light;}
     & .button {color: $f-light;}
