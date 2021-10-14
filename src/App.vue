@@ -76,6 +76,13 @@ div.main h2 {
     &.disabled {opacity: 0.5;}
 }
 
+img.inline {
+  max-height: 100%;
+  height: 1em;
+  vertical-align: middle;
+  margin-bottom: 0.2em;
+}
+
 /* Forms */
 .toggle {
       float: right;

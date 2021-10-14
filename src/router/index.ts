@@ -49,7 +49,11 @@ const routes: Array<RouteRecordRaw> = [
     component: Search
     // component: defineAsyncComponent(() => import(/* webpackChunkName: "searchview", webpackPreload: true */ '../views/Search.vue'))
   },
-  { path: '/:pathMatch(.*)*', redirect: '/' } // Redirect 404:s to the start page.
+  { // Redirect 404:s to the start page.
+    path: '/:pathMatch(.*)*',
+    redirect: '/',
+    name: 'Unmatched'
+  }
 ]
 
 const router = createRouter({

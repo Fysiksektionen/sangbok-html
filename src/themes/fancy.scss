@@ -1,13 +1,14 @@
 /* Colors */
 $text-color: #b7b7b7;
 $secondary-text-color: $text-color;
-$body-background: url('/gast.svg') center fixed no-repeat #000;
+$body-background: url('/img/gast.svg') center fixed no-repeat #000;
 $secondary-background: lighten(#000, 10%);
 $highlight-color: #460066;
 $highlight-text-color: $text-color;
 $navbar-background: $highlight-color;
 $dropdown-background: $body-background;
 $sheet-music-filter: invert(0.8);
+$inline-image-filter: invert(1);
 $success: #f00;
 
 
@@ -31,7 +32,7 @@ body.fancy .song-index, body.fancy .index {
 
 body.fancy {
     background-size: contain;
-    background-image: url('/gast.svg');
+    background-image: url('/img/gast.svg');
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;

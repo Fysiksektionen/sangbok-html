@@ -8,9 +8,7 @@
           <tr v-for="(song, idx) in chapter.songs"
               @click="clickHandler(song, idx)"
               v-bind:key="idx">
-              <td class="index">
-                {{ song.index }}
-              </td>
+              <td class="index" v-html="song.index"></td>
               <td class="name">
                 <span v-html="song.title"></span>
                 <span v-if="song.msvg" class="sheetmusicicon">𝄞</span>
