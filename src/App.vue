@@ -37,9 +37,9 @@ export default defineComponent({
 /* TODO: Load these on-demand. */
 @import './themes/night.scss';
 @import './themes/day.scss';
-@import './themes/galaxy.scss';
-@import './themes/fancy.scss';
-@import './themes/neo.scss';
+/* @import './themes/galaxy.scss'; */
+/* @import './themes/fancy.scss'; */
+/* @import './themes/neo.scss'; */
 /* @import './themes/.scss'; */
 
 /* Layout */
@@ -74,6 +74,13 @@ div.main h2 {
     background-color: rgba(128, 128, 128, 0.10);
     &:active:not(.disabled):not(.static) {background-color: rgba(128, 128, 128, 0.30);}
     &.disabled {opacity: 0.5;}
+}
+
+img.inline {
+  max-height: 100%;
+  height: 1em;
+  vertical-align: middle;
+  margin-bottom: 0.2em;
 }
 
 /* Forms */

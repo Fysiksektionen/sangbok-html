@@ -2,8 +2,6 @@
 # We assume that music is pre-built.
 FROM node:16-alpine AS frontend-build
 
-# RUN apk add --no-cache brotli
-
 WORKDIR /app
 
 COPY package*.json .

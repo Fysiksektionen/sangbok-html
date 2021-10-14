@@ -8,9 +8,7 @@
         <tr v-for="(hit, idx) in search($route.params.query)"
             @click="goto(hit)"
             v-bind:key="idx">
-            <td class="index">
-              {{ hit.item.index }}
-            </td>
+            <td class="index" v-html="hit.item.index"></td>
             <td class="name">
               {{ hit.item.title }}
               <span v-if="hit.item.msvg" class="sheetmusicicon">𝄞</span>
@@ -48,7 +46,7 @@ export default defineComponent({
       if (hit.item.chapterindex !== undefined && hit.item.songindex !== undefined) {
         this.$router.push('/chapter/' + hit.item.chapterindex + '/song/' + hit.item.songindex)
       } else if (hit.item.chapterindex !== undefined && hit.item.songindex === undefined) {
-        this.$router.push('/chapter/' + hit.item.index)
+        this.$router.push('/chapter/' + hit.item.chapterindex)
       } else {
         this.$router.push('/song/' + hit.item.index)
       }
