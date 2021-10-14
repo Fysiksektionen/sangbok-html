@@ -1,7 +1,7 @@
 <!-- View to list all songs in a chapter. -->
 
 <template>
-  <Swiper :swipeHandler="swipeHandler" :allowZoom="true"
+  <Swiper :swipeHandler="swipeHandler" :allowZoom="true" class="component-song"
       :left="($route.name=='SongByIndex') ? 'hide' : ($route.params.songId > 0) ? 'allow' : 'disallow'"
       :right="($route.name=='SongByIndex') ? 'hide' : (chapter.songs.length - 1 > $route.params.songId) ? 'allow' : 'disallow'">
     <div class="main">

@@ -84,36 +84,37 @@ export default defineComponent({
 
   .component-swiper {
     width: 100%;
+    overflow-x: hidden;
     padding: 0;
     margin: 0;
     border: none;
     & div.swipe-indicator {
-    transition: all 0.3s ease-out;
-    position: fixed;
-    top: 30%;
-    border-radius: 4cm;
-    height: 4cm;
-    width: 4cm;
-    line-height: 4cm;
-    opacity: 0.5;
+      transition: all 0.3s ease-out;
+      position: fixed;
+      top: 5cm;
+      border-radius: 4cm;
+      height: 4cm;
+      width: 4cm;
+      line-height: 4cm;
+      opacity: 0.5;
 
-    &.right {
-      right: -3cm;
-      padding-left: 1cm;
-    }
+      &.right {
+        right: -3cm;
+        padding-left: 1cm;
+      }
 
-    &.left {
-      left: -3cm;
-      padding-right: 1cm;
-      text-align: right;
-    }
+      &.left {
+        left: -3cm;
+        padding-right: 1cm;
+        text-align: right;
+      }
 
-    &>img {
-      height: 1em;
-      vertical-align: middle;
-    }
+      &>img {
+        height: 1em;
+        vertical-align: middle;
+      }
 
-    &.disabled {background-color: gray;}
+      &.disabled {background-color: gray;}
   }
 
   /* TODO: Find a solution to this that does not involve !important. */

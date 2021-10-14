@@ -5,5 +5,6 @@ export const themes = {
   neo: '🚀',
   galaxy: '🌌',
   // halloween: '🎃'
-  fancy: '👑'
+  fancy: '👑',
+  z: '☣'
 }
