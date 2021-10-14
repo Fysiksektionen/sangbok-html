@@ -1,0 +1,67 @@
+/* Colors */
+$text-color: #20191C;
+$secondary-text-color: $text-color;
+$body-background: silver;
+$secondary-background: #C2413A90;
+$highlight-color: #C2413A;
+$highlight-text-color: $text-color;
+$navbar-background: $highlight-color;
+$dropdown-background: $body-background;
+$sheet-music-filter: none;
+$inline-image-filter: none;
+$success: #f00;
+
+
+$row-shadow-color: #12121290;
+$row-background: rgba(0,0,0,0);
+
+$button-color: #00000030;
+$button-text-color: $text-color;
+$active-button-color: #C2413A70;
+
+@font-face {
+    font-family: 'Capture Smallz';
+    src: url('/font/capture-smallz.regular.woff2') format('woff2');
+    
+  }
+@font-face {
+    font-family: 'HVD Peace';
+    src: url('/font/hvd-peace.regular.woff2') format('woff2');
+    unicode-range: U+0000-0026, U+0028-FFFF;
+  }
+
+// @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Fruktur&family=Hanalei+Fill&display=swap'); //  'Ballet', 'Pinyon Script', 'Meie Script', 'Fleur De Leah'
+body.z,
+body.z .title,
+body.z input[type=search] {
+    font-family: 'HVD Peace', 'Capture Smallz',  serif;
+    color: $text-color;
+}
+
+body.fancy .song-index, body.fancy .index {
+    font-family: 'Capture Smallz', serif;
+}
+
+body.z {
+    background-size: cover;
+    background-image: url('/img/biohazard.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #E3BC3A;
+    color: $text-color;
+
+    @import "../components/index.scss";
+    @import "../views/index.scss";
+
+    & tr {
+        backdrop-filter: saturate(70%) contrast(110%) blur(2px);
+        &:active {
+                backdrop-filter: saturate(80%);
+        }
+    }
+
+    & .component-song {
+        backdrop-filter: saturate(90%) blur(1px);
+    }
+}
