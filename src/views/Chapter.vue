@@ -26,7 +26,7 @@ import { key } from '@/store'
 
 import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
 import { SwipeIndicatorState } from '@/utils/swipe.ts'
-import { chapters, getChapterByStringIndex, Chapter, Song } from '@/utils/lyrics.ts'
+import { chapters, getChapterByStringIndex, Chapter, Song } from '@/lyrics'
 
 export default defineComponent({
   name: 'ChapterView',

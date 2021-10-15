@@ -1,5 +1,5 @@
-import { SongIndex2 } from '@/utils/lyrics'
-import { Mutation } from 'vuex'
+import { SongIndex2 } from '@/lyrics'
+// import { Mutation } from 'vuex'
 
 export type SongList = {
   name: string,
@@ -40,10 +40,10 @@ export const listsModule = {
     deleteList (state: SongList[], list: number): void {
       state.splice(list, 1)
     },
-    newList (state: SongList[], list: number): void {
+    newList (state: SongList[]): void {
       state.push({
         name: 'Lista ' + (state.length + 1), description: '', songs: []
       })
     }
-  } as { [key: string]: Mutation<any> }
+  } // as { [key: string]: Mutation<any> }
 }

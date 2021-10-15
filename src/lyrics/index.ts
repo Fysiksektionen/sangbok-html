@@ -1,10 +1,10 @@
-import { greek2latin, greek2latin2 } from './other'
+import { greek2latin, greek2latin2 } from '../utils/other'
 
-import lyrics from '@/assets/lyrics.json'
-import leo from '@/assets/addons/leo.json'
-import ths from '@/assets/addons/ths.json'
-import extraSongs from '@/assets/addons/songs.json'
-import { RouteLocationNormalized } from 'vue-router'
+import lyrics from './lyrics.json'
+import leo from './addons/leo.json'
+import ths from './addons/ths.json'
+import extraSongs from './addons/songs.json'
+export { getChapterFromRoute, getSongFromRoute, param2int } from './routeGetters'
 
 export type SongIndex = [number, number]
 export type SongIndex2 = string
@@ -66,6 +66,15 @@ export function getSongByStringIndex(idx: string): Song | undefined {
   } else return undefined
 }
 
+export function getSongsByStringIndices(indices: SongIndex2[]): Song[] {
+  const out: Song[] = []
+  for (const songIndex of indices) {
+    const res = getSongByStringIndex(songIndex)
+    res && out.push(res)
+  }
+  return out
+}
+
 export function getChapterByStringIndex(idx: string): Chapter | undefined {
   // List of all songs (for viewing. Includes easter eggs.)
   const cs: Chapter[] = chapters.concat([leo, ths] as Chapter[])
@@ -73,18 +82,4 @@ export function getChapterByStringIndex(idx: string): Chapter | undefined {
   if (hits.length > 0) {
     return hits[0]
   } else return undefined
-}
-
-// TODO: Move elsewhere
-export function param2int (s: string | string[]): number { return parseInt((typeof s === 'string') ? s : s[0]) }
-
-export function getSongFromRoute(route: RouteLocationNormalized): Song | undefined {
-  if (route.name === 'SongByIndex') {
-    return getSongByStringIndex(route.params.songIndex as string)
-  } else if (route.name === 'SongByChapterIndex') {
-    const ch = getChapterByStringIndex(route.params.chapterIndex as string)
-    if (ch) { return ch.songs[param2int(route.params.songId)] }
-  } else {
-    return chapters[param2int(route.params.chapterId)].songs[param2int(route.params.songId)] as Song
-  }
 }

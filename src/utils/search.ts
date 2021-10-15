@@ -1,6 +1,6 @@
 import Fuse from 'fuse.js'
-import { songs, SongHit } from './lyrics'
-import keys from '@/assets/addons/search.json'
+import { songs, SongHit } from '../lyrics'
+import keys from '@/lyrics/addons/search.json'
 
 const options = {
   includeScore: true,

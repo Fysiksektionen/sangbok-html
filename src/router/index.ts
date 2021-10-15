@@ -3,12 +3,11 @@ import Chapters from '../views/Chapters.vue'
 import Chapter from '../views/Chapter.vue'
 import Song from '../views/Song.vue'
 import Search from '../views/Search.vue'
-import { chapters, getChapterByStringIndex, getSongByStringIndex } from '@/utils/lyrics'
+import { chapters, getChapterByStringIndex, getSongByStringIndex } from '@/lyrics'
 
 // Certain components may benefit from async loading. For now (v1.0) this adds about 3 KiB to the total size (transferred)
 // while reducing the entrypoint size by about 30 KiB. Hence the difference is pretty negligible for now, especially since
 // all users will use the Song component, and most will use the Search component.
-// import { defineAsyncComponent } from 'vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -31,7 +30,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/chapter/:chapterId(\\d+)/song/:songId(\\d+)',
     name: 'Song',
     component: Song
-    // component: defineAsyncComponent(() => import(/* webpackChunkName: "songview", webpackPreload: true */ '../views/Song.vue'))
   },
   {
     path: '/chapter/:chapterIndex(.+)/song/:songId(\\d+)',
@@ -49,6 +47,24 @@ const routes: Array<RouteRecordRaw> = [
     component: Search
     // component: defineAsyncComponent(() => import(/* webpackChunkName: "searchview", webpackPreload: true */ '../views/Search.vue'))
   },
+  {
+    path: '/list/:listId(\\d+)',
+    name: 'List',
+    component: () => import(/* webpackChunkName: "listview" */ '../views/List.vue')
+  },
+  {
+    path: '/list/:listId(\\d+)/song/:songId(\\d+)',
+    name: 'SongFromList',
+    component: Song
+  },
+  {
+    path: '/chapter/list/:listId(\\d+)/song/:songId(\\d+)',
+    name: 'ListRedirect',
+    redirect: to => {
+      console.warn('ListRedirect is an ugly solution, and should be replaced.')
+      return '/list/' + to.params.listId + '/song/' + to.params.songId
+    }
+  },
   { // Redirect 404:s to the start page.
     path: '/:pathMatch(.*)*',
     redirect: '/',
@@ -61,6 +77,7 @@ const router = createRouter({
   routes
 })
 
+// TODO: Add navigation guard for lists
 router.beforeEach((to: RouteLocationNormalized) => {
   if (to.name === 'Chapter') {
     const cid = parseInt(to.params.cid as string)
@@ -98,6 +115,8 @@ router.beforeEach((to: RouteLocationNormalized) => {
       console.warn(`Song id ${sid} is too large for chapter ${chapter.prefix}. Redirecting to home.`)
       return '/' as RouteLocationRaw
     }
+  } else if (['Home'].indexOf(to.name ? to.name.toString() : '') !== -1) { /* Ignore */ } else {
+    console.warn('Route ' + (to.name && to.name.toString()) + ' has no navigation guard.')
   }
 })
 

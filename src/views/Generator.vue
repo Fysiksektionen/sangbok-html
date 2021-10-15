@@ -69,7 +69,7 @@ import { useRoute, RouteLocationNormalized } from 'vue-router'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
-import { chapters, getSongsByIndices } from '@/utils/lyrics'
+import { chapters, getSongsByIndices } from '@/lyrics'
 import { DownloadSetting } from '@/utils/export/settings'
 
 import getStage from '@/utils/stageChecker'

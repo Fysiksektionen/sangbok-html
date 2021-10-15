@@ -47,14 +47,9 @@ import { useRoute, RouteLocationNormalized } from 'vue-router'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
-import { chapters, getSongsByIndices, getSongByStringIndex, getSongFromRoute } from '@/utils/lyrics'
-import { DownloadSetting } from '@/utils/export/settings'
+import { chapters, getSongByStringIndex, getSongFromRoute } from '@/lyrics'
 
 import getStage from '@/utils/stageChecker'
-import getContentTeX from '@/utils/export/contentTeX'
-import getMainTeX from '@/utils/export/mainTeX'
-import openInOverleaf from '@/utils/export/overleaf'
-import downloadZip from '@/utils/export/zip'
 
 export default defineComponent({
   name: 'GeneratorView',
@@ -62,10 +57,10 @@ export default defineComponent({
     const lists = useStore(key).state.lists
     return {
       chapters: chapters,
-      currentListIndex: lists.length == 0 ? -1 : 0,
+      currentListIndex: lists.length === 0 ? -1 : 0,
       currentListMeta: {
-        name: lists.length == 0 ? '' : lists[0].name,
-        description: lists.length == 0 ? '' : lists[0].description
+        name: lists.length === 0 ? '' : lists[0].name,
+        description: lists.length === 0 ? '' : lists[0].description
       }
     }
   },
@@ -89,7 +84,7 @@ export default defineComponent({
       const route: RouteLocationNormalized = useRoute()
       if (getStage(route) === 'song') {
         const song = getSongFromRoute(route)
-        return (song !== undefined) && (this.currentList !== undefined) && this.currentList.songs.indexOf(song.index) == -1
+        return (song !== undefined) && (this.currentList !== undefined) && this.currentList.songs.indexOf(song.index) === -1
       } else { return false }
     },
     updateMeta () {

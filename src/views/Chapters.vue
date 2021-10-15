@@ -26,7 +26,7 @@ import { key } from '@/store'
 import { onlyAllowZoomOut } from '@/utils/swipe.ts' // @ is an alias to /src
 import { greekPrefix2latin } from '@/utils/other'
 import SearchBox from '@/components/SearchBox.vue'
-import { chapters } from '@/utils/lyrics.ts'
+import { chapters } from '@/lyrics'
 
 export default defineComponent({
   name: 'ChaptersView',

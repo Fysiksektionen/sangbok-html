@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { RouteLocationNormalized } from 'vue-router'
-import { chapters } from '@/utils/lyrics'
+import { chapters } from '@/lyrics'
 import copy from 'copy-to-clipboard'
 import getStage from '@/utils/stageChecker'
 

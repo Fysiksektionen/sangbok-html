@@ -1,6 +1,6 @@
 import { generalSettings, GeneralSettings } from '@/utils/export/generalSettings'
 import { specificSettings, SpecificDownloadSettings } from '@/utils/export/specificSettings'
-import { getSongsByIndices, Song, SongIndex } from '@/utils/lyrics'
+import { getSongsByIndices, Song, SongIndex } from '@/lyrics'
 // import { Mutation } from 'vuex'
 
 export type GeneratorState = {
