@@ -8,12 +8,14 @@ export type SongList = {
 }
 
 export const listsModule = {
-  state: [{
-    name: 'Lista 1',
-    description: '',
-    songs: ['α2']
-  }] as SongList[],
-  getters: {},
+  state: [] as SongList[],
+  getters: {
+    hasLists: (state: SongList[]): boolean => {
+      for (const list of state) {
+        if (list.songs.length > 0) return true
+      } return false
+    }
+  },
   mutations: {
     addToList: (state: SongList[], { list, index }: {list: number, index: SongIndex2}): void => {
       console.log(list)

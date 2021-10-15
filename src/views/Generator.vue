@@ -72,7 +72,6 @@ import { key } from '@/store'
 import { chapters, getSongsByIndices } from '@/lyrics'
 import { DownloadSetting } from '@/utils/export/settings'
 
-import getStage from '@/utils/stageChecker'
 import getContentTeX from '@/utils/export/contentTeX'
 import getMainTeX from '@/utils/export/mainTeX'
 import openInOverleaf from '@/utils/export/overleaf'
@@ -93,11 +92,11 @@ export default defineComponent({
   methods: {
     add() {
       const route: RouteLocationNormalized = this.$route
-      if (getStage(route) === 'song') { // TODO: Use a switch here isntead of if-else if
+      if (route.name && route.name.toString().startsWith('Song')) { // TODO: Use a switch here isntead of if-else if
         const songId = parseInt(route.params.songId as string)
         const chapterId = parseInt(route.params.chapterId as string)
         this.store.commit('add', [chapterId, songId])
-      } else if (getStage(route) === 'chapter') {
+      } else if (route.name && route.name.toString().startsWith('Chapter')) {
         const chapterId = parseInt(route.params.cid as string)
         for (let songId = 0; songId < this.chapters[chapterId].songs.length; songId++) {
           this.store.commit('add', [chapterId, songId])
@@ -106,11 +105,11 @@ export default defineComponent({
     },
     canAdd(): boolean { // TODO: Move to computed
       const route: RouteLocationNormalized = useRoute()
-      if (getStage(route) === 'song') {
+      if (route.name && route.name.toString().startsWith('Song')) {
         const songId = parseInt(route.params.songId as string)
         const chapterId = parseInt(route.params.chapterId as string)
         return !this.store.getters.songHasBeenAdded(chapterId, songId)
-      } else if (getStage(route) === 'chapter') {
+      } else if (route.name && route.name.toString().startsWith('Chapter')) {
         // TODO: Return false if all songs in a given chapter has been added.
         return true
       } else { return false }

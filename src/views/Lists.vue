@@ -4,17 +4,16 @@
   <div class="main" v-touch:drag="dragHandler" v-bind:style="onlyAllowZoomOut">
     <SearchBox/>
     <table class="songbook">
-        <tr v-for="(chapter, idx) in chapters"
-            @click="$router.push('/chapter/'+idx)"
+        <tr v-for="(list, idx) in lists"
+            @click="$router.push('/list/'+idx)"
             v-bind:key="idx">
             <td class="index">
-                {{$store.state.settings.translate ? greek2latin(chapter.prefix) : chapter.prefix}}
+                {{ idx + 1 }}. {{ list.name }}
             </td>
             <td class="name">
-                {{ chapter.chapter }}
+                {{ list.description }}
             </td>
         </tr>
-        <tr @click="$router.push('/list/')" v-if="$store.getters.hasLists"><td class="index">♥</td><td class="name">Egna listor</td></tr>
     </table>
   </div>
 </template>
@@ -27,21 +26,20 @@ import { key } from '@/store'
 import { onlyAllowZoomOut } from '@/utils/swipe.ts' // @ is an alias to /src
 import { greekPrefix2latin } from '@/utils/other'
 import SearchBox from '@/components/SearchBox.vue'
-import { chapters } from '@/lyrics'
 
 export default defineComponent({
-  name: 'ChaptersView',
+  name: 'ListsView',
   components: {
     SearchBox
   },
   data() {
     return {
-      chapters: chapters,
+      lists: useStore(key).state.lists.filter(l => l.songs.length > 0),
       onlyAllowZoomOut: onlyAllowZoomOut()
     }
   },
   created() {
-    useStore(key).commit('setQuery', '')
+    return { store: useStore(key) }
   },
   methods: {
     dragHandler () { this.onlyAllowZoomOut = onlyAllowZoomOut() },

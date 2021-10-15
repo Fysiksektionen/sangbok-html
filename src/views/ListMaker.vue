@@ -7,37 +7,38 @@
       <hr>
       <div>
         <div class="setting">
-          Lista: <select v-model="currentListIndex" @change="fetchMeta"><option v-for="val, idx in $store.state.lists" v-bind:key="idx" v-bind:value="idx">{{ val.name }}</option></select>
+          Lista: <select v-model="currentListIndex" @change="fetchMeta; qr()"><option v-for="val, idx in $store.state.lists" v-bind:key="idx" v-bind:value="idx">{{ val.name }}</option></select>
         </div>
         <div class="setting">
-          Namn: <input placeholder="Listans namn" type="text" v-model="currentListMeta.name" @keyup="updateMeta" />
+          Namn: <input placeholder="Listans namn" type="text" v-model="currentListMeta.name" @keyup="updateMeta(); qr()" />
         </div>
         <div class="setting">
-          Beskrivning: <input placeholder="Beskrivning" type="text" v-model="currentListMeta.description" @keyup="updateMeta" />
+          Beskrivning: <input placeholder="Beskrivning" type="text" v-model="currentListMeta.description" @keyup="updateMeta(); qr()" />
         </div>
       </div>
       <hr>
     </div>
 
     <div class="generatorbuttons">
-      <div v-bind:class="{ 'disabled': !canAdd() }" @click="add()" title="Lägg till">+</div>
+      <div v-bind:class="{ 'disabled': !canAdd() }" @click="add() && qr()" title="Lägg till">+</div>
     </div>
 
     <table class="songbook" v-if="currentList!==undefined && currentList.songs.length > 0">
       <tr v-for="songidx, listIdx in currentList.songs" v-bind:key="listIdx">
         <td class="name">{{ getSongByStringIndex(songidx).title }}</td>
         <td class="operation up" v-bind:class="{ 'disabled': listIdx == 0 }"
-          @click="$store.commit('moveInList', {list: currentListIndex, index: listIdx, direction: -1})">▲
+          @click="$store.commit('moveInList', {list: currentListIndex, index: listIdx, direction: -1}); qr()">▲
         </td>
         <td class="operation down" v-bind:class="{ 'disabled': listIdx == currentList.songs.length-1 }"
-          @click="$store.commit('moveInList', {list: currentListIndex, index: listIdx, direction: 1})">▼</td>
-        <td class="operation delete" @click="$store.commit('delete', listIdx)">✖</td>
+          @click="$store.commit('moveInList', {list: currentListIndex, index: listIdx, direction: 1}); qr()">▼</td>
+        <td class="operation delete" @click="$store.commit('deleteFromList', {list: currentListIndex, index: idx}); qr()">✖</td>
       </tr>
     </table>
 
     <p style="font-size:0.75em;color:gray; text-align: center;">
       Listskaparen är experimentell.
     </p>
+    <!-- <div style="text-align-last: center;"><canvas id="lmCanvas"></canvas></div> -->
   </div>
 </template>
 
@@ -47,12 +48,12 @@ import { useRoute, RouteLocationNormalized } from 'vue-router'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
+// import QRCode from 'qrcode'
+
 import { chapters, getSongByStringIndex, getSongFromRoute } from '@/lyrics'
 
-import getStage from '@/utils/stageChecker'
-
 export default defineComponent({
-  name: 'GeneratorView',
+  name: 'ListMakerView',
   data() {
     const lists = useStore(key).state.lists
     return {
@@ -69,20 +70,28 @@ export default defineComponent({
       return this.store.state.lists[this.currentListIndex]
     }
   },
-  setup() { return { store: useStore(key) } },
+  setup() {
+    return { store: useStore(key) }
+  },
+  mounted () { this.qr() },
   props: ['songid', 'chapterid'],
   methods: {
     getSongByStringIndex: getSongByStringIndex,
+    qr () {
+      // const target = window.location.origin + window.location.pathname + "#/list/add/" + encodeURI(JSON.stringify(this.currentList))
+      // console.log(target)
+      // QRCode.toCanvas(document.getElementById("lmCanvas"), target, (err: Error) => {})
+    },
     add() {
       const route: RouteLocationNormalized = this.$route
-      if (getStage(route) === 'song') { // TODO: Use a switch here isntead of if-else if
+      if (route.name && route.name.toString().startsWith('Song')) { // TODO: Use a switch here isntead of if-else if
         const song = getSongFromRoute(route)
         song && this.store.commit('addToList', { list: this.currentListIndex, index: song.index })
       }
     },
     canAdd(): boolean { // TODO: Move to computed
       const route: RouteLocationNormalized = useRoute()
-      if (getStage(route) === 'song') {
+      if (route.name && route.name.toString().startsWith('Song')) {
         const song = getSongFromRoute(route)
         return (song !== undefined) && (this.currentList !== undefined) && this.currentList.songs.indexOf(song.index) === -1
       } else { return false }

@@ -45,12 +45,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/search/:query',
     name: 'Search',
     component: Search
-    // component: defineAsyncComponent(() => import(/* webpackChunkName: "searchview", webpackPreload: true */ '../views/Search.vue'))
   },
   {
     path: '/list/:listId(\\d+)',
     name: 'List',
     component: () => import(/* webpackChunkName: "listview" */ '../views/List.vue')
+  },
+  {
+    path: '/list/',
+    name: 'Lists',
+    component: () => import(/* webpackChunkName: "listsview" */ '../views/Lists.vue')
   },
   {
     path: '/list/:listId(\\d+)/song/:songId(\\d+)',
@@ -60,8 +64,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/chapter/list/:listId(\\d+)/song/:songId(\\d+)',
     name: 'ListRedirect',
-    redirect: to => {
-      console.warn('ListRedirect is an ugly solution, and should be replaced.')
+    redirect: to => { // TODO: Replace
+      console.warn('ListRedirect is an ugly solution, and should be replaced. It causes back-button bugs.')
       return '/list/' + to.params.listId + '/song/' + to.params.songId
     }
   },

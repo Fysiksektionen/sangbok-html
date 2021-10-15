@@ -30,7 +30,7 @@ import { SwipeIndicatorState } from '@/utils/swipe.ts'
 import { Song, param2int, getSongsByStringIndices } from '@/lyrics'
 
 export default defineComponent({
-  name: 'ChapterView',
+  name: 'ListView',
   components: {
     Swiper
   },
