@@ -3,8 +3,8 @@ export const themes = {
   day: '🌞',
   night: '🌙',
   neo: '🚀',
-  galaxy: '🌌',
-  fancy: '👑'
+  galaxy: '🌌'
+  // fancy: '👑'
   // halloween: '🎃'
   // z: '☣'
 }

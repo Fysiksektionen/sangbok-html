@@ -4,8 +4,10 @@ import lyrics from '@/assets/lyrics.json'
 import leo from '@/assets/addons/leo.json'
 import ths from '@/assets/addons/ths.json'
 import extraSongs from '@/assets/addons/songs.json'
+import { RouteLocationNormalized } from 'vue-router'
 
 export type SongIndex = [number, number]
+export type SongIndex2 = string
 
 export type Song = {
   title: string,
@@ -71,4 +73,18 @@ export function getChapterByStringIndex(idx: string): Chapter | undefined {
   if (hits.length > 0) {
     return hits[0]
   } else return undefined
+}
+
+// TODO: Move elsewhere
+export function param2int (s: string | string[]): number { return parseInt((typeof s === 'string') ? s : s[0]) }
+
+export function getSongFromRoute(route: RouteLocationNormalized): Song | undefined {
+  if (route.name === 'SongByIndex') {
+    return getSongByStringIndex(route.params.songIndex as string)
+  } else if (route.name === 'SongByChapterIndex') {
+    const ch = getChapterByStringIndex(route.params.chapterIndex as string)
+    if (ch) { return ch.songs[param2int(route.params.songId)] }
+  } else {
+    return chapters[param2int(route.params.chapterId)].songs[param2int(route.params.songId)] as Song
+  }
 }

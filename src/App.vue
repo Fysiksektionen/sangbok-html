@@ -3,6 +3,7 @@
   <div class="flex-row">
     <router-view/>
     <GeneratorView v-if="$store.state.settings.generator"/>
+    <ListMakerView v-if="$store.state.settings.makelist"/>
   </div>
 </template>
 
@@ -16,14 +17,19 @@ export default defineComponent({
   components: {
     // Only load Generator component and generator helper functions on-demand.
     GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue')),
+    ListMakerView: defineAsyncComponent(() => import(/* webpackChunkName: "listmaker" */ '@/views/ListMaker.vue')),
     Navbar
   },
   created () {
     // TODO: Ugly fix that removes body night class if stored settings.night === false. Also done in store.
-    const theme = JSON.parse(window.localStorage.getItem('vuex') || '{"settings":{"theme": undefined}}').settings.theme
-    if (theme !== undefined && Object.keys(themes).indexOf(theme) !== -1) {
-      document.body.className = theme
-    } else {
+    try {
+      const theme = JSON.parse(window.localStorage.getItem('vuex') || '{"settings":{"theme": undefined}}').settings.theme
+      if (theme !== undefined && Object.keys(themes).indexOf(theme) !== -1) {
+        document.body.className = theme
+      } else {
+        document.body.className = 'night'
+      }
+    } catch {
       document.body.className = 'night'
     }
   }
@@ -33,15 +39,15 @@ export default defineComponent({
 <style lang="scss">
 @use "sass:math";
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+@import './views/Generator.scss';
 
 /* TODO: Load these on-demand. */
 @import './themes/night.scss';
 @import './themes/day.scss';
 @import './themes/galaxy.scss';
-@import './themes/fancy.scss';
 @import './themes/neo.scss';
+/* @import './themes/fancy.scss'; */
 /* @import './themes/z.scss'; */
-/* @import './themes/.scss'; */
 
 /* Layout */
 body {

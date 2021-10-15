@@ -4,7 +4,7 @@ import { getSongsByIndices, Song, SongIndex } from '@/utils/lyrics'
 // import { Mutation } from 'vuex'
 
 export type GeneratorState = {
-  generatorSongs: SongIndex[], // TODO: Perhaps should be stored using $store.
+  generatorSongs: SongIndex[],
   generalSettings: GeneralSettings,
   specificSettings: SpecificDownloadSettings[]
 }

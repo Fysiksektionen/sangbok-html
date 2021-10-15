@@ -3,6 +3,7 @@ import { createStore, Store } from 'vuex'
 
 import createPersistedState from 'vuex-persistedstate'
 import { generatorModule, GeneratorState } from './generator'
+import { listsModule, SongList } from './lists'
 
 // Store state typing
 export interface State {
@@ -11,10 +12,12 @@ export interface State {
     theme: string,
     larger: boolean,
     generator: boolean,
+    makelist: boolean,
     touchAction: string // 'none' | 'swipe' | 'zoom' | 'all'
   },
   query: string,
-  generator: GeneratorState
+  generator: GeneratorState,
+  lists: SongList[]
 }
 
 type SetSettingProps = {key: 'touchAction' | 'theme', value: string}
@@ -28,6 +31,7 @@ export default createStore<State>({
       theme: 'night',
       larger: false,
       generator: false,
+      makelist: false,
       touchAction: 'all'
     },
     query: ''
@@ -48,6 +52,6 @@ export default createStore<State>({
     }
   },
   // actions: {},
-  modules: { generator: generatorModule },
+  modules: { generator: generatorModule, lists: listsModule },
   plugins: [createPersistedState({})]
 })

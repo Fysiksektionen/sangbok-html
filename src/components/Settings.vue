@@ -9,6 +9,7 @@
       Touchfunktioner
     </SettingsSwitch>
     <SettingsButton :setting="'generator'">Skapa sångblad</SettingsButton>
+    <SettingsButton :setting="'makelist'">Skapa lista</SettingsButton>
     <ClipboardButton/>
   </div>
 </template>

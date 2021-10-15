@@ -35,9 +35,7 @@ import { key } from '@/store'
 import Swiper from '@/components/Swiper.vue'
 import { SwipeIndicatorState } from '@/utils/swipe'
 import NavButtons from '@/components/SongNavButtons.vue'
-import { chapters, Song, getSongByStringIndex, getChapterByStringIndex } from '@/utils/lyrics.ts'
-
-const param2int = (s: string | string[]): number => parseInt((typeof s === 'string') ? s : s[0])
+import { chapters, Song, getSongByStringIndex, getChapterByStringIndex, getSongFromRoute, param2int } from '@/utils/lyrics.ts'
 
 export default defineComponent({
   name: 'SongView',
@@ -51,16 +49,7 @@ export default defineComponent({
     return {
       chapter: (route.name === 'SongByIndex') ? undefined : (route.name === 'SongByChapterIndex') ? getChapterByStringIndex(route.params.chapterIndex as string) : chapters[param2int(route.params.chapterId)],
       // TODO: This is an ugly fix for the song not updating when pressing NavButtons. It can probably be done using computed()
-      song: () => {
-        if (route.name === 'SongByIndex') {
-          return getSongByStringIndex(route.params.songIndex as string)
-        } else if (route.name === 'SongByChapterIndex') {
-          const ch = getChapterByStringIndex(route.params.chapterIndex as string)
-          if (ch) { return ch.songs[param2int(route.params.songId)] }
-        } else {
-          return chapters[param2int(route.params.chapterId)].songs[param2int(route.params.songId)] as Song
-        }
-      },
+      song: () => getSongFromRoute(route),
       showMsvg: false
     }
   },
