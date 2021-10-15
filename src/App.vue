@@ -40,7 +40,7 @@ export default defineComponent({
 @import './themes/galaxy.scss';
 @import './themes/fancy.scss';
 @import './themes/neo.scss';
-@import './themes/z.scss';
+/* @import './themes/z.scss'; */
 /* @import './themes/.scss'; */
 
 /* Layout */

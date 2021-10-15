@@ -4,7 +4,7 @@ export const themes = {
   night: '🌙',
   neo: '🚀',
   galaxy: '🌌',
+  fancy: '👑'
   // halloween: '🎃'
-  fancy: '👑',
-  z: '☣'
+  // z: '☣'
 }
