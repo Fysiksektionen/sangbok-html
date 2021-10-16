@@ -13,7 +13,7 @@ COPY *.js .
 COPY .eslintrc .
 COPY src src
 
-RUN npm run build
+RUN npx vue-cli-service build --modern
 
 # Precompress assets
 RUN apk add --no-cache brotli

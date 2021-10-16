@@ -13,7 +13,7 @@ COPY *.js .
 COPY .eslintrc .
 COPY src src
 
-RUN npm run build
+RUN npx vue-cli-service build --modern
 
 # TODO: Merge this dockerfile with the other nginx Dockerfile.
 # Disable this when using apache
