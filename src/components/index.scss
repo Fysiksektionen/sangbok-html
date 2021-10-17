@@ -36,3 +36,7 @@
         color: rgba($text-color, 0.6);
     }
 }
+
+.navbuttons .button img {
+    filter: $inline-image-filter;
+}

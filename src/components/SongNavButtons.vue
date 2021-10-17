@@ -7,7 +7,7 @@
       @click="$router.replace('/chapter/'+chapterPrefix+'/song/'+(parseInt(songid)-1))">
       <div>{{chapter.songs[parseInt(songid)-1].title}}</div>
       <div>
-        <img src="../assets/back.png"/> &nbsp;
+        <img src="../assets/back_black.png"/> &nbsp;
         <span v-html="chapter.songs[parseInt(songid)-1].index"></span>
       </div>
     </div>
@@ -17,7 +17,7 @@
       <div>{{chapter.songs[parseInt(songid)+1].title}}</div>
       <div>
         <span v-html="chapter.songs[parseInt(songid)+1].index"></span> &nbsp;
-        <img src="../assets/back.png" style="transform: scaleX(-1);"/>
+        <img src="../assets/back_black.png" style="transform: scaleX(-1);"/>
       </div>
     </div>
     <div class="filler" v-if="parseInt(songid) == chapter.songs.length-1"></div>
@@ -38,8 +38,7 @@ export default defineComponent({
 })
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 .navbuttons {
     padding: 20px 0;
     text-align: center;

@@ -52,6 +52,10 @@ body.neo {
     & .button {color: $f-light;}
     & .component-settings {font-size: 1.1em;}
 
+    & .navbuttons > .button > div > img { /* Ovveride the default, which is $inline-image-filter. */
+        filter: invert(1);
+    }
+
     @import "../components/index.scss";
     @import "../views/index.scss";
 }
