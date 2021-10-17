@@ -11,7 +11,7 @@
               <td class="index" v-html="song.index"></td>
               <td class="name">
                 <span v-html="song.title"></span>
-                <span v-if="song.msvg" class="sheetmusicicon">𝄞</span>
+                <span v-if="song.msvg" class="sheetmusicicon">𝄢<!--𝄞--></span>
               </td>
           </tr>
       </table>

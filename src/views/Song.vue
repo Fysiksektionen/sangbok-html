@@ -7,7 +7,7 @@
     <div class="main">
       <div class="lyrics">
         <button v-if="song().msvg && song().text" @click="showMsvg = !showMsvg" class="button musicbutton">
-          {{ showMsvg ? 'Dölj noter' : '𝄞'}}</button>
+          {{ showMsvg ? 'Dölj noter' : '𝄢'}}</button>
         <SheetMusicRenderer v-if="song().msvg && (!song().text || showMsvg)" :src="song().msvg" />
         <div class="song-index" v-if="song().text && !showMsvg" v-html="song().index"></div>
         <div v-if="song().text && (!showMsvg || !song().msvg)">

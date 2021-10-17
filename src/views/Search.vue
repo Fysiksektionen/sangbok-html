@@ -12,7 +12,7 @@
             <td class="index" v-html="hit.item.index"></td>
             <td class="name">
               {{ hit.item.title }}
-              <span v-if="hit.item.msvg" class="sheetmusicicon">𝄞</span>
+              <span v-if="hit.item.msvg" class="sheetmusicicon">𝄢<!--𝄞--></span>
             </td>
         </tr>
         <tr class="nohits">
