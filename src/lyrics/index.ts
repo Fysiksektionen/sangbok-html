@@ -1,11 +1,13 @@
-import { greek2latin, greek2latin2 } from './other'
+import { greek2latin, greek2latin2 } from '../utils/other'
 
-import lyrics from '@/assets/lyrics.json'
-import leo from '@/assets/addons/leo.json'
-import ths from '@/assets/addons/ths.json'
-import extraSongs from '@/assets/addons/songs.json'
+import lyrics from './lyrics.json'
+import leo from './addons/leo.json'
+import ths from './addons/ths.json'
+import extraSongs from './addons/songs.json'
+export { getChapterFromRoute, getSongFromRoute, param2int } from './routeGetters'
 
-export type SongIndex = [number, number]
+type SongIndex = [number, number]
+export type SongIndex2 = string
 
 export type Song = {
   title: string,
@@ -47,7 +49,9 @@ export const songs: Song[] = (
     .concat(extraSongs as Song[])
 )
 
+// Deprecated
 export function getSongsByIndices(indices: SongIndex[]): Song[] {
+  console.warn('getSongsByIndices is deprecated. Use string indices instead.')
   const out: Song[] = []
   for (const songIndex of indices) {
     out.push(chapters[songIndex[0]].songs[songIndex[1]])
@@ -62,6 +66,15 @@ export function getSongByStringIndex(idx: string): Song | undefined {
   if (hits.length > 0) {
     return hits[0]
   } else return undefined
+}
+
+export function getSongsByStringIndices(indices: SongIndex2[]): Song[] {
+  const out: Song[] = []
+  for (const songIndex of indices) {
+    const res = getSongByStringIndex(songIndex)
+    res && out.push(res)
+  }
+  return out
 }
 
 export function getChapterByStringIndex(idx: string): Chapter | undefined {

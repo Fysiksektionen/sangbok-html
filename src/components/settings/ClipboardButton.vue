@@ -10,9 +10,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { RouteLocationNormalized } from 'vue-router'
-import { chapters } from '@/utils/lyrics'
+import { chapters } from '@/lyrics'
 import copy from 'copy-to-clipboard'
-import getStage from '@/utils/stageChecker'
 
 export default defineComponent({
   name: 'ClipboardButton',
@@ -23,13 +22,14 @@ export default defineComponent({
   },
   computed: {
     isSongStage () {
-      return getStage(this.$route) === 'song'
+      const route: RouteLocationNormalized = this.$route
+      return route.name && route.name.toString().startsWith('Song')
     }
   },
   methods: { // TODO: Move to computed
     lyrics () {
       const route: RouteLocationNormalized = this.$route
-      if (getStage(route) === 'song') {
+      if (route.name && route.name.toString().startsWith('Song')) {
         const songId = parseInt(route.params.songId as string)
         const chapterId = parseInt(route.params.chapterId as string)
         const song = chapters[chapterId].songs[songId]

@@ -3,9 +3,9 @@
 <template>
   <Swiper :swipeHandler="swipeHandler" :right="'hide'">
     <div class="main">
-      <h2>{{chapter.chapter}}</h2>
+      <h2>{{list.name}}</h2>
       <table class="songbook">
-          <tr v-for="(song, idx) in chapter.songs"
+          <tr v-for="(song, idx) in list.songs"
               @click="clickHandler(song, idx)"
               v-bind:key="idx">
               <td class="index" v-html="song.index"></td>
@@ -22,25 +22,24 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
+import { useRoute, RouteLocationNormalized } from 'vue-router'
 import { key } from '@/store'
 
 import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
 import { SwipeIndicatorState } from '@/utils/swipe.ts'
-import { chapters, getChapterByStringIndex, Chapter, Song } from '@/lyrics'
+import { Song, param2int, getSongsByStringIndices } from '@/lyrics'
 
 export default defineComponent({
-  name: 'ChapterView',
+  name: 'ListView',
   components: {
     Swiper
   },
-  computed: {
-    chapter () {
-      if (this.$route.name === 'ChapterByIndex') {
-        // console.log(getChapterByStringIndex(this.$route.params.chapterIndex as string))
-        return getChapterByStringIndex(this.$route.params.chapterIndex as string) as Chapter
-      } else {
-        return chapters[parseInt(this.$route.params.cid as string)] as Chapter
-      }
+  data() {
+    const store = useStore(key)
+    const route: RouteLocationNormalized = useRoute()
+    const list = store.state.lists[param2int(route.params.listId)]
+    return {
+      list: { ...list, songs: getSongsByStringIndices(list.songs) }
     }
   },
   setup() {
@@ -49,11 +48,7 @@ export default defineComponent({
   methods: {
     swipeHandler (direction: SwipeIndicatorState) { (direction === 'left') && this.$router.push('/') },
     clickHandler (song: Song, idx: number) {
-      if (this.$route.name === 'ChapterByIndex') {
-        this.$router.push('/chapter/' + this.chapter.prefix + '/song/' + idx)
-      } else {
-        this.$router.push('/chapter/' + this.$route.params.cid + '/song/' + idx)
-      }
+      this.$router.push('/list/' + this.$route.params.listId + '/song/' + idx)
     }
   }
 })

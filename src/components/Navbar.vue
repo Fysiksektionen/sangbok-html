@@ -18,7 +18,7 @@
 <script lang="ts">
 // Async-loading dropdown only saves about 1 KiB of entrypoint size. Its benefit is negligible.
 import { defineComponent /* , defineAsyncComponent */ } from 'vue'
-import Dropdown from '@/components/Settings.vue'
+import Dropdown from '@/components/settings/Settings.vue'
 
 export default defineComponent({
   name: 'Navbar',

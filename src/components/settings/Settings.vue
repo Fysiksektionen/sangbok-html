@@ -9,15 +9,16 @@
       Touchfunktioner
     </SettingsSwitch>
     <SettingsButton :setting="'generator'">Skapa sångblad</SettingsButton>
+    <SettingsButton :setting="'makelist'">Redigera listor</SettingsButton>
     <ClipboardButton/>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import SettingsButton from '@/components/SettingsButton.vue'
-import SettingsSwitch from '@/components/SettingsSwitch.vue'
-import ClipboardButton from '@/components/ClipboardButton.vue'
+import SettingsButton from './SettingsButton.vue'
+import SettingsSwitch from './SettingsSwitch.vue'
+import ClipboardButton from './ClipboardButton.vue'
 import { themes } from '@/themes'
 
 export default defineComponent({

@@ -26,7 +26,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-// import { chapters } from '@/utils/lyrics.ts'
 
 export default defineComponent({
   name: 'Navbar',

@@ -1,39 +1,33 @@
 import { generalSettings, GeneralSettings } from '@/utils/export/generalSettings'
 import { specificSettings, SpecificDownloadSettings } from '@/utils/export/specificSettings'
-import { getSongsByIndices, Song, SongIndex } from '@/utils/lyrics'
+import { SongIndex2 } from '@/lyrics'
 // import { Mutation } from 'vuex'
 
 export type GeneratorState = {
-  generatorSongs: SongIndex[], // TODO: Perhaps should be stored using $store.
+  generatorSongs: SongIndex2[],
   generalSettings: GeneralSettings,
   specificSettings: SpecificDownloadSettings[]
 }
 
 export const generatorModule = {
   state: {
-    generatorSongs: [[0, 0]],
+    generatorSongs: [],
     generalSettings: generalSettings,
     specificSettings: specificSettings
   } as GeneratorState,
   getters: {
-    songHasBeenAdded: (state: GeneratorState) => (chapterid: number, songid: number): boolean => {
+    songHasBeenAdded: (state: GeneratorState) => (songindex: SongIndex2): boolean => {
       // TODO: Can probably be done in a more vectorized fashion
       // console.log('SHBA', chapterid, songid)
-      for (const indices of state.generatorSongs) {
-        if (indices[0] === chapterid && indices[1] === songid) {
-          return true
-        }
-      }
-      return false
+      return state.generatorSongs.indexOf(songindex) !== -1
     },
     settingIsVisible: (state: GeneratorState) => (setting: SpecificDownloadSettings): boolean => {
-      const currentIndicesGreek = getSongsByIndices(state.generatorSongs).map((s: Song) => s.index)
-      return [...setting.indexes].filter((i: string) => currentIndicesGreek.indexOf(i) > -1).length > 0
+      return [...setting.indexes].filter((i: string) => state.generatorSongs.indexOf(i) > -1).length > 0
     }
   },
   mutations: {
-    add: (state: GeneratorState, idx: SongIndex): void => {
-      !generatorModule.getters.songHasBeenAdded(state)(...idx) && state.generatorSongs.push(idx)
+    add: (state: GeneratorState, idx: SongIndex2): void => {
+      !generatorModule.getters.songHasBeenAdded(state)(idx) && state.generatorSongs.push(idx)
     },
     move: (state: GeneratorState, { index, direction }: { index: number, direction: number }): void => {
       // TODO: Can probably be done more elegantly.

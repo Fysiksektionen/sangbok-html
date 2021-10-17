@@ -1,4 +1,4 @@
-import { Song } from '../lyrics'
+import { Song } from '../../lyrics'
 import { getDefaultText, escapeAll } from './escapes'
 import { GeneralSettings } from './generalSettings'
 import { SpecificDownloadSettings } from './specificSettings'

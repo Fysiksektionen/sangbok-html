@@ -11,8 +11,8 @@
     </div>
 
     <table class="songbook" v-if="generatorSongs.length > 0">
-      <tr v-for="songIdxs, listIdx in generatorSongs" v-bind:key="listIdx">
-        <td class="name">{{ chapters[songIdxs[0]].songs[songIdxs[1]].title }}</td>
+      <tr v-for="songIdx, listIdx in generatorSongs" v-bind:key="listIdx">
+        <td class="name">{{ getSongByStringIndex(songIdx).title }}</td>
         <td class="operation up" v-bind:class="{ 'disabled': listIdx == 0 }"
           @click="$store.commit('move', {index: listIdx, direction: -1})">▲
         </td>
@@ -38,6 +38,7 @@
         </div>
 
         <div v-for="settinggroup, gidx in specificSettings" v-bind:key="gidx">
+          <!-- {{settinggroup.indexes}}<br>{{store.state.generator.generatorSongs}} -->
           <div v-if="$store.getters.settingIsVisible(settinggroup) && settinggroup.settings.length > 0">
             <h3>{{settinggroup.title}}</h3>
             <div class="setting" v-for="setting, idx in settinggroup.settings" v-bind:key="idx"
@@ -55,9 +56,10 @@
       </div>
     </div>
 
-    <p style="font-size:0.75em;color:gray; text-align: center;">
+    <p style="font-size:0.75em; opacity: 0.5; text-align: center;">
       Sångbladsskaparen är experimentell.<br />
-      Pennikonen öppnar latex-källan i Overleaf.
+      Pennikonen öppnar latex-källan i Overleaf.<br />
+      Gå till <a @click="goToListMaker" style="text-decoration: underline;">vyn för redigering av listor</a> för att importera dessa.
       <!--Overleafs logotyp tillhör Writelatex Ltd. Denna sida är ej affilierad med Overleaf.-->
     </p>
   </div>
@@ -69,10 +71,9 @@ import { useRoute, RouteLocationNormalized } from 'vue-router'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
-import { chapters, getSongsByIndices } from '@/utils/lyrics'
+import { chapters, getSongsByStringIndices, getSongByStringIndex, getSongFromRoute, getChapterFromRoute } from '@/lyrics'
 import { DownloadSetting } from '@/utils/export/settings'
 
-import getStage from '@/utils/stageChecker'
 import getContentTeX from '@/utils/export/contentTeX'
 import getMainTeX from '@/utils/export/mainTeX'
 import openInOverleaf from '@/utils/export/overleaf'
@@ -91,26 +92,29 @@ export default defineComponent({
   setup() { return { store: useStore(key) } },
   props: ['songid', 'chapterid'],
   methods: {
+    getSongByStringIndex: getSongByStringIndex, // TODO: Don't use this function in the template.
     add() {
       const route: RouteLocationNormalized = this.$route
-      if (getStage(route) === 'song') { // TODO: Use a switch here isntead of if-else if
-        const songId = parseInt(route.params.songId as string)
-        const chapterId = parseInt(route.params.chapterId as string)
-        this.store.commit('add', [chapterId, songId])
-      } else if (getStage(route) === 'chapter') {
-        const chapterId = parseInt(route.params.cid as string)
-        for (let songId = 0; songId < this.chapters[chapterId].songs.length; songId++) {
-          this.store.commit('add', [chapterId, songId])
-        }
+      if (route.name && route.name.toString().startsWith('Song')) { // TODO: Use a switch here isntead of if-else if
+        const song = getSongFromRoute(route)
+        if (song !== undefined) {
+          this.store.commit('add', song.index)
+        } else { console.warn('Cannot add song, since it could not be read from route. This is unexpected.') }
+      } else if (route.name && route.name.toString().startsWith('Chapter')) {
+        const chapter = getChapterFromRoute(route)
+        if (chapter !== undefined) {
+          for (const song of chapter.songs) {
+            this.store.commit('add', song.index)
+          }
+        } else { console.warn('Cannot add chapter, since it could not be read from route. This is unexpected.') }
       }
     },
     canAdd(): boolean { // TODO: Move to computed
       const route: RouteLocationNormalized = useRoute()
-      if (getStage(route) === 'song') {
-        const songId = parseInt(route.params.songId as string)
-        const chapterId = parseInt(route.params.chapterId as string)
-        return !this.store.getters.songHasBeenAdded(chapterId, songId)
-      } else if (getStage(route) === 'chapter') {
+      if (route.name && route.name.toString().startsWith('Song')) {
+        const song = getSongFromRoute(route)
+        return song !== undefined && !this.store.getters.songHasBeenAdded(song.index)
+      } else if (route.name && route.name.toString().startsWith('Chapter')) {
         // TODO: Return false if all songs in a given chapter has been added.
         return true
       } else { return false }
@@ -122,7 +126,7 @@ export default defineComponent({
       } else { return false }
     },
     go: async function (method: 'zip' | 'overleaf') {
-      const songs = (this.store.state.generator.generatorSongs.length === 0) ? chapters.map(c => c.songs).flat() : getSongsByIndices(this.store.state.generator.generatorSongs)
+      const songs = (this.store.state.generator.generatorSongs.length === 0) ? chapters.map(c => c.songs).flat() : getSongsByStringIndices(this.store.state.generator.generatorSongs)
 
       const files: { [key: string]: string } = { // TODO Load asynchronously, that is, don't use await right here.
         'main.tex': getMainTeX(this.generalSettings),
@@ -139,86 +143,11 @@ export default defineComponent({
         downloadZip(files)
         break
       }
+    },
+    goToListMaker () {
+      this.store.commit('toggleSettingTo', { key: 'makelist', value: true })
+      this.store.commit('toggleSettingTo', { key: 'generator', value: false })
     }
   }
 })
 </script>
-
-<style lang="scss">
-
-  .view-generator {
-    width: 40%;
-    right: 0;
-    min-width: 8cm;
-
-    & hr {border: none; border-top: 1px solid gray;}
-
-    & .generatorsettings {
-      padding: 0.5cm;
-    }
-
-    & .setting {
-      margin-bottom: 0.8em;
-
-      & input {
-        float: right;
-        background-color: #f0f0f0;
-        border: none;
-        border-radius: 0.3em;
-        padding-left: 0.5em !important;
-        padding-right: 0.5em !important;
-        height: 1.8em;
-        text-align: right;
-      }
-    }
-  }
-
-  table.songbook tr:active {
-    background-color: unset;
-  }
-
-  table.songbook {
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-  }
-
-  .operation:hover:not(.disabled) {
-    cursor: pointer;
-  }
-
-  .operation.disabled {
-    color: #333
-  }
-
-  .generatorbuttons {
-    text-align: center;
-
-    &>div {
-      display: inline-block;
-      background-color: rgba(128, 128, 128, 0.10);
-
-      $navbutton-spacing: 12px;
-      border-radius: $navbutton-spacing;
-      margin: $navbutton-spacing;
-      padding: $navbutton-spacing;
-      width: calc(25% - 4 * #{$navbutton-spacing});
-      min-width: 1cm;
-
-      font-size: 2em;
-
-      & img {
-        max-height: 32px;
-      }
-
-      &:hover:not(.disabled) {
-        cursor: pointer;
-      }
-
-      &.disabled {
-        background-color: rgba(128, 128, 128, 0.80);
-        color: unset;
-      }
-    }
-  }
-
-</style>
