@@ -2,10 +2,12 @@
 <template>
   <div class="view-generator">
     <div class="generatorsettings">
-      <h2>Redigera lista</h2>
-      <button class="button" @click="newList">Ny lista</button><button class="button" @click="deleteList">Ta bort</button>
+      <h2>Redigera listor</h2>
+      <button class="button" @click="newList">Ny lista</button>
+      <button class="button" @click="deleteList">Ta bort</button>
+      <button class="button" @click="goToGenerator">Skapa sångblad</button>
       <hr>
-      <div>
+      <div v-if="store.state.lists.length > 0">
         <div class="setting">
           Lista: <select v-model="currentListIndex" @change="fetchMeta; qr()"><option v-for="val, idx in $store.state.lists" v-bind:key="idx" v-bind:value="idx">{{ val.name }}</option></select>
         </div>
@@ -16,6 +18,7 @@
           Beskrivning: <input placeholder="Beskrivning" type="text" v-model="currentListMeta.description" @keyup="updateMeta(); qr()" />
         </div>
       </div>
+      <div v-if="store.state.lists.length === 0">Inga listor hittades. Du kan skapa en ny ovan.</div>
       <hr>
     </div>
 
@@ -35,7 +38,7 @@
       </tr>
     </table>
 
-    <p style="font-size:0.75em;color:gray; text-align: center;">
+    <p style="font-size:0.75em; opacity: 0.5; text-align: center;">
       Listskaparen är experimentell.
     </p>
     <!-- <div style="text-align-last: center;"><canvas id="lmCanvas"></canvas></div> -->
@@ -121,6 +124,17 @@ export default defineComponent({
       this.store.commit('newList')
       this.currentListIndex = this.store.state.lists.length - 1
       this.fetchMeta()
+    },
+    goToGenerator () {
+      // Clear generator stuff
+      this.store.commit('clear')
+      const l = this.currentList
+      for (const song of l.songs) { // TODO: Not really efficient O(n^2), but it will do for now
+        const s = getSongByStringIndex(song)
+        s && this.store.commit('add', s.index)
+      }
+      this.store.commit('toggleSettingTo', { key: 'makelist', value: false })
+      this.store.commit('toggleSettingTo', { key: 'generator', value: true })
     }
   }
 })
@@ -128,7 +142,7 @@ export default defineComponent({
 
 <style scoped lang="css">
   .button {
-    width: calc(50% - 12px);
+    width: calc(33% - 12px);
     display: inline-block
   }
 </style>

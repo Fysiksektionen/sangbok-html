@@ -49,8 +49,11 @@ export function getChapterFromRoute(route: RouteLocationNormalized): Chapter | u
       songs: getSongsByStringIndices(list.songs)
     } as Chapter
     break
+  case 'ChapterByIndex':
+    return getChapterByStringIndex(route.params.chapterIndex as string)
+    break
   default:
-    console.error('getChapter called for unknown route.')
+    console.error('getChapter called for unknown route: ' + (route.name?.toString()))
     return undefined
     break
   }

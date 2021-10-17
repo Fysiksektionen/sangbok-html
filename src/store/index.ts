@@ -20,7 +20,7 @@ export interface State {
   lists: SongList[]
 }
 
-type SetSettingProps = {key: 'touchAction' | 'theme', value: string}
+type SetSettingProps = { key: 'touchAction' | 'theme', value: string }
 
 export const key: InjectionKey<Store<State>> = Symbol('storage')
 
@@ -37,17 +37,20 @@ export default createStore<State>({
     query: ''
   } as State, // We need to explicity say that this qualifies as State, since the generator property is loaded through a module.
   mutations: {
-    toggleSetting (state, key: 'translate' | 'larger' | 'generator') {
+    toggleSetting(state, key: 'translate' | 'larger' | 'generator') {
       state.settings[key] = !(state.settings[key])
     },
-    setSetting (state, props: SetSettingProps) {
+    toggleSettingTo(state, { key, value }: { key: 'translate' | 'larger' | 'generator', value: boolean }) {
+      state.settings[key] = value
+    },
+    setSetting(state, props: SetSettingProps) { // Only used by multiple-choice settings.
       state.settings[props.key] = props.value
 
       // On update
       document.body.style.touchAction = (['zoom', 'all'].indexOf(state.settings.touchAction) === -1) ? 'pan-x pan-y' : ''
       document.body.className = state.settings.theme
     },
-    setQuery (state, query: string) {
+    setQuery(state, query: string) {
       state.query = query
     }
   },
