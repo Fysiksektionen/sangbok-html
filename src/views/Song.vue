@@ -91,12 +91,13 @@ export default defineComponent({
 
 <style lang="scss" scoped>
   .song-index {
-    float: right;
+    right: 0;
     margin: 24px;
     margin-top: 12px;
     font-size: 1.5em;
     opacity: 0.8;
     letter-spacing: 1px;
+    position: absolute;
   }
 
   div.lyrics {
