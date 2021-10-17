@@ -39,7 +39,7 @@
     </table>
 
     <p style="font-size:0.75em; opacity: 0.5; text-align: center;">
-      Listskaparen är experimentell.
+      Listskaparen är experimentell, och är ännu ej optimerad för mobila enheter.
     </p>
     <!-- <div style="text-align-last: center;"><canvas id="lmCanvas"></canvas></div> -->
   </div>
