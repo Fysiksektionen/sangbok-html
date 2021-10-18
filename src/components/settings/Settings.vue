@@ -8,6 +8,7 @@
     <SettingsSwitch :setting="'touchAction'" :values="{'none': 'Inga', 'zoom': 'Zooma', 'swipe': 'Svep', 'all': 'Alla'}">
       Touchfunktioner
     </SettingsSwitch>
+    <SettingsButton :setting="'sheetmusic'">Noter</SettingsButton>
     <SettingsButton :setting="'generator'">Skapa sångblad</SettingsButton>
     <SettingsButton :setting="'makelist'">Redigera listor</SettingsButton>
     <ClipboardButton/>
