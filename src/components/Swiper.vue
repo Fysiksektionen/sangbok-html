@@ -91,7 +91,7 @@ export default defineComponent({
     & div.swipe-indicator {
       transition: all 0.3s ease-out;
       position: fixed;
-      top: 5cm;
+      top: 30vh;
       border-radius: 4cm;
       height: 4cm;
       width: 4cm;

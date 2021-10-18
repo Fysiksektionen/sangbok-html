@@ -21,6 +21,7 @@
           <div v-if="song().author" class="author" v-html="toHTML(song().author)"></div>
         </div>
         <NavButtons v-if="chapter" :chapter="chapter" :chapterid="$route.params.chapterId" :songid="$route.params.songId" />
+        <div v-if="!chapter" style="height: 40px;"></div><!-- Margin if NavButtons is hidden. -->
       </div>
     </div>
   </Swiper>

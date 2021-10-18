@@ -50,6 +50,9 @@ export default defineComponent({
 /* @import './themes/z.scss'; */
 
 /* Layout */
+html { height: 100%; }
+body, #app { min-height: 100vh; }
+#app > div.flex-row, #app div.component-swiper { min-height: calc(100vh - 2.3em); /* 2.3em is navbar height. */}
 body {
     margin: 0;
     transition: 0.1s background-color ease-in-out;
