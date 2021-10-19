@@ -1,4 +1,5 @@
-<!-- TODO: Generator should be split into subcomonents, which could be used here as well. -->
+<!-- Not used. Kept as a reference for now. -->
+
 <template>
   <div class="view-generator">
     <div class="generatorsettings">

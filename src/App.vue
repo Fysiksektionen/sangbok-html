@@ -3,7 +3,6 @@
   <div class="flex-row">
     <router-view/>
     <GeneratorView v-if="$store.state.settings.generator"/>
-    <ListMakerView v-if="$store.state.settings.makelist"/>
   </div>
 </template>
 
@@ -17,7 +16,6 @@ export default defineComponent({
   components: {
     // Only load Generator component and generator helper functions on-demand.
     GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue')),
-    ListMakerView: defineAsyncComponent(() => import(/* webpackChunkName: "listmaker" */ '@/views/ListMaker.vue')),
     Navbar
   },
   created () {
