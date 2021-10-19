@@ -82,6 +82,10 @@ div.main h2 {
     background-color: rgba(128, 128, 128, 0.10);
     &:active:not(.disabled):not(.static) {background-color: rgba(128, 128, 128, 0.30);}
     &.disabled {opacity: 0.5;}
+    &.button-2 {
+      width: calc(50% - 3*$navbutton-spacing);
+      display: inline-block
+    }
 }
 
 img.inline {

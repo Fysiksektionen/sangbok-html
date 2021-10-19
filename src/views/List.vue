@@ -32,7 +32,7 @@ import { key } from '@/store'
 
 import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
 import { SwipeIndicatorState } from '@/utils/swipe.ts'
-import { Song, param2int, getSongsByStringIndices, getSongByStringIndex } from '@/lyrics'
+import { Song, param2int, getSongsByStringIndices } from '@/lyrics'
 
 export default defineComponent({
   name: 'ListView',
@@ -85,6 +85,8 @@ export default defineComponent({
     min-width: 3em;
     margin-left: 12px;
   }
+
+  div.main h2 {margin-bottom: 24px;}
 
     td.icon {
     /* TODO: Share with sheetmusicicon */

@@ -26,38 +26,38 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { useStore } from 'vuex'
-  import { key } from '@/store'
+import { defineComponent } from 'vue'
+import { useStore } from 'vuex'
+import { key } from '@/store'
 
-  import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
-  import { SwipeIndicatorState } from '@/utils/swipe.ts'
-  // import SearchBox from '@/components/SearchBox.vue'
+import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
+import { SwipeIndicatorState } from '@/utils/swipe.ts'
+// import SearchBox from '@/components/SearchBox.vue'
 
-  export default defineComponent({
-    name: 'ListsView',
-    components: {
-      // SearchBox
-      Swiper
-    },
-    data() {
-      return {
-        lists: useStore(key).state.lists, // .filter(l => l.songs.length > 0),
-      }
-    },
-    setup() {
-      return { store: useStore(key) }
-    },
-    methods: {
-      swipeHandler (direction: SwipeIndicatorState) { (direction === 'left') && this.$router.push('/') },
-      newList() {
-        this.store.commit('newList')
-      },
-      deleteList(idx: number) {
-        this.store.commit('deleteList', idx)
-      },
+export default defineComponent({
+  name: 'ListsView',
+  components: {
+    // SearchBox
+    Swiper
+  },
+  data() {
+    return {
+      lists: useStore(key).state.lists // .filter(l => l.songs.length > 0),
     }
-  })
+  },
+  setup() {
+    return { store: useStore(key) }
+  },
+  methods: {
+    swipeHandler (direction: SwipeIndicatorState) { (direction === 'left') && this.$router.push('/') },
+    newList() {
+      this.store.commit('newList')
+    },
+    deleteList(idx: number) {
+      this.store.commit('deleteList', idx)
+    }
+  }
+})
 </script>
 
 <style scoped lang="scss">
@@ -67,6 +67,8 @@
     min-width: 3em;
     margin-left: 12px;
   }
+
+  div.main h2 {margin-bottom: 24px;}
 
   td.icon {
     /* TODO: Share with sheetmusicicon and List.vue */
