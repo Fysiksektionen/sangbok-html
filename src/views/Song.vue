@@ -6,24 +6,40 @@
       :right="($route.name=='SongByIndex') ? 'hide' : (chapter.songs.length - 1 > $route.params.songId) ? 'allow' : 'disallow'">
     <div class="main">
       <div class="lyrics">
-        <button v-if="song().msvg && song().text" @click="showMsvg = !showMsvg" class="button musicbutton">
-          {{ showMsvg ? 'Dölj noter' : '𝄞'}}</button>
-        <SheetMusicRenderer v-if="song().msvg && (!song().text || showMsvg)" :src="song().msvg" />
-        <div class="song-index" v-if="song().text && !showMsvg" v-html="song().index"></div>
-        <div v-if="song().text && (!showMsvg || !song().msvg)">
-          <div class="titlecontainer" v-bind:style="{'minHeight':(song().msvg && !showMsvg ? '5em' : undefined)}">
-            <h2>{{song().title}}</h2>
-            <div v-if="song().melody" class="melody" v-html="toHTML(song().melody)"></div>
+        <button v-if="song.msvg && song.text && $store.state.settings.sheetmusic && !$store.state.settings.makelist" @click="showMsvg = !showMsvg" class="button musicbutton">
+          {{ showMsvg ? 'Dölj noter' : '𝄢'}}</button>
+        <button v-if="$store.state.settings.makelist" class="button musicbutton" @click="listModalVisible=true">+</button>
+        <SheetMusicRenderer v-if="song.msvg && (!song.text || showMsvg)" :src="song.msvg" />
+        <div class="song-index" v-if="song.text && !showMsvg" v-html="song.index"></div>
+        <div v-if="song.text && (!showMsvg || !song.msvg)">
+          <div class="titlecontainer" v-bind:style="{'minHeight':(song.msvg && !showMsvg ? '5em' : undefined)}">
+            <h2>{{song.title}}</h2>
+            <div v-if="song.melody" class="melody" v-html="toHTML(song.melody)"></div>
           </div>
-          <div class="textcontainer" v-html="toHTML(song().text)"
+          <div class="textcontainer" v-html="toHTML(song.text)"
             v-bind:class="{'larger': $store.state.settings.larger}">
           </div>
-          <div v-if="song().author" class="author" v-html="toHTML(song().author)"></div>
+          <div v-if="song.author" class="author" v-html="toHTML(song.author)"></div>
         </div>
         <NavButtons v-if="chapter" :chapter="chapter" :chapterid="$route.params.chapterId" :songid="$route.params.songId" />
+        <div v-if="!chapter" style="height: 40px;"></div><!-- Margin if NavButtons is hidden. -->
       </div>
     </div>
   </Swiper>
+  <transition name="modal-down">
+  <Modal v-if="listModalVisible" style="transition: all 0.2s ease-out;">
+    <header><h3>Lägg till i lista</h3></header>
+    <div>
+      <div v-for="list, idx in lists" v-bind:key="idx" class="row"
+      @click="listModalVisible=(list.songs.indexOf(song.index) !== -1); addToList(idx)"
+        v-bind:class="{ 'disabled': list.songs.indexOf(song.index) !== -1 }">{{list.name}}</div>
+    </div>
+    <footer style="margin-top: 0.5em;">
+      <div class="button button-2" @click="$store.commit('newList')">Ny lista</div>
+      <div class="button button-2" @click="listModalVisible=false">Avbryt</div>
+    </footer>
+  </Modal>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -42,15 +58,21 @@ export default defineComponent({
   components: {
     Swiper,
     NavButtons,
-    SheetMusicRenderer: defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer", webpackPrefetch: true */ '@/components/SheetMusicRenderer.vue'))
+    SheetMusicRenderer: defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer", webpackPrefetch: true */ '@/components/SheetMusicRenderer.vue')),
+    Modal: defineAsyncComponent(() => import(/* webpackChunkName: "modal", webpackPrefetch: true */ '@/components/Modal.vue'))
   },
   data() {
     const route: RouteLocationNormalized = useRoute()
     return {
       chapter: getChapterFromRoute(route),
-      // TODO: This is an ugly fix for the song not updating when pressing NavButtons. It can probably be done using computed()
-      song: () => getSongFromRoute(route),
-      showMsvg: false
+      showMsvg: false,
+      listModalVisible: false,
+      lists: useStore(key).state.lists
+    }
+  },
+  computed: {
+    song () {
+      return getSongFromRoute(this.$route)
     }
   },
   setup() {
@@ -58,7 +80,7 @@ export default defineComponent({
   },
   methods: {
     toHTML(text: string): string {
-      const ALLOWED_TAGS = ['li', 'ol', 'ul', 'b', 'p', 'i', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+      const ALLOWED_TAGS = ['li', 'ol', 'ul', 'b', 'p', 'i', 's', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
       let out = text.replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/\n/igm, '<br />')
       for (const tag of ALLOWED_TAGS) {
         out = out.replace(new RegExp(`&lt;(/)?${tag}&gt;`, 'mig'), `<$1${tag}>`)
@@ -84,19 +106,39 @@ export default defineComponent({
       } else if (direction === 'left' && songId > 0) {
         this.$router.replace('/chapter/' + (chapterId || chapter.prefix) + '/song/' + (songId - 1))
       }
+    },
+    addToList(listIdx: number) {
+      this.song && this.store.commit('addToList', { list: listIdx, index: this.song?.index })
     }
   }
 })
 </script>
 
 <style lang="scss" scoped>
+.modal-down-enter-from, .modal-down-leave-to {/* See hard-coded style property to set transition speed. */
+    /* TODO: Set dropdown speeds using classes. */
+    filter: blur(0);
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  div.row {
+    padding: 0.75em;
+    text-align: center;
+    &.disabled {
+      opacity: 0.3;
+      text-decoration: line-through;
+    }
+  }
+
   .song-index {
-    float: right;
+    right: 0;
     margin: 24px;
     margin-top: 12px;
     font-size: 1.5em;
     opacity: 0.8;
     letter-spacing: 1px;
+    position: absolute;
   }
 
   div.lyrics {

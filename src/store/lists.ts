@@ -46,6 +46,15 @@ export const listsModule = {
       state.push({
         name: 'Lista ' + (state.length + 1), description: '', songs: []
       })
+    },
+    moveList: (state: SongList[], { index, direction }: {index: number, direction: number }): void => {
+      // TODO: Can probably be done more elegantly.
+      if (index + direction < 0 || index + direction > state.length - 1) {
+        return
+      }
+      const temp = state[index]
+      state[index] = state[index + direction]
+      state[index + direction] = temp
     }
   } // as { [key: string]: Mutation<any> }
 }

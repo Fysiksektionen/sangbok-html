@@ -3,7 +3,6 @@
   <div class="flex-row">
     <router-view/>
     <GeneratorView v-if="$store.state.settings.generator"/>
-    <ListMakerView v-if="$store.state.settings.makelist"/>
   </div>
 </template>
 
@@ -17,7 +16,6 @@ export default defineComponent({
   components: {
     // Only load Generator component and generator helper functions on-demand.
     GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue')),
-    ListMakerView: defineAsyncComponent(() => import(/* webpackChunkName: "listmaker" */ '@/views/ListMaker.vue')),
     Navbar
   },
   created () {
@@ -50,6 +48,9 @@ export default defineComponent({
 /* @import './themes/z.scss'; */
 
 /* Layout */
+html { height: 100%; }
+body, #app { min-height: 100vh; }
+#app > div.flex-row, #app div.component-swiper { min-height: calc(100vh - 2.3em); /* 2.3em is navbar height. */}
 body {
     margin: 0;
     transition: 0.1s background-color ease-in-out;
@@ -81,6 +82,10 @@ div.main h2 {
     background-color: rgba(128, 128, 128, 0.10);
     &:active:not(.disabled):not(.static) {background-color: rgba(128, 128, 128, 0.30);}
     &.disabled {opacity: 0.5;}
+    &.button-2 {
+      width: calc(50% - 3*$navbutton-spacing);
+      display: inline-block
+    }
 }
 
 img.inline {

@@ -11,7 +11,7 @@
   &:active:not(.disabled):not(.static) {background-color: $active-button-color;}
 }
 
-& table.songbook tr {
+& table.songbook tr, div.row {
   box-shadow: 0 2px 3px $row-shadow-color;
   border-bottom: 1px solid #111;
   background-color: $row-background;

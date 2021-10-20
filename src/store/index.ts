@@ -13,6 +13,7 @@ export interface State {
     larger: boolean,
     generator: boolean,
     makelist: boolean,
+    sheetmusic: boolean,
     touchAction: string // 'none' | 'swipe' | 'zoom' | 'all'
   },
   query: string,
@@ -32,6 +33,7 @@ export default createStore<State>({
       larger: false,
       generator: false,
       makelist: false,
+      sheetmusic: true,
       touchAction: 'all'
     },
     query: ''

@@ -14,7 +14,7 @@
                 {{ chapter.chapter }}
             </td>
         </tr>
-        <tr @click="$router.push('/list/')" v-if="$store.getters.hasLists"><td class="index">♥</td><td class="name">Egna listor</td></tr>
+        <tr @click="$router.push('/list/')" v-if="$store.getters.hasLists || $store.state.settings.makelist"><td class="index">♥</td><td class="name">Egna listor</td></tr>
     </table>
   </div>
 </template>
