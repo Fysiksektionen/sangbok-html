@@ -8,7 +8,7 @@
       <div class="lyrics">
         <button v-if="song.msvg && song.text && $store.state.settings.sheetmusic && !$store.state.settings.makelist" @click="showMsvg = !showMsvg" class="button musicbutton">
           {{ showMsvg ? 'Dölj noter' : '𝄢'}}</button>
-        <button v-if="$store.state.settings.makelist && canAddToSomeList" class="button musicbutton" @click="listModalVisible=true">+</button>
+        <button v-if="$store.state.settings.makelist" class="button musicbutton" @click="listModalVisible=true">+</button>
         <SheetMusicRenderer v-if="song.msvg && (!song.text || showMsvg)" :src="song.msvg" />
         <div class="song-index" v-if="song.text && !showMsvg" v-html="song.index"></div>
         <div v-if="song.text && (!showMsvg || !song.msvg)">
@@ -26,7 +26,7 @@
       </div>
     </div>
   </Swiper>
-  <transition name="dropdown">
+  <transition name="modal-down">
   <Modal v-if="listModalVisible" style="transition: all 0.2s ease-out;">
     <header><h3>Lägg till i lista</h3></header>
     <div>
@@ -73,13 +73,6 @@ export default defineComponent({
   computed: {
     song () {
       return getSongFromRoute(this.$route)
-    },
-    canAddToSomeList() {
-      for (const list of this.lists) {
-        const song = this.song
-        if (song && list.songs.indexOf(song.index) === -1) { return true }
-      }
-      return false
     }
   },
   setup() {
@@ -122,7 +115,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.dropdown-enter-from, .dropdown-leave-to {/* See hard-coded style property to set transition speed. */
+.modal-down-enter-from, .modal-down-leave-to {/* See hard-coded style property to set transition speed. */
     /* TODO: Set dropdown speeds using classes. */
     filter: blur(0);
     transform: translateY(-100%);
