@@ -14,7 +14,8 @@ export type Song = {
   index: string,
   author?: string,
   melody?: string,
-  unlock?: string, // Required keyword (regexp) to see this in the search engine.
+  // unlock?: string, // Required keyword (regexp) to see this in the search engine.
+  tags?: string[]
 } & ({
   msvg?: string,
   text: string
@@ -42,7 +43,11 @@ export const chapters: Chapter[] = lyrics
 // List of songs for search
 export const songs: Song[] = (
   // Regular songs.
-  ([...chapters].map((c, cid) => c.songs.map((s, sid) => { return { ...s, chapterindex: cid, songindex: sid, tags: [greek2latin(s.index), greek2latin2(s.index), s.msvg ? 'noter' : ''] } as SongHit })).flat())
+  ([...chapters].map((c, cid) => c.songs.map((s, sid) => {
+    const tags = [greek2latin(s.index), greek2latin2(s.index), s.msvg ? 'noter' : '']
+    if (s.tags !== undefined) { tags.push(...s.tags) }
+    return { ...s, chapterindex: cid, songindex: sid, tags: tags } as SongHit
+  })).flat())
     // Searchable songs of hidden chapters (needs to be indexed by chapter prefix, not index)
     .concat((([ths] as Chapter[]).map((c) => c.songs.map((s, sid) => { return { ...s, chapterindex: c.prefix, songindex: sid, tags: [greek2latin(s.index), greek2latin2(s.index), s.msvg ? 'noter' : ''] } as SongHit })).flat()))
     // Searchable standalone songs

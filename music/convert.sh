@@ -80,7 +80,7 @@ if [[ $*\  == *--compress\ *  || $*\  == *-c\ * ]]; then
     do
         # echo -e " - \e[34m$file\e[0m"
         if [[ $file =~ ".min.svg" ]]; then
-            echo -e "$file is already minified."
+            echo -e "$file är redan komprimerad."
         else
             svgo --input "$file" --output "${file//.svg/.min.svg}" --multipass || echo -e "\e[31mKomprimering misslyckades\e[0m för $file."
             rm "$file" # Remove old file
