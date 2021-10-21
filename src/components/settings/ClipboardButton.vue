@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { RouteLocationNormalized } from 'vue-router'
-import { chapters } from '@/lyrics'
+import { chapters, getSongFromRoute } from '@/lyrics'
 import copy from 'copy-to-clipboard'
 
 export default defineComponent({
@@ -30,13 +30,15 @@ export default defineComponent({
     lyrics () {
       const route: RouteLocationNormalized = this.$route
       if (route.name && route.name.toString().startsWith('Song')) {
-        const songId = parseInt(route.params.songId as string)
-        const chapterId = parseInt(route.params.chapterId as string)
-        const song = chapters[chapterId].songs[songId]
-        return song.title + '\n\n' + song.text
+        const song = getSongFromRoute(route)
+        return song !== undefined ? song.title + '\n\n' + song.text : ''
       } else { return '' }
     },
     copy () {
+      if(this.lyrics() === '') {
+        this.state = 'err'
+        return
+      }
       this.state = copy(this.lyrics()) ? 'ok' : 'err'
       setTimeout(this.resetState, 1000)
     },

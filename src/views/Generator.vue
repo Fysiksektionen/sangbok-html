@@ -95,7 +95,7 @@ export default defineComponent({
     getSongByStringIndex: getSongByStringIndex, // TODO: Don't use this function in the template.
     add() {
       const route: RouteLocationNormalized = this.$route
-      if (route.name && route.name.toString().startsWith('Song')) { // TODO: Use a switch here isntead of if-else if
+      if (route.name && route.name.toString().startsWith('Song')) {
         const song = getSongFromRoute(route)
         if (song !== undefined) {
           this.store.commit('add', song.index)
@@ -128,7 +128,7 @@ export default defineComponent({
     go: async function (method: 'zip' | 'overleaf') {
       const songs = (this.store.state.generator.generatorSongs.length === 0) ? chapters.map(c => c.songs).flat() : getSongsByStringIndices(this.store.state.generator.generatorSongs)
 
-      const files: { [key: string]: string } = { // TODO Load asynchronously, that is, don't use await right here.
+      const files: { [key: string]: string } = { // TODO: Load asynchronously, that is, don't use await right here.
         'main.tex': getMainTeX(this.generalSettings),
         'blad.cls': await (await fetch('tex/blad.cls')).text(),
         'logga.svg': await (await fetch('tex/logga.svg')).text(),

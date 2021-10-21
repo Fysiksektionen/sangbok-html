@@ -4,6 +4,8 @@ import Chapter from '../views/Chapter.vue'
 import Song from '../views/Song.vue'
 import Search from '../views/Search.vue'
 import { chapters, getChapterByStringIndex, getSongByStringIndex } from '@/lyrics'
+// import { useStore } from 'vuex'
+import store from '@/store'
 
 // Certain components may benefit from async loading. For now (v1.0) this adds about 3 KiB to the total size (transferred)
 // while reducing the entrypoint size by about 30 KiB. Hence the difference is pretty negligible for now, especially since
@@ -67,6 +69,31 @@ const routes: Array<RouteRecordRaw> = [
     redirect: to => { // TODO: Replace
       console.warn('ListRedirect is an ugly solution, and should be replaced. It causes back-button bugs.')
       return '/list/' + to.params.listId + '/song/' + to.params.songId
+    }
+  },
+  {
+    path: '/list/add/:data(.+)',
+    name: 'AddList',
+    redirect: to => {
+      // TODO: Error-handle
+      // TODO: The use of store here is somewhat sketchy...
+      const data = JSON.parse(to.params.data as string)
+      if (typeof data.name === 'string' && typeof data.description === 'string' && Array.isArray(data.songs)) {
+        store.commit('newList')
+        const i = store.state.lists.length - 1
+        store.commit('setListMeta', {list: i, name: data.name, description: data.description })
+        for (const song of data.songs) {
+          const s = getSongByStringIndex(song)
+          if (s !== undefined) {
+            store.commit('addToList', { list: i, index: song })
+          } else { // TODO: Show error message when this happens (but only one per attempt, not one per song.)
+            console.warn('Tried to import song with index ' + song + ', but it was not found.')
+          }
+        }
+        return '/list/' + i
+      } else { // TODO: Show error message after this redirect.
+        return '/'
+      }
     }
   },
   { // Redirect 404:s to the start page.

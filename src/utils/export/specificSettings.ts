@@ -4,7 +4,7 @@ import { DownloadSetting, NumberSetting } from './settings'
 export type SpecificDownloadSettings = {
   title: string,
   indexes: string[], // TODO: using string indices is very encoding-sensitive. There should be a better way.
-  // Also, title could be fetched directly from the indexes
+  // TODO: Also, title could be fetched directly from the indexes
   settings: DownloadSetting[],
   processor: (lyrics: string, settings: DownloadSetting[]) => string
 }
@@ -33,7 +33,6 @@ function trailingInfo(lyrics: string, settings: DownloadSetting[]): string {
  * Specific preprocessors
  */
 function arskursernas(lyrics: string, settings: DownloadSetting[]): string { // TODO: Cleanup
-  // console.log(settings)
   const content = [] as string[]
   const description = lyrics.split('\n').filter(line => /^(?!\d\d)/.test(line))
   const years = lyrics.split('\n').filter(line => /^\d\d/.test(line))

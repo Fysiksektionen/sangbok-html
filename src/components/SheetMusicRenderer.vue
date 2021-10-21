@@ -35,8 +35,7 @@ export default defineComponent({
       isLoading: true
     }
   },
-  // mounted() {},
-  methods: { // TODO: Most of these can be pre-computed, and put in data.
+  methods: { // TODO: Move some of these to computed
     getImages(): string[] {
       const curSongSvgs = svglist.filter(s => { return s.indexOf(this.$props.src) > -1 })
       const curSongSvgsWithZoom = curSongSvgs.filter(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ['', ''])[1] === this.getZoomLevels()[this.zoomIdx])

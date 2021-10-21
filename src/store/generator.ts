@@ -16,11 +16,7 @@ export const generatorModule = {
     specificSettings: specificSettings
   } as GeneratorState,
   getters: {
-    songHasBeenAdded: (state: GeneratorState) => (songindex: SongIndex2): boolean => {
-      // TODO: Can probably be done in a more vectorized fashion
-      // console.log('SHBA', chapterid, songid)
-      return state.generatorSongs.indexOf(songindex) !== -1
-    },
+    songHasBeenAdded: (state: GeneratorState) => (songindex: SongIndex2): boolean => state.generatorSongs.indexOf(songindex) !== -1,
     settingIsVisible: (state: GeneratorState) => (setting: SpecificDownloadSettings): boolean => {
       return [...setting.indexes].filter((i: string) => state.generatorSongs.indexOf(i) > -1).length > 0
     }
@@ -30,13 +26,8 @@ export const generatorModule = {
       !generatorModule.getters.songHasBeenAdded(state)(idx) && state.generatorSongs.push(idx)
     },
     move: (state: GeneratorState, { index, direction }: { index: number, direction: number }): void => {
-      // TODO: Can probably be done more elegantly.
-      if (index + direction < 0 || index + direction > state.generatorSongs.length - 1) {
-        return
-      }
-      const temp = state.generatorSongs[index]
-      state.generatorSongs[index] = state.generatorSongs[index + direction]
-      state.generatorSongs[index + direction] = temp
+      if (index + direction < 0 || index + direction > state.generatorSongs.length - 1) { return }
+      [state.generatorSongs[index], state.generatorSongs[index + direction]] = [state.generatorSongs[index + direction], state.generatorSongs[index]]
     },
     delete: (state: GeneratorState, listIdx: number): void => {
       state.generatorSongs.splice(listIdx, 1)
