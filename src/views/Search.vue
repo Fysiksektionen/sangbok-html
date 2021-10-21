@@ -9,6 +9,7 @@
             @click="goto(hit)"
             v-bind:key="idx">
             <!-- TODO: Prevent XSS from list titles without CSP. -->
+            <!-- As of now, lists are not visible in search. -->
             <td class="index" v-html="hit.item.index"></td>
             <td class="name">
               {{ hit.item.title }}

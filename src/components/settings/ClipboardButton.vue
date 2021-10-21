@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { RouteLocationNormalized } from 'vue-router'
-import { chapters, getSongFromRoute } from '@/lyrics'
+import { getSongFromRoute } from '@/lyrics'
 import copy from 'copy-to-clipboard'
 
 export default defineComponent({
@@ -35,7 +35,7 @@ export default defineComponent({
       } else { return '' }
     },
     copy () {
-      if(this.lyrics() === '') {
+      if (this.lyrics() === '') {
         this.state = 'err'
         return
       }

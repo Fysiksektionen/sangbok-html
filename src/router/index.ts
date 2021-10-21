@@ -75,13 +75,13 @@ const routes: Array<RouteRecordRaw> = [
     path: '/list/add/:data(.+)',
     name: 'AddList',
     redirect: to => {
-      // TODO: Error-handle
+      // TODO: Error-handle and validate data
       // TODO: The use of store here is somewhat sketchy...
       const data = JSON.parse(to.params.data as string)
       if (typeof data.name === 'string' && typeof data.description === 'string' && Array.isArray(data.songs)) {
         store.commit('newList')
         const i = store.state.lists.length - 1
-        store.commit('setListMeta', {list: i, name: data.name, description: data.description })
+        store.commit('setListMeta', { list: i, name: data.name, description: data.description })
         for (const song of data.songs) {
           const s = getSongByStringIndex(song)
           if (s !== undefined) {
@@ -146,7 +146,25 @@ router.beforeEach((to: RouteLocationNormalized) => {
       console.warn(`Song id ${sid} is too large for chapter ${chapter.prefix}. Redirecting to home.`)
       return '/' as RouteLocationRaw
     }
-  } else if (['Home'].indexOf(to.name ? to.name.toString() : '') !== -1) { /* Ignore */ } else {
+  } else if (to.name === 'SongFromList') {
+    const lid = parseInt(to.params.listId as string)
+    const list = store.state.lists[lid]
+    if (!list) {
+      console.warn(`List ${lid} not found. Redirecting to home.`)
+      return '/' as RouteLocationRaw
+    }
+    const sid = parseInt(to.params.songId as string)
+    if (sid >= list.songs.length) {
+      console.warn(`Song id ${sid} is too large for list ${lid}. Redirecting to home.`)
+      return '/' as RouteLocationRaw
+    }
+  } else if (to.name === 'List') {
+    const lid = parseInt(to.params.listId as string)
+    if (lid >= store.state.lists.length) {
+      console.warn(`List id ${lid} is too large. Redirecting to home.`)
+      return '/' as RouteLocationRaw
+    }
+  } else if (['Home', 'Lists', 'Search'].indexOf(to.name ? to.name.toString() : '') !== -1) { /* Ignore */ } else {
     console.warn('Route ' + (to.name && to.name.toString()) + ' has no navigation guard.')
   }
 })

@@ -70,7 +70,7 @@ export default defineComponent({
       return { ...list, songs: getSongsByStringIndices(list.songs) }
     },
     link (): string {
-      return window.location.origin + window.location.pathname + "#/list/add/" + encodeURI(JSON.stringify({...this.list, songs: this.list.songs.map(s => s.index)}))
+      return window.location.origin + window.location.pathname + '#/list/add/' + encodeURI(JSON.stringify({ ...this.list, songs: this.list.songs.map(s => s.index) }))
     }
   },
   setup() {
