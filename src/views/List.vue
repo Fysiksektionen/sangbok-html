@@ -92,7 +92,7 @@ export default defineComponent({
     },
     async showQR () {
       this.qrVisible = true
-      const QRCode = await import('qrcode')
+      const QRCode = await import(/* webpackChunkName: "qrcodelib", webpackPrefetch: false */ 'qrcode')
       this.qrImage = await QRCode.toDataURL(this.link)
     },
     copyLink () {

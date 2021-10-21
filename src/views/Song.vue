@@ -34,7 +34,7 @@
       @click="listModalVisible=(list.songs.indexOf(song.index) !== -1); addToList(idx)"
         v-bind:class="{ 'disabled': list.songs.indexOf(song.index) !== -1 }">{{list.name}}</div>
     </div>
-    <footer style="margin-top: 0.5em;">
+    <footer style="padding-top: 0.5em;">
       <div class="button button-2" @click="$store.commit('newList')">Ny lista</div>
       <div class="button button-2" @click="listModalVisible=false">Avbryt</div>
     </footer>
@@ -50,6 +50,7 @@ import { key } from '@/store'
 
 import Swiper from '@/components/Swiper.vue'
 import { SwipeIndicatorState } from '@/utils/swipe'
+import Modal from '@/components/Modal.vue'
 import NavButtons from '@/components/SongNavButtons.vue'
 import { getSongFromRoute, getChapterFromRoute } from '@/lyrics'
 
@@ -59,7 +60,7 @@ export default defineComponent({
     Swiper,
     NavButtons,
     SheetMusicRenderer: defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer", webpackPrefetch: true */ '@/components/SheetMusicRenderer.vue')),
-    Modal: defineAsyncComponent(() => import(/* webpackChunkName: "modal", webpackPrefetch: true */ '@/components/Modal.vue'))
+    Modal: Modal
   },
   data() {
     const route: RouteLocationNormalized = useRoute()

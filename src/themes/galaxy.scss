@@ -40,6 +40,9 @@ $button-color: rgba($f-gray-violet, 0.4);
 $button-text-color: $text-color;
 $active-button-color: rgba($f-gray-violet, 0.7);
 
+$modal-text-color: $text-color;
+$modal-background-color: $body-background;
+
 @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap');
 body.galaxy {
     background: $body-background;

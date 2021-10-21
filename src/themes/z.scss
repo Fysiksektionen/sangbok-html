@@ -19,6 +19,9 @@ $button-color: #00000030;
 $button-text-color: $text-color;
 $active-button-color: #C2413A70;
 
+$modal-text-color: $text-color;
+$modal-background-color: $body-background;
+
 @font-face {
     font-family: 'Capture Smallz';
     src: url('/font/capture-smallz.regular.woff2') format('woff2');
