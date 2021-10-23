@@ -6,39 +6,31 @@
       :right="($route.name=='SongByIndex') ? 'hide' : (chapter.songs.length - 1 > $route.params.songId) ? 'allow' : 'disallow'">
     <div class="main">
       <div class="lyrics">
-        <button v-if="song.msvg && song.text && $store.state.settings.sheetmusic && !$store.state.settings.makelist" @click="showMsvg = !showMsvg" class="button musicbutton">
-          {{ showMsvg ? 'Dölj noter' : '𝄢'}}</button>
+        <!-- Pre-header -->
+        <button v-if="song.msvg && song.text && $store.state.settings.sheetmusic && !$store.state.settings.makelist"
+          @click="showMsvg = !showMsvg" class="button musicbutton">
+          {{ showMsvg ? 'Dölj noter' : '𝄢'}}
+        </button>
         <button v-if="$store.state.settings.makelist" class="button musicbutton" @click="listModalVisible=true">+</button>
-        <SheetMusicRenderer v-if="song.msvg && (!song.text || showMsvg)" :src="song.msvg" />
         <div class="song-index" v-if="song.text && !showMsvg" v-html="song.index"></div>
+        <!-- Main content -->
+        <SheetMusicRenderer v-if="song.msvg && (!song.text || showMsvg)" :src="song.msvg" />
         <div v-if="song.text && (!showMsvg || !song.msvg)">
           <div class="titlecontainer" v-bind:style="{'minHeight':(song.msvg && !showMsvg ? '5em' : undefined)}">
             <h2>{{song.title}}</h2>
             <div v-if="song.melody" class="melody" v-html="toHTML(song.melody)"></div>
           </div>
-          <div class="textcontainer" v-html="toHTML(song.text)"
-            v-bind:class="{'larger': $store.state.settings.larger}">
-          </div>
+          <div class="textcontainer" v-html="toHTML(song.text)" v-bind:class="{'larger': $store.state.settings.larger}"></div>
           <div v-if="song.author" class="author" v-html="toHTML(song.author)"></div>
         </div>
         <NavButtons v-if="chapter" :chapter="chapter" :chapterid="$route.params.chapterId" :songid="$route.params.songId" />
-        <div v-if="!chapter" style="height: 40px;"></div><!-- Margin if NavButtons is hidden. -->
+        <div v-if="!chapter" style="height: 2em;"></div><!-- Margin if NavButtons is hidden. -->
       </div>
     </div>
   </Swiper>
+  <!-- Modals -->
   <transition name="modal-down">
-  <Modal v-if="listModalVisible" style="transition: all 0.2s ease-out;">
-    <header><h3>Lägg till i lista</h3></header>
-    <div>
-      <div v-for="list, idx in lists" v-bind:key="idx" class="row"
-      @click="listModalVisible=(list.songs.indexOf(song.index) !== -1); addToList(idx)"
-        v-bind:class="{ 'disabled': list.songs.indexOf(song.index) !== -1 }">{{list.name}}</div>
-    </div>
-    <footer style="padding-top: 0.5em;">
-      <div class="button button-2" @click="$store.commit('newList')">Ny lista</div>
-      <div class="button button-2" @click="listModalVisible=false">Avbryt</div>
-    </footer>
-  </Modal>
+    <ListModal songindex="song.index" v-if="listModalVisible" @close="listModalVisible=false" style="transition: all 0.2s ease-out;"/>
   </transition>
 </template>
 
@@ -49,67 +41,41 @@ import { useStore } from 'vuex'
 import { key } from '@/store'
 
 import Swiper from '@/components/Swiper.vue'
-import { SwipeIndicatorState } from '@/utils/swipe'
-import Modal from '@/components/Modal.vue'
-import NavButtons from '@/components/SongNavButtons.vue'
-import { getSongFromRoute, getChapterFromRoute } from '@/lyrics'
+import NavButtons from '@/views/song/SongNavButtons.vue'
+import ListModal from '@/views/song/ListModal.vue'
+
+import { SwipeIndicatorState, swipeIndicatorToOffset } from '@/utils/swipe'
+import { getSongFromRoute, getChapterFromRoute, getOffsetSongFromRoute } from '@/lyrics'
+import { toHTML } from '@/utils/other'
 
 export default defineComponent({
   name: 'SongView',
   components: {
     Swiper,
     NavButtons,
-    SheetMusicRenderer: defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer", webpackPrefetch: true */ '@/components/SheetMusicRenderer.vue')),
-    Modal: Modal
+    ListModal,
+    // Load SheetMusicRenderer on-demand
+    SheetMusicRenderer: defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer", webpackPrefetch: true */ '@/views/song/SheetMusicRenderer.vue'))
   },
+  setup() { return { store: useStore(key) } },
   data() {
     const route: RouteLocationNormalized = useRoute()
     return {
       chapter: getChapterFromRoute(route),
       showMsvg: false,
-      listModalVisible: false,
-      lists: useStore(key).state.lists
+      listModalVisible: false
     }
   },
   computed: {
-    song () {
-      return getSongFromRoute(this.$route)
-    }
-  },
-  setup() {
-    return { store: useStore(key) }
+    song () { return getSongFromRoute(this.$route) }
   },
   methods: {
-    toHTML(text: string): string {
-      const ALLOWED_TAGS = ['li', 'ol', 'ul', 'b', 'p', 'i', 's', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
-      let out = text.replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/\n/igm, '<br />')
-      for (const tag of ALLOWED_TAGS) {
-        out = out.replace(new RegExp(`&lt;(/)?${tag}&gt;`, 'mig'), `<$1${tag}>`)
-      }
-      return out
-    },
-    goToParent() { // store.state.query is set if the user came from search. If that's the case, send them back to the search page, else go to the chapter page.
-      if (this !== undefined) {
-        if (this.store.state.query !== '') {
-          this.$router.push('/search/' + this.store.state.query)
-        } else {
-          this.$router.push('/chapter/' + this.$route.params.chapterId)
-        }
-      }
-    },
+    toHTML: toHTML,
     swipeHandler(direction: SwipeIndicatorState) {
-      const songId = parseInt(this.$route.params.songId as string)
-      const chapter = this.chapter
-      if (!chapter) return
-      const chapterId = (this.$route.params.chapterId === undefined) ? chapter.prefix : this.$route.params.chapterId
-      if (direction === 'right' && chapter.songs.length - 1 > songId) {
-        this.$router.replace('/chapter/' + (chapterId || chapter.prefix) + '/song/' + (songId + 1))
-      } else if (direction === 'left' && songId > 0) {
-        this.$router.replace('/chapter/' + (chapterId || chapter.prefix) + '/song/' + (songId - 1))
-      }
-    },
-    addToList(listIdx: number) {
-      this.song && this.store.commit('addToList', { list: listIdx, index: this.song?.index })
+      const offset = swipeIndicatorToOffset[direction]
+      if (offset === 0) return
+      const newSong = getOffsetSongFromRoute(this.$route, offset)
+      newSong && this.$router.replace('/chapter/' + newSong.chapterIdentifier + '/song/' + newSong.index)
     }
   }
 })
@@ -121,15 +87,6 @@ export default defineComponent({
     filter: blur(0);
     transform: translateY(-100%);
     opacity: 0;
-  }
-
-  div.row {
-    padding: 0.75em;
-    text-align: center;
-    &.disabled {
-      opacity: 0.3;
-      text-decoration: line-through;
-    }
   }
 
   .song-index {

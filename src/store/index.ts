@@ -35,8 +35,7 @@ export default createStore<State>({
       makelist: false,
       sheetmusic: true,
       touchAction: 'all'
-    },
-    query: ''
+    }
   } as State, // We need to explicity say that this qualifies as State, since the generator property is loaded through a module.
   mutations: {
     toggleSetting(state, key: 'translate' | 'larger' | 'generator') {
@@ -51,9 +50,6 @@ export default createStore<State>({
       // On update
       document.body.style.touchAction = (['zoom', 'all'].indexOf(state.settings.touchAction) === -1) ? 'pan-x pan-y' : ''
       document.body.className = state.settings.theme
-    },
-    setQuery(state, query: string) {
-      state.query = query
     }
   },
   // actions: {},

@@ -1,3 +1,12 @@
+export function toHTML(text: string): string {
+  const ALLOWED_TAGS = ['li', 'ol', 'ul', 'b', 'p', 'i', 's', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+  let out = text.replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/\n/igm, '<br />')
+  for (const tag of ALLOWED_TAGS) {
+    out = out.replace(new RegExp(`&lt;(/)?${tag}&gt;`, 'mig'), `<$1${tag}>`)
+  }
+  return out
+}
+
 export function greekPrefix2latin (greek: string): string {
   const dict: { [key: string]: string } = {
     Αα: 'Alfa',

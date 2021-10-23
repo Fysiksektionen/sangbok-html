@@ -15,8 +15,9 @@ if [[ $*\  == *--help\ * || $*\  == *-h\ * ]]; then
     exit 0
 fi
 
-
-# Cleanup and directory creation
+##
+## Cleanup and directory creation
+##
 mkdir -p svg
 if [[ $*\  == *--force\ * ]]; then
     rm svg/*.svg
@@ -39,16 +40,17 @@ do
     rm tmp/*.mscx
 
     # Extract the source file, so that we can modify the scale factor before rendering.
-    # Note that the internal .mscx file does not neccessarily correspond to the .mscz file name.
+    # Note that the internal .mscx file does not neccessarily correspond to the .mscz file name if the .mscz has been renamed after saving.
     unzip -o "mscz/$file" *.mscx -d "tmp" || exit 3;
 
     for sf in "${SCALE_FACTORS[@]}"
     do
-        # TODO: if we are using hash, and a generated image has already been found, don't regenerate it unless we force it with a flag.
         if [[ $*\  == *--no-hash\ * ]]; then
+            # Set hash to empty.
             csum=""
         else
             # Check if another file with the same checksum exists.
+            # If it's found, use the old file.
             csum="."$(sha1sum "mscz/$file")
             if ls svg/*${csum:0:8}-sf$sf-*.svg > /dev/null 2>&1
             then
@@ -56,12 +58,14 @@ do
             fi
         fi
         
-        for tmpfile in tmp/*.mscx # Find whatever the .mscx file is called.
+        for tmpfile in tmp/*.mscx # Find whatever the .mscx file is called (there should only be one).
         do
+            # Modify the scaling factor and the page height in order to get the desired zoom level in a single svg file.
             sed -e "s/<Spatium>[0-9]\.[0-9]*<\/Spatium>/<Spatium>$sf<\/Spatium>/g" "$tmpfile" \
                 | sed -e "s/<pageHeight>[0-9]*\.[0-9]*<\/pageHeight>/<pageHeight>1000<\/pageHeight>/g" \
                 > "tmp/${file//mscz/tmp.mscx}" \
                 || exit 3
+            # Generate svg
             mscore3 --export-to "svg/${file//.mscz/}${csum:0:8}-sf$sf.svg" "tmp/${file//mscz/tmp.mscx}" --force --trim-image 140 || exit 1;
         done
     done
@@ -78,19 +82,18 @@ if [[ $*\  == *--compress\ *  || $*\  == *-c\ * ]]; then
     cd svg
     for file in *.svg
     do
-        # echo -e " - \e[34m$file\e[0m"
         if [[ $file =~ ".min.svg" ]]; then
             echo -e "$file är redan komprimerad."
         else
             svgo --input "$file" --output "${file//.svg/.min.svg}" --multipass || echo -e "\e[31mKomprimering misslyckades\e[0m för $file."
-            rm "$file" # Remove old file
+            rm "$file" # Remove old, non-compressed file
         fi
     done
     cd ..
 fi
 
 ##
-## Generate svgs.json
+## Generate svgs.json (a list of all available svg sheet music files)
 ##
 if [[ ! $*\  == *--no-json\ * ]]; then
     echo -e "\e[1;32mGenererar svgs.json\e[0m"
@@ -114,6 +117,7 @@ if [[ ! $*\  == *--no-move\ * ]]; then
     cp svg/* ../public/msvg/
 fi
 
+# Only create a cache if we reconverted from scratch and compressed everything.
 if [[ $*\  == *--force\ * && $*\  == *--compress\ * ]]; then
     echo -e "\e[1;32mSkapar cache.\e[0m"
     tar -cJf svg.tar.lzma svg/*

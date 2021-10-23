@@ -1,5 +1,9 @@
 export type SwipeIndicatorState = 'xleft' | 'left' | 'none' | 'right' | 'xright'
 
+export const swipeIndicatorToOffset: {[key: string]: -1 | 0 | 1} = {
+  right: 1, left: -1, none: 0, xleft: 0, xright: 0
+}
+
 export function getCoordsFromEvent(e: Event): [number, number] | [undefined, undefined] {
   if (e.constructor.name === 'TouchEvent') {
     const touch = (e as TouchEvent).touches[0]

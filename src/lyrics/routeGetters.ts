@@ -58,3 +58,22 @@ export function getChapterFromRoute(route: RouteLocationNormalized): Chapter | u
     break
   }
 }
+
+// Returns undefined if no next song could be found. Returns false if the song is the first/last, etc.
+export function getOffsetSongFromRoute(route: RouteLocationNormalized, offset: 1 | -1): undefined | false | {song: Song, chapterIdentifier: string | number, index: number} {
+  if (route.name === 'SongByIndex') return undefined
+
+  const chapter = getChapterFromRoute(route)
+  const songId = param2int(route.params.songId as string)
+  if (!chapter) return undefined
+
+  const chapterId = (route.name === 'Song') ? (route.params.chapterId as string || chapter.prefix) : chapter.prefix
+
+  if ((songId + offset > chapter.songs.length - 1) || (songId + offset < 0)) return false
+
+  return {
+    song: chapter.songs[songId + offset],
+    chapterIdentifier: chapterId,
+    index: songId + offset
+  }
+}

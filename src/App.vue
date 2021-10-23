@@ -14,9 +14,9 @@ import { themes } from '@/themes'
 export default defineComponent({
   name: 'Sångbok',
   components: {
-    // Only load Generator component and generator helper functions on-demand.
-    GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue')),
-    Navbar
+    Navbar,
+    // This loads Generator component and generator helper functions on-demand.
+    GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue'))
   },
   created () {
     // TODO: Ugly fix that removes body night class if stored settings.night === false. Also done in store.
@@ -37,9 +37,9 @@ export default defineComponent({
 <style lang="scss">
 @use "sass:math";
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
-@import './views/Generator.scss';
 
 /* TODO: Load these on-demand. */
+/* Themes */
 @import './themes/night.scss';
 @import './themes/day.scss';
 @import './themes/galaxy.scss';

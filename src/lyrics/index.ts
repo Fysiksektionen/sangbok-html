@@ -4,7 +4,7 @@ import lyrics from './lyrics.json'
 import leo from './addons/leo.json'
 import ths from './addons/ths.json'
 import extraSongs from './addons/songs.json'
-export { getChapterFromRoute, getSongFromRoute, param2int } from './routeGetters'
+export { getChapterFromRoute, getSongFromRoute, getOffsetSongFromRoute, param2int } from './routeGetters'
 
 type SongIndex = [number, number]
 export type SongIndex2 = string
