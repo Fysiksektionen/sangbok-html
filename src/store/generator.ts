@@ -1,10 +1,10 @@
 import { generalSettings, GeneralSettings } from '@/utils/export/generalSettings'
 import { specificSettings, SpecificDownloadSettings } from '@/utils/export/specificSettings'
-import { SongIndex2 } from '@/lyrics'
+import { SongIndex } from '@/lyrics'
 // import { Mutation } from 'vuex'
 
 export type GeneratorState = {
-  generatorSongs: SongIndex2[],
+  generatorSongs: SongIndex[],
   generalSettings: GeneralSettings,
   specificSettings: SpecificDownloadSettings[]
 }
@@ -16,13 +16,13 @@ export const generatorModule = {
     specificSettings: specificSettings
   } as GeneratorState,
   getters: {
-    songHasBeenAdded: (state: GeneratorState) => (songindex: SongIndex2): boolean => state.generatorSongs.indexOf(songindex) !== -1,
+    songHasBeenAdded: (state: GeneratorState) => (songindex: SongIndex): boolean => state.generatorSongs.indexOf(songindex) !== -1,
     settingIsVisible: (state: GeneratorState) => (setting: SpecificDownloadSettings): boolean => {
       return [...setting.indexes].filter((i: string) => state.generatorSongs.indexOf(i) > -1).length > 0
     }
   },
   mutations: {
-    add: (state: GeneratorState, idx: SongIndex2): void => {
+    add: (state: GeneratorState, idx: SongIndex): void => {
       !generatorModule.getters.songHasBeenAdded(state)(idx) && state.generatorSongs.push(idx)
     },
     move: (state: GeneratorState, { index, direction }: { index: number, direction: number }): void => {

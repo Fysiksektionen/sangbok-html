@@ -11,7 +11,7 @@
               <td class="index" v-html="song.index"></td>
               <td class="name">
                 <span v-html="song.title"></span>
-                <span v-if="song.msvg && $store.state.settings.sheetmusic" class="sheetmusicicon">𝄢<!--𝄞--></span>
+                <span v-if="song.msvg && $store.state.settings.sheetmusic" class="sheetmusicicon">𝄢</span>
               </td>
           </tr>
       </table>
@@ -26,22 +26,19 @@ import { key } from '@/store'
 
 import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
 import { SwipeIndicatorState } from '@/utils/swipe.ts'
-import { chapters, getChapterByStringIndex, Chapter, Song } from '@/lyrics'
+import { Song, getChapterFromRoute, Chapter } from '@/lyrics'
 
 export default defineComponent({
   name: 'ChapterView',
   components: {
     Swiper
   },
-  computed: {
-    chapter () {
-      if (this.$route.name === 'ChapterByIndex') {
-        // console.log(getChapterByStringIndex(this.$route.params.chapterIndex as string))
-        return getChapterByStringIndex(this.$route.params.chapterIndex as string) as Chapter
-      } else {
-        return chapters[parseInt(this.$route.params.cid as string)] as Chapter
-      }
+  data() {
+    const chapter = getChapterFromRoute(this.$route)
+    if (chapter === undefined) {
+      alert('Något gick riktigt snett. Kapitlet kan inte bestämmas.')
     }
+    return { chapter: chapter as Chapter }
   },
   setup() {
     return { store: useStore(key) }

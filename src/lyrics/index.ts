@@ -6,8 +6,7 @@ import ths from './addons/ths.json'
 import extraSongs from './addons/songs.json'
 export { getChapterFromRoute, getSongFromRoute, getOffsetSongFromRoute, param2int } from './routeGetters'
 
-type SongIndex = [number, number]
-export type SongIndex2 = string
+export type SongIndex = string
 
 export type Song = {
   title: string,
@@ -54,16 +53,6 @@ export const songs: Song[] = (
     .concat(extraSongs as Song[])
 )
 
-// Deprecated
-export function getSongsByIndices(indices: SongIndex[]): Song[] {
-  console.warn('getSongsByIndices is deprecated. Use string indices instead.')
-  const out: Song[] = []
-  for (const songIndex of indices) {
-    out.push(chapters[songIndex[0]].songs[songIndex[1]])
-  }
-  return out
-}
-
 export function getSongByStringIndex(idx: string): Song | undefined {
   // List of all songs (for viewing. Includes easter eggs.)
   const allSongs: Song[] = songs.concat(leo.songs as Song[])
@@ -73,7 +62,7 @@ export function getSongByStringIndex(idx: string): Song | undefined {
   } else return undefined
 }
 
-export function getSongsByStringIndices(indices: SongIndex2[]): Song[] {
+export function getSongsByStringIndices(indices: SongIndex[]): Song[] {
   const out: Song[] = []
   for (const songIndex of indices) {
     const res = getSongByStringIndex(songIndex)

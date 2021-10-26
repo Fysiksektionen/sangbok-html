@@ -19,7 +19,7 @@ export default defineComponent({
     GeneratorView: defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator.vue'))
   },
   created () {
-    // TODO: Ugly fix that removes body night class if stored settings.night === false. Also done in store.
+    // Ugly fix that updates the theme. Also done in store.
     try {
       const theme = JSON.parse(window.localStorage.getItem('vuex') || '{"settings":{"theme": undefined}}').settings.theme
       if (theme !== undefined && Object.keys(themes).indexOf(theme) !== -1) {

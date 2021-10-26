@@ -1,9 +1,23 @@
+/**
+ * State for the swipe indicator. None means hidden, left means that the left SwipeIndicator is shown (user dragged finger to the right).
+ * A prefix of x means that the SwipeIndicator is shown, but grayed-out with a "no entry" sign showing.
+ */
 export type SwipeIndicatorState = 'xleft' | 'left' | 'none' | 'right' | 'xright'
 
+/**
+ * A dictionary used to convert a SwipeIndicatorState to an index offset.
+ * Maps right -> 1, left -> -1, other -> 0
+ */
 export const swipeIndicatorToOffset: {[key: string]: -1 | 0 | 1} = {
   right: 1, left: -1, none: 0, xleft: 0, xright: 0
 }
 
+/**
+ * Accepts a TouchEvent (or MouseEvent if in development mode), and returns the clientX & clientY coordinates for the event.
+ * If the event is of a non-allowed type, returns [undefined, undefined].
+ * @param e TouchEvent (or MouseEvent in development mode)
+ * @returns A list on the form [x, y] with event coordinates, or [undefind, undefined] if unsuccessful.
+ */
 export function getCoordsFromEvent(e: Event): [number, number] | [undefined, undefined] {
   if (e.constructor.name === 'TouchEvent') {
     const touch = (e as TouchEvent).touches[0]
@@ -14,21 +28,11 @@ export function getCoordsFromEvent(e: Event): [number, number] | [undefined, und
   return [undefined, undefined]
 }
 
-export function genericDragHandler(touchCoords: [number, number] | [undefined, undefined], [x, y]:[number, number] | [undefined, undefined]): SwipeIndicatorState {
-  if (touchCoords[0] !== undefined && touchCoords[1] !== undefined && x !== undefined && y !== undefined) {
-    // Absolute angle of touch path, relative to the vertical line.
-    const phi = Math.abs(Math.atan2(touchCoords[0] - x, touchCoords[1] - y))
-    if (Math.PI / 4 <= phi && phi <= 3 * Math.PI / 4) {
-      if (touchCoords[0] - x > 30) {
-        return 'right'
-      } else if (touchCoords[0] - x < -30) {
-        return 'left'
-      }
-    }
-  }
-  return 'none'
-}
-
+/**
+ * Returns a style object that enables all touch actions (even zooming) if the viewport is zoomed in.
+ * If the viewport is at 100%, only allows scrolling in the y-direction.
+ * @returns a style object
+ */
 export function onlyAllowZoomOut(): {'touchAction': string} | Record<string, never> {
   return { touchAction: (window.visualViewport.scale > 1) ? 'manipulation' : 'pan-y' }
 }

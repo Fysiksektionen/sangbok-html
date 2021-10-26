@@ -1,10 +1,10 @@
-import { SongIndex2 } from '@/lyrics'
+import { SongIndex } from '@/lyrics'
 // import { Mutation } from 'vuex'
 
 export type SongList = {
   name: string,
   description: string,
-  songs: SongIndex2[],
+  songs: SongIndex[],
 }
 
 export const listsModule = {
@@ -17,7 +17,7 @@ export const listsModule = {
     }
   },
   mutations: {
-    addToList: (state: SongList[], { list, index }: {list: number, index: SongIndex2}): void => {
+    addToList: (state: SongList[], { list, index }: {list: number, index: SongIndex}): void => {
       console.log(list)
       console.log(state)
       state[list].songs.indexOf(index) === -1 && state[list].songs.push(index)

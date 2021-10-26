@@ -18,6 +18,7 @@ const latexEscapes: [RegExp, string][] = [
 ]
 
 export function escapeAll(s: string): string {
+  // Iterates over latexEscapes and performs replacements
   for (let i = 0; i < latexEscapes.length; i++) { s = s.replace(latexEscapes[i][0], latexEscapes[i][1]) }
   return s
 }
