@@ -1,10 +1,11 @@
 import { createRouter, createWebHashHistory, RouteLocationNormalized, RouteLocationRaw, RouteRecordRaw } from 'vue-router'
+
 import Chapters from '../views/Chapters.vue'
 import Chapter from '../views/Chapter.vue'
 import Song from '../views/Song.vue'
 import Search from '../views/Search.vue'
-import { chapters, getChapterByStringIndex, getSongByStringIndex } from '@/lyrics'
-// import { useStore } from 'vuex'
+
+import { getChapterFromRoute, getSongByStringIndex, getSongFromRoute } from '@/lyrics'
 import store from '@/store'
 
 // Certain components may benefit from async loading. For now (v1.0) this adds about 3 KiB to the total size (transferred)
@@ -79,8 +80,8 @@ const routes: Array<RouteRecordRaw> = [
       // TODO: The use of store here is somewhat sketchy...
       const data = JSON.parse(to.params.data as string)
       if (typeof data.name === 'string' && typeof data.description === 'string' && Array.isArray(data.songs)) {
+        const i = store.state.lists.length
         store.commit('newList')
-        const i = store.state.lists.length - 1
         store.commit('setListMeta', { list: i, name: data.name, description: data.description })
         for (const song of data.songs) {
           const s = getSongByStringIndex(song)
@@ -108,63 +109,16 @@ const router = createRouter({
   routes
 })
 
-// TODO: Add navigation guard for lists
 router.beforeEach((to: RouteLocationNormalized) => {
-  if (to.name === 'Chapter') {
-    const cid = parseInt(to.params.cid as string)
-    if (cid >= chapters.length) {
-      console.warn(`Chapter id ${cid} is too large. Redirecting to home.`)
-      return '/' as RouteLocationRaw
-    }
-  } else if (to.name === 'Song') {
-    const cid = parseInt(to.params.chapterId as string)
-    const sid = parseInt(to.params.songId as string)
-    if (cid >= chapters.length || sid >= chapters[cid].songs.length) {
-      console.warn(`Chapter id ${cid} or song id ${sid} is too large. Redirecting to home.`)
-      return '/' as RouteLocationRaw
-    }
-  } else if (to.name === 'SongByIndex') {
-    const song = getSongByStringIndex(to.params.songIndex as string)
-    if (!song) {
-      console.warn(`Song ${to.params.songIndex} not found. Redirecting to home.`)
-      return '/' as RouteLocationRaw
-    }
-  } else if (to.name === 'ChapterByIndex') {
-    const chapter = getChapterByStringIndex(to.params.chapterIndex as string)
-    if (!chapter) {
-      console.warn(`Chapter ${to.params.chapterIndex} not found. Redirecting to home.`)
-      return '/' as RouteLocationRaw
-    }
-  } else if (to.name === 'SongByChapterIndex') {
-    const chapter = getChapterByStringIndex(to.params.chapterIndex as string)
-    if (!chapter) {
-      console.warn(`Chapter ${to.params.chapterIndex} not found. Redirecting to home.`)
-      return '/' as RouteLocationRaw
-    }
-    const sid = parseInt(to.params.songId as string)
-    if (sid >= chapter.songs.length) {
-      console.warn(`Song id ${sid} is too large for chapter ${chapter.prefix}. Redirecting to home.`)
-      return '/' as RouteLocationRaw
-    }
-  } else if (to.name === 'SongFromList') {
-    const lid = parseInt(to.params.listId as string)
-    const list = store.state.lists[lid]
-    if (!list) {
-      console.warn(`List ${lid} not found. Redirecting to home.`)
-      return '/' as RouteLocationRaw
-    }
-    const sid = parseInt(to.params.songId as string)
-    if (sid >= list.songs.length) {
-      console.warn(`Song id ${sid} is too large for list ${lid}. Redirecting to home.`)
-      return '/' as RouteLocationRaw
-    }
+  if (to.name?.toString().startsWith('Chapter')) {
+    return getChapterFromRoute(to) === undefined ? '/' as RouteLocationRaw : undefined
+  } else if (to.name?.toString().startsWith('Song')) {
+    return getSongFromRoute(to) === undefined ? '/' as RouteLocationRaw : undefined
   } else if (to.name === 'List') {
-    const lid = parseInt(to.params.listId as string)
-    if (lid >= store.state.lists.length) {
-      console.warn(`List id ${lid} is too large. Redirecting to home.`)
-      return '/' as RouteLocationRaw
-    }
-  } else if (['Home', 'Lists', 'Search'].indexOf(to.name ? to.name.toString() : '') !== -1) { /* Ignore */ } else {
+    if (parseInt(to.params.listId as string) >= store.state.lists.length) { return '/' as RouteLocationRaw }
+  } else if (['Home', 'Lists', 'Search'].indexOf(to.name ? to.name.toString() : '') !== -1) {
+    /* Ignore */
+  } else {
     console.warn('Route ' + (to.name && to.name.toString()) + ' has no navigation guard.')
   }
 })

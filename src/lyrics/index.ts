@@ -8,6 +8,7 @@ export { getChapterFromRoute, getSongFromRoute, getOffsetSongFromRoute, param2in
 
 export type SongIndex = string
 
+/** Song, as specified on lyrics.json */
 export type Song = {
   title: string,
   index: string,
@@ -15,15 +16,8 @@ export type Song = {
   melody?: string,
   // unlock?: string, // Required keyword (regexp) to see this in the search engine.
   tags?: string[]
-} & ({
-  msvg?: string,
-  text: string
-}
-  |
-{ // We need either mxl or text to be defined.
-  msvg: string,
-  text?: string,
-})
+ // We need either mxl or text to be defined.
+} & ({ msvg?: string, text: string } | { msvg: string, text?: string })
 
 export type SongHit = Song & {
   chapterindex?: number | string,

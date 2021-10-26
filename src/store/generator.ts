@@ -37,7 +37,7 @@ export const generatorModule = {
       // If we create a new array, vuex, won't recognize that it's been updated.
       state.generatorSongs.splice(0, state.generatorSongs.length)
     },
-    // TODO: These are kinda ugly...
+    // TODO: These are kinda ugly and redundant...
     updateGeneralSettings: (state: GeneratorState, gs: GeneralSettings): void => { state.generalSettings = gs },
     updateSpecificSettings: (state: GeneratorState, ss: SpecificDownloadSettings[]): void => { state.specificSettings = ss }
   } // as { [key: string]: Mutation<any> }

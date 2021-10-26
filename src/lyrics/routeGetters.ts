@@ -27,7 +27,6 @@ export function getSongFromRoute(route: RouteLocationNormalized): Song | undefin
     break
   }
   case 'Song':
-
     return chapters[param2int(route.params.chapterId)].songs[param2int(route.params.songId)] as Song
     break
   default:
@@ -48,7 +47,6 @@ export function getChapterFromRoute(route: RouteLocationNormalized): Chapter | u
     return chapters[param2int(route.params.chapterId)]
     break
   case 'SongFromList': {
-    // Doesn't work.
     const list = store.state.lists[param2int(route.params.listId)]
     return {
       chapter: list.name,
