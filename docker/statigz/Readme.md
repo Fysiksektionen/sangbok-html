@@ -1,0 +1,2 @@
+# Statigz
+Denna container är baserad på [statigz](https://github.com/vearutop/statigz), vilket är en modifierad version av [Go](https://golang.org):s inbyggda http-server. Den fungerar, men i praktiken finns det ingen anledning att använda denna framför nginx-containrarna, så därför är dessa skript ganska dåligt dokumenterade. Har du några frågor, kan du skapa en issue eller maila, men som sagt: den här containern används inte längre, och den är endast kvar här ifall jag skulle få användning av den i framtiden.

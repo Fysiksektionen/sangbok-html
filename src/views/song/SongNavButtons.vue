@@ -7,7 +7,7 @@
       @click="$router.replace('/chapter/'+chapterPrefix+'/song/'+(parseInt(songid)-1))">
       <div>{{chapter.songs[parseInt(songid)-1].title}}</div>
       <div>
-        <img src="../assets/back_black.png"/> &nbsp;
+        <img src="@/assets/back_black.png"/> &nbsp;
         <span v-html="chapter.songs[parseInt(songid)-1].index"></span>
       </div>
     </div>
@@ -17,7 +17,7 @@
       <div>{{chapter.songs[parseInt(songid)+1].title}}</div>
       <div>
         <span v-html="chapter.songs[parseInt(songid)+1].index"></span> &nbsp;
-        <img src="../assets/back_black.png" style="transform: scaleX(-1);"/>
+        <img src="@/assets/back_black.png" style="transform: scaleX(-1);"/>
       </div>
     </div>
     <div class="filler" v-if="parseInt(songid) == chapter.songs.length-1"></div>

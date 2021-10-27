@@ -4,6 +4,7 @@
   <Swiper :swipeHandler="swipeHandler" :right="'hide'">
     <div class="main">
       <button class="button left" @click="goToGenerator" v-if="$store.state.settings.makelist" title="Skapa sångblad">🖶</button>
+      <button class="button right" @click="showQR" title="Dela">📤</button>
       <h2>{{list.name}}</h2>
       <table class="songbook">
           <tr v-for="(song, idx) in list.songs"
@@ -22,6 +23,14 @@
       </table>
     </div>
   </Swiper>
+  <Modal v-if="qrVisible">
+    <header><h3>Dela</h3></header>
+    <div style="text-align: center;"><img v-bind:src="qrImage" style="text-align: center;"/></div>
+    <footer style="margin-top: 0.5em;">
+      <div class="button button-2" @click="copyLink">Kopiera länk</div>
+      <div class="button button-2" @click="qrVisible=false">Avbryt</div>
+    </footer>
+  </Modal>
 </template>
 
 <script lang="ts">
@@ -30,31 +39,38 @@ import { useStore } from 'vuex'
 import { useRoute, RouteLocationNormalized } from 'vue-router'
 import { key } from '@/store'
 
+import copy from 'copy-to-clipboard'
+
 import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
-import { SwipeIndicatorState } from '@/utils/swipe.ts'
+import Modal from '@/components/Modal.vue'
+import { SwipeIndicatorState } from '@/utils/swipe'
 import { Song, param2int, getSongsByStringIndices } from '@/lyrics'
 
 export default defineComponent({
   name: 'ListView',
   components: {
-    Swiper
+    Swiper,
+    Modal
   },
   data() {
-    // const store = useStore(key)
     const route: RouteLocationNormalized = useRoute()
     const listIdx = param2int(route.params.listId)
     return {
-      listIdx: listIdx
+      listIdx: listIdx,
+      qrVisible: false,
+      qrImage: undefined as string | undefined
     }
   },
   computed: {
     list () {
-      // TODO: use "this" for store and route...
       const store = useStore(key)
       const route: RouteLocationNormalized = useRoute()
       const listIdx = param2int(route.params.listId)
       const list = store.state.lists[listIdx]
       return { ...list, songs: getSongsByStringIndices(list.songs) }
+    },
+    link (): string {
+      return window.location.origin + window.location.pathname + '#/list/add/' + encodeURI(JSON.stringify({ ...this.list, songs: this.list.songs.map(s => s.index) }))
     }
   },
   setup() {
@@ -69,21 +85,37 @@ export default defineComponent({
       // Clear generator stuff
       this.store.commit('clear')
       const l = this.list
-      for (const song of l.songs) { // TODO: Not really efficient O(n^2), but it will do for now
+      for (const song of l.songs) { // TODO: Not really efficient (O(n^2)), but it will do for now
         song && this.store.commit('add', song.index)
       }
       this.store.commit('toggleSettingTo', { key: 'generator', value: true })
+    },
+    async showQR () {
+      this.qrVisible = true
+      const QRCode = await import(/* webpackChunkName: "qrcodelib" */ 'qrcode')
+      this.qrImage = await QRCode.toDataURL(this.link)
+    },
+    copyLink () {
+      const success = copy(this.link)
+      if (success) {
+        this.qrVisible = false
+      }
     }
   }
 })
 </script>
 
 <style scoped lang="scss">
-    .button.left {
+  .button.left {
     float: left;
     position: absolute;
     min-width: 3em;
     margin-left: 12px;
+  }
+  .button.right {
+    float: right;
+    min-width: 3em;
+    margin-right: 12px;
   }
 
   div.main h2 {margin-bottom: 24px;}

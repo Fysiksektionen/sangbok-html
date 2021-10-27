@@ -1,3 +1,25 @@
+/** List of allowed tags. Used by toHTML. */
+const ALLOWED_TAGS = ['li', 'ol', 'ul', 'b', 'p', 'i', 's', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+
+/**
+ * Converts text to safe html. Only tags in ALLOWED_TAGS with no attributes are kept as html.
+ * All other html tags are escaped.
+ * @param text HTML-like text, to be cleaned up.
+ * @returns Safe html.
+ */
+export function toHTML(text: string): string {
+  let out = text.replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/\n/igm, '<br />')
+  for (const tag of ALLOWED_TAGS) {
+    out = out.replace(new RegExp(`&lt;(/)?${tag}&gt;`, 'mig'), `<$1${tag}>`)
+  }
+  return out
+}
+
+/**
+ * Converts greek prefix to latin prefix.
+ * @param greek Greek prefix. Should be of length 2.
+ * @returns Latin prefix
+ */
 export function greekPrefix2latin (greek: string): string {
   const dict: { [key: string]: string } = {
     Αα: 'Alfa',
@@ -15,11 +37,17 @@ export function greekPrefix2latin (greek: string): string {
     Νν: 'Ny',
     Οο: 'Omikron',
     Σσ: 'Sigma'
-    // Lℓ: 'Leo'
   }
   return dict[greek]
 }
 
+/**
+ * Converts greek unicode characters to their corresponding latin name.
+ * If the greek character is uppercase, the first letter of the latin name will also be uppercase.
+ * Eg. 'α' -> 'alfa', 'Δ' -> 'Delta'
+ * @param greek String containing greek letters. Usually has a length of 1.
+ * @returns A string.
+ */
 export function greek2latin (greek: string): string {
   const dict: { [key: string]: string } = {
     α: 'alfa',
@@ -60,6 +88,12 @@ export function greek2latin (greek: string): string {
   return out
 }
 
+/**
+ * Converts greek characters in the given string to their corresponding latin character.
+ * Currently only works with lowercase characters. Eg. 'β' -> 'b'
+ * @param greek String containing greek characters
+ * @returns A string without greek characters
+ */
 export function greek2latin2 (greek: string): string {
   const dict: { [key: string]: string } = {
     α: 'a',
@@ -82,6 +116,5 @@ export function greek2latin2 (greek: string): string {
   Object.keys(dict).forEach((key) => {
     out = out.replace(key, dict[key])
   })
-  // console.log(greek, out)
   return out
 }

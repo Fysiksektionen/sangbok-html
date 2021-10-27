@@ -1,9 +1,6 @@
-<!--TODO: Add Swiper-->
-
 <template>
   <Swiper :swipeHandler="swipeHandler" :right="'hide'">
     <div class="main">
-      <!-- <SearchBox/> -->
       <button class="button left" @click="newList" v-if="$store.state.settings.makelist">+</button>
       <h2>Listor</h2>
       <table class="songbook">
@@ -31,18 +28,16 @@ import { useStore } from 'vuex'
 import { key } from '@/store'
 
 import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
-import { SwipeIndicatorState } from '@/utils/swipe.ts'
-// import SearchBox from '@/components/SearchBox.vue'
+import { SwipeIndicatorState } from '@/utils/swipe'
 
 export default defineComponent({
   name: 'ListsView',
   components: {
-    // SearchBox
     Swiper
   },
   data() {
     return {
-      lists: useStore(key).state.lists // .filter(l => l.songs.length > 0),
+      lists: useStore(key).state.lists // .filter(l => l.songs.length > 0), // TODO: Show icon for empty list
     }
   },
   setup() {

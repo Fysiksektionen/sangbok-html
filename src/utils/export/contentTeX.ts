@@ -3,6 +3,13 @@ import { getDefaultText, escapeAll } from './escapes'
 import { GeneralSettings } from './generalSettings'
 import { SpecificDownloadSettings } from './specificSettings'
 
+/**
+ * Function that generates the content of a "sångblad" as LaTeX.
+ * @param songs A list of songs to include.
+ * @param gs General settings
+ * @param ss Song-specific settings
+ * @returns A LaTeX string.
+ */
 export default function getContentTeX(songs: Song[], gs: GeneralSettings, ss: SpecificDownloadSettings[]): string {
   const content: string[] = []
 

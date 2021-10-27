@@ -21,10 +21,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useStore } from 'vuex'
-import { key } from '@/store'
 
-import { onlyAllowZoomOut } from '@/utils/swipe.ts' // @ is an alias to /src
+import { onlyAllowZoomOut } from '@/utils/swipe' // @ is an alias to /src
 import { greekPrefix2latin } from '@/utils/other'
 import SearchBox from '@/components/SearchBox.vue'
 import { chapters } from '@/lyrics'
@@ -39,9 +37,6 @@ export default defineComponent({
       chapters: chapters,
       onlyAllowZoomOut: onlyAllowZoomOut()
     }
-  },
-  created() {
-    useStore(key).commit('setQuery', '')
   },
   methods: {
     dragHandler () { this.onlyAllowZoomOut = onlyAllowZoomOut() },

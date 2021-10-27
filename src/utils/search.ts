@@ -2,48 +2,46 @@ import Fuse from 'fuse.js'
 import { songs, SongHit } from '../lyrics'
 import keys from '@/lyrics/addons/search.json'
 
-const options = {
+// Song search engine
+const fuse = new Fuse(songs, {
   includeScore: true,
   isCaseSensitive: false,
-  shouldSort: true,
-  // includeMatches: false,
-  // findAllMatches: false,
-  minMatchCharLength: 3,
-  // location: 0,
-  threshold: 0.2, // 0 makes the algorithm super picky, 1 matches almost anything. 0.2 seems fairly ok.
-  // distance: 100,
-  // useExtendedSearch: false,
   ignoreLocation: true,
-  // ignoreFieldNorm: false,
+  minMatchCharLength: 3,
+  shouldSort: false, // We sort afterwards, manually.
+  threshold: 0.2, // 0 makes the algorithm super picky, 1 matches almost anything. 0.2 seems fairly ok.
   keys: [
-    {
-      name: 'title',
-      weight: 10
-    },
+    { name: 'title', weight: 10 },
+    { name: 'tags', weight: 0.5 },
+    // Has weight (priority) 1:
     'author',
     'melody',
     'text',
-    'index',
-    {
-      name: 'tags',
-      weight: 0.5
-    }
+    'index'
   ]
-}
+})
 
-const fuse = new Fuse(songs, options)
+// Addons (chapters) search engine
 const addons = new Fuse(keys, {
   includeScore: true,
   isCaseSensitive: false,
   minMatchCharLength: 3,
-  threshold: 0.1, // 0 makes the algorithm super picky, 1 matches almost anything. 0.2 seems fairly ok.
+  threshold: 0.1,
   ignoreLocation: true,
   keys: [
     { name: 'title', weight: 10 },
-    { name: 'index', weight: 1 }
+    'index'
   ]
 })
 
+/**
+ * Performs a search for both songs and addons (which in practice means hidden chapters).
+ * @param s Search query string
+ * @returns A list of results, sorted by best match.
+ */
 export function search(s: string): Fuse.FuseResult<SongHit>[] {
-  return fuse.search(s).concat(addons.search(s)).sort((x, y) => { return (x.score || 0) - (y.score || 0) })
+  return (fuse.search(s)
+    .concat(addons.search(s))
+    .sort((x, y) => { return (x.score || 0) - (y.score || 0) })
+  )
 }

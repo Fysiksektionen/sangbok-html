@@ -54,7 +54,8 @@
         color: $highlight-text-color;
     }
 
-    & > div {
-        background: $body-background;
+    & > div, > footer {
+        color: $modal-text-color;
+        background-color: $modal-background-color;
     }
 }

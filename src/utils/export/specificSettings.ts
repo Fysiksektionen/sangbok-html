@@ -1,10 +1,14 @@
+/*
+ * Specific download settings, aka. song-specific settings.
+ */
+
 import { escapeAll, getDefaultText } from './escapes'
 import { DownloadSetting, NumberSetting } from './settings'
 
 export type SpecificDownloadSettings = {
   title: string,
   indexes: string[], // TODO: using string indices is very encoding-sensitive. There should be a better way.
-  // Also, title could be fetched directly from the indexes
+  // TODO: Also, title could be fetched directly from the indexes
   settings: DownloadSetting[],
   processor: (lyrics: string, settings: DownloadSetting[]) => string
 }
@@ -12,19 +16,34 @@ export type SpecificDownloadSettings = {
 /*
  * Generic preprocessors
  */
-function truncateVerses(lyrics: string, settings: DownloadSetting[], splitsPerVerse?: number): string {
+
+/**
+ * Assuming that each paragraph is split by '\n\n', and that each verse is paragraphsPerVerse paragraphs long,
+ * truncates the last settings[0].value verses from the passed lyrics.
+ * @param lyrics A lyrics string.
+ * @param settings List of settings, containing only one element.
+ * @param paragraphsPerVerse The number of paragraphs per verse. Defaults to 1.
+ * @returns The lyrics, with the last verses removed, until the number of verses matches the set value.
+ */
+function truncateVerses(lyrics: string, settings: DownloadSetting[], paragraphsPerVerse?: number): string {
   const setting = settings[0] as NumberSetting
   if (setting.max !== undefined) {
-    return getDefaultText(lyrics
-      .split('\n\n')
-      .slice(0, (setting.value || setting.max) * (splitsPerVerse || 1))
-      .join('\n\n')
+    return getDefaultText(
+      lyrics.split('\n\n')
+        .slice(0, (setting.value || setting.max) * (paragraphsPerVerse || 1))
+        .join('\n\n')
     )
   } else {
     throw TypeError('A non-numeric setting was passed to truncateVerses().')
   }
 }
 
+/**
+ * Truncates anything past '\n\n\n' in the provided lyrics if settings[0].value === false.
+ * @param lyrics Lyrics string
+ * @param settings List of settings, containing only one element.
+ * @returns The lyrics string, with the trailing info removed (or not).
+ */
 function trailingInfo(lyrics: string, settings: DownloadSetting[]): string {
   return (settings[0].value) ? getDefaultText(lyrics) : getDefaultText(lyrics.split(/\n\n\n/g)[0])
 }
@@ -32,8 +51,8 @@ function trailingInfo(lyrics: string, settings: DownloadSetting[]): string {
 /*
  * Specific preprocessors
  */
+/** LaTeX pre-processor for Årskursernas hederssång */
 function arskursernas(lyrics: string, settings: DownloadSetting[]): string { // TODO: Cleanup
-  // console.log(settings)
   const content = [] as string[]
   const description = lyrics.split('\n').filter(line => /^(?!\d\d)/.test(line))
   const years = lyrics.split('\n').filter(line => /^\d\d/.test(line))
@@ -56,6 +75,7 @@ function arskursernas(lyrics: string, settings: DownloadSetting[]): string { // 
   return content.concat(yearsContent).join('')
 }
 
+/** LaTeX pre-processor for O gamla klang och jubeltid */
 function ogamlaklang(lyrics: string, settings: DownloadSetting[]): string { // TODO: This code is kinda ugly...
   if (settings[0].value) {
     if (settings[1].value) {
@@ -72,10 +92,7 @@ function ogamlaklang(lyrics: string, settings: DownloadSetting[]): string { // T
   }
 }
 
-/*
- * Bring it all together
- */
-
+/** A list of song-specific settings and their respective pre-processors. */
 export const specificSettings: SpecificDownloadSettings[] = [{
   title: 'Årskursernas hederssång',
   indexes: ['ο2'],

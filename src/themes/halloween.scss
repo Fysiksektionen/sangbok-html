@@ -18,6 +18,9 @@ $button-color: rgba(128, 128, 128, 0.10);
 $button-text-color: $text-color;
 $active-button-color: rgba(128, 128, 128, 0.30);
 
+$modal-text-color: $text-color;
+$modal-background-color: $body-background;
+
 body.halloween {
     background-size: contain !important;
     background: $body-background;

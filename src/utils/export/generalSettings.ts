@@ -1,15 +1,6 @@
-type BoolSetting = {
-  text: string,
-  type: 'bool',
-  value: boolean
-}
+import { BoolSetting, StringSetting } from './settings'
 
-type StringSetting = {
-  text: string,
-  type: 'string',
-  value: string
-}
-
+/** General settings used by every "sångblad" regardless of song contents. */
 export type GeneralSettings = {
   title: StringSetting,
   showLogo: BoolSetting,
@@ -19,6 +10,7 @@ export type GeneralSettings = {
   showSheetMusicNotice: BoolSetting
 }
 
+/** General settings used by every "sångblad" regardless of song contents. */
 export const generalSettings = {
   title: {
     text: 'Titel på förstasida',

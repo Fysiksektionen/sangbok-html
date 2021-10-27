@@ -1,4 +1,4 @@
-<!-- TODO: This should probably be split into smaller components... -->
+<!-- TODO: This should probably be split into smaller components -->
 <template>
   <div class="view-generator">
     <h2>Sångbladsskaparen</h2>
@@ -38,7 +38,6 @@
         </div>
 
         <div v-for="settinggroup, gidx in specificSettings" v-bind:key="gidx">
-          <!-- {{settinggroup.indexes}}<br>{{store.state.generator.generatorSongs}} -->
           <div v-if="$store.getters.settingIsVisible(settinggroup) && settinggroup.settings.length > 0">
             <h3>{{settinggroup.title}}</h3>
             <div class="setting" v-for="setting, idx in settinggroup.settings" v-bind:key="idx"
@@ -95,7 +94,7 @@ export default defineComponent({
     getSongByStringIndex: getSongByStringIndex, // TODO: Don't use this function in the template.
     add() {
       const route: RouteLocationNormalized = this.$route
-      if (route.name && route.name.toString().startsWith('Song')) { // TODO: Use a switch here isntead of if-else if
+      if (route.name && route.name.toString().startsWith('Song')) {
         const song = getSongFromRoute(route)
         if (song !== undefined) {
           this.store.commit('add', song.index)
@@ -128,7 +127,7 @@ export default defineComponent({
     go: async function (method: 'zip' | 'overleaf') {
       const songs = (this.store.state.generator.generatorSongs.length === 0) ? chapters.map(c => c.songs).flat() : getSongsByStringIndices(this.store.state.generator.generatorSongs)
 
-      const files: { [key: string]: string } = { // TODO Load asynchronously, that is, don't use await right here.
+      const files: { [key: string]: string } = { // TODO: Load asynchronously, that is, don't use await right here.
         'main.tex': getMainTeX(this.generalSettings),
         'blad.cls': await (await fetch('tex/blad.cls')).text(),
         'logga.svg': await (await fetch('tex/logga.svg')).text(),
@@ -151,3 +150,80 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss">
+  .view-generator {
+    width: 40%;
+    right: 0;
+    min-width: 8cm;
+
+    & hr {border: none; border-top: 1px solid gray;}
+
+    & .generatorsettings {
+      padding: 0.5cm;
+    }
+
+    & .setting {
+      margin-bottom: 0.8em;
+
+      & input, select {
+        float: right;
+        // background-color: #f0f0f0;
+        border: none;
+        border-radius: 0.3em;
+        padding-left: 0.5em !important;
+        padding-right: 0.5em !important;
+        height: 1.8em;
+        text-align: right;
+      }
+    }
+  }
+
+  table.songbook tr:active {
+    background-color: unset;
+  }
+
+  table.songbook {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+  }
+
+  .operation:hover:not(.disabled) {
+    cursor: pointer;
+  }
+
+  .operation.disabled {
+    color: #333
+  }
+
+  .generatorbuttons {
+    text-align: center;
+
+    &>div {
+      display: inline-block;
+      background-color: rgba(128, 128, 128, 0.10);
+
+      $navbutton-spacing: 12px;
+      border-radius: $navbutton-spacing;
+      margin: $navbutton-spacing;
+      padding: $navbutton-spacing;
+      width: calc(25% - 4 * #{$navbutton-spacing});
+      min-width: 1cm;
+
+      font-size: 2em;
+
+      & img {
+        max-height: 32px;
+      }
+
+      &:hover:not(.disabled) {
+        cursor: pointer;
+      }
+
+      &.disabled {
+        background-color: rgba(128, 128, 128, 0.80);
+        color: unset;
+      }
+    }
+  }
+</style>

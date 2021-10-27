@@ -14,8 +14,6 @@ import (
 
 const colorReset = "\033[0m"
 
-// Declare your embedded assets.
-
 // See https://ndersson.me/post/capturing_status_code_in_net_http/
 type loggingResponseWriter struct {
 	http.ResponseWriter

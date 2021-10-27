@@ -1,5 +1,10 @@
 import { GeneralSettings } from './generalSettings'
 
+/**
+ * Generates the main LaTeX file, given a set of GeneralSettings.
+ * @param gs General settings.
+ * @returns A LaTeX string.
+ */
 export default function getMainTeX(gs: GeneralSettings): string {
   const out: string[] = []
   out.push(

@@ -1,0 +1,38 @@
+# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Tests
+
+on:
+  push:
+    paths:
+      - '**.vue'
+      - '**.ts'
+      - '**.js'
+      - '**.json'
+      - '**/jest.yml'
+  pull_request:
+    branches: [ main, dev ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Run tests (Vue/Jest)
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16.x
+        cache: 'npm'
+    - name: Install packages
+      run: npm ci
+    - name: Unpack cached svg:s
+      run: rm -rf svg && tar -xJf svg.tar.lzma && ./convert.sh --no-generate
+      working-directory: ./music
+    - name: Run tests
+      run: npx jest --ci --coverage && npx codecov
+    # - name: Codecov
+    #   uses: codecov/codecov-action@v2
+    #   with:
+    #     token: ${{ secrets.CODECOV_TOKEN }}
+# TODO: svgs are not moved right now...

@@ -17,7 +17,7 @@ on:
       - '.Dockerignore'
       - '**/build-vue.yml'
   pull_request:
-    branches: [ main, vue ]
+    branches: [ main, dev ]
   workflow_dispatch:
     # inputs:
     #   skip-compression:

@@ -2,12 +2,12 @@
 <template>
   <div class="navbar">
     <div style="float: left;" v-if="!hideBackButton" @click="() => $router.go(-1)">
-      <button><img src="../assets/back.png" alt="Go back" /></button>
+      <button><img src="../assets/back.png" alt="Gå tillbaka" /></button>
     </div>
     <div class="title">Sångboken</div>
     <div style="float: right;">
-      <button @click="showSettings=true" v-if="!showSettings"><img src="../assets/settings.png" alt="Show settings" /></button>
-      <button @click="showSettings=false" v-if="showSettings"><img src="../assets/x.png" alt="Close settings" /></button>
+      <button @click="showSettings=true" v-if="!showSettings"><img src="../assets/settings.png" alt="Visa inställningar" /></button>
+      <button @click="showSettings=false" v-if="showSettings"><img src="../assets/x.png" alt="Dölj inställningar" /></button>
     </div>
   </div>
   <transition name="dropdown">

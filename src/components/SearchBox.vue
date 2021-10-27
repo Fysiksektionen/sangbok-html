@@ -29,7 +29,6 @@ export default defineComponent({
         } else {
           this.$router.replace('/search/' + this.query2)
         }
-        this.store.commit('setQuery', this.query2)
       }
     }
   }

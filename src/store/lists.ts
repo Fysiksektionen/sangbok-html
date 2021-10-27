@@ -1,10 +1,10 @@
-import { SongIndex2 } from '@/lyrics'
+import { SongIndex } from '@/lyrics'
 // import { Mutation } from 'vuex'
 
 export type SongList = {
   name: string,
   description: string,
-  songs: SongIndex2[],
+  songs: SongIndex[],
 }
 
 export const listsModule = {
@@ -17,27 +17,19 @@ export const listsModule = {
     }
   },
   mutations: {
-    addToList: (state: SongList[], { list, index }: {list: number, index: SongIndex2}): void => {
-      console.log(list)
-      console.log(state)
+    addToList: (state: SongList[], { list, index }: {list: number, index: SongIndex}): void => {
       state[list].songs.indexOf(index) === -1 && state[list].songs.push(index)
     },
     deleteFromList: (state: SongList[], { list, index }: {list: number, index: number}): void => {
       state[list].songs.splice(index, 1)
     },
     moveInList: (state: SongList[], { list, index, direction }: {list: number, index: number, direction: number }): void => {
-      // TODO: Can probably be done more elegantly.
-      if (index + direction < 0 || index + direction > state[list].songs.length - 1) {
-        return
-      }
-      const temp = state[list].songs[index]
-      state[list].songs[index] = state[list].songs[index + direction]
-      state[list].songs[index + direction] = temp
+      if (index + direction < 0 || index + direction > state[list].songs.length - 1) { return }
+      [state[list].songs[index], state[list].songs[index + direction]] = [state[list].songs[index + direction], state[list].songs[index]]
     },
     setListMeta: (state: SongList[], { list, name, description }: {list: number, name: string, description: string }): void => {
       state[list].name = name
       state[list].description = description
-      console.log('SLM')
     },
     deleteList (state: SongList[], list: number): void {
       state.splice(list, 1)
@@ -48,13 +40,8 @@ export const listsModule = {
       })
     },
     moveList: (state: SongList[], { index, direction }: {index: number, direction: number }): void => {
-      // TODO: Can probably be done more elegantly.
-      if (index + direction < 0 || index + direction > state.length - 1) {
-        return
-      }
-      const temp = state[index]
-      state[index] = state[index + direction]
-      state[index + direction] = temp
+      if (index + direction < 0 || index + direction > state.length - 1) { return }
+      [state[index], state[index + direction]] = [state[index + direction], state[index]]
     }
   } // as { [key: string]: Mutation<any> }
 }
