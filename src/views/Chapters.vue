@@ -22,7 +22,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { onlyAllowZoomOut } from '@/utils/swipe.ts' // @ is an alias to /src
+import { onlyAllowZoomOut } from '@/utils/swipe' // @ is an alias to /src
 import { greekPrefix2latin } from '@/utils/other'
 import SearchBox from '@/components/SearchBox.vue'
 import { chapters } from '@/lyrics'

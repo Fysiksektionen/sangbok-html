@@ -43,7 +43,7 @@ import copy from 'copy-to-clipboard'
 
 import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
 import Modal from '@/components/Modal.vue'
-import { SwipeIndicatorState } from '@/utils/swipe.ts'
+import { SwipeIndicatorState } from '@/utils/swipe'
 import { Song, param2int, getSongsByStringIndices } from '@/lyrics'
 
 export default defineComponent({

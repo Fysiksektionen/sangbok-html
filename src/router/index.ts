@@ -1,12 +1,12 @@
 import { createRouter, createWebHashHistory, RouteLocationNormalized, RouteLocationRaw, RouteRecordRaw } from 'vue-router'
 
-import Chapters from '../views/Chapters.vue'
-import Chapter from '../views/Chapter.vue'
-import Song from '../views/Song.vue'
-import Search from '../views/Search.vue'
-
 import { getChapterFromRoute, getSongByStringIndex, getSongFromRoute } from '@/lyrics'
 import store from '@/store'
+
+import Chapters from '@/views/Chapters.vue'
+import Chapter from '@/views/Chapter.vue'
+import Song from '@/views/Song.vue'
+import Search from '@/views/Search.vue'
 
 // Certain components may benefit from async loading. For now (v1.0) this adds about 3 KiB to the total size (transferred)
 // while reducing the entrypoint size by about 30 KiB. Hence the difference is pretty negligible for now, especially since

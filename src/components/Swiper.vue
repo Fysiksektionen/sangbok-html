@@ -6,14 +6,14 @@
     <transition name="swipe-right">
       <div class="swipe-indicator right bg-highlight" v-if="showSwipeIndicator.includes('right')"
         v-bind:class="{'disabled': showSwipeIndicator.includes('x')}">
-        <img src="../assets/back.png" style="transform: scaleX(-1);" v-if="!showSwipeIndicator.includes('x')" />
+        <img src="@/assets/back.png" style="transform: scaleX(-1);" v-if="!showSwipeIndicator.includes('x')" />
         {{ showSwipeIndicator.includes('x') ? "⊘" : "" }}
       </div>
     </transition>
     <transition name="swipe-left">
       <div class="swipe-indicator left bg-highlight" v-if="showSwipeIndicator.includes('left')"
         v-bind:class="{'disabled': showSwipeIndicator.includes('x')}">
-        <img src="../assets/back.png" v-if="!showSwipeIndicator.includes('x')" />
+        <img src="@/assets/back.png" v-if="!showSwipeIndicator.includes('x')" />
         {{ showSwipeIndicator.includes('x') ? "⊘" : "" }}
       </div>
     </transition>
@@ -25,7 +25,7 @@ import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
-import { SwipeIndicatorState, getCoordsFromEvent, onlyAllowZoomOut } from '@/utils/swipe.ts'
+import { SwipeIndicatorState, getCoordsFromEvent, onlyAllowZoomOut } from '@/utils/swipe'
 
 const SWIPE_TRESHOLD = 30
 

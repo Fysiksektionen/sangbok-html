@@ -30,11 +30,11 @@ import Fuse from 'fuse.js'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
-import { search } from '@/utils/search.ts' // @ is an alias to /src
+import { search } from '@/utils/search' // @ is an alias to /src
 import SearchBox from '@/components/SearchBox.vue'
 import { chapters, SongHit } from '@/lyrics'
 import Swiper from '@/components/Swiper.vue'
-import { SwipeIndicatorState } from '@/utils/swipe.ts'
+import { SwipeIndicatorState } from '@/utils/swipe'
 
 export default defineComponent({
   name: 'Search',

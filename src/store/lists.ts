@@ -18,8 +18,6 @@ export const listsModule = {
   },
   mutations: {
     addToList: (state: SongList[], { list, index }: {list: number, index: SongIndex}): void => {
-      console.log(list)
-      console.log(state)
       state[list].songs.indexOf(index) === -1 && state[list].songs.push(index)
     },
     deleteFromList: (state: SongList[], { list, index }: {list: number, index: number}): void => {

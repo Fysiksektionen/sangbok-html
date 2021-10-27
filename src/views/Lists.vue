@@ -28,7 +28,7 @@ import { useStore } from 'vuex'
 import { key } from '@/store'
 
 import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
-import { SwipeIndicatorState } from '@/utils/swipe.ts'
+import { SwipeIndicatorState } from '@/utils/swipe'
 
 export default defineComponent({
   name: 'ListsView',
