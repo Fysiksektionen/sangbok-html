@@ -908,7 +908,7 @@
         "songs": [
             {
                 "title": "Punschen kommer",
-                "author": "",
+                "author": "Text: Lillie Green-Värjare\nMusik: Franz Lehár",
                 "melody": "Glada änkan\n(Sjungs medan punschen serveras, under det att man gungar vänster-höger, framåt-bakåt och uppåt-nedåt\nDen som fått sin punsch slutar sjunga)",
                 "text": "Punschen kommer, punschen kommer,\nljuv och sval.\nGlasen imma, röster stimma,\ni vår sal.\nSkål för glada minnen,\nskål för varje vår!\nInga sorger finnas mer\nnär punsch vi får.",
                 "index": "ζ1"
@@ -1084,13 +1084,6 @@
                 "text": "Yoghurt, yoghurt,\nfyller oss till bredden,\noss till bredden.\nGurglar härligt samman där med grädden\ndär med grädden.\nGräddfil kräver att vi törstigt häfver\nMjölk! Mjölk! Mjölk!",
                 "index": "η9",
                 "msvg": "h9. Häflåten"
-            },
-            {
-                "title": "Avundsjuk visa",
-                "author": "Lundakarnevalen 2002",
-                "melody": "En sockerbagare",
-                "text": "En sockerdrickare finns på kalaset\nhen dricker Champis det lilla aset.\nHen dricker Pommac och 7-up,\noch när jag däckar så får hen napp.\n\nEn sockerdrickare finns på kalaset\nhen dricker Champis det lilla aset.\nOch när hen däckar så får jag napp,\nför jag har spetsat hens 7-up!",
-                "index": "η9,5"
             },
             {
                 "title": "Kaffe",
@@ -1549,7 +1542,8 @@
                 "author": "C. M. Bellman",
                 "melody": "",
                 "text": "Bort allt vad oro gör,\nBort allt vad hjärtat kväljer\nBäst att man väljer bland\nDesse buteljer\nSin maglikör.\n\n||: Granne, gör du just som jag gör,\nVet denna oljan ger humör.\nVad det var läckert!\nVad var det? Rhenskt bläckert\nOui, Monseigneur. :||\n\nBort allt vad oro gör,\nAllt är ju stoft och aska.\nLåt oss bli raska och\nTömma vår flaska\nBland bröderna\n\n||: Granne, gör du just som jag gör,\nVet denna oljan ger humör.\nVad det var mäktigt!\nVad var det? Jo, präktigt!\nMalaga - ja. :||",
-                "index": "λ2"
+                "index": "λ2",
+                "msvg": "l2. Bort allt vad oro gör"
             },
             {
                 "title": "Fredmans epistel n:o 48",

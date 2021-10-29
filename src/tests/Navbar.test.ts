@@ -2,7 +2,7 @@ import { mount, flushPromises } from '@vue/test-utils'
 import Vue3TouchEvents from 'vue3-touch-events'
 import router from '@/router'
 import store, { key } from '@/store'
-import Navbar from './Navbar.vue'
+import Navbar from '@/components/Navbar.vue'
 
 test('Navbar dropdown', async () => {
   router.push('/')
