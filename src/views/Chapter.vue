@@ -11,7 +11,7 @@
               <td class="index" v-html="song.index"></td>
               <td class="name">
                 <span v-html="song.title"></span>
-                <span v-if="song.msvg && $store.state.settings.sheetmusic" class="sheetmusicicon">𝄢</span>
+                <span v-if="hasSheetMusic(song) && $store.state.settings.sheetmusic" class="sheetmusicicon">𝄢</span>
               </td>
           </tr>
       </table>
@@ -26,7 +26,7 @@ import { key } from '@/store'
 
 import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
 import { SwipeIndicatorState } from '@/utils/swipe'
-import { Song, getChapterFromRoute, Chapter } from '@/lyrics'
+import { Song, getChapterFromRoute, Chapter, hasSheetMusic } from '@/lyrics'
 
 export default defineComponent({
   name: 'ChapterView',
@@ -44,6 +44,7 @@ export default defineComponent({
     return { store: useStore(key) }
   },
   methods: {
+    hasSheetMusic: hasSheetMusic,
     swipeHandler (direction: SwipeIndicatorState) { (direction === 'left') && this.$router.push('/') },
     clickHandler (song: Song, idx: number) {
       if (this.$route.name === 'ChapterByIndex') {

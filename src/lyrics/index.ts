@@ -1,6 +1,7 @@
 import { greek2latin, greek2latin2 } from '../utils/other'
 
 import lyrics from './lyrics.json'
+import svglist from '@/assets/msvgs.json'
 import leo from './addons/leo.json'
 import ths from './addons/ths.json'
 import extraSongs from './addons/songs.json'
@@ -17,7 +18,8 @@ export type Song = {
   // unlock?: string, // Required keyword (regexp) to see this in the search engine.
   tags?: string[]
  // We need either mxl or text to be defined.
-} & ({ msvg?: string, text: string } | { msvg: string, text?: string })
+ text: string
+}
 
 export type SongHit = Song & {
   chapterindex?: number | string,
@@ -33,16 +35,20 @@ export type Chapter = {
 
 export const chapters: Chapter[] = lyrics
 
+export function hasSheetMusic(song: Song): boolean {
+  return svglist.filter(s => { return s.startsWith(song.index) }).length > 0
+}
+
 // List of songs for search
 export const songs: Song[] = (
   // Regular songs.
   ([...chapters].map((c, cid) => c.songs.map((s, sid) => {
-    const tags = [greek2latin(s.index), greek2latin2(s.index), s.msvg ? 'noter' : '']
+    const tags = [greek2latin(s.index), greek2latin2(s.index), hasSheetMusic(s) ? 'noter' : '']
     if (s.tags !== undefined) { tags.push(...s.tags) }
     return { ...s, chapterindex: cid, songindex: sid, tags: tags } as SongHit
   })).flat())
     // Searchable songs of hidden chapters (needs to be indexed by chapter prefix, not index)
-    .concat((([ths] as Chapter[]).map((c) => c.songs.map((s, sid) => { return { ...s, chapterindex: c.prefix, songindex: sid, tags: [greek2latin(s.index), greek2latin2(s.index), s.msvg ? 'noter' : ''] } as SongHit })).flat()))
+    .concat((([ths] as Chapter[]).map((c) => c.songs.map((s, sid) => { return { ...s, chapterindex: c.prefix, songindex: sid, tags: [greek2latin(s.index), greek2latin2(s.index), hasSheetMusic(s) ? 'noter' : ''] } as SongHit })).flat()))
     // Searchable standalone songs
     .concat(extraSongs as Song[])
 )

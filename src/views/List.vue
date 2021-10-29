@@ -12,7 +12,7 @@
               <td class="index" v-html="song.index" @click="clickHandler(song, idx)"></td>
               <td class="name" @click="clickHandler(song, idx)">
                 <span v-html="song.title"></span>
-                <span v-if="song.msvg && $store.state.settings.sheetmusic && !$store.state.settings.makelist" class="sheetmusicicon">𝄢<!--𝄞--></span>
+                <span v-if="hasSheetMusic(song) && $store.state.settings.sheetmusic && !$store.state.settings.makelist" class="sheetmusicicon">𝄢<!--𝄞--></span>
               </td>
             <td v-if="$store.state.settings.makelist" class="icon">
               <span class="operation up" v-bind:class="{ 'disabled': idx == 0 }" @click="$store.commit('moveInList', {list: listIdx, index: idx, direction: -1})">▲</span>
@@ -44,7 +44,7 @@ import copy from 'copy-to-clipboard'
 import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
 import Modal from '@/components/Modal.vue'
 import { SwipeIndicatorState } from '@/utils/swipe'
-import { Song, param2int, getSongsByStringIndices } from '@/lyrics'
+import { Song, param2int, getSongsByStringIndices, hasSheetMusic } from '@/lyrics'
 
 export default defineComponent({
   name: 'ListView',
@@ -77,6 +77,7 @@ export default defineComponent({
     return { store: useStore(key) }
   },
   methods: {
+    hasSheetMusic: hasSheetMusic,
     swipeHandler (direction: SwipeIndicatorState) { (direction === 'left') && this.$router.push('/') },
     clickHandler (song: Song, idx: number) {
       this.$router.push('/list/' + this.$route.params.listId + '/song/' + idx)

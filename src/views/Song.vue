@@ -7,16 +7,16 @@
     <div class="main">
       <div class="lyrics">
         <!-- Pre-header -->
-        <button v-if="song.msvg && song.text && $store.state.settings.sheetmusic && !$store.state.settings.makelist"
+        <button v-if="sheetMusicAvailable && song.text && $store.state.settings.sheetmusic && !$store.state.settings.makelist"
           @click="showMsvg = !showMsvg" class="button musicbutton">
           {{ showMsvg ? 'Dölj noter' : '𝄢'}}
         </button>
         <button v-if="$store.state.settings.makelist" class="button musicbutton" @click="listModalVisible=true">+</button>
         <div class="song-index" v-if="song.text && !showMsvg" v-html="song.index"></div>
         <!-- Main content -->
-        <SheetMusicRenderer v-if="song.msvg && (!song.text || showMsvg)" :src="song.msvg" />
-        <div v-if="song.text && (!showMsvg || !song.msvg)">
-          <div class="titlecontainer" v-bind:style="{'minHeight':(song.msvg && !showMsvg ? '5em' : undefined)}">
+        <SheetMusicRenderer v-if="sheetMusicAvailable && (!song.text || showMsvg)" :src="song.index" />
+        <div v-if="song.text && (!showMsvg || !sheetMusicAvailable)">
+          <div class="titlecontainer" v-bind:style="{'minHeight':(sheetMusicAvailable && !showMsvg ? '5em' : undefined)}">
             <h2>{{song.title}}</h2>
             <div v-if="song.melody" class="melody" v-html="toHTML(song.melody)"></div>
           </div>
@@ -45,7 +45,7 @@ import NavButtons from '@/views/song/SongNavButtons.vue'
 import ListModal from '@/views/song/ListModal.vue'
 
 import { SwipeIndicatorState, swipeIndicatorToOffset } from '@/utils/swipe'
-import { getSongFromRoute, getChapterFromRoute, getOffsetSongFromRoute } from '@/lyrics'
+import { getSongFromRoute, getChapterFromRoute, getOffsetSongFromRoute, hasSheetMusic, Song } from '@/lyrics'
 import { toHTML } from '@/utils/other'
 
 export default defineComponent({
@@ -67,7 +67,8 @@ export default defineComponent({
     }
   },
   computed: {
-    song () { return getSongFromRoute(this.$route) }
+    song () { return getSongFromRoute(this.$route) },
+    sheetMusicAvailable () { return hasSheetMusic(getSongFromRoute(this.$route) as Song) }
   },
   methods: {
     toHTML: toHTML,
