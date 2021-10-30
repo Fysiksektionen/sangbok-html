@@ -13,7 +13,7 @@
             <td class="index" v-html="hit.item.index"></td>
             <td class="name">
               {{ hit.item.title }}
-              <span v-if="hit.item.msvg && $store.state.settings.sheetmusic" class="sheetmusicicon">𝄢<!--𝄞--></span>
+              <span v-if="hasSheetMusic(hit.item) && $store.state.settings.sheetmusic" class="sheetmusicicon">𝄢<!--𝄞--></span>
             </td>
         </tr>
         <tr class="nohits">
@@ -32,7 +32,7 @@ import { key } from '@/store'
 
 import { search } from '@/utils/search' // @ is an alias to /src
 import SearchBox from '@/components/SearchBox.vue'
-import { chapters, SongHit } from '@/lyrics'
+import { chapters, SongHit, hasSheetMusic } from '@/lyrics'
 import Swiper from '@/components/Swiper.vue'
 import { SwipeIndicatorState } from '@/utils/swipe'
 
@@ -44,6 +44,7 @@ export default defineComponent({
   },
   methods: {
     search: search,
+    hasSheetMusic: hasSheetMusic,
     goto (hit: Fuse.FuseResult<SongHit>) {
       if (hit.item.chapterindex !== undefined && hit.item.songindex !== undefined) {
         this.$router.push('/chapter/' + hit.item.chapterindex + '/song/' + hit.item.songindex)
