@@ -12,10 +12,10 @@
           {{ showMsvg ? 'Dölj noter' : '𝄢'}}
         </button>
         <button v-if="$store.state.settings.makelist" class="button musicbutton" @click="listModalVisible=true">+</button>
-        <div class="song-index" v-if="song.text && !showMsvg" v-html="song.index"></div>
+        <div class="song-index" v-if="!showMsvg" v-html="song.index"></div>
         <!-- Main content -->
-        <SheetMusicRenderer v-if="sheetMusicAvailable && (!song.text || showMsvg)" :src="song.index" />
-        <div v-if="song.text && (!showMsvg || !sheetMusicAvailable)">
+        <SheetMusicRenderer v-if="sheetMusicAvailable && showMsvg && $store.state.settings.sheetmusic" :src="song.index" />
+        <div v-if="!showMsvg || !$store.state.settings.sheetmusic || !sheetMusicAvailable">
           <div class="titlecontainer" v-bind:style="{'minHeight':(sheetMusicAvailable && !showMsvg ? '5em' : undefined)}">
             <h2>{{song.title}}</h2>
             <div v-if="song.melody" class="melody" v-html="toHTML(song.melody)"></div>

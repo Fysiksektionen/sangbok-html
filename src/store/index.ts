@@ -16,6 +16,7 @@ export interface State {
     sheetmusic: boolean,
     touchAction: string // 'none' | 'swipe' | 'zoom' | 'all'
   },
+  version: string, // Settings version (could be useful on backwards-compatibility-breaking schema changes).
   query: string,
   generator: GeneratorState,
   lists: SongList[]
@@ -23,7 +24,7 @@ export interface State {
 
 type SetSettingProps = { key: 'touchAction' | 'theme', value: string }
 
-export const key: InjectionKey<Store<State>> = Symbol('storage')
+export const key: InjectionKey<Store<State>> = Symbol('sangbok')
 
 export default createStore<State>({
   state: {
@@ -35,7 +36,8 @@ export default createStore<State>({
       makelist: false,
       sheetmusic: true,
       touchAction: 'all'
-    }
+    },
+    version: '1'
   } as State, // We need to explicity say that this qualifies as State, since the generator property is loaded through a module.
   mutations: {
     toggleSetting(state, key: 'translate' | 'larger' | 'generator') {
