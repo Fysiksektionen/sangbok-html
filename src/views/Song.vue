@@ -91,13 +91,11 @@ export default defineComponent({
   }
 
   .song-index {
-    right: 0;
-    margin: 24px;
-    margin-top: 12px;
+    margin: 12px 16px auto 12px;
+    float: right;
     font-size: 1.5em;
     opacity: 0.8;
     letter-spacing: 1px;
-    position: absolute;
   }
 
   div.lyrics {
@@ -111,6 +109,7 @@ export default defineComponent({
   }
 
   .button.musicbutton {
+    margin-right: 12px;
     float: left;
     min-width: 3em;
   }
