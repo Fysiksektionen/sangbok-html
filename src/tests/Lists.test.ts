@@ -59,22 +59,22 @@ test('List back-button behavior', async () => {
   const wrapper = mount(App, {
     global: { plugins: [router, [store, key], Vue3TouchEvents] }
   })
-  expect(wrapper.findComponent({ name: 'ChaptersView' }).exists())
+  expect(wrapper.findComponent({ name: 'ChaptersView' }).exists()).toEqual(true)
 
   // Enter lists view
   await wrapper.find('tr:last-child > td.index').trigger('click')
   await flushPromises()
-  expect(wrapper.findComponent({ name: 'ListsView' }).exists())
+  expect(wrapper.findComponent({ name: 'ListsView' }).exists()).toEqual(true)
 
   // Enter list view
   await wrapper.find('tr > td.index').trigger('click')
   await flushPromises()
-  expect(wrapper.findComponent({ name: 'ListView' }).exists())
+  expect(wrapper.findComponent({ name: 'ListView' }).exists()).toEqual(true)
 
   // Enter some song in list
   await wrapper.find('tr > td.index').trigger('click')
   await flushPromises()
-  expect(wrapper.findComponent({ name: 'Song' }).exists())
+  expect(wrapper.findComponent({ name: 'SongView' }).exists()).toEqual(true)
   expect(wrapper.find('.navbuttons > .button'))
 
   // Go to next song
@@ -88,5 +88,6 @@ test('List back-button behavior', async () => {
   // Check that the back button gets you back to the list view.
   wrapper.find('.navbar > div:first-child').trigger('click')
   await flushPromises()
-  expect(wrapper.find('button[title=\'Skapa sångblad\']').exists())
+  // expect(wrapper.html()).toContain('Skapa sångblad')
+  expect(wrapper.find('button[title=\'Skapa sångblad\']').exists()).toEqual(true)
 })

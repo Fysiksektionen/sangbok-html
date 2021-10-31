@@ -31,7 +31,7 @@ export default defineComponent({
   props: ['src'],
   data() {
     return {
-      zoomIdx: Math.min((window.matchMedia('only screen and (max-width: 760px)').matches) ? 5 : 3, this.getZoomLevels().length - 1),
+      zoomIdx: Math.min(((window.matchMedia && window.matchMedia('only screen and (max-width: 760px)').matches)) ? 5 : 3, this.getZoomLevels().length - 1),
       isLoading: true
     }
   },
@@ -43,7 +43,7 @@ export default defineComponent({
     },
     getZoomLevels() {
       const curSongSvgs = svglist.filter(s => { return s.indexOf(this.$props.src) > -1 })
-      const zoomLevels = [...new Set(curSongSvgs.map(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ['', ''])[1]))]
+      const zoomLevels = Array.from(new Set(curSongSvgs.map(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ['', ''])[1])))
       return zoomLevels.sort()
     },
     zoom(z: number) {

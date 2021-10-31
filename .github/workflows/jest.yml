@@ -30,7 +30,7 @@ jobs:
       run: rm -rf svg && tar -xJf svg.tar.lzma && ./convert.sh --no-generate
       working-directory: ./music
     - name: Run tests
-      run: npx jest --ci --coverage && npx codecov
+      run: npx jest --ci --coverage; npx codecov
     # - name: Codecov
     #   uses: codecov/codecov-action@v2
     #   with:
