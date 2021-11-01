@@ -17,8 +17,14 @@ export type Song = {
   melody?: string,
   // unlock?: string, // Required keyword (regexp) to see this in the search engine.
   tags?: string[]
- // We need either mxl or text to be defined.
- text: string
+  // We need either mxl or text to be defined.
+  text: string
+}
+
+type JSONChapter = {
+  chapter: string,
+  prefix: string,
+  songs: Song[],
 }
 
 export type SongHit = Song & {
@@ -30,14 +36,22 @@ export type SongHit = Song & {
 export type Chapter = {
   chapter: string,
   prefix: string,
+  path: string,
   songs: Song[],
 }
 
-export const chapters: Chapter[] = lyrics
+//
+// Helpers
+//
+export function addPathToChapter (c: JSONChapter, index: number): Chapter {
+  return { ...c, path: '/chapter/' + index }
+}
 
 export function hasSheetMusic(song: Song): boolean {
   return svglist.filter(s => { return s.startsWith(song.index) }).length > 0
 }
+
+export const chapters: Chapter[] = lyrics.map(addPathToChapter)
 
 // List of songs for search
 export const songs: Song[] = (
@@ -48,7 +62,7 @@ export const songs: Song[] = (
     return { ...s, chapterindex: cid, songindex: sid, tags: tags } as SongHit
   })).flat())
     // Searchable songs of hidden chapters (needs to be indexed by chapter prefix, not index)
-    .concat((([ths] as Chapter[]).map((c) => c.songs.map((s, sid) => { return { ...s, chapterindex: c.prefix, songindex: sid, tags: [greek2latin(s.index), greek2latin2(s.index), hasSheetMusic(s) ? 'noter' : ''] } as SongHit })).flat()))
+    .concat((([ths] as JSONChapter[]).map(addPathToChapter).map((c) => c.songs.map((s, sid) => { return { ...s, chapterindex: c.prefix, songindex: sid, tags: [greek2latin(s.index), greek2latin2(s.index), hasSheetMusic(s) ? 'noter' : ''] } as SongHit })).flat()))
     // Searchable standalone songs
     .concat(extraSongs as Song[])
 )
@@ -73,7 +87,7 @@ export function getSongsByStringIndices(indices: SongIndex[]): Song[] {
 
 export function getChapterByStringIndex(idx: string): Chapter | undefined {
   // List of all songs (for viewing. Includes easter eggs.)
-  const cs: Chapter[] = chapters.concat([leo, ths] as Chapter[])
+  const cs: Chapter[] = chapters.concat(([leo, ths] as JSONChapter[]).map(addPathToChapter))
   const hits = cs.filter(c => c.prefix === idx)
   if (hits.length > 0) {
     return hits[0]

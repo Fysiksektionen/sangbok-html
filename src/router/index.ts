@@ -65,14 +65,6 @@ const routes: Array<RouteRecordRaw> = [
     component: Song
   },
   {
-    path: '/chapter/list/:listId(\\d+)/song/:songId(\\d+)',
-    name: 'ListRedirect',
-    redirect: to => { // TODO: Replace
-      console.warn('ListRedirect is an ugly solution, and should be replaced. It causes back-button bugs.')
-      return '/list/' + to.params.listId + '/song/' + to.params.songId
-    }
-  },
-  {
     path: '/list/add/:data(.+)',
     name: 'AddList',
     redirect: to => {

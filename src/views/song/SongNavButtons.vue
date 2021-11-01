@@ -4,7 +4,7 @@
 <template>
   <div class="navbuttons">
     <div class="button" v-if="parseInt(songid) > 0"
-      @click="$router.replace('/chapter/'+chapterPrefix+'/song/'+(parseInt(songid)-1))">
+      @click="$router.replace(chapterPath+'/song/'+(parseInt(songid)-1))">
       <div>{{chapter.songs[parseInt(songid)-1].title}}</div>
       <div>
         <img src="@/assets/back_black.png"/> &nbsp;
@@ -13,7 +13,7 @@
     </div>
     <div class="filler" v-if="parseInt(songid) == 0"></div>
     <div class="button" v-if="chapter.songs[parseInt(songid)+1]"
-      @click="$router.replace('/chapter/'+chapterPrefix+'/song/'+(parseInt(songid)+1))">
+      @click="$router.replace(chapterPath+'/song/'+(parseInt(songid)+1))">
       <div>{{chapter.songs[parseInt(songid)+1].title}}</div>
       <div>
         <span v-html="chapter.songs[parseInt(songid)+1].index"></span> &nbsp;
@@ -28,11 +28,11 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Navbar',
-  props: ['songid', 'chapter', 'chapterid'],
+  name: 'SongNavButtons',
+  props: ['songid', 'chapter'],
   computed: {
-    chapterPrefix () {
-      return (this.$props.chapterid === undefined) ? this.$props.chapter.prefix : this.$props.chapterid
+    chapterPath () {
+      return this.$props.chapter.path
     }
   }
 })

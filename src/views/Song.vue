@@ -76,7 +76,7 @@ export default defineComponent({
       const offset = swipeIndicatorToOffset[direction]
       if (offset === 0) return
       const newSong = getOffsetSongFromRoute(this.$route, offset)
-      newSong && this.$router.replace('/chapter/' + newSong.chapterIdentifier + '/song/' + newSong.index)
+      newSong && this.$router.replace(newSong.chapterPath + '/song/' + newSong.index)
     }
   }
 })

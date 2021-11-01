@@ -25,11 +25,10 @@ import { getSongFromRoute } from '@/lyrics'
 export default defineComponent({
   name: 'SongViewListModal',
   components: { Modal },
-  props: ['songIdx', 'callback'],
+  props: ['callback'],
   setup() { return { store: useStore(key) } },
   data() {
     const store = useStore(key)
-    console.log(store.state.lists)
     return { lists: store.state.lists }
   },
   computed: {
@@ -39,7 +38,7 @@ export default defineComponent({
   },
   methods: {
     addToList(listIdx: number) {
-      this.song && this.store.commit('addToList', { list: listIdx, index: this.$props.songIdx })
+      this.song && this.store.commit('addToList', { list: listIdx, index: this.song.index })
     }
   }
 })
