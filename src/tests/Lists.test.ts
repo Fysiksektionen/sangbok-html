@@ -45,16 +45,18 @@ test('List song management', async () => {
 
   // Delete our list
   store.commit('deleteList', 0)
+  await flushPromises()
   expect(store.state.lists.length).toEqual(0)
 })
 
-test('List back-button behavior', async () => {
+test('List navigation', async () => {
   router.push('/')
   await router.isReady()
 
   store.commit('newList')
   store.commit('addToList', { list: 0, index: 'α1' })
   store.commit('addToList', { list: 0, index: 'α2' })
+  await flushPromises()
 
   const wrapper = mount(App, {
     global: { plugins: [router, [store, key], Vue3TouchEvents] }
@@ -97,4 +99,30 @@ test('List back-button behavior', async () => {
   // await flushPromises()
   // expect(wrapper.html()).toContain('Lista')
   // expect(wrapper.findComponent({ name: 'ListView' }).exists()).toEqual(true)
+
+  // Delete our list (we want a clean store for the next test)
+  router.push('/') // Prevent 404s when programatically deleting the list wile viewing it
+  await flushPromises()
+  store.commit('deleteList', 0)
+  expect(store.state.lists.length).toEqual(0)
+})
+
+test('Share modal', async () => {
+  expect(store.state.lists.length).toEqual(0)
+
+  store.commit('newList')
+  store.commit('addToList', { list: 0, index: 'α1' })
+  store.commit('addToList', { list: 0, index: 'α2' })
+
+  router.push('/list/0')
+  await flushPromises()
+
+  const wrapper = mount(App, {
+    global: { plugins: [router, [store, key], Vue3TouchEvents] }
+  })
+
+  await wrapper.find('.button[title=\'Dela\']').trigger('click')
+  await flushPromises()
+
+  expect(wrapper.html()).toContain('Kopiera länk')
 })

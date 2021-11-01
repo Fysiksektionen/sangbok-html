@@ -15,5 +15,9 @@ test('Chapter views', async () => {
 
   await wrapper.find('td.index').trigger('click')
   await flushPromises()
-  expect(wrapper.html()).toContain('Visor')
+  expect(wrapper.html()).toContain('α1')
+
+  await wrapper.find('td.index').trigger('click')
+  await flushPromises()
+  expect(wrapper.html()).toContain('α1')
 })

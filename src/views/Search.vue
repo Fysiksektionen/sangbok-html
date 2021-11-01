@@ -27,12 +27,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Fuse from 'fuse.js'
-import { useStore } from 'vuex'
-import { key } from '@/store'
 
 import { search } from '@/utils/search' // @ is an alias to /src
 import SearchBox from '@/components/SearchBox.vue'
-import { chapters, SongHit, hasSheetMusic } from '@/lyrics'
+import { SongHit, hasSheetMusic } from '@/lyrics'
 import Swiper from '@/components/Swiper.vue'
 import { SwipeIndicatorState } from '@/utils/swipe'
 
@@ -45,7 +43,7 @@ export default defineComponent({
   methods: {
     search: search,
     hasSheetMusic: hasSheetMusic,
-    goto (hit: Fuse.FuseResult<SongHit>) {
+    goto (hit: Fuse.FuseResult<SongHit>) { // TODO: Externalize
       if (hit.item.chapterindex !== undefined && hit.item.songindex !== undefined) {
         this.$router.push('/chapter/' + hit.item.chapterindex + '/song/' + hit.item.songindex)
       } else if (hit.item.chapterindex !== undefined && hit.item.songindex === undefined) {
@@ -55,14 +53,6 @@ export default defineComponent({
       }
     },
     swipeHandler(direction: SwipeIndicatorState) { if (direction === 'left') { this.$router.push('/') } }
-  },
-  data() {
-    return {
-      chapters: chapters
-    }
-  },
-  setup() {
-    return { store: useStore(key) }
   }
 })
 </script>
