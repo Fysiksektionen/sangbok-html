@@ -14,7 +14,7 @@
         <button v-if="$store.state.settings.makelist" class="button musicbutton" @click="listModalVisible=true">+</button>
         <div class="song-index" v-if="!showMsvg" v-html="song.index"></div>
         <!-- Main content -->
-        <SheetMusicRenderer v-if="sheetMusicAvailable && showMsvg && $store.state.settings.sheetmusic" :src="song.index" />
+        <SheetMusicRenderer v-if="sheetMusicAvailable && showMsvg && $store.state.settings.sheetmusic" :src="song.index" :key="song.index"/>
         <div v-if="!showMsvg || !$store.state.settings.sheetmusic || !sheetMusicAvailable">
           <div class="titlecontainer" v-bind:style="{'minHeight':(sheetMusicAvailable && !showMsvg ? '5em' : undefined)}">
             <h2>{{song.title}}</h2>
