@@ -14,11 +14,16 @@ test('Sheet music view', async () => {
     global: { plugins: [router, [store, key], Vue3TouchEvents] }
   })
 
+  // Make sure sheetmusic is enabled
+  store.commit('toggleSettingTo', { key: 'sheetmusic', value: true })
+
   for (const index of sheetMusicIndexes) {
     router.push('/song/' + index)
+
     await flushPromises()
     await wrapper.find('button.musicbutton').trigger('click')
     await flushPromises()
+
     expect(wrapper.find('.component-sheet-music-renderer').exists()).toEqual(true)
     await wrapper.find('button.musicbutton').trigger('click')
   }

@@ -40,10 +40,10 @@ export default createStore<State>({
     version: '1'
   } as State, // We need to explicity say that this qualifies as State, since the generator property is loaded through a module.
   mutations: {
-    toggleSetting(state, key: 'translate' | 'larger' | 'generator') {
+    toggleSetting(state, key: 'translate' | 'larger' | 'generator' | 'sheetmusic') {
       state.settings[key] = !(state.settings[key])
     },
-    toggleSettingTo(state, { key, value }: { key: 'translate' | 'larger' | 'generator', value: boolean }) {
+    toggleSettingTo(state, { key, value }: { key: 'translate' | 'larger' | 'generator' | 'sheetmusic', value: boolean }) {
       state.settings[key] = value
     },
     setSetting(state, props: SetSettingProps) { // Only used by multiple-choice settings.

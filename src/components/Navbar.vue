@@ -5,7 +5,7 @@
       <button><img src="../assets/back.png" alt="Gå tillbaka" /></button>
     </div>
     <div class="title">Sångboken</div>
-    <div style="float: right;">
+    <div style="float: right;" data-test="settingsButtonWrapper">
       <button @click="showSettings=true" v-if="!showSettings"><img src="../assets/settings.png" alt="Visa inställningar" /></button>
       <button @click="showSettings=false" v-if="showSettings"><img src="../assets/x.png" alt="Dölj inställningar" /></button>
     </div>

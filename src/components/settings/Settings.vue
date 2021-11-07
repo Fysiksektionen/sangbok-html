@@ -9,7 +9,7 @@
       Touchfunktioner
     </SettingsSwitch>
     <SettingsButton :setting="'sheetmusic'">Noter</SettingsButton>
-    <SettingsButton :setting="'generator'">Skapa sångblad</SettingsButton>
+    <SettingsButton :setting="'generator'" data-test="generatorSettingsButton">Skapa sångblad</SettingsButton>
     <SettingsButton :setting="'makelist'">Redigera listor</SettingsButton>
     <ClipboardButton/>
   </div>
