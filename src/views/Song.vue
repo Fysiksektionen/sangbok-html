@@ -106,11 +106,6 @@ export default defineComponent({
     margin-right: 1%;
   }
 
-  div.titlecontainer {
-    margin: auto auto;
-    width: fit-content;
-  }
-
   .button.musicbutton {
     margin-right: 12px;
     float: left;

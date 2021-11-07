@@ -133,4 +133,9 @@ table.songbook {
 
 ol>li {margin-top: 0.75em}
 .textcontainer>p {line-height: 1.5em;font-size: 1.1em;}
+
+div.titlecontainer {
+    margin: auto auto;
+    width: fit-content;
+  }
 </style>

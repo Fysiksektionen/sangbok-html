@@ -168,11 +168,6 @@ export default defineComponent({
       & input, select {
         float: right;
         // background-color: #f0f0f0;
-        border: none;
-        border-radius: 0.3em;
-        padding-left: 0.5em !important;
-        padding-right: 0.5em !important;
-        height: 1.8em;
         text-align: right;
       }
     }

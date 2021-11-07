@@ -5,7 +5,15 @@
     <div class="main">
       <button class="button left" @click="goToGenerator" v-if="$store.state.settings.makelist" title="Skapa sångblad">🖶</button>
       <button class="button right" @click="showQR" title="Dela">📤</button>
-      <h2>{{list.name}}</h2>
+      <div v-if="!$store.state.settings.makelist" class="titlecontainer">
+        <h2>{{list.name}}</h2>
+        <p style="text-align: center;">{{list.description}}</p>
+      </div>
+      <div v-if="$store.state.settings.makelist" style="text-align: center;margin-top: 1em;">
+        <input type="text" class="secondary" v-model="name" @keyup="updateMeta" placeholder="Listans namn" style="margin-bottom:0.5em;">
+        <br>
+        <input type="text" class="secondary" v-model="description" @keyup="updateMeta" placeholder="Beskrivning">
+      </div>
       <table class="songbook">
           <tr v-for="(song, idx) in list.songs"
               v-bind:key="idx">
@@ -38,6 +46,7 @@ import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute, RouteLocationNormalized } from 'vue-router'
 import { key } from '@/store'
+import { SongList } from '@/store/lists'
 
 import copy from 'copy-to-clipboard'
 
@@ -55,10 +64,14 @@ export default defineComponent({
   data() {
     const route: RouteLocationNormalized = useRoute()
     const listIdx = param2int(route.params.listId)
+    const store = useStore(key)
     return {
       listIdx: listIdx,
       qrVisible: false,
-      qrImage: undefined as string | undefined
+      qrImage: undefined as string | undefined,
+      // Only used for updates. This initialization method may be problematic if this view is embedded, but it's not supposed to.
+      name: store.state.lists[listIdx].name,
+      description: store.state.lists[listIdx].description
     }
   },
   computed: {
@@ -66,7 +79,7 @@ export default defineComponent({
       const store = useStore(key)
       const route: RouteLocationNormalized = useRoute()
       const listIdx = param2int(route.params.listId)
-      const list = store.state.lists[listIdx]
+      const list: SongList = store.state.lists[listIdx]
       return { ...list, songs: getSongsByStringIndices(list.songs) }
     },
     link (): string {
@@ -81,6 +94,9 @@ export default defineComponent({
     swipeHandler (direction: SwipeIndicatorState) { (direction === 'left') && this.$router.push('/') },
     clickHandler (song: Song, idx: number) {
       this.$router.push('/list/' + this.$route.params.listId + '/song/' + idx)
+    },
+    updateMeta () {
+      this.store.commit('setListMeta', { list: this.listIdx, name: this.name, description: this.description })
     },
     goToGenerator () {
       // Clear generator stuff
