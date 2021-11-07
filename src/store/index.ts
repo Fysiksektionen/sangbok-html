@@ -34,7 +34,7 @@ export default createStore<State>({
       larger: false,
       generator: false,
       makelist: false,
-      sheetmusic: true,
+      sheetmusic: false,
       touchAction: 'all'
     },
     version: '1'
@@ -56,5 +56,5 @@ export default createStore<State>({
   },
   // actions: {},
   modules: { generator: generatorModule, lists: listsModule },
-  plugins: [createPersistedState({})]
+  plugins: [createPersistedState({ key: 'sangbok' })]
 })

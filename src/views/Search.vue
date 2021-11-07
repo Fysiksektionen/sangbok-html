@@ -13,7 +13,7 @@
             <td class="index" v-html="hit.item.index"></td>
             <td class="name">
               {{ hit.item.title }}
-              <span v-if="hasSheetMusic(hit.item) && $store.state.settings.sheetmusic" class="sheetmusicicon">𝄢<!--𝄞--></span>
+              <span v-if="hasSheetMusic(hit.item) && $store.state.settings.sheetmusic" class="sheetmusicicon">𝄢</span>
             </td>
         </tr>
         <tr class="nohits">

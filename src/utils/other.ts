@@ -35,7 +35,8 @@ export function greekPrefix2latin (greek: string): string {
     Λλ: 'Lambda',
     Μμ: 'My',
     Νν: 'Ny',
-    Οο: 'Omikron',
+    Οο: 'Omikron', // One uses greek omicron
+    Oo: 'Omikron', // The other, a regular o.
     Σσ: 'Sigma'
   }
   return dict[greek]

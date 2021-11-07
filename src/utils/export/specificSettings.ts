@@ -13,6 +13,12 @@ export type SpecificDownloadSettings = {
   processor: (lyrics: string, settings: DownloadSetting[]) => string
 }
 
+function stripLastVerse(lyrics: string): string {
+  const l = lyrics.split(/\n\n/g)
+  l.pop()
+  return l.join('\n\n')
+}
+
 /*
  * Generic preprocessors
  */
@@ -45,7 +51,7 @@ function truncateVerses(lyrics: string, settings: DownloadSetting[], paragraphsP
  * @returns The lyrics string, with the trailing info removed (or not).
  */
 function trailingInfo(lyrics: string, settings: DownloadSetting[]): string {
-  return (settings[0].value) ? getDefaultText(lyrics) : getDefaultText(lyrics.split(/\n\n\n/g)[0])
+  return (settings[0].value) ? getDefaultText(lyrics) : getDefaultText(stripLastVerse(lyrics))
 }
 
 /*
@@ -76,26 +82,20 @@ function arskursernas(lyrics: string, settings: DownloadSetting[]): string { // 
 }
 
 /** LaTeX pre-processor for O gamla klang och jubeltid */
-function ogamlaklang(lyrics: string, settings: DownloadSetting[]): string { // TODO: This code is kinda ugly...
+function ogamlaklang(lyrics: string, settings: DownloadSetting[]): string {
   if (settings[0].value) {
-    if (settings[1].value) {
-      return getDefaultText(lyrics.replace(/KÄRNAN/g, '\\textbf{KÄRNAN}'))
-    } else {
-      return (lyrics.replace(/KÄRNAN/g, '\\textbf{KÄRNAN}').split(/\n\n\n/g)[0])
-    }
-  } else {
-    if (settings[1].value) {
-      return (lyrics)
-    } else {
-      return getDefaultText(lyrics.split(/\n\n\n/g)[0])
-    }
+    lyrics = lyrics.replace(/KÄRNAN/i, '\\textbf{KÄRNAN}')
   }
+  if (settings[1].value === false) {
+    lyrics = stripLastVerse(lyrics)
+  }
+  return getDefaultText(lyrics)
 }
 
 /** A list of song-specific settings and their respective pre-processors. */
 export const specificSettings: SpecificDownloadSettings[] = [{
   title: 'Årskursernas hederssång',
-  indexes: ['ο2'],
+  indexes: ['o2'],
   settings: [{
     text: 'Inkludera t.o.m.',
     type: 'number',
@@ -119,7 +119,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
   processor: arskursernas
 }, {
   title: 'Système International och liknande',
-  indexes: ['ι1', 'ι16', 'ι18'],
+  indexes: ['ι1', 'ι16', 'ι17'],
   settings: [{
     text: 'Ordna texten regelbundet',
     type: 'bool',
@@ -190,7 +190,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
   processor: truncateVerses
 }, {
   title: 'O gamla klang och jubeltid',
-  indexes: ['ο∞'],
+  indexes: ['o∞'],
   settings: [{
     text: 'Fetstilt "KÄRNAN"',
     type: 'bool',
@@ -239,7 +239,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
   processor: trailingInfo
 }, {
   title: 'Konglig Fysiks Paradhymn',
-  indexes: ['ο1'],
+  indexes: ['o1'],
   settings: [{
     text: 'Inkludera rad om att fysiker står',
     type: 'bool',

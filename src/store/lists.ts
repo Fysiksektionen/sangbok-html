@@ -4,7 +4,7 @@ import { SongIndex, getSongByStringIndex } from '@/lyrics'
 export type SongList = {
   name: string,
   description: string,
-  songs: SongIndex[],
+  songs: SongIndex[]
 }
 
 export const listsModule = {

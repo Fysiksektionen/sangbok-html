@@ -45,7 +45,6 @@ export default defineComponent({
 @import './themes/galaxy.scss';
 @import './themes/neo.scss';
 /* @import './themes/fancy.scss'; */
-/* @import './themes/z.scss'; */
 
 /* Layout */
 html { height: 100%; }

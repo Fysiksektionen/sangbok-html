@@ -83,7 +83,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.modal-down-enter-from, .modal-down-leave-to {/* See hard-coded style property to set transition speed. */
+.modal-down-enter-from, .modal-down-leave-to {
+    /* See hard-coded style property to set transition speed. */
     /* TODO: Set dropdown speeds using classes. */
     filter: blur(0);
     transform: translateY(-100%);
@@ -94,7 +95,7 @@ export default defineComponent({
     margin: 12px 16px auto 12px;
     float: right;
     font-size: 1.5em;
-    opacity: 0.8;
+    opacity: 0.7;
     letter-spacing: 1px;
   }
 

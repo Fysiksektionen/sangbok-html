@@ -6,14 +6,16 @@ import { SongIndex } from '@/lyrics'
 export type GeneratorState = {
   generatorSongs: SongIndex[],
   generalSettings: GeneralSettings,
-  specificSettings: SpecificDownloadSettings[]
+  specificSettings: SpecificDownloadSettings[],
+  version: string
 }
 
 export const generatorModule = {
   state: {
     generatorSongs: [],
     generalSettings: generalSettings,
-    specificSettings: specificSettings
+    specificSettings: specificSettings,
+    version: '1'
   } as GeneratorState,
   getters: {
     songHasBeenAdded: (state: GeneratorState) => (songindex: SongIndex): boolean => state.generatorSongs.indexOf(songindex) !== -1,

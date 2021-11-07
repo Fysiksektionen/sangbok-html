@@ -39,13 +39,10 @@ export function getChapterFromRoute(route: RouteLocationNormalized): Chapter | u
   switch (route.name) {
   case 'SongByIndex':
     return undefined
-    break
   case 'SongByChapterIndex':
     return getChapterByStringIndex(route.params.chapterIndex as string)
-    break
   case 'Song':
     return chapters[param2int(route.params.chapterId)]
-    break
   case 'SongFromList': {
     const list = store.state.lists[param2int(route.params.listId)]
     return {
@@ -54,18 +51,14 @@ export function getChapterFromRoute(route: RouteLocationNormalized): Chapter | u
       songs: getSongsByStringIndices(list.songs),
       path: `/list/${route.params.listId}`
     }
-    break
   }
   case 'Chapter':
     return chapters[param2int(route.params.cid)]
-    break
   case 'ChapterByIndex':
     return getChapterByStringIndex(route.params.chapterIndex as string)
-    break
   default:
     console.error('getChapter called for unknown route: ' + (route.name?.toString()))
     return undefined
-    break
   }
 }
 

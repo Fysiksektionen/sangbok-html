@@ -1,7 +1,7 @@
 import { Song } from '../../lyrics'
 import { getDefaultText, escapeAll } from './escapes'
 import { GeneralSettings } from './generalSettings'
-import { SpecificDownloadSettings } from './specificSettings'
+import { SpecificDownloadSettings, specificSettings } from './specificSettings'
 
 /**
  * Function that generates the content of a "sångblad" as LaTeX.
@@ -32,7 +32,6 @@ export default function getContentTeX(songs: Song[], gs: GeneralSettings, ss: Sp
         .split('\n').filter(function (line) {
           return (!gs.showSheetMusicNotice.value || line.indexOf('notkapitlet') === -1)
         }).join('\\hfil\\\\*\n\\hfil '))
-
       if (melodyContent.length !== 0) { // Add melody
         content.push('\\hfil\\textit{',
           escapeAll(melodyContent),
@@ -44,9 +43,15 @@ export default function getContentTeX(songs: Song[], gs: GeneralSettings, ss: Sp
 
     let sscount = 0
     // Song-specific settings
-    for (const setting of ss) {
+    for (const i in ss) {
+      const setting = ss[i]
       if (setting.indexes.indexOf(song.index) > -1) {
-        content.push(setting.processor(song.text, setting.settings))
+        if (setting.processor !== undefined) {
+          content.push(setting.processor(song.text, setting.settings))
+        } else {
+          console.warn('Using specificSettings preprocessor fallback. This may cause preprocessor bugs when migrating between specificSettings versions.')
+          content.push(specificSettings[i].processor(song.text, setting.settings))
+        }
         sscount++
       }
     }
@@ -54,7 +59,7 @@ export default function getContentTeX(songs: Song[], gs: GeneralSettings, ss: Sp
     if (sscount === 0) { // No specific settings were used
       content.push(getDefaultText(song.text))
     } else if (sscount > 1) {
-      alert(`Fler än en specialinställning användes för låt (see what I did there xD) ${song.index}. Det är dags att skicka ett surt mail till lämplig projektledare, eller webmaster.`)
+      alert(`Fler än en specialinställning användes för låt ${song.index}. Det är dags att skicka ett surt mail till lämplig projektledare, eller webmaster.`)
     }
 
     // TODO: Extract into separate function

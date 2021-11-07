@@ -31,8 +31,3 @@ jobs:
       working-directory: ./music
     - name: Run tests
       run: npx jest --ci --coverage; npx codecov
-    # - name: Codecov
-    #   uses: codecov/codecov-action@v2
-    #   with:
-    #     token: ${{ secrets.CODECOV_TOKEN }}
-# TODO: svgs are not moved right now...
