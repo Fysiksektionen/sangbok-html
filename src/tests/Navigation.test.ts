@@ -4,24 +4,22 @@ import router from '@/router'
 import store, { key } from '@/store'
 import App from '@/App.vue'
 
+// Tests for inter-view navigation. For more specific views, see other tests.
 
-test('Chapter view by index', async () => {
+test('Chapter views', async () => {
   router.push('/')
   await router.isReady()
 
   const wrapper = mount(App, {
     global: { plugins: [router, [store, key], Vue3TouchEvents] }
   })
-  router.push('/chapter/0')
+  expect(wrapper.html()).toContain('Visor vi minns')
+
+  await wrapper.find('td.index').trigger('click')
   await flushPromises()
   expect(wrapper.html()).toContain('α1')
-})
 
-test('Chapter view by index', async () => {
-  const wrapper = mount(App, {
-    global: { plugins: [router, [store, key], Vue3TouchEvents] }
-  })
-  router.push('/chapter/Aα')
+  await wrapper.find('td.index').trigger('click')
   await flushPromises()
   expect(wrapper.html()).toContain('α1')
 })
