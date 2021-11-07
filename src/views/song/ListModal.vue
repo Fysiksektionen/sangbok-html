@@ -54,6 +54,5 @@ export default defineComponent({
       opacity: 0.3;
       text-decoration: line-through;
     }
-
   }
 </style>

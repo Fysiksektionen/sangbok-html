@@ -8,7 +8,7 @@
           <tr v-for="(song, idx) in chapter.songs"
               @click="clickHandler(song, idx)"
               v-bind:key="idx">
-              <td class="index" v-html="song.index"></td>
+              <td class="index"><Index :index="song.index" /></td>
               <td class="name">
                 <span v-html="song.title"></span>
                 <span v-if="hasSheetMusic(song) && $store.state.settings.sheetmusic" class="sheetmusicicon">𝄢</span>
@@ -24,6 +24,7 @@ import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
+import Index from '@/components/Index.vue'
 import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
 import { SwipeIndicatorState } from '@/utils/swipe'
 import { Song, getChapterFromRoute, Chapter, hasSheetMusic } from '@/lyrics'
@@ -31,7 +32,8 @@ import { Song, getChapterFromRoute, Chapter, hasSheetMusic } from '@/lyrics'
 export default defineComponent({
   name: 'ChapterView',
   components: {
-    Swiper
+    Swiper,
+    Index
   },
   data() {
     const chapter = getChapterFromRoute(this.$route)

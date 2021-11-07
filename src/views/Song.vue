@@ -12,7 +12,7 @@
           {{ showMsvg ? 'Dölj noter' : '𝄢'}}
         </button>
         <button v-if="$store.state.settings.makelist" class="button musicbutton" @click="listModalVisible=true">+</button>
-        <div class="song-index" v-if="!showMsvg" v-html="song.index"></div>
+        <div class="song-index" v-if="!showMsvg"><Index :index="song.index" /></div>
         <!-- Main content -->
         <SheetMusicRenderer v-if="sheetMusicAvailable && showMsvg && $store.state.settings.sheetmusic" :src="song.index" :key="song.index"/>
         <div v-if="!showMsvg || !$store.state.settings.sheetmusic || !sheetMusicAvailable">
@@ -40,6 +40,7 @@ import { useRoute, RouteLocationNormalized } from 'vue-router'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
+import Index from '@/components/Index.vue'
 import Swiper from '@/components/Swiper.vue'
 import NavButtons from '@/views/song/SongNavButtons.vue'
 import ListModal from '@/views/song/ListModal.vue'
@@ -54,6 +55,7 @@ export default defineComponent({
     Swiper,
     NavButtons,
     ListModal,
+    Index,
     // Load SheetMusicRenderer on-demand
     SheetMusicRenderer: defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer", webpackPrefetch: true */ '@/views/song/SheetMusicRenderer.vue'))
   },

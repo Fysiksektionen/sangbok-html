@@ -22,7 +22,7 @@ const fuse = new Fuse(songs, {
 })
 
 // Addons (chapters) search engine
-const addons = new Fuse(keys, {
+const addons = new Fuse(keys as SongHit[], {
   includeScore: true,
   isCaseSensitive: false,
   minMatchCharLength: 3,
@@ -30,7 +30,8 @@ const addons = new Fuse(keys, {
   ignoreLocation: true,
   keys: [
     { name: 'title', weight: 10 },
-    'index'
+    'index',
+    'chapterindex'
   ]
 })
 

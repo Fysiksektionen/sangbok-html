@@ -4,7 +4,6 @@ import router from '@/router'
 import store, { key } from '@/store'
 import App from '@/App.vue'
 
-
 test('Chapter view by index', async () => {
   router.push('/')
   await router.isReady()

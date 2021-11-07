@@ -4,7 +4,8 @@
 <template>
   <div class="navbuttons">
     <div class="button" v-if="parseInt(songid) > 0"
-      @click="$router.replace(chapterPath+'/song/'+(parseInt(songid)-1))">
+      @click="$router.replace(chapterPath+'/song/'+(parseInt(songid)-1))"
+      data-test="previous">
       <div>{{chapter.songs[parseInt(songid)-1].title}}</div>
       <div>
         <img src="@/assets/back_black.png"/> &nbsp;
@@ -13,7 +14,8 @@
     </div>
     <div class="filler" v-if="parseInt(songid) == 0"></div>
     <div class="button" v-if="chapter.songs[parseInt(songid)+1]"
-      @click="$router.replace(chapterPath+'/song/'+(parseInt(songid)+1))">
+      @click="$router.replace(chapterPath+'/song/'+(parseInt(songid)+1))"
+      data-test="next">
       <div>{{chapter.songs[parseInt(songid)+1].title}}</div>
       <div>
         <span v-html="chapter.songs[parseInt(songid)+1].index"></span> &nbsp;

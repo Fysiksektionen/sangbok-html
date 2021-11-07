@@ -10,7 +10,7 @@
             v-bind:key="idx">
             <!-- TODO: Prevent XSS from list titles without CSP. -->
             <!-- As of now, lists are not visible in search. -->
-            <td class="index" v-html="hit.item.index"></td>
+            <td class="index"><Index :index="hit.item.index || hit.item.chapterindex" /></td>
             <td class="name">
               {{ hit.item.title }}
               <span v-if="hasSheetMusic(hit.item) && $store.state.settings.sheetmusic" class="sheetmusicicon">𝄢</span>
@@ -28,9 +28,10 @@
 import { defineComponent } from 'vue'
 import Fuse from 'fuse.js'
 
+import { SongHit, hasSheetMusic } from '@/lyrics'
 import { search } from '@/utils/search' // @ is an alias to /src
 import SearchBox from '@/components/SearchBox.vue'
-import { SongHit, hasSheetMusic } from '@/lyrics'
+import Index from '@/components/Index.vue'
 import Swiper from '@/components/Swiper.vue'
 import { SwipeIndicatorState } from '@/utils/swipe'
 
@@ -38,7 +39,8 @@ export default defineComponent({
   name: 'Search',
   components: {
     Swiper,
-    SearchBox
+    SearchBox,
+    Index
   },
   methods: {
     search: search,

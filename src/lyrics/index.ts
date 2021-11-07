@@ -21,21 +21,23 @@ export type Song = {
   text: string
 }
 
-type JSONChapter = {
-  chapter: string,
-  prefix: string,
-  songs: Song[],
-}
-
 export type SongHit = Song & {
   chapterindex?: number | string,
   songindex?: number,
   tags?: string[]
 }
 
+type JSONChapter = {
+  chapter: string,
+  prefix: string,
+  icon?: string,
+  songs: Song[],
+}
+
 export type Chapter = {
   chapter: string,
   prefix: string,
+  icon?: string,
   path: string,
   songs: Song[],
 }

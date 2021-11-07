@@ -57,10 +57,12 @@ test('List navigation', async () => {
   store.commit('addToList', { list: 0, index: 'α1' })
   store.commit('addToList', { list: 0, index: 'α2' })
   await flushPromises()
+  expect(store.state.lists[0].songs).toEqual(['α1', 'α2'])
 
   const wrapper = mount(App, {
     global: { plugins: [router, [store, key], Vue3TouchEvents] }
   })
+
   expect(wrapper.findComponent({ name: 'ChaptersView' }).exists()).toEqual(true)
 
   // Enter lists view
@@ -78,16 +80,16 @@ test('List navigation', async () => {
   await flushPromises()
   expect(wrapper.findComponent({ name: 'SongView' }).exists()).toEqual(true)
   expect(wrapper.html()).toContain('α1')
-  expect(wrapper.find('.navbuttons > .button'))
+  expect(wrapper.find('.navbuttons > div.button[data-test="next"]').exists()).toEqual(true)
 
   // Go to next song
-  await wrapper.find('.navbuttons > .button').trigger('click')
+  await wrapper.find('.navbuttons > div.button[data-test="next"]').trigger('click')
   await flushPromises()
   expect(wrapper.findComponent({ name: 'SongView' }).exists()).toEqual(true)
   expect(wrapper.html()).toContain('α2')
 
   // Go to some other song
-  await wrapper.find('.navbuttons > .button').trigger('click')
+  await wrapper.find('.navbuttons > div.button[data-test="previous"]').trigger('click')
   await flushPromises()
   expect(wrapper.findComponent({ name: 'SongView' }).exists()).toEqual(true)
   expect(wrapper.html()).toContain('α1')
