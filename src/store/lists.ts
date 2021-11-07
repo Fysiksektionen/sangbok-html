@@ -1,3 +1,4 @@
+// TODO: Add documentation
 import { SongIndex, getSongByStringIndex } from '@/lyrics'
 // import { Mutation } from 'vuex'
 

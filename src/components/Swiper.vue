@@ -2,7 +2,11 @@
 <template>
   <div class="component-swiper" v-touch:release="releaseHandler" v-touch:press="pressHandler" v-touch:drag="dragHandler"
     v-bind:style="onlyAllowZoomOut">
+
+    <!-- Subcomponent injection -->
     <slot></slot>
+
+    <!-- Swipe indicators -->
     <transition name="swipe-right">
       <div class="swipe-indicator right bg-highlight" v-if="showSwipeIndicator.includes('right')"
         v-bind:class="{'disabled': showSwipeIndicator.includes('x')}">
@@ -10,6 +14,7 @@
         {{ showSwipeIndicator.includes('x') ? "⊘" : "" }}
       </div>
     </transition>
+
     <transition name="swipe-left">
       <div class="swipe-indicator left bg-highlight" v-if="showSwipeIndicator.includes('left')"
         v-bind:class="{'disabled': showSwipeIndicator.includes('x')}">
@@ -17,23 +22,26 @@
         {{ showSwipeIndicator.includes('x') ? "⊘" : "" }}
       </div>
     </transition>
+
   </div>
 </template>
 
 <script lang="ts">
+// TODO: Add docs.
 import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
 import { SwipeIndicatorState, getCoordsFromEvent, onlyAllowZoomOut } from '@/utils/swipe'
 
+// The treshold, in pixels, for how far the user has to draw their for it to be considered a swipe.
 const SWIPE_TRESHOLD = 30
 
 export default defineComponent({
   name: 'Swiper',
   props: {
     swipeHandler: Function,
-    left: String, /* Actually 'allow' | 'disallow' | 'hide' */
+    left: String, // Actually 'allow' | 'disallow' | 'hide', but Vue doesn't validate things that closely
     right: String,
     allowZoom: Boolean
   },
@@ -47,7 +55,6 @@ export default defineComponent({
   setup() {
     return { store: useStore(key) }
   },
-  // created() {console.log(this.$props)},
   methods: {
     releaseHandler() {
       this.$props.swipeHandler && this.$props.swipeHandler(this.showSwipeIndicator)

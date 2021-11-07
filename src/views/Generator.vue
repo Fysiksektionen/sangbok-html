@@ -89,7 +89,6 @@ export default defineComponent({
     }
   },
   setup() { return { store: useStore(key) } },
-  props: ['songid', 'chapterid'],
   methods: {
     getSongByStringIndex: getSongByStringIndex, // TODO: Don't use this function in the template.
     add() {

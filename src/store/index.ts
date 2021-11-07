@@ -1,3 +1,5 @@
+// TODO: Add documentation
+// TODO: Move settings to own submodule.
 import { InjectionKey } from 'vue'
 import { createStore, Store } from 'vuex'
 
@@ -17,7 +19,6 @@ export interface State {
     touchAction: string // 'none' | 'swipe' | 'zoom' | 'all'
   },
   version: string, // Settings version (could be useful on backwards-compatibility-breaking schema changes).
-  query: string,
   generator: GeneratorState,
   lists: SongList[]
 }

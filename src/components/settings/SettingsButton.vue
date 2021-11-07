@@ -1,3 +1,4 @@
+<!-- Used by the Settings dropdown to render a toggleable row. -->
 <template>
   <div @click="$store.commit('toggleSetting', $props.setting)" class="setting">
     <slot></slot>
@@ -10,7 +11,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'SettingsButton',
-  props: ['setting']
+  props: { setting: String }
 })
 </script>
 

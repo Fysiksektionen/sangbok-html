@@ -1,3 +1,4 @@
+// TODO: Add documentation
 import { Song } from '../../lyrics'
 import { getDefaultText, escapeAll } from './escapes'
 import { GeneralSettings } from './generalSettings'

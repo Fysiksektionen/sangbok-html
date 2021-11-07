@@ -25,7 +25,6 @@ import { getSongFromRoute } from '@/lyrics'
 export default defineComponent({
   name: 'SongViewListModal',
   components: { Modal },
-  props: ['callback'],
   setup() { return { store: useStore(key) } },
   data() {
     const store = useStore(key)

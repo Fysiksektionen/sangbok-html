@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isSongStage" @click="copy" class="setting clipboard">
+  <div @click="copy" class="setting clipboard">
     Kopiera sångtext
     <transition name="fade">
       <div class="checkmark" style="color: #0E0;" v-if="state=='ok'">✔</div>
@@ -17,32 +17,30 @@ export default defineComponent({
   name: 'ClipboardButton',
   data () {
     return {
+      // The state determines the icon that's shown.
       state: 'none' as 'none' | 'ok' | 'err'
     }
   },
   computed: {
-    isSongStage () {
-      const route: RouteLocationNormalized = this.$route
-      return route.name && route.name.toString().startsWith('Song')
-    }
-  },
-  methods: { // TODO: Move to computed
-    lyrics () {
+    lyrics () { // Returns the title and the lyrics of the current song, to be copied.
       const route: RouteLocationNormalized = this.$route
       if (route.name && route.name.toString().startsWith('Song')) {
         const song = getSongFromRoute(route)
         return song !== undefined ? song.title + '\n\n' + song.text : ''
       } else { return '' }
-    },
-    copy () {
-      if (this.lyrics() === '') {
+    }
+  },
+  methods: {
+    copy () { // Attempt to copy, and show an indicator of how it went.
+      if (this.lyrics === '') {
         this.state = 'err'
         return
       }
-      this.state = copy(this.lyrics()) ? 'ok' : 'err'
+      this.state = copy(this.lyrics) ? 'ok' : 'err'
       setTimeout(this.resetState, 1000)
     },
     resetState () {
+      // This is a separate function due to us needing the this, variable, which is not in scope for lambda function (there may be a better way to do this)
       this.state = 'none'
     }
   }

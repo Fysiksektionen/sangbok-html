@@ -37,12 +37,12 @@ const addons = new Fuse(keys as SongHit[], {
 
 /**
  * Performs a search for both songs and addons (which in practice means hidden chapters).
- * @param s Search query string
+ * @param query Search query string
  * @returns A list of results, sorted by best match.
  */
-export function search(s: string): Fuse.FuseResult<SongHit>[] {
-  return (fuse.search(s)
-    .concat(addons.search(s))
+export function search(query: string): Fuse.FuseResult<SongHit>[] {
+  return (fuse.search(query)
+    .concat(addons.search(query))
     .sort((x, y) => { return (x.score || 0) - (y.score || 0) })
   )
 }

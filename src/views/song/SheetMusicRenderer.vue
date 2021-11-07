@@ -28,7 +28,7 @@ import svglist from '@/assets/msvgs.json'
 
 export default defineComponent({
   name: 'SheetMusicRenderer',
-  props: ['src'],
+  props: { src: String },
   data() {
     return {
       zoomIdx: Math.min(((window.matchMedia && window.matchMedia('only screen and (max-width: 760px)').matches)) ? 5 : 3, this.getZoomLevels().length - 1),
@@ -36,13 +36,14 @@ export default defineComponent({
     }
   },
   methods: { // TODO: Move some of these to computed
+    // TODO: Cleanup
     getImages(): string[] {
-      const curSongSvgs = svglist.filter(s => { return s.indexOf(this.$props.src) > -1 })
+      const curSongSvgs = svglist.filter(s => { return this.$props.src && s.indexOf(this.$props.src) > -1 })
       const curSongSvgsWithZoom = curSongSvgs.filter(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ['', ''])[1] === this.getZoomLevels()[this.zoomIdx])
       return curSongSvgsWithZoom.map(s => 'msvg/' + s)
     },
     getZoomLevels() {
-      const curSongSvgs = svglist.filter(s => { return s.indexOf(this.$props.src) > -1 })
+      const curSongSvgs = svglist.filter(s => { return this.$props.src && s.indexOf(this.$props.src) > -1 })
       const zoomLevels = Array.from(new Set(curSongSvgs.map(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ['', ''])[1])))
       return zoomLevels.sort()
     },

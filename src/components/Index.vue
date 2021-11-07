@@ -16,13 +16,13 @@ type ParsedIndex = {
   text: string
 }
 
-// TODO: This thing is called twice, but at the same time, we need to have our props in computed, to prevent indices from being stuck.
 /**
  * Takes an index, and splits it into an image part and a suffix string part.
  * @param index Index as as a string
  * @returns A ParsedIndex object, containing the index, split into an image and a string part, as well as the matched key.
  */
 function computeData(index: string): ParsedIndex {
+  // TODO: This thing is called twice, but at the same time, we need to have our props in computed, to prevent indices from being stuck.
   for (const key of Object.keys(INDEX_MAP)) {
     if (index.startsWith(key)) {
       return { key: key, image: INDEX_MAP[key], text: index.slice(key.length) }
@@ -33,10 +33,10 @@ function computeData(index: string): ParsedIndex {
 
 export default defineComponent({
   name: 'Index',
-  props: ['index'],
+  props: { index: String },
   computed: {
-    text() { return computeData(this.$props.index).text },
-    image() { return computeData(this.$props.index).image }
+    text() { return computeData(this.$props.index || '').text },
+    image() { return computeData(this.$props.index || '').image }
   }
 })
 </script>
