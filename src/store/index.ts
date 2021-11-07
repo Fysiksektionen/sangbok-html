@@ -25,7 +25,8 @@ export interface State {
 
 type SetSettingProps = { key: 'touchAction' | 'theme', value: string }
 
-export const key: InjectionKey<Store<State>> = Symbol('sangbok')
+export const stringKey = 'sangbok'
+export const key: InjectionKey<Store<State>> = Symbol(stringKey)
 
 export default createStore<State>({
   state: {
@@ -57,5 +58,5 @@ export default createStore<State>({
   },
   // actions: {},
   modules: { generator: generatorModule, lists: listsModule },
-  plugins: [createPersistedState({ key: 'sangbok' })]
+  plugins: [createPersistedState({ key: stringKey })]
 })
