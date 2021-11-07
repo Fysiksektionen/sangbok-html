@@ -64,7 +64,8 @@ export function greek2latin (greek: string): string {
     λ: 'lambda',
     μ: 'my',
     ν: 'ny',
-    ο: 'omikron',
+    ο: 'omikron', // Greek ο
+    o: 'omikron', // Latin o
     σ: 'sigma',
     Α: 'Alfa',
     Β: 'Beta',

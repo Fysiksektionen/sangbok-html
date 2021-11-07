@@ -23,7 +23,7 @@
           <div class="textcontainer" v-html="toHTML(song.text)" v-bind:class="{'larger': $store.state.settings.larger}"></div>
           <div v-if="song.author" class="author" v-html="toHTML(song.author)"></div>
         </div>
-        <NavButtons v-if="chapter" :chapter="chapter" :chapterid="$route.params.chapterId" :songid="$route.params.songId" />
+        <NavButtons v-if="chapter" />
         <div v-if="!chapter" style="height: 2em;"></div><!-- Margin if NavButtons is hidden. -->
       </div>
     </div>

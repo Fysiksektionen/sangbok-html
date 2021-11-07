@@ -24,10 +24,10 @@ export default defineComponent({
     search (evt: Event) {
       evt.preventDefault()
       if (this !== undefined) {
-        if (this.$route.name === 'Home') {
-          this.$router.push('/search/' + this.query2)
-        } else {
+        if (this.$route.name === 'Search') {
           this.$router.replace('/search/' + this.query2)
+        } else {
+          this.$router.push('/search/' + this.query2)
         }
       }
     }

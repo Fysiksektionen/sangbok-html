@@ -16,8 +16,12 @@ test('Search box', async () => {
   await box.setValue('beta')
   await box.trigger('submit')
   await flushPromises()
-
   expect(wrapper.html()).toContain('β1')
+
+  await box.setValue('omikron')
+  await box.trigger('submit')
+  await flushPromises()
+  expect(wrapper.html()).toContain('Paradhymn')
 })
 
 test('Porthos', async () => {

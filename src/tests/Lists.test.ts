@@ -80,16 +80,16 @@ test('List navigation', async () => {
   await flushPromises()
   expect(wrapper.findComponent({ name: 'SongView' }).exists()).toEqual(true)
   expect(wrapper.html()).toContain('α1')
-  expect(wrapper.find('.navbuttons > div.button[data-test="next"]').exists()).toEqual(true)
+  expect(wrapper.find('.navbuttons .button:last-child').exists()).toEqual(true)
 
   // Go to next song
-  await wrapper.find('.navbuttons > div.button[data-test="next"]').trigger('click')
+  await wrapper.find('.navbuttons .button:last-child').trigger('click')
   await flushPromises()
   expect(wrapper.findComponent({ name: 'SongView' }).exists()).toEqual(true)
   expect(wrapper.html()).toContain('α2')
 
   // Go to some other song
-  await wrapper.find('.navbuttons > div.button[data-test="previous"]').trigger('click')
+  await wrapper.find('.navbuttons .button:first-child').trigger('click')
   await flushPromises()
   expect(wrapper.findComponent({ name: 'SongView' }).exists()).toEqual(true)
   expect(wrapper.html()).toContain('α1')

@@ -19,23 +19,23 @@ test('getSongFromRoute (Song)', async () => {
 })
 
 test('getSongFromRoute (SongByChapterIndex)', async () => {
-  router.push('/chapter/Γγ/song/0')
+  router.push('/chapter/Γγ/song/1')
   await flushPromises()
 
   const wrapper = mount(Song, {
     global: { plugins: [router, [store, key], Vue3TouchEvents] }
   })
 
-  expect(wrapper.html()).toContain('Ölbytarvisan')
+  expect(wrapper.html()).toContain('Strejk på Pripps')
 })
 
 test('getSongFromRoute (SongByIndex)', async () => {
-  router.push('/song/γ1')
+  router.push('/song/γ3')
   await flushPromises()
 
   const wrapper = mount(Song, {
     global: { plugins: [router, [store, key], Vue3TouchEvents] }
   })
 
-  expect(wrapper.html()).toContain('Ölbytarvisan')
+  expect(wrapper.html()).toContain('Ode till ölet')
 })
