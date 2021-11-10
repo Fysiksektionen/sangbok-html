@@ -1,20 +1,7 @@
+// This list used to be longer, but special char handling has been moved to blad.cls
+// TODO: Perhaps remove this.
 const LATEX_ESCAPES: [RegExp, string][] = [
-  [/"/g, "''"],
-  [/Ω/g, '\\(\\Omega\\)'],
-  [/ω/g, '\\(\\omega\\)'],
-  [/τ/g, '\\(\\tau\\)'],
-  [/π/g, '\\(\\pi\\)'],
-  [/ζ/g, '\\(\\zeta\\)'],
-  [/σ/g, '\\(\\sigma\\)'],
-  [/δ/g, '\\(\\delta\\)'],
-  [/ε/g, '\\(\\letepsilon\\)'],
-  [/β/g, '\\(\\beta\\)'],
-  [/β/g, '\\(\\beta\\)'],
-  [/ϱ/g, '\\(\\rho\\)'],
-  [/°/g, '\\(^\\circ\\)'],
-  [/²/g, '\\(^2\\)'],
-  [/³/g, '\\(^3\\)'],
-  [/₂/g, '\\(_2\\)']
+  [/"/g, "''"]
 ]
 
 /**

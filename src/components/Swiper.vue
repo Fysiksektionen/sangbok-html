@@ -92,7 +92,7 @@ export default defineComponent({
           // Absolute angle of touch path, relative to the vertical line.
           const phi = Math.abs(Math.atan2(coords[0] - x, coords[1] - y))
 
-          if (Math.PI/180*(90 - SWIPE_ANGLE/2) < phi && phi < Math.PI/180*(90 + SWIPE_ANGLE/2)) {
+          if (Math.PI / 180 * (90 - SWIPE_ANGLE / 2) < phi && phi < Math.PI / 180 * (90 + SWIPE_ANGLE / 2)) {
             if (coords[2] === 'none') {
               if (coords[0] - x > SWIPE_TRESHOLD) {
                 const swipeIndicator = (this.$props.right === 'disallow') ? 'xright' : ((this.$props.right === 'hide') ? 'none' : 'right')

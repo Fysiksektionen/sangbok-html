@@ -1,8 +1,8 @@
 % Filename: blad.cls
 % Author: Arno Lepisk (2003, v 1.0)
-%         Oskar Rune (2021, v 1.1.2)
+%         Oskar Rune (2021, v 1.1.3)
 % 
-% Version: 1.1.2
+% Version: 1.1.3
 
 % This is a LaTeX2e document class.
 
@@ -82,3 +82,28 @@
 
 \pagenumbering{none}
 \pagestyle{empty}
+
+%
+% Special character handling 
+%
+\DeclareUnicodeCharacter{03A9}{$\Omega$} %Ω
+\DeclareUnicodeCharacter{03B2}{$\beta$} %β
+\DeclareUnicodeCharacter{03B4}{$\delta$} %δ
+\DeclareUnicodeCharacter{03B5}{$\varepsilon$} %ε
+\DeclareUnicodeCharacter{03B6}{$\zeta$} %ζ
+\DeclareUnicodeCharacter{03C0}{$\pi$} %π
+\DeclareUnicodeCharacter{03C1}{$\rho$} %ρ
+\DeclareUnicodeCharacter{03C3}{$\sigma$} %σ
+\DeclareUnicodeCharacter{03C4}{$\tau$} %τ
+\DeclareUnicodeCharacter{03C9}{$\omega$} %ω
+\DeclareUnicodeCharacter{03D5}{$\varphi$} %ϕ
+
+\DeclareUnicodeCharacter{00B0}{$^\circ$} %°
+\DeclareUnicodeCharacter{00B2}{$^2$} %²
+\DeclareUnicodeCharacter{00B3}{$^3$} %³
+\DeclareUnicodeCharacter{2082}{$_2$} %₂
+\DeclareUnicodeCharacter{2099}{$_n$} %ₙ
+
+\DeclareUnicodeCharacter{1E8D}{$\ddot{x}$} %ẍ
+\DeclareUnicodeCharacter{1E8B}{$\dot{x}$} %ẋ
+\DeclareUnicodeCharacter{2205}{$\emptyset$} %∅
