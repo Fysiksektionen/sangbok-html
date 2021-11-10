@@ -1,9 +1,8 @@
-
 % Filename: blad.cls
 % Author: Arno Lepisk (2003, v 1.0)
-%         Oskar Rune (2021, v 1.1.1)
+%         Oskar Rune (2021, v 1.1.2)
 % 
-% Version: 1.1.1
+% Version: 1.1.2
 
 % This is a LaTeX2e document class.
 
@@ -34,12 +33,15 @@
 %
 % Layout
 %
+
+% LaTeX automatically adds 1in of offset margin. This resets that.
 \setlength{\hoffset}{-1in}
 \setlength{\topmargin}{5mm}
 \setlength{\headsep}{0in}
 \setlength{\headheight}{0in}
 
-\setlength{\oddsidemargin}{6mm}
+% Prevent -1in offset for second page.
+\setlength{\oddsidemargin}{1in} 
 \setlength{\evensidemargin}{6mm}
 
 \setlength{\voffset}{-1in}
@@ -50,8 +52,8 @@
 
 \setlength{\paperwidth}{.5\paperwidth}
 
-\setlength{\textwidth}{.96\paperwidth}
-\setlength{\textheight}{.95\paperheight}
+\setlength{\textwidth}{.96\paperwidth} %0.96
+\setlength{\textheight}{.95\paperheight} %0.95
 
 %
 % Booklet setup
@@ -63,17 +65,13 @@
 %
 % Song template
 %
-\newenvironment{sang}[1]{\startasang{#1}}{\slutasang}
-
-\newcommand{\startasang}[1]{
-\nopagebreak
-\subsection*{#1}
-\begin{verse}
-}
-
-\newcommand{\slutasang}{
-\end{verse}
-\nopagebreak
+\newenvironment{sang}[1]{
+ \nopagebreak
+ \subsection*{#1}
+ \begin{verse}
+}{
+ \end{verse}
+ \nopagebreak
 }
 
 % fkm* logo
