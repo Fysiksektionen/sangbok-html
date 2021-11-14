@@ -4,6 +4,17 @@ import { getDefaultText, escapeAll } from './escapes'
 import { GeneralSettings } from './generalSettings'
 import { SpecificDownloadSettings, specificSettings } from './specificSettings'
 
+function getMelodyContent(gs: GeneralSettings, song: Song): string[] {
+  const melodyContent = ((song.melody || '')
+    .split('\n').filter(function (line) {
+      return (!gs.showSheetMusicNotice.value || line.indexOf('notkapitlet') === -1)
+    }).join('\\*\n'))
+  if (melodyContent.length !== 0) {
+    return [`\\melody{${escapeAll(melodyContent)}}\n`]
+  }
+  return []
+}
+
 /**
  * Function that generates the content of a "sångblad" as LaTeX.
  * @param songs A list of songs to include.
@@ -17,33 +28,23 @@ export default function getContentTeX(songs: Song[], gs: GeneralSettings, ss: Sp
   // Main loop
   for (const song of songs) {
     if (!song.text) {
-      console.warn(`Song with empty text. Ignoring: ${song.index}`)
+      console.warn(`Song with empty lyrics. Ignoring: ${song.index}`)
       continue
     }
 
     content.push(
-      '\\begin{sang}{',
-      escapeAll(song.title),
-      '}\n'
+      '\\pagebreak[3]\n',
+      '\\begin{samepage}\n',
+      `\\songtitle{${escapeAll(song.title)}}\n`,
+      ...getMelodyContent(gs, song),
+      '\\begin{lyrics}\n'
     )
 
-    // TODO: Extract to separate function
-    if (gs.showMelody.value && song.melody) { // TODO: Include melodies and smn:s even if showMelody is false, but as comments.
-      const melodyContent = ((song.melody || '')
-        .split('\n').filter(function (line) {
-          return (!gs.showSheetMusicNotice.value || line.indexOf('notkapitlet') === -1)
-        }).join('\\hfil\\\\*\n\\hfil '))
-      if (melodyContent.length !== 0) { // Add melody
-        content.push('\\hfil\\textit{',
-          escapeAll(melodyContent),
-          '}\\hfil\\\\*\n',
-          '\\vspace*{0.1cm}\n'
-        )
-      }
-    }
-
+    //
+    // Add songs
+    //
     let sscount = 0
-    // Song-specific settings
+    // With song-specific settings
     for (const i in ss) {
       const setting = ss[i]
       if (setting.indexes.indexOf(song.index) > -1) {
@@ -57,23 +58,17 @@ export default function getContentTeX(songs: Song[], gs: GeneralSettings, ss: Sp
       }
     }
 
-    if (sscount === 0) { // No specific settings were used
+    if (sscount === 0) { // No specific settings were used. Use default processor.
       content.push(getDefaultText(song.text))
     } else if (sscount > 1) {
       alert(`Fler än en specialinställning användes för låt ${song.index}. Det är dags att skicka ett surt mail till lämplig projektledare, eller webmaster.`)
     }
+    content.push('\\end{lyrics}\n')
 
-    // TODO: Extract into separate function
-    if (gs.showAuthor.value && song.author !== undefined) {
-      content.push(
-        '\\\\* \\vspace*{0.1cm}\n',
-        '\\raggedleft\\textit{',
-        escapeAll(song.author.replace('\n', '\\\\* ')),
-        '}\n'
-      )
-    }
-
-    content.push('\\end{sang}\n')
+    // Add author
+    const escapedAuthor = song.author ? escapeAll(song.author.replace('\n', '\\\\* ')) : '';
+    if (escapedAuthor) { content.push(`\\auth{${escapedAuthor}}`) }
+    content.push('\\end{samepage}\n\n\n')
   }
 
   return content.join('')

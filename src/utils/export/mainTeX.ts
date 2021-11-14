@@ -13,6 +13,8 @@ export default function getMainTeX(gs: GeneralSettings): string {
     `${gs.showLogo.value ? '' : '\\author{}\n%'}\\author{\\includesvg[width=.8\\textwidth]{logga}}`,
     '%\\author{\\includegraphics[width=.8\\textwidth]{logga}} % Om du använder något annat än en svg-fil.',
     `${gs.showDate.value ? '%' : ''}\\date{}\t%Ta bort kommentaren om du inte vill ha med datum.`,
+    `${gs.showAuthor.value ? '%' : ''}\\renewcommand{\\auth}[1]{}\t%Ta bort kommentaren om du inte vill ha med upphovspersons-angivelse.`,
+    `${gs.showMelody.value ? '%' : ''}\\renewcommand{\\melody}[1]{}\t%Ta bort kommentaren om du inte vill ha med melodier.`,
     '\n\n\\begin{document}\n\\maketitle\n\\input{content.tex}\n\\end{document}'
   )
   return out.join('\n')

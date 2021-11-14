@@ -1,8 +1,8 @@
 % Filename: blad.cls
 % Author: Arno Lepisk (2003, v 1.0)
-%         Oskar Rune (2021, v 1.2.0)
+%         Oskar Rune (2021, v 1.1.3)
 % 
-% Version: 1.2.0. Not backwards-compatible with versions 1.0 and 1.1.x
+% Version: 1.1.3. Backwards-compatible with v 1.0.
 
 % This is a LaTeX2e document class.
 
@@ -24,7 +24,6 @@
 \RequirePackage{calc}
 \RequirePackage{xspace}
 \RequirePackage{ifthen}
-\RequirePackage{quoting}
 
 \RequirePackage{verbatim}
 
@@ -71,37 +70,13 @@
 %
 % Song template
 %
-\newcommand{\songtitle}[1]{
-    \begin{flushleft}
-        \subsection*{#1}
-    \end{flushleft}
-    % \nopagebreak
-}
-\newcommand{\melody}[1]{
-    % \nopagebreak
-    \vspace*{0.1cm}
-        \begin{quoting}[leftmargin=6mm]
-            \small{\textit{#1}}
-        \end{quoting}
-    \vspace*{-3mm}
-    % \nopagebreak
-}
-\newenvironment{lyrics}{
-%  \nopagebreak
- \vspace*{1mm}
+\newenvironment{sang}[1]{
+ \nopagebreak
+ \subsection*{#1}
  \begin{verse}
 }{
  \end{verse}
-%  \nopagebreak
-}
-\newcommand{\auth}[1]{
-    % \nopagebreak
-    \vspace*{0.1cm}
-    \begin{verse}
-        \begin{flushright}
-            \textit{#1}
-        \end{flushright}
-    \end{verse}
+ \nopagebreak
 }
 
 % fkm* logo
