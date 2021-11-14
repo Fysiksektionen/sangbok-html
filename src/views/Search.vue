@@ -8,12 +8,11 @@
         <tr v-for="(hit, idx) in search($route.params.query)"
             @click="goto(hit)"
             v-bind:key="idx">
-            <!-- TODO: Prevent XSS from list titles without CSP. -->
-            <!-- As of now, lists are not visible in search. -->
-            <td class="index" v-html="hit.item.index"></td>
+            <!-- TODO: As of now, lists are not visible in search. Don't forget to prevent XSS from list titles without using CSP if you implement this. -->
+            <td class="index"><Index :index="hit.item.index || hit.item.chapterindex" /></td>
             <td class="name">
               {{ hit.item.title }}
-              <span v-if="hit.item.msvg && $store.state.settings.sheetmusic" class="sheetmusicicon">𝄢<!--𝄞--></span>
+              <span v-if="hasSheetMusic(hit.item) && $store.state.settings.sheetmusic" class="sheetmusicicon">𝄢</span>
             </td>
         </tr>
         <tr class="nohits">
@@ -27,12 +26,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Fuse from 'fuse.js'
-import { useStore } from 'vuex'
-import { key } from '@/store'
 
+import { SongHit, hasSheetMusic } from '@/lyrics'
 import { search } from '@/utils/search' // @ is an alias to /src
 import SearchBox from '@/components/SearchBox.vue'
-import { chapters, SongHit } from '@/lyrics'
+import Index from '@/components/Index.vue'
 import Swiper from '@/components/Swiper.vue'
 import { SwipeIndicatorState } from '@/utils/swipe'
 
@@ -40,10 +38,13 @@ export default defineComponent({
   name: 'Search',
   components: {
     Swiper,
-    SearchBox
+    SearchBox,
+    Index
   },
   methods: {
     search: search,
+    hasSheetMusic: hasSheetMusic,
+    /** Sends the user to the target of the hit. */
     goto (hit: Fuse.FuseResult<SongHit>) {
       if (hit.item.chapterindex !== undefined && hit.item.songindex !== undefined) {
         this.$router.push('/chapter/' + hit.item.chapterindex + '/song/' + hit.item.songindex)
@@ -53,15 +54,10 @@ export default defineComponent({
         this.$router.push('/song/' + hit.item.index)
       }
     },
-    swipeHandler(direction: SwipeIndicatorState) { if (direction === 'left') { this.$router.push('/') } }
-  },
-  data() {
-    return {
-      chapters: chapters
+    swipeHandler(direction: SwipeIndicatorState) {
+      // Send the user to the main view if they swipe right (which gives an indicator on the 'left').
+      if (direction === 'left') { this.$router.push('/') }
     }
-  },
-  setup() {
-    return { store: useStore(key) }
   }
 })
 </script>

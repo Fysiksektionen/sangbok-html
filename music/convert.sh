@@ -67,6 +67,8 @@ if [[ ! $*\  == *--no-generate\ * ]]; then
                     | sed -e "s/<pageHeight>[0-9]*\.[0-9]*<\/pageHeight>/<pageHeight>1000<\/pageHeight>/g" \
                     > "tmp/${file//mscz/tmp.mscx}" \
                     || exit 3
+                # Prevent musescore from trying to open the above file if it's not 100% finished. Makes the script more stable.
+                sleep 0.2
                 # Generate svg
                 mscore3 --export-to "svg/${file//.mscz/}${csum:0:8}-sf$sf.svg" "tmp/${file//mscz/tmp.mscx}" --force --trim-image 140 || exit 1;
             done
@@ -83,16 +85,23 @@ rm -rf tmp
 ##
 if [[ $*\  == *--compress\ *  || $*\  == *-c\ * ]]; then
     echo -e "\e[1;32mKomprimerar filer:\e[0m"
+    counter=1
     cd svg
     for file in *.svg
     do
         if [[ $file =~ ".min.svg" ]]; then
             echo -e "$file är redan komprimerad."
         else
-            svgo --input "$file" --output "${file//.svg/.min.svg}" --multipass || echo -e "\e[31mKomprimering misslyckades\e[0m för $file."
-            rm "$file" # Remove old, non-compressed file
+            counter=$((counter+1))
+            svgo --input "$file" --output "${file//.svg/.min.svg}" --multipass && rm "$file" || echo -e "\e[31mKomprimering misslyckades\e[0m för $file." &
+        fi
+        if [[ $counter > 6 ]]; then
+            # Allow up to 6 compressions in parallell. Generally, you want to set this to the number of scale factors.
+            wait
+            counter=1
         fi
     done
+    wait # Wait for all background compression processes to finish in case counter is not 1
     cd ..
 fi
 

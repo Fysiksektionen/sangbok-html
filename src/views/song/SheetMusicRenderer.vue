@@ -1,24 +1,32 @@
+<!-- Component that renders sheet music. -->
 <template>
   <div class="component-sheet-music-renderer">
+    <!-- Zoom control buttons-->
     <div class="zoombuttoncontainer">
       <button class="button" @click="zoom(-1)" v-bind:class="{'disabled': zoomIdx == 0}">&#128269;-</button>
       <button class="button" @click="zoom(1)"
         v-bind:class="{'disabled': zoomIdx == getZoomLevels().length-1}">&#128269;+</button>
     </div>
+
+    <!-- The svg images containing sheet music. Usually there will be only one (we had more previously). -->
     <div v-for="img, key in getImages()" v-bind:key="key">
       <img v-bind:src="img" alt="Loading..." @load="isLoading=false">
     </div>
+
+    <!-- Error messages -->
     <div v-if="getImages().length == 0">
       <h2>Fel</h2>
-      <p style="text-align: center;">Inga noter hittades, trots att de borde finnas. Skicka ett surt mail till webmaster
-        eller sångbokens projektledare.</p>
+      <p style="text-align: center;">
+        Inga noter hittades, trots att de borde finnas. Du borde skicka ett surt mail till webmaster eller sångbokens projektledare.
+      </p>
     </div>
+
+    <!-- Loading message -->
     <div v-if="isLoading">
       <h2>Laddar...</h2>
     </div>
-    <p class="notice">
-      Notvisaren är experimentell.
-    </p>
+
+    <p class="notice">Notvisaren är experimentell.</p>
   </div>
 </template>
 
@@ -28,24 +36,32 @@ import svglist from '@/assets/msvgs.json'
 
 export default defineComponent({
   name: 'SheetMusicRenderer',
-  props: ['src'],
+  props: { src: String },
   data() {
     return {
-      zoomIdx: Math.min((window.matchMedia('only screen and (max-width: 760px)').matches) ? 5 : 3, this.getZoomLevels().length - 1),
+      zoomIdx: Math.min(((window.matchMedia && window.matchMedia('only screen and (max-width: 760px)').matches)) ? 5 : 3, this.getZoomLevels().length - 1),
       isLoading: true
     }
   },
-  methods: { // TODO: Move some of these to computed
+  methods: {
+    // TODO: Cleanup
+    // TODO: Move some of these to computed
+    /** @returns The images of the current song, at the current zoom-level. */
     getImages(): string[] {
-      const curSongSvgs = svglist.filter(s => { return s.indexOf(this.$props.src) > -1 })
+      const curSongSvgs = svglist.filter(s => { return this.$props.src && s.indexOf(this.$props.src) > -1 })
       const curSongSvgsWithZoom = curSongSvgs.filter(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ['', ''])[1] === this.getZoomLevels()[this.zoomIdx])
       return curSongSvgsWithZoom.map(s => 'msvg/' + s)
     },
+    /** @returns The available zoom-levels for this song. */
     getZoomLevels() {
-      const curSongSvgs = svglist.filter(s => { return s.indexOf(this.$props.src) > -1 })
-      const zoomLevels = [...new Set(curSongSvgs.map(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ['', ''])[1]))]
+      const curSongSvgs = svglist.filter(s => { return this.$props.src && s.indexOf(this.$props.src) > -1 })
+      const zoomLevels = Array.from(new Set(curSongSvgs.map(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ['', ''])[1])))
       return zoomLevels.sort()
     },
+    /**
+       * Alters the zoom index by `z`. Generally, a positive `z` will increase the zoom by `z` levels, and decrease if `z` is negative.
+       * @param z - the zoom index offset.
+       */
     zoom(z: number) {
       this.zoomIdx += z
       this.zoomIdx = Math.max(0, Math.min(this.zoomIdx, this.getZoomLevels().length - 1))

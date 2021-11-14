@@ -1,8 +1,12 @@
+<!-- View for showing all lists. -->
 <template>
   <Swiper :swipeHandler="swipeHandler" :right="'hide'">
     <div class="main">
+      <!-- Title -->
       <button class="button left" @click="newList" v-if="$store.state.settings.makelist">+</button>
       <h2>Listor</h2>
+
+      <!-- The list of lists. -->
       <table class="songbook">
         <tr v-for="(list, idx) in lists" v-bind:key="idx">
           <td class="index" @click="$router.push('/list/'+idx)">
@@ -11,6 +15,7 @@
           <td class="name" @click="$router.push('/list/'+idx)">
             {{ list.description }}
           </td>
+          <!-- List order editing -->
           <td v-if="$store.state.settings.makelist" class="icon">
             <span class="operation up" v-bind:class="{ 'disabled': idx == 0 }" @click="$store.commit('moveList', { index: idx, direction: -1});">▲</span>
             <span class="operation down" v-bind:class="{ 'disabled': idx == lists.length-1 }" @click="$store.commit('moveList', { index: idx, direction: 1});">▼</span>
@@ -45,9 +50,11 @@ export default defineComponent({
   },
   methods: {
     swipeHandler (direction: SwipeIndicatorState) { (direction === 'left') && this.$router.push('/') },
+    /** Creates a new list. */
     newList() {
       this.store.commit('newList')
     },
+    /** Deletes a list, given by the parameter `idx`. */
     deleteList(idx: number) {
       this.store.commit('deleteList', idx)
     }

@@ -10,6 +10,7 @@
 import { defineComponent, defineAsyncComponent } from 'vue'
 import Navbar from '@/components/Navbar.vue'
 import { themes } from '@/themes'
+import { stringKey } from '@/store/index'
 
 export default defineComponent({
   name: 'Sångbok',
@@ -21,7 +22,7 @@ export default defineComponent({
   created () {
     // Ugly fix that updates the theme. Also done in store.
     try {
-      const theme = JSON.parse(window.localStorage.getItem('vuex') || '{"settings":{"theme": undefined}}').settings.theme
+      const theme = JSON.parse(window.localStorage.getItem(stringKey) || '{"settings":{"theme": undefined}}').settings.theme
       if (theme !== undefined && Object.keys(themes).indexOf(theme) !== -1) {
         document.body.className = theme
       } else {
@@ -45,7 +46,6 @@ export default defineComponent({
 @import './themes/galaxy.scss';
 @import './themes/neo.scss';
 /* @import './themes/fancy.scss'; */
-/* @import './themes/z.scss'; */
 
 /* Layout */
 html { height: 100%; }
@@ -134,4 +134,9 @@ table.songbook {
 
 ol>li {margin-top: 0.75em}
 .textcontainer>p {line-height: 1.5em;font-size: 1.1em;}
+
+div.titlecontainer {
+    margin: auto auto;
+    width: fit-content;
+  }
 </style>

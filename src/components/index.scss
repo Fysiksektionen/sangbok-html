@@ -59,3 +59,9 @@
         background-color: $modal-background-color;
     }
 }
+
+
+/* Other small stuff */
+& img.inline {
+    filter: $inline-image-filter;
+  }

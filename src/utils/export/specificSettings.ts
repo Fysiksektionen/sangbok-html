@@ -1,16 +1,27 @@
 /*
  * Specific download settings, aka. song-specific settings.
+ *
+ * OBS! If you're thinking of adding new song-specific settings, make sure to read the notice at the end of this file.
+ * (If the notice isn't there, the issue has probably been fixed, especially if the corresponding comment in contentTeX.ts has also been removed.)
  */
 
 import { escapeAll, getDefaultText } from './escapes'
 import { DownloadSetting, NumberSetting } from './settings'
 
+/** Type-declaration for song-specific settings. */
 export type SpecificDownloadSettings = {
   title: string,
-  indexes: string[], // TODO: using string indices is very encoding-sensitive. There should be a better way.
-  // TODO: Also, title could be fetched directly from the indexes
+  // TODO: using string indices is very encoding-sensitive. There should be a better way.
+  indexes: string[],
+  // TODO:  The title could probably be fetched directly from the indexes
   settings: DownloadSetting[],
   processor: (lyrics: string, settings: DownloadSetting[]) => string
+}
+
+function stripLastVerse(lyrics: string): string {
+  const l = lyrics.split(/\n\n/g)
+  l.pop()
+  return l.join('\n\n')
 }
 
 /*
@@ -45,7 +56,7 @@ function truncateVerses(lyrics: string, settings: DownloadSetting[], paragraphsP
  * @returns The lyrics string, with the trailing info removed (or not).
  */
 function trailingInfo(lyrics: string, settings: DownloadSetting[]): string {
-  return (settings[0].value) ? getDefaultText(lyrics) : getDefaultText(lyrics.split(/\n\n\n/g)[0])
+  return (settings[0].value) ? getDefaultText(lyrics) : getDefaultText(stripLastVerse(lyrics))
 }
 
 /*
@@ -76,26 +87,20 @@ function arskursernas(lyrics: string, settings: DownloadSetting[]): string { // 
 }
 
 /** LaTeX pre-processor for O gamla klang och jubeltid */
-function ogamlaklang(lyrics: string, settings: DownloadSetting[]): string { // TODO: This code is kinda ugly...
+function ogamlaklang(lyrics: string, settings: DownloadSetting[]): string {
   if (settings[0].value) {
-    if (settings[1].value) {
-      return getDefaultText(lyrics.replace(/KÄRNAN/g, '\\textbf{KÄRNAN}'))
-    } else {
-      return (lyrics.replace(/KÄRNAN/g, '\\textbf{KÄRNAN}').split(/\n\n\n/g)[0])
-    }
-  } else {
-    if (settings[1].value) {
-      return (lyrics)
-    } else {
-      return getDefaultText(lyrics.split(/\n\n\n/g)[0])
-    }
+    lyrics = lyrics.replace(/KÄRNAN/i, '\\textbf{KÄRNAN}')
   }
+  if (settings[1].value === false) {
+    lyrics = stripLastVerse(lyrics)
+  }
+  return getDefaultText(lyrics)
 }
 
 /** A list of song-specific settings and their respective pre-processors. */
 export const specificSettings: SpecificDownloadSettings[] = [{
   title: 'Årskursernas hederssång',
-  indexes: ['ο2'],
+  indexes: ['o2'],
   settings: [{
     text: 'Inkludera t.o.m.',
     type: 'number',
@@ -119,7 +124,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
   processor: arskursernas
 }, {
   title: 'Système International och liknande',
-  indexes: ['ι1', 'ι16', 'ι18'],
+  indexes: ['ι1', 'ι16', 'ι17'],
   settings: [{
     text: 'Ordna texten regelbundet',
     type: 'bool',
@@ -190,7 +195,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
   processor: truncateVerses
 }, {
   title: 'O gamla klang och jubeltid',
-  indexes: ['ο∞'],
+  indexes: ['o∞'],
   settings: [{
     text: 'Fetstilt "KÄRNAN"',
     type: 'bool',
@@ -239,7 +244,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
   processor: trailingInfo
 }, {
   title: 'Konglig Fysiks Paradhymn',
-  indexes: ['ο1'],
+  indexes: ['o1'],
   settings: [{
     text: 'Inkludera rad om att fysiker står',
     type: 'bool',
@@ -288,3 +293,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
   settings: [],
   processor: (lyrics: string) => getDefaultText(lyrics.split(/\n\n\n/g)[0])
 }]
+// If you're thinking of adding a new specificSetting, you should know about a bug described in contentTeX.ts, roughly at line 70 (at the time of writing)
+// Basically, the settings are persisted using HTML Web Storage, which does not store the processor functions.
+// This means that altering the order of specialSettings may cause issues with the wrong setting using the wrong processor.
+// Adding new settings at the end should not cause problems, but it's worth being aware of this.

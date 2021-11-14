@@ -4,6 +4,8 @@ import router from '@/router'
 import store, { key } from '@/store'
 import App from '@/App.vue'
 
+// Tests for inter-view navigation. For more specific views, see other tests.
+
 test('Chapter views', async () => {
   router.push('/')
   await router.isReady()
@@ -15,5 +17,9 @@ test('Chapter views', async () => {
 
   await wrapper.find('td.index').trigger('click')
   await flushPromises()
-  expect(wrapper.html()).toContain('Visor')
+  expect(wrapper.html()).toContain('α1')
+
+  await wrapper.find('td.index').trigger('click')
+  await flushPromises()
+  expect(wrapper.html()).toContain('α1')
 })

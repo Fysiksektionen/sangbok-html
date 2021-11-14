@@ -1,8 +1,11 @@
 import { createRouter, createWebHashHistory, RouteLocationNormalized, RouteLocationRaw, RouteRecordRaw } from 'vue-router'
 
-import { getChapterFromRoute, getSongByStringIndex, getSongFromRoute } from '@/lyrics'
+// Helper functions
+import { getChapterFromRoute, getSongFromRoute } from '@/lyrics'
+import { addListHandler } from './utils'
 import store from '@/store'
 
+// Views
 import Chapters from '@/views/Chapters.vue'
 import Chapter from '@/views/Chapter.vue'
 import Song from '@/views/Song.vue'
@@ -13,6 +16,9 @@ import Search from '@/views/Search.vue'
 // all users will use the Song component, and most will use the Search component.
 
 const routes: Array<RouteRecordRaw> = [
+  //
+  // Chapter views
+  //
   {
     path: '/',
     name: 'Home',
@@ -29,6 +35,9 @@ const routes: Array<RouteRecordRaw> = [
     name: 'ChapterByIndex',
     component: Chapter
   },
+  //
+  // Song views
+  //
   {
     path: '/chapter/:chapterId(\\d+)/song/:songId(\\d+)',
     name: 'Song',
@@ -45,10 +54,21 @@ const routes: Array<RouteRecordRaw> = [
     component: Song
   },
   {
+    path: '/list/:listId(\\d+)/song/:songId(\\d+)',
+    name: 'SongFromList',
+    component: Song
+  },
+  //
+  // Search view
+  //
+  {
     path: '/search/:query',
     name: 'Search',
     component: Search
   },
+  //
+  // List views
+  //
   {
     path: '/list/:listId(\\d+)',
     name: 'List',
@@ -60,43 +80,13 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "listsview" */ '../views/Lists.vue')
   },
   {
-    path: '/list/:listId(\\d+)/song/:songId(\\d+)',
-    name: 'SongFromList',
-    component: Song
-  },
-  {
-    path: '/chapter/list/:listId(\\d+)/song/:songId(\\d+)',
-    name: 'ListRedirect',
-    redirect: to => { // TODO: Replace
-      console.warn('ListRedirect is an ugly solution, and should be replaced. It causes back-button bugs.')
-      return '/list/' + to.params.listId + '/song/' + to.params.songId
-    }
-  },
-  {
     path: '/list/add/:data(.+)',
     name: 'AddList',
-    redirect: to => {
-      // TODO: Error-handle and validate data
-      // TODO: The use of store here is somewhat sketchy...
-      const data = JSON.parse(to.params.data as string)
-      if (typeof data.name === 'string' && typeof data.description === 'string' && Array.isArray(data.songs)) {
-        const i = store.state.lists.length
-        store.commit('newList')
-        store.commit('setListMeta', { list: i, name: data.name, description: data.description })
-        for (const song of data.songs) {
-          const s = getSongByStringIndex(song)
-          if (s !== undefined) {
-            store.commit('addToList', { list: i, index: song })
-          } else { // TODO: Show error message when this happens (but only one per attempt, not one per song.)
-            console.warn('Tried to import song with index ' + song + ', but it was not found.')
-          }
-        }
-        return '/list/' + i
-      } else { // TODO: Show error message after this redirect.
-        return '/'
-      }
-    }
+    redirect: addListHandler
   },
+  //
+  // Other
+  //
   { // Redirect 404:s to the start page.
     path: '/:pathMatch(.*)*',
     redirect: '/',
@@ -109,6 +99,7 @@ const router = createRouter({
   routes
 })
 
+// Navigation guards. Prevents navigation to things that do not exist.
 router.beforeEach((to: RouteLocationNormalized) => {
   if (to.name?.toString().startsWith('Chapter')) {
     return getChapterFromRoute(to) === undefined ? '/' as RouteLocationRaw : undefined
@@ -117,7 +108,7 @@ router.beforeEach((to: RouteLocationNormalized) => {
   } else if (to.name === 'List') {
     if (parseInt(to.params.listId as string) >= store.state.lists.length) { return '/' as RouteLocationRaw }
   } else if (['Home', 'Lists', 'Search'].indexOf(to.name ? to.name.toString() : '') !== -1) {
-    /* Ignore */
+    /* Ignore. These can always be shown. */
   } else {
     console.warn('Route ' + (to.name && to.name.toString()) + ' has no navigation guard.')
   }

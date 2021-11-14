@@ -2,7 +2,7 @@ import Fuse from 'fuse.js'
 import { songs, SongHit } from '../lyrics'
 import keys from '@/lyrics/addons/search.json'
 
-// Song search engine
+/** Fuse instance used for searching for songs. */
 const fuse = new Fuse(songs, {
   includeScore: true,
   isCaseSensitive: false,
@@ -21,8 +21,8 @@ const fuse = new Fuse(songs, {
   ]
 })
 
-// Addons (chapters) search engine
-const addons = new Fuse(keys, {
+/** Fuse instance used for searching for addons (hidden chapters). */
+const addons = new Fuse(keys as SongHit[], {
   includeScore: true,
   isCaseSensitive: false,
   minMatchCharLength: 3,
@@ -30,18 +30,19 @@ const addons = new Fuse(keys, {
   ignoreLocation: true,
   keys: [
     { name: 'title', weight: 10 },
-    'index'
+    'index',
+    'chapterindex'
   ]
 })
 
 /**
  * Performs a search for both songs and addons (which in practice means hidden chapters).
- * @param s Search query string
+ * @param query Search query string
  * @returns A list of results, sorted by best match.
  */
-export function search(s: string): Fuse.FuseResult<SongHit>[] {
-  return (fuse.search(s)
-    .concat(addons.search(s))
+export function search(query: string): Fuse.FuseResult<SongHit>[] {
+  return (fuse.search(query)
+    .concat(addons.search(query))
     .sort((x, y) => { return (x.score || 0) - (y.score || 0) })
   )
 }

@@ -19,13 +19,7 @@
   &:first-child {box-shadow: 0 1px 5px $row-shadow-color;}
 }
 
-& .view-generator {
-  & .setting input {
-    color: $text-color;
-    background-color: $secondary-background;
-  }
-  
-  & .generatorbuttons>div {
+& .view-generator .generatorbuttons>div {
       // background-color: rgba(128, 128, 128, 0.10);
   
       color: $highlight-color;
@@ -35,10 +29,16 @@
         // color: unset;
       // }
   }
-}
 
-
-/* Other small stuff */
-& img.inline {
-  filter: $inline-image-filter;
+& .view-generator .setting input, input.secondary, textarea.secondary {
+  color: $text-color;
+  background-color: $secondary-background;
+  border: none;
+  /* TODO: Move somewhere more general and use classes in generator to reference this. */
+  border-radius: 0.3em;
+  padding-left: 0.5em !important;
+  padding-right: 0.5em !important;
+  &:not(textarea) {
+    height: 1.8em;
+  }
 }

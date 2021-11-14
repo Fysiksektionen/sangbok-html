@@ -1,3 +1,4 @@
+<!-- Modal for selecting which list to add a song to. -->
 <template>
   <Modal>
     <header><h3>Lägg till i lista</h3></header>
@@ -25,21 +26,26 @@ import { getSongFromRoute } from '@/lyrics'
 export default defineComponent({
   name: 'SongViewListModal',
   components: { Modal },
-  props: ['songIdx', 'callback'],
   setup() { return { store: useStore(key) } },
   data() {
     const store = useStore(key)
-    console.log(store.state.lists)
     return { lists: store.state.lists }
   },
   computed: {
+    /**
+     * @returns The Song object associated with the current route.
+     */
     song () {
       return getSongFromRoute(this.$route)
     }
   },
   methods: {
+    /**
+     * Method that adds the current song to the list given by `listIdx`
+     * @param listIdx the index of the list to add the song to.
+     */
     addToList(listIdx: number) {
-      this.song && this.store.commit('addToList', { list: listIdx, index: this.$props.songIdx })
+      this.song && this.store.commit('addToList', { list: listIdx, index: this.song.index })
     }
   }
 })
@@ -55,6 +61,5 @@ export default defineComponent({
       opacity: 0.3;
       text-decoration: line-through;
     }
-
   }
 </style>

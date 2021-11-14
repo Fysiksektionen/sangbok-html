@@ -1,3 +1,4 @@
+<!-- Used by the Settings dropdown to render a multiple-choice row. -->
 <template>
   <div class="setting">
     <slot></slot>
@@ -17,7 +18,10 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'SettingsButton',
-  props: ['setting', 'values']
+  props: {
+    setting: String,
+    values: Object
+  }
 })
 </script>
 

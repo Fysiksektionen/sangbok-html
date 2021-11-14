@@ -22,5 +22,5 @@ export type NumberSetting = {
   placeholder?: string
 }
 
-/** One of the setting types. */
+/** Represents a setting containing either a string, boolean or numeric value. */
 export type DownloadSetting = BoolSetting | StringSetting | NumberSetting

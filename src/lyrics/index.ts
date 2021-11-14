@@ -1,74 +1,73 @@
-import { greek2latin, greek2latin2 } from '../utils/other'
-
+// Content imports
 import lyrics from './lyrics.json'
 import leo from './addons/leo.json'
 import ths from './addons/ths.json'
 import extraSongs from './addons/songs.json'
+
+// TS imports
+import { addPathToChapter, addSongTags } from './importHelpers'
+import { Chapter, Song, SongIndex, JSONChapter } from './types'
+
+// Exports from other files
+export { hasSheetMusic } from './importHelpers'
+export { Song, Chapter, SongHit, SongIndex } from './types'
 export { getChapterFromRoute, getSongFromRoute, getOffsetSongFromRoute, param2int } from './routeGetters'
 
-export type SongIndex = string
+/** Main menu chapters. */
+export const chapters: Chapter[] = lyrics.map(addPathToChapter)
 
-/** Song, as specified on lyrics.json */
-export type Song = {
-  title: string,
-  index: string,
-  author?: string,
-  melody?: string,
-  // unlock?: string, // Required keyword (regexp) to see this in the search engine.
-  tags?: string[]
- // We need either mxl or text to be defined.
-} & ({ msvg?: string, text: string } | { msvg: string, text?: string })
+/** List of song for search. */
+export const songs: Song[] = (function () {
+  // Regular songs
+  const songs = ([...chapters]
+    .map((chapter, chapterId) => chapter.songs.map((song, songId) => addSongTags(song, songId, chapterId))).flat())
 
-export type SongHit = Song & {
-  chapterindex?: number | string,
-  songindex?: number,
-  tags?: string[]
-}
+  // THS chapter.
+  const thsSongs = (([ths] as JSONChapter[])
+    .map(addPathToChapter)
+    .map((chapter) => chapter.songs.map((song, songId) => addSongTags(song, songId, chapter.prefix))).flat())
 
-export type Chapter = {
-  chapter: string,
-  prefix: string,
-  songs: Song[],
-}
+  // Add standealone songs and return
+  return songs.concat(thsSongs).concat(extraSongs as Song[])
+})()
 
-export const chapters: Chapter[] = lyrics
-
-// List of songs for search
-export const songs: Song[] = (
-  // Regular songs.
-  ([...chapters].map((c, cid) => c.songs.map((s, sid) => {
-    const tags = [greek2latin(s.index), greek2latin2(s.index), s.msvg ? 'noter' : '']
-    if (s.tags !== undefined) { tags.push(...s.tags) }
-    return { ...s, chapterindex: cid, songindex: sid, tags: tags } as SongHit
-  })).flat())
-    // Searchable songs of hidden chapters (needs to be indexed by chapter prefix, not index)
-    .concat((([ths] as Chapter[]).map((c) => c.songs.map((s, sid) => { return { ...s, chapterindex: c.prefix, songindex: sid, tags: [greek2latin(s.index), greek2latin2(s.index), s.msvg ? 'noter' : ''] } as SongHit })).flat()))
-    // Searchable standalone songs
-    .concat(extraSongs as Song[])
-)
-
-export function getSongByStringIndex(idx: string): Song | undefined {
+/**
+ * Attempts to find a song with the given string index.
+ * @param index The string index (eg. α1)
+ * @returns The found Song object, or undefined if none was found.
+ */
+export function getSongByStringIndex(index: string): Song | undefined {
   // List of all songs (for viewing. Includes easter eggs.)
   const allSongs: Song[] = songs.concat(leo.songs as Song[])
-  const hits = allSongs.filter(s => s.index === idx)
+  const hits = allSongs.filter(s => s.index === index)
   if (hits.length > 0) {
     return hits[0]
   } else return undefined
 }
 
+/**
+ * Attempts to find songs from a list of string indices.
+ * Indices that are not found do not affect the output (we don't add anything if a particular index is not found.)
+ * @param indices A list of string indices (eg. ['α1', 'α2'])
+ * @returns A list of Song objects.
+ */
 export function getSongsByStringIndices(indices: SongIndex[]): Song[] {
   const out: Song[] = []
   for (const songIndex of indices) {
-    const res = getSongByStringIndex(songIndex)
-    res && out.push(res)
+    const song = getSongByStringIndex(songIndex)
+    song && out.push(song)
   }
   return out
 }
 
+/**
+ * Attempts to find a chapter with the given string index.
+ * @param index The string index (eg. Aα)
+ * @returns The found Chapter object, or undefined if none was found.
+ */
 export function getChapterByStringIndex(idx: string): Chapter | undefined {
-  // List of all songs (for viewing. Includes easter eggs.)
-  const cs: Chapter[] = chapters.concat([leo, ths] as Chapter[])
-  const hits = cs.filter(c => c.prefix === idx)
+  const allChapters: Chapter[] = chapters.concat(([leo, ths] as JSONChapter[]).map(addPathToChapter))
+  const hits = allChapters.filter(c => c.prefix === idx)
   if (hits.length > 0) {
     return hits[0]
   } else return undefined

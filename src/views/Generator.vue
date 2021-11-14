@@ -1,15 +1,18 @@
+<!-- The generator sidebar view. -->
 <!-- TODO: This should probably be split into smaller components -->
 <template>
   <div class="view-generator">
     <h2>Sångbladsskaparen</h2>
 
+    <!-- Buttons for adding songs or exporting the sångblad. -->
     <div class="generatorbuttons">
-      <div v-bind:class="{ 'disabled': !canAdd() }" @click="add()" title="Lägg till">+</div>
-      <div v-bind:class="{ 'disabled': generatorSongs.length == 0 }" @click="$store.commit('clear');" title="Ta bort alla">🗑</div>
+      <div v-bind:class="{ 'disabled': !canAdd() }" @click="add()" title="Lägg till" data-test="addButton">+</div>
+      <div v-bind:class="{ 'disabled': generatorSongs.length == 0 }" @click="$store.commit('clear');" title="Ta bort alla" data-test="clearButton">🗑</div>
       <div @click="go('overleaf')" title="Öppna i Overleaf"><!--img src="../assets/overleaf_logo.svg" /-->🖉</div>
       <div @click="go('zip')" title="Ladda ner zip-fil med TeX">↓</div>
     </div>
 
+    <!-- List of songs, for editing of song order, etc. -->
     <table class="songbook" v-if="generatorSongs.length > 0">
       <tr v-for="songIdx, listIdx in generatorSongs" v-bind:key="listIdx">
         <td class="name">{{ getSongByStringIndex(songIdx).title }}</td>
@@ -22,11 +25,12 @@
       </tr>
     </table>
 
+    <!-- Settings for the sångblad -->
     <div class="generatorsettings">
       <hr>
       <h2>Sångbladsinställningar</h2>
       <div>
-
+        <!-- General settings. Used for every sångblad. -->
         <h3>Allmänt</h3>
         <div class="setting" v-for="setting, idx in generalSettings" v-bind:key="idx">
           <div @click="switchIfBool(setting) && $store.commit('updateGeneralSettings', generalSettings)">
@@ -37,6 +41,7 @@
           </div>
         </div>
 
+        <!-- Song-specific settings. Only the ones that are applicable to some added song are shown. -->
         <div v-for="settinggroup, gidx in specificSettings" v-bind:key="gidx">
           <div v-if="$store.getters.settingIsVisible(settinggroup) && settinggroup.settings.length > 0">
             <h3>{{settinggroup.title}}</h3>
@@ -51,15 +56,15 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
+    <!-- End of settings -->
 
+    <!-- Misc. instructions. -->
     <p style="font-size:0.75em; opacity: 0.5; text-align: center;">
       Sångbladsskaparen är experimentell.<br />
       Pennikonen öppnar latex-källan i Overleaf.<br />
       Gå till <a @click="goToListMaker" style="text-decoration: underline;">vyn för redigering av listor</a> för att importera dessa.
-      <!--Overleafs logotyp tillhör Writelatex Ltd. Denna sida är ej affilierad med Overleaf.-->
     </p>
   </div>
 </template>
@@ -80,6 +85,7 @@ import downloadZip from '@/utils/export/zip'
 
 export default defineComponent({
   name: 'GeneratorView',
+  setup() { return { store: useStore(key) } },
   data() {
     return {
       chapters: chapters,
@@ -88,18 +94,20 @@ export default defineComponent({
       specificSettings: useStore(key).state.generator.specificSettings
     }
   },
-  setup() { return { store: useStore(key) } },
-  props: ['songid', 'chapterid'],
   methods: {
-    getSongByStringIndex: getSongByStringIndex, // TODO: Don't use this function in the template.
+    // TODO: Don't use this function directly in the template.
+    getSongByStringIndex: getSongByStringIndex,
+    /**
+     * Attempts to add the current song (or the songs of the current chapter) to the generator.
+     */
     add() {
       const route: RouteLocationNormalized = this.$route
-      if (route.name && route.name.toString().startsWith('Song')) {
+      if (route.name && route.name.toString().startsWith('Song')) { // A single song.
         const song = getSongFromRoute(route)
         if (song !== undefined) {
           this.store.commit('add', song.index)
         } else { console.warn('Cannot add song, since it could not be read from route. This is unexpected.') }
-      } else if (route.name && route.name.toString().startsWith('Chapter')) {
+      } else if (route.name && route.name.toString().startsWith('Chapter')) { // An entire chapter
         const chapter = getChapterFromRoute(route)
         if (chapter !== undefined) {
           for (const song of chapter.songs) {
@@ -107,27 +115,48 @@ export default defineComponent({
           }
         } else { console.warn('Cannot add chapter, since it could not be read from route. This is unexpected.') }
       }
+      // If we are not in any of the two cases above, we don't add anything.
+      // This is also the case when we try to add a song that is already in the generator songs. Nothing happens.
     },
-    canAdd(): boolean { // TODO: Move to computed
+    /**
+     * @returns A boolean indicating whether we can
+     */
+    canAdd(): boolean {
+      // TODO: Move to computed
+      // TODO: Implement test for this.
       const route: RouteLocationNormalized = useRoute()
       if (route.name && route.name.toString().startsWith('Song')) {
         const song = getSongFromRoute(route)
         return song !== undefined && !this.store.getters.songHasBeenAdded(song.index)
       } else if (route.name && route.name.toString().startsWith('Chapter')) {
-        // TODO: Return false if all songs in a given chapter has been added.
-        return true
+        const chapter = getChapterFromRoute(route)
+        if (!chapter) return false
+        for (const s of chapter.songs) {
+          if (!this.store.getters.songHasBeenAdded(s.index)) return true
+        }
+        return false
       } else { return false }
     },
+    /**
+     * Inverts the boolean value of a given `setting`, if the setting is a boolean setting.
+     * @param setting A DownloadSetting object.
+     * @returns true if the setting was changed (that is, if a BooleanSetting was passed), and false otherwise.
+     */
     switchIfBool(setting: DownloadSetting): boolean { // Returns true if setting was changed.
       if (setting.type === 'bool') {
         setting.value = !setting.value
         return true
       } else { return false }
     },
+    /**
+     * Packages the TeX-source, and either sends them, along with the user to Overleaf, or downloads the files as a zip.
+     * @param method Either 'zip' or 'overleaf'
+     */
     go: async function (method: 'zip' | 'overleaf') {
+      // If no songs are added, add all songs. Previously used for debugging.
       const songs = (this.store.state.generator.generatorSongs.length === 0) ? chapters.map(c => c.songs).flat() : getSongsByStringIndices(this.store.state.generator.generatorSongs)
 
-      const files: { [key: string]: string } = { // TODO: Load asynchronously, that is, don't use await right here.
+      const files: { [key: string]: string } = { // TODO: Asynchronous loading would be faster (that is, use something like Promise.all instead of multiple awaits)
         'main.tex': getMainTeX(this.generalSettings),
         'blad.cls': await (await fetch('tex/blad.cls')).text(),
         'logga.svg': await (await fetch('tex/logga.svg')).text(),
@@ -143,9 +172,10 @@ export default defineComponent({
         break
       }
     },
+    /** Sends the user to the list view, and closes the generator. */
     goToListMaker () {
+      this.$router.push('/list/')
       this.store.commit('toggleSettingTo', { key: 'makelist', value: true })
-      this.store.commit('toggleSettingTo', { key: 'generator', value: false })
     }
   }
 })
@@ -169,11 +199,6 @@ export default defineComponent({
       & input, select {
         float: right;
         // background-color: #f0f0f0;
-        border: none;
-        border-radius: 0.3em;
-        padding-left: 0.5em !important;
-        padding-right: 0.5em !important;
-        height: 1.8em;
         text-align: right;
       }
     }
