@@ -6,6 +6,7 @@
       :right="($route.name=='SongByIndex') ? 'hide' : (chapter.songs.length - 1 > $route.params.songId) ? 'allow' : 'disallow'">
     <div class="main">
       <div class="lyrics">
+
         <!-- Pre-header -->
         <button v-if="sheetMusicAvailable && song.text && $store.state.settings.sheetmusic && !$store.state.settings.makelist"
           @click="showMsvg = !showMsvg" class="button musicbutton">
@@ -13,21 +14,31 @@
         </button>
         <button v-if="$store.state.settings.makelist" class="button musicbutton" @click="listModalVisible=true">+</button>
         <div class="song-index" v-if="!showMsvg"><Index :index="song.index" /></div>
+
         <!-- Main content -->
-        <SheetMusicRenderer v-if="sheetMusicAvailable && showMsvg && $store.state.settings.sheetmusic" :src="song.index" :key="song.index"/>
         <div v-if="!showMsvg || !$store.state.settings.sheetmusic || !sheetMusicAvailable">
+          <!-- Header -->
           <div class="titlecontainer" v-bind:style="{'minHeight':(sheetMusicAvailable && !showMsvg ? '5em' : undefined)}">
             <h2>{{song.title}}</h2>
             <div v-if="song.melody" class="melody" v-html="toHTML(song.melody)"></div>
           </div>
+
+          <!-- Content -->
           <div class="textcontainer" v-html="toHTML(song.text)" v-bind:class="{'larger': $store.state.settings.larger}"></div>
           <div v-if="song.author" class="author" v-html="toHTML(song.author)"></div>
         </div>
+
+        <!-- Sheet music -->
+        <!-- If this is visible, the "Main content" above will be hidden. -->
+        <SheetMusicRenderer v-if="sheetMusicAvailable && showMsvg && $store.state.settings.sheetmusic" :src="song.index" :key="song.index"/>
+
+        <!-- Navigation -->
         <NavButtons v-if="chapter" />
-        <div v-if="!chapter" style="height: 2em;"></div><!-- Margin if NavButtons is hidden. -->
+        <div v-if="!chapter" style="height: 2em;"></div><!-- Margin if NavButtons is hidden. --><!-- TODO: Check if this is really needed. -->
       </div>
     </div>
   </Swiper>
+
   <!-- Modals -->
   <transition name="modal-down">
     <ListModal songindex="song.index" v-if="listModalVisible" @close="listModalVisible=false" style="transition: all 0.2s ease-out;"/>
@@ -64,17 +75,23 @@ export default defineComponent({
     const route: RouteLocationNormalized = useRoute()
     return {
       chapter: getChapterFromRoute(route),
-      showMsvg: false,
-      listModalVisible: false
+      listModalVisible: false,
+      // A boolean indicating whether the sheetmusic should be visible, if applicable.
+      showMsvg: false
     }
   },
   computed: {
     song () { return getSongFromRoute(this.$route) },
+    /** @returns true if the current song has sheet music, and false otherwise. */
     sheetMusicAvailable () { return hasSheetMusic(getSongFromRoute(this.$route) as Song) }
   },
   methods: {
     toHTML: toHTML,
+    /** Sends the user to the next or previous song on swipes. */
     swipeHandler(direction: SwipeIndicatorState) {
+      // If newSong is false we are on the first/last song and cannot swipe further.
+      // If it's undefined, we are not in a chapter or list, and there is nowhere to go.
+      // Hence we check that newSong is valid before asking the router to do its thing.
       const offset = swipeIndicatorToOffset[direction]
       if (offset === 0) return
       const newSong = getOffsetSongFromRoute(this.$route, offset)

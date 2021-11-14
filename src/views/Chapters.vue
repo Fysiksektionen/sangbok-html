@@ -1,5 +1,4 @@
 <!-- Main chapter list view-->
-
 <template>
   <div class="main" v-touch:drag="dragHandler" v-bind:style="onlyAllowZoomOut">
     <SearchBox/>
@@ -8,12 +7,13 @@
             @click="$router.push('/chapter/'+idx)"
             v-bind:key="idx">
             <td class="index">
-                {{$store.state.settings.translate ? greek2latin(chapter.prefix) : chapter.prefix}}
+                {{ $store.state.settings.translate ? greek2latin(chapter.prefix) : chapter.prefix }}
             </td>
             <td class="name">
                 {{ chapter.chapter }}
             </td>
         </tr>
+        <!-- We display a link to the lists view if the user has any non-empty lists, or is in the list-editing mode. -->
         <tr @click="$router.push('/list/')" v-if="$store.getters.hasLists || $store.state.settings.makelist"><td class="index">♥</td><td class="name">Egna listor</td></tr>
     </table>
   </div>

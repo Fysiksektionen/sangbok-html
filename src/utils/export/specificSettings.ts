@@ -1,14 +1,19 @@
 /*
  * Specific download settings, aka. song-specific settings.
+ *
+ * OBS! If you're thinking of adding new song-specific settings, make sure to read the notice at the end of this file.
+ * (If the notice isn't there, the issue has probably been fixed, especially if the corresponding comment in contentTeX.ts has also been removed.)
  */
 
 import { escapeAll, getDefaultText } from './escapes'
 import { DownloadSetting, NumberSetting } from './settings'
 
+/** Type-declaration for song-specific settings. */
 export type SpecificDownloadSettings = {
   title: string,
-  indexes: string[], // TODO: using string indices is very encoding-sensitive. There should be a better way.
-  // TODO: Also, title could be fetched directly from the indexes
+  // TODO: using string indices is very encoding-sensitive. There should be a better way.
+  indexes: string[],
+  // TODO:  The title could probably be fetched directly from the indexes
   settings: DownloadSetting[],
   processor: (lyrics: string, settings: DownloadSetting[]) => string
 }
@@ -288,3 +293,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
   settings: [],
   processor: (lyrics: string) => getDefaultText(lyrics.split(/\n\n\n/g)[0])
 }]
+// If you're thinking of adding a new specificSetting, you should know about a bug described in contentTeX.ts, roughly at line 70 (at the time of writing)
+// Basically, the settings are persisted using HTML Web Storage, which does not store the processor functions.
+// This means that altering the order of specialSettings may cause issues with the wrong setting using the wrong processor.
+// Adding new settings at the end should not cause problems, but it's worth being aware of this.

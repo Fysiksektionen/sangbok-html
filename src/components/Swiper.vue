@@ -14,7 +14,6 @@
         {{ showSwipeIndicator.includes('x') ? "⊘" : "" }}
       </div>
     </transition>
-
     <transition name="swipe-left">
       <div class="swipe-indicator left bg-highlight" v-if="showSwipeIndicator.includes('left')"
         v-bind:class="{'disabled': showSwipeIndicator.includes('x')}">
@@ -27,7 +26,6 @@
 </template>
 
 <script lang="ts">
-// TODO: Add docs.
 import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '@/store'
@@ -49,7 +47,9 @@ export default defineComponent({
   },
   data() {
     return {
+      /** A list containing recent touch coordinates, as well as the SwipeIndicatorState at that point. */
       touchCoords: [[undefined, undefined, 'none']] as ([number, number, SwipeIndicatorState] | [undefined, undefined, SwipeIndicatorState])[],
+      /** A style-object, which allows zooming, only if we are zoomed in. See also dragHandler.  */
       onlyAllowZoomOut: this.$props.allowZoom ? {} : onlyAllowZoomOut()
     }
   },
@@ -63,13 +63,16 @@ export default defineComponent({
   },
   methods: {
     releaseHandler() {
+      // Let swipehandler decide what to do, if it's defined, and reset the touchCoords list.
       this.$props.swipeHandler && this.$props.swipeHandler(this.showSwipeIndicator)
       this.touchCoords = []
     },
     pressHandler(e: Event) {
+      // Reset the touchCoords list and add the starting point.
       this.touchCoords = [[...getCoordsFromEvent(e), 'none' as SwipeIndicatorState]]
     },
     dragHandler(e: Event) {
+      // if this.$props.allowZoom, set the touch-actions to only allow zoom if we are zoomed in.
       this.onlyAllowZoomOut = this.$props.allowZoom ? {} : onlyAllowZoomOut()
 
       // If we have swipe disabled, or are zoomed in, don't enable swipes.
@@ -78,12 +81,12 @@ export default defineComponent({
       }
 
       /*
-         * this.touchCoords is a trace of drag-points and their respective associated state.
-         * This loop goes back from recent drag-points to not-so-recent drag points, and looks at different criterion for changing the states.
-         * If the most recent state is none, we look for a point more than SWIPE_TRESHOLD pixels away from our current point in order to trigger a swipe.
-         * If the most recent state is a swipe, we look back at the last point and checks if it was further away than the SWIPE_RESET_TRESHOLD.
-         * This is not perfect, but it works rather ok as long as the drag-event frequency is sufficiently low.
-         */
+      * this.touchCoords is a trace of drag-points and their respective associated state.
+      * This loop goes back from recent drag-points to not-so-recent drag points, and looks at different criterion for changing the states.
+      * If the most recent state is none, we look for a point more than SWIPE_TRESHOLD pixels away from our current point in order to trigger a swipe.
+      * If the most recent state is a swipe, we look back at the last point and checks if it was further away than the SWIPE_RESET_TRESHOLD.
+      * This is not perfect, but it works rather ok as long as the drag-event frequency is sufficiently low.
+      */
       const [x, y] = getCoordsFromEvent(e)
       for (let i = this.touchCoords.length - 1; i >= 0; i--) {
         const coords = this.touchCoords[i]

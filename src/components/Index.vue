@@ -22,7 +22,7 @@ type ParsedIndex = {
  * @returns A ParsedIndex object, containing the index, split into an image and a string part, as well as the matched key.
  */
 function computeData(index: string): ParsedIndex {
-  // TODO: This thing is called twice, but at the same time, we need to have our props in computed, to prevent indices from being stuck.
+  // TODO: This thing is called twice, but at the same time, we need to have our props in computed, to prevent indices from being stuck. We could use a solution that is more efficient, but this will do for now.
   for (const key of Object.keys(INDEX_MAP)) {
     if (index.startsWith(key)) {
       return { key: key, image: INDEX_MAP[key], text: index.slice(key.length) }

@@ -3,6 +3,7 @@
 <template>
   <div class="navbuttons" v-if="songWrappers">
     <div v-for="songWrapper in songWrappers" v-bind:key="songWrapper.index">
+      <!-- We display a navigation button if we found a nearby song -->
       <div class="button" v-if="songWrapper.song"
         @click="$router.replace(songWrapper.chapterPath + '/song/' + songWrapper.index)">
         <div>{{ songWrapper.song.title }}</div>
@@ -11,6 +12,7 @@
           <Index :index="songWrapper.song.index" />
         </div>
       </div>
+      <!-- Or a filler if none was found. -->
       <div class="filler" v-if="!songWrapper.song"></div>
     </div>
   </div>
@@ -25,6 +27,10 @@ export default defineComponent({
   name: 'SongNavButtons',
   components: { Index },
   computed: {
+    /**
+     * Returns a list of SongIndexWrapper:s, containing the previous and next song, as well as the chapter (or list) index and song index in that chapter (or list).
+     * If the song is stand-alone (e.g. not in a chapter or a list), returns undefined.
+     */
     songWrappers() {
       const out = [getOffsetSongFromRoute(this.$route, -1), getOffsetSongFromRoute(this.$route, 1)]
       return out.indexOf(undefined) === -1 ? out : undefined

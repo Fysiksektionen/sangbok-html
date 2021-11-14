@@ -1,5 +1,4 @@
 <!-- View to list all songs in a chapter. -->
-
 <template>
   <Swiper :swipeHandler="swipeHandler" :right="'hide'">
     <div class="main">
@@ -37,9 +36,7 @@ export default defineComponent({
   },
   data() {
     const chapter = getChapterFromRoute(this.$route)
-    if (chapter === undefined) {
-      alert('Något gick riktigt snett. Kapitlet kan inte bestämmas.')
-    }
+    if (chapter === undefined) { alert('Något gick riktigt snett. Kapitlet kan inte bestämmas.') }
     return { chapter: chapter as Chapter }
   },
   setup() {
@@ -47,8 +44,13 @@ export default defineComponent({
   },
   methods: {
     hasSheetMusic: hasSheetMusic,
-    swipeHandler (direction: SwipeIndicatorState) { (direction === 'left') && this.$router.push('/') },
+    swipeHandler (direction: SwipeIndicatorState) {
+      // Move up to the main view if the user swipes right (that is, the indicator is shown on the left-hand side, hence the 'left')
+      (direction === 'left') && this.$router.push('/')
+    },
     clickHandler (song: Song, idx: number) {
+      // Chapters can be accessed by either their index in the main view (cid), or by their index (mostly used for hidden chapters).
+      // Depending on how the chapter was accessed, we access the songs differently.
       if (this.$route.name === 'ChapterByIndex') {
         this.$router.push('/chapter/' + this.chapter.prefix + '/song/' + idx)
       } else {

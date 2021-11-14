@@ -1,5 +1,4 @@
 // This list used to be longer, but special char handling has been moved to blad.cls
-// TODO: Perhaps remove this.
 const LATEX_ESCAPES: [RegExp, string][] = [
   [/"/g, "''"],
   [/&/g, '\\&']

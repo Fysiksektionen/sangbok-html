@@ -2,7 +2,7 @@ import Fuse from 'fuse.js'
 import { songs, SongHit } from '../lyrics'
 import keys from '@/lyrics/addons/search.json'
 
-// Song search engine
+/** Fuse instance used for searching for songs. */
 const fuse = new Fuse(songs, {
   includeScore: true,
   isCaseSensitive: false,
@@ -21,7 +21,7 @@ const fuse = new Fuse(songs, {
   ]
 })
 
-// Addons (chapters) search engine
+/** Fuse instance used for searching for addons (hidden chapters). */
 const addons = new Fuse(keys as SongHit[], {
   includeScore: true,
   isCaseSensitive: false,

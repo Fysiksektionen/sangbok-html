@@ -8,8 +8,7 @@
         <tr v-for="(hit, idx) in search($route.params.query)"
             @click="goto(hit)"
             v-bind:key="idx">
-            <!-- TODO: Prevent XSS from list titles without CSP. -->
-            <!-- As of now, lists are not visible in search. -->
+            <!-- TODO: As of now, lists are not visible in search. Don't forget to prevent XSS from list titles without using CSP if you implement this. -->
             <td class="index"><Index :index="hit.item.index || hit.item.chapterindex" /></td>
             <td class="name">
               {{ hit.item.title }}
@@ -45,7 +44,8 @@ export default defineComponent({
   methods: {
     search: search,
     hasSheetMusic: hasSheetMusic,
-    goto (hit: Fuse.FuseResult<SongHit>) { // TODO: Externalize
+    /** Sends the user to the target of the hit. */
+    goto (hit: Fuse.FuseResult<SongHit>) {
       if (hit.item.chapterindex !== undefined && hit.item.songindex !== undefined) {
         this.$router.push('/chapter/' + hit.item.chapterindex + '/song/' + hit.item.songindex)
       } else if (hit.item.chapterindex !== undefined && hit.item.songindex === undefined) {
@@ -54,7 +54,10 @@ export default defineComponent({
         this.$router.push('/song/' + hit.item.index)
       }
     },
-    swipeHandler(direction: SwipeIndicatorState) { if (direction === 'left') { this.$router.push('/') } }
+    swipeHandler(direction: SwipeIndicatorState) {
+      // Send the user to the main view if they swipe right (which gives an indicator on the 'left').
+      if (direction === 'left') { this.$router.push('/') }
+    }
   }
 })
 </script>
