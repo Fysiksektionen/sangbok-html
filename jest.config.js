@@ -4,7 +4,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.vue$': 'vue-jest',
-    '^.+\\js$': 'babel-jest'
+    '^.+\\jsx?$': 'babel-jest'
   },
   transformIgnorePatterns: [
     // Force-compile vue3-touch-events before running tests
