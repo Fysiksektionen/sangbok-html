@@ -39,7 +39,8 @@ jobs:
     needs: sheet-music
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [16.x, 17.x]
+      fail-fast: false
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
