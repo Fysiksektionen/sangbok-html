@@ -1,28 +1,19 @@
 // Used by the Settings dropdown to render a toggleable row.
-import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { BooleanSettings, key } from '@/store'
+import { Slot } from 'vue';
 
-export default defineComponent({
-  name: 'SettingsButton',
-  props: {
-    setting: {
-      type: String,
-      required: true,
-    }
-  },
-  setup() {
-    return { store: useStore(key) }
-  },
-  render() {
-    const store = this.store;
-    const setting = this.$props.setting as BooleanSettings;
-    const enabled = store.state.settings[setting] as boolean;
-    return (
-      <div onClick={() => store.commit('toggleSetting', setting)} class="setting">
-        <slot></slot>
-        <div class="toggle border-highlight" v-bind:class={{'bg-highlight': enabled }}></div>
-      </div>
-    )
-  }
-})
+export default function SettingsButtonComponent(
+    { setting }: { setting: BooleanSettings },
+    { slots }: { slots: { [name: string]: Slot } },
+  ) {
+  const store = useStore(key);
+  const enabled = store.state.settings[setting] as boolean;
+  const slot = slots.default && slots.default();
+  return (
+    <div onClick={() => store.commit('toggleSetting', setting)} class="setting">
+      {slot}
+      <div class={{ 'bg-highlight': enabled, 'border-highlight': true, 'toggle': true }}></div>
+    </div>
+  )
+}
