@@ -21,13 +21,11 @@ export const songs: Song[] = (function () {
   // Regular songs
   const songs = ([...chapters]
     .map((chapter, chapterId) => chapter.songs.map((song, songId) => addSongTags(song, songId, chapterId))).flat())
-
   // THS chapter.
   const thsSongs = (([ths] as JSONChapter[])
     .map(addPathToChapter)
     .map((chapter) => chapter.songs.map((song, songId) => addSongTags(song, songId, chapter.prefix))).flat())
-
-  // Add standealone songs and return
+  // Add standalone songs and return
   return songs.concat(thsSongs).concat(extraSongs as Song[])
 })()
 
@@ -40,9 +38,7 @@ export function getSongByStringIndex(index: string): Song | undefined {
   // List of all songs (for viewing. Includes easter eggs.)
   const allSongs: Song[] = songs.concat(leo.songs as Song[])
   const hits = allSongs.filter(s => s.index === index)
-  if (hits.length > 0) {
-    return hits[0]
-  } else return undefined
+  if (hits.length > 0) { return hits[0] }
 }
 
 /**
@@ -66,9 +62,8 @@ export function getSongsByStringIndices(indices: SongIndex[]): Song[] {
  * @returns The found Chapter object, or undefined if none was found.
  */
 export function getChapterByStringIndex(idx: string): Chapter | undefined {
-  const allChapters: Chapter[] = chapters.concat(([leo, ths] as JSONChapter[]).map(addPathToChapter))
+  const addPathToPrefixedChapter = (c: JSONChapter) => { return { ...c, path: '/chapter/' + c.prefix } as Chapter }
+  const allChapters: Chapter[] = chapters.concat(([leo, ths] as JSONChapter[]).map(addPathToPrefixedChapter))
   const hits = allChapters.filter(c => c.prefix === idx)
-  if (hits.length > 0) {
-    return hits[0]
-  } else return undefined
+  if (hits.length > 0) { return hits[0] }
 }

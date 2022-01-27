@@ -3,7 +3,8 @@ import { greek2latin, greek2latin2 } from '@/utils/other'
 import { Chapter, JSONChapter, Song, SongHit } from './types'
 
 /**
- * Converts a JSONChapter object to a Chapter object by adding the path to it.
+ * Converts a JSONChapter object to a Chapter object by adding the path to it, using its index.
+ * Only for use by the main chapters. For prefix-indexed chapters, see getChapterByStringIndex.
  * @param chapter The JSONChapter object.
  * @param index The index of the chapter
  * @returns A Chapter object.

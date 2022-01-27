@@ -38,6 +38,7 @@ jobs:
     name: Build vue
     needs: sheet-music
     strategy:
+      fail-fast: false
       matrix:
         node-version: [14.x, 16.x]
     steps:
@@ -101,22 +102,22 @@ jobs:
         name: music-svgs
         path: music/svg
 
-  compression-benchmark:
-    runs-on: ubuntu-latest
-    name: Check compression ratios
-    needs: sheet-music
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install Zopfli
-      run: sudo apt-get install -y zopfli
-    - name: Fetch sheet music artifacts
-      uses: actions/download-artifact@v2
-      with:
-        name: music-svgs
-        path: .github/workflows/svg
-    - name: Benchmark
-      working-directory: .github/workflows
-      run: ./compression-benchmark.sh
+#   compression-benchmark:
+#     runs-on: ubuntu-latest
+#     name: Check compression ratios
+#     needs: sheet-music
+#     steps:
+#     - uses: actions/checkout@v2
+#     - name: Install Zopfli
+#       run: sudo apt-get install -y zopfli
+#     - name: Fetch sheet music artifacts
+#       uses: actions/download-artifact@v2
+#       with:
+#         name: music-svgs
+#         path: .github/workflows/svg
+#     - name: Benchmark
+#       working-directory: .github/workflows
+#       run: ./compression-benchmark.sh
   
   ##
   ## Docker build
@@ -128,17 +129,21 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: [nginx, nginx-gz, statigz]
+        variant: [nginx, nginx-gz, statigz, nginx-prpc]
         include:
+          - variant: nginx-prpc
+            compression: semi-redundant gzip/brotli
+            server: nginx
           - variant: nginx-gz
-            suffix: -slim-nginx
+            suffix: -nginx-gz
             compression: gzip
             server: nginx
           - variant: nginx
+            suffix: -nginx-gz-br
             compression: redundant gzip/brotli
             server: nginx
           - variant: statigz
-            suffix: -slim
+            suffix: -statigz-br
             compression: brotli
             server: statigz
     permissions:
