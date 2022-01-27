@@ -23,23 +23,38 @@ export function toHTML(text: string): string {
 export function greekPrefix2latin (greek: string): string {
   const dict: { [key: string]: string } = {
     Αα: 'Alfa',
+    Aα: 'Alfa',
+    Bβ: 'Beta',
     Ββ: 'Beta',
     Γγ: 'Gamma',
     Δδ: 'Delta',
+    Eε: 'Epsilon',
     Εε: 'Epsilon',
+    Zζ: 'Zeta',
     Ζζ: 'Zeta',
+    Hη: 'Eta',
     Ηη: 'Eta',
     Θθ: 'Theta',
+    Iι: 'Iota',
     Ιι: 'Iota',
+    Kκ: 'Kappa',
     Κκ: 'Kappa',
     Λλ: 'Lambda',
+    Mμ: 'My',
     Μμ: 'My',
+    Nν: 'Ny',
     Νν: 'Ny',
-    Οο: 'Omikron', // One uses greek omicron
-    Oo: 'Omikron', // The other, a regular o.
+    Οο: 'Omikron',
+    Οo: 'Omikron',
+    Oo: 'Omikron',
+    Oο: 'Omikron',
     Σσ: 'Sigma'
   }
-  return dict[greek]
+  const out = dict[greek]
+  if (!out) {
+    console.log(greek)
+  }
+  return out
 }
 
 /**
