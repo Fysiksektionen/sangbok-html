@@ -6,7 +6,7 @@
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build --modern",
     "lint": "vue-cli-service lint",
-    "test": "jest"
+    "test": "vue-cli-service test:unit"
   },
   "dependencies": {
     "copy-to-clipboard": "^3.3.1",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.15.0",
-    "@types/jest": "^27.0.2",
+    "@types/jest": "26.x",
     "@types/jest-expect-message": "^1.0.3",
     "@types/qrcode": "^1.4.1",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
@@ -32,13 +32,14 @@
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "^4.5.15",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-standard": "^5.1.2",
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^2.0.0-rc.16",
-    "babel-jest": ">=25.2.6",
+    "babel-jest": "26.x",
     "codecov": "^3.8.3",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
@@ -58,5 +59,20 @@
     "> 1%",
     "last 3 versions",
     "not dead"
-  ]
+  ],
+  "jest": {
+    "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel",
+    "transform": { "^.+\\.vue$": "vue-jest" },
+    "transformIgnorePatterns": [
+      "node_modules/(?!@ngrx|(?!deck.gl)|ng-dynamic)",
+      "node_modules/(?!vue3-touch-events)"
+    ],
+    "testMatch": [ "**/*.test.[jt]s?(x)" ],
+    "moduleFileExtensions": ["vue", "js", "json", "jsx", "ts", "tsx", "node"],
+    "moduleNameMapper": {
+        "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/utils/dummy.ts",
+        "\\.(css|less)$": "<rootDir>/src/utils/dummy.ts",
+        "^@/(.*)$": "<rootDir>/src/$1"
+    }
+  }
 }

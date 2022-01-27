@@ -18,7 +18,7 @@ export enum BooleanSettings {
 export interface State {
   settings: {
     theme: string,
-    touchAction: string, //'none' | 'swipe' | 'zoom' | 'all'
+    touchAction: string, // 'none' | 'swipe' | 'zoom' | 'all'
   } & {[key in BooleanSettings]: boolean},
   version: string, // Settings version (could be useful on backwards-compatibility-breaking schema changes).
   generator: GeneratorState,
