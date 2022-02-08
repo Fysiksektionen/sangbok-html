@@ -4,7 +4,7 @@
 [![Tests](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/jest.yml/badge.svg?branch=main)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/jest.yml) 
 [![codecov](https://codecov.io/gh/Fysiksektionen/sangbok-html/branch/dev/graph/badge.svg?token=AJEO5EPXXU)](https://codecov.io/gh/Fysiksektionen/sangbok-html)
 
-Sångboken, för hemsidan. Work-in-progress. Detta är alltså _inte_ [den version](https://f.kth.se/sangbok/) som ligger uppe på hemsidan nu (se [Helmers repo](https://github.com/HelmerNylen/sangbok-f) för koden till den). Vill du se hur det går, ligger en hyfsat uppdaterad version [här](https://f-sangbok-3cf6d8.netlify.app). Vill du hänga på, eller har fler förslag på vad som kan förbättras är det bara att hojta till 😊.  
+[Sångboken](https://f.kth.se/sangbok/), för hemsidan. Omskriven och utökad version av [Helmers original](https://github.com/HelmerNylen/sangbok-f). Vill du hänga på, eller har fler förslag på vad som kan förbättras är det bara att hojta till 😊.
 / Oskar
 
 ## Hur du kör detta projekt
