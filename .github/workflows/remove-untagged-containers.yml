@@ -1,9 +1,16 @@
 name: Remove old package versions
+
+# package_name will generally be sangbok-html
+# PAT can be generated at https://github.com/settings/tokens
+# Needs write:packages, read:packages, delete:packages permissions.
 on:
   workflow_dispatch:
     inputs:
       package_name:
         description: 'The name of the package to delete'     
+        required: true
+      pat:
+        description: 'Personal Access Token'     
         required: true
 
 jobs:
@@ -14,4 +21,4 @@ jobs:
         uses: dylanratcliffe/delete-untagged-containers@main
         with:
           package_name: ${{ github.event.inputs.package_name }}
-          token: ${{ secrets.CR_PAT }}
+          token: ${{ github.event.inputs.pat }}
