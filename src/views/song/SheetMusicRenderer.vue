@@ -50,7 +50,8 @@ export default defineComponent({
     getImages(): string[] {
       const curSongSvgs = svglist.filter(s => { return this.$props.src && s.indexOf(this.$props.src) > -1 })
       const curSongSvgsWithZoom = curSongSvgs.filter(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ['', ''])[1] === this.getZoomLevels()[this.zoomIdx])
-      return curSongSvgsWithZoom.map(s => 'msvg/' + s)
+      // eslint-disable-next-line
+      return curSongSvgsWithZoom.map(s => __webpack_public_path__ + 'msvg/' + s)
     },
     /** @returns The available zoom-levels for this song. */
     getZoomLevels() {
