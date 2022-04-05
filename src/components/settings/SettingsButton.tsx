@@ -5,13 +5,13 @@ import { Slot } from 'vue';
 
 export default function SettingsButtonComponent(
     { setting }: { setting: BooleanSettings },
-    { slots }: { slots: { [name: string]: Slot } },
+    { slots, attrs }: { slots: { [name: string]: Slot }, attrs: { [name: string]: string } },
   ) {
   const store = useStore(key);
   const enabled = store.state.settings[setting] as boolean;
   const slot = slots.default && slots.default();
   return (
-    <div onClick={() => store.commit('toggleSetting', setting)} class="setting">
+    <div onClick={() => store.commit('toggleSetting', setting)} class="setting" {...attrs}>
       {slot}
       <div class={{ 'bg-highlight': enabled, 'border-highlight': true, 'toggle': true }}></div>
     </div>
