@@ -52,7 +52,7 @@ import { useStore } from 'vuex'
 import { key } from '@/store'
 
 import Index from '@/components/Index'
-import ListModal from '@/views/song/ListModal.vue'
+import ListModal from '@/views/song/ListModal'
 import Swiper from '@/components/Swiper.vue'
 import NavButtons from '@/views/song/SongNavButtons'
 

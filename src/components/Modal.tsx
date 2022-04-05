@@ -1,11 +1,12 @@
 // Modal visibility logic is handled by the parent component.
 
-import { Slots } from 'vue'
+import { Slots, SetupContext } from 'vue'
 
-export default function Modal(_: any, { slots }: { slots: Slots }): JSX.Element {
+// eslint-disable-next-line
+export default function Modal({ }, { slots, attrs }: Omit<SetupContext, 'expose'>): JSX.Element {
   const slot = slots.default && slots.default()
   return (
-    <div class="component-modal">
+    <div class="component-modal" {...attrs}>
       <div class="modal-box">
         {slot}
       </div>
