@@ -1,19 +1,7 @@
-<!-- Modal visibility logic is handled by the parent component. -->
-<template>
-  <div class="component-modal">
-    <div class="modal-box">
-      <slot></slot>
-    </div>
-  </div>
-</template>
+/* Global (=not theme-specific) styles for tsx components in this folder. */
+/* See index.scss for theme-sepecific styles. */
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({ name: 'Modal' })
-</script>
-
-<style lang="scss">
-  .component-modal {
+.component-modal {
     /* Blur background */
     width: 100vw;
     height: 100vh;
@@ -64,4 +52,3 @@ export default defineComponent({ name: 'Modal' })
       }
     }
   }
-</style>

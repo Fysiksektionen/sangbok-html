@@ -39,6 +39,8 @@ export default defineComponent({
 @use "sass:math";
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
 
+@import './components/global.scss';
+
 /* TODO: Load these on-demand. */
 /* Themes */
 @import './themes/night.scss';

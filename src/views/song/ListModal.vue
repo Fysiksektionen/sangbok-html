@@ -19,7 +19,7 @@ import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
-import Modal from '@/components/Modal.vue'
+import Modal from '@/components/Modal'
 
 import { getSongFromRoute } from '@/lyrics'
 
@@ -45,7 +45,7 @@ export default defineComponent({
      * @param listIdx the index of the list to add the song to.
      */
     addToList(listIdx: number) {
-      this.song && this.store.commit('addToList', { list: listIdx, index: this.song.index })
+      (this as any).song && (this as any).store.commit('addToList', { list: listIdx, index: (this as any).song.index })
     }
   }
 })

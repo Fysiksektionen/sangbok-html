@@ -2,14 +2,13 @@ const INDEX_MAP: { [key: string]: string } = {
   '✻': 'img/ths_emblem_filled_black.svg'
 }
 
-
 export default function Index({ index }: { index: string }): JSX.Element {
   type ParsedIndex = {
     key?: string,
     image?: string,
     text: string
   }
-  
+
   /**
    * Takes an index, and splits it into an image part and a suffix string part.
    * @param index Index as as a string
@@ -23,14 +22,13 @@ export default function Index({ index }: { index: string }): JSX.Element {
     }
     return { text: index }
   }
-  
 
-  let data = computeData(index || '');
+  const data = computeData(index || '')
 
   return (
-      <>
-        { data.image && <img src={data.image} class="inline" /> }
-        { data.text }
-      </>
+    <>
+      { data.image && <img src={data.image} class="inline" /> }
+      { data.text }
+    </>
   )
 }

@@ -52,7 +52,7 @@
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "ts-jest": "26.x",
-    "typescript": "4.x",
+    "typescript": ">=3.8",
     "vue-jest": "^5.0.0-alpha.1"
   },
   "browserslist": [
