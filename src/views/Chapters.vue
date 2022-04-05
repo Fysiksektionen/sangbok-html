@@ -24,7 +24,7 @@ import { defineComponent } from 'vue'
 
 import { onlyAllowZoomOut } from '@/utils/swipe' // @ is an alias to /src
 import { greekPrefix2latin } from '@/utils/other'
-import SearchBox from '@/components/SearchBox.vue'
+import SearchBox from '@/components/SearchBox'
 import { chapters } from '@/lyrics'
 
 export default defineComponent({

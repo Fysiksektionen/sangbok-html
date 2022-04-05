@@ -25,6 +25,6 @@ body.night {
     background: $body-background;
     color: $text-color;
 
-    @import "../components/index.scss";
-    @import "../views/index.scss";
+    @import "../components/themed.scss";
+    @import "../views/themed.scss";
 }

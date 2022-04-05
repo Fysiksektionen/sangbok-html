@@ -29,7 +29,7 @@ import Fuse from 'fuse.js'
 
 import { SongHit, hasSheetMusic } from '@/lyrics'
 import { search } from '@/utils/search' // @ is an alias to /src
-import SearchBox from '@/components/SearchBox.vue'
+import SearchBox from '@/components/SearchBox'
 import Index from '@/components/Index'
 import Swiper from '@/components/Swiper.vue'
 import { SwipeIndicatorState } from '@/utils/swipe'

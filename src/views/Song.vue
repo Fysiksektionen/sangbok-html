@@ -54,7 +54,7 @@ import { key } from '@/store'
 import Index from '@/components/Index'
 import ListModal from '@/views/song/ListModal.vue'
 import Swiper from '@/components/Swiper.vue'
-import NavButtons from '@/views/song/SongNavButtons.vue'
+import NavButtons from '@/views/song/SongNavButtons'
 
 import { SwipeIndicatorState, swipeIndicatorToOffset } from '@/utils/swipe'
 import { getSongFromRoute, getChapterFromRoute, getOffsetSongFromRoute, hasSheetMusic, Song } from '@/lyrics'
@@ -68,7 +68,7 @@ export default defineComponent({
     Index,
     ListModal,
     // Load SheetMusicRenderer on-demand
-    SheetMusicRenderer: defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer", webpackPrefetch: true */ '@/views/song/SheetMusicRenderer.vue'))
+    SheetMusicRenderer: defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer", webpackPrefetch: true */ '@/views/song/SheetMusicRenderer'))
   },
   setup() { return { store: useStore(key) } },
   data() {

@@ -59,6 +59,6 @@ body.neo {
         filter: invert(1);
     }
 
-    @import "../components/index.scss";
-    @import "../views/index.scss";
+    @import "../components/themed.scss";
+    @import "../views/themed.scss";
 }

@@ -26,6 +26,6 @@ body.day {
     background-color: #fff;
     color: $text-color;
 
-    @import "../components/index.scss";
-    @import "../views/index.scss";
+    @import "../components/themed.scss";
+    @import "../views/themed.scss";
 }
