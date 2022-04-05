@@ -50,7 +50,12 @@ export default defineComponent({
     getImages(): string[] {
       const curSongSvgs = svglist.filter(s => { return this.$props.src && s.indexOf(this.$props.src) > -1 })
       const curSongSvgsWithZoom = curSongSvgs.filter(s => (s.match(/-sf(\d(\.\d+)?)-/i) || ['', ''])[1] === this.getZoomLevels()[this.zoomIdx])
-      return curSongSvgsWithZoom.map(s => 'msvg/' + s)
+
+      // __webpack_public_path__ is undefined in our testing environment. This is a Goodhart-style fix to that.
+      // TODO: find a way to define __webpack_public_path__ in the testing code instead.
+      // eslint-disable-next-line
+      const root = (typeof __webpack_public_path__ !== 'string') ? '' : __webpack_public_path__
+      return curSongSvgsWithZoom.map(s => root + 'msvg/' + s)
     },
     /** @returns The available zoom-levels for this song. */
     getZoomLevels() {

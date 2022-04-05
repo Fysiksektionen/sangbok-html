@@ -6,7 +6,7 @@ const webpack = require('webpack')
  * @type {import('@vue/cli-service').ProjectOptions}
  */
 module.exports = {
-  publicPath: '', // See https://cli.vuejs.org/config/#publicpath for limitations.
+  publicPath: '/sangbok/', // See https://cli.vuejs.org/config/#publicpath for limitations.
   lintOnSave: true,
   configureWebpack: {
     plugins: [new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 12288 /* Minimum number of characters */ })]

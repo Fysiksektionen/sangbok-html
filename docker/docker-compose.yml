@@ -1,0 +1,12 @@
+# Example docker-compose file.
+version: "2.4"
+services:
+    sangbok:
+        image: ghcr.io/fysiksektionen/sangbok-html:latest
+        container_name: sangbok
+        restart: unless-stopped
+        # Route localhost:8085 to container:80
+        ports:
+            - 8085:80/tcp
+        # Optionally set a RAM limit.
+        #mem_limit: 32m
