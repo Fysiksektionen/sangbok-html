@@ -15,9 +15,9 @@ export default defineComponent({
     return (
       <div onClick={this.copy} class="setting clipboard">
           Kopiera sångtext
-            <Transition name="fade">
-              { this.state === 'ok' && <div class="checkmark" style="color: #0E0;">✔</div> }
-            </Transition>
+        <Transition name="fade">
+          { this.state === 'ok' && <div class="checkmark" style="color: #0E0;">✔</div> }
+        </Transition>
       </div>
     )
   },
@@ -45,4 +45,3 @@ export default defineComponent({
     }
   }
 })
-

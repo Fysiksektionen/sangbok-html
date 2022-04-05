@@ -51,7 +51,7 @@ import { useRoute, RouteLocationNormalized } from 'vue-router'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
-import Index from '@/components/Index.vue'
+import Index from '@/components/Index'
 import Swiper from '@/components/Swiper.vue'
 import NavButtons from '@/views/song/SongNavButtons.vue'
 import ListModal from '@/views/song/ListModal.vue'

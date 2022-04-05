@@ -21,7 +21,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { getOffsetSongFromRoute } from '@/lyrics'
-import Index from '@/components/Index.vue'
+import Index from '@/components/Index'
 
 export default defineComponent({
   name: 'SongNavButtons',

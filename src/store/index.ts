@@ -6,6 +6,7 @@ import createPersistedState from 'vuex-persistedstate'
 import { generatorModule, GeneratorState } from './generator'
 import { listsModule, SongList } from './lists'
 
+/* eslint-disable no-unused-vars */
 /** Type declaration for the storage. */
 export enum BooleanSettings {
   translate = 'translate',
@@ -15,15 +16,18 @@ export enum BooleanSettings {
   sheetmusic = 'sheetmusic'
 }
 
+export enum MultipleStateSettings {
+  theme = 'theme',
+  touchAction = 'touchAction' // 'none' | 'swipe' | 'zoom' | 'all'
+}
+
 export interface State {
-  settings: {
-    theme: string,
-    touchAction: string, // 'none' | 'swipe' | 'zoom' | 'all'
-  } & {[key in BooleanSettings]: boolean},
+  settings: {[key in MultipleStateSettings]: string} & {[key in BooleanSettings]: boolean},
   version: string, // Settings version (could be useful on backwards-compatibility-breaking schema changes).
   generator: GeneratorState,
   lists: SongList[]
 }
+/* eslint-enable no-unused-vars */
 
 /** Helpers. Should be integrated into the State interface */
 
