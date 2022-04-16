@@ -6,7 +6,7 @@ import { key } from '@/store'
 
 import './Lists.scss'
 
-import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
+import Swiper from '@/components/Swiper' // @ is an alias to /src
 import { SwipeIndicatorState } from '@/utils/swipe'
 
 export default defineComponent({

@@ -9,7 +9,7 @@ import { SongList } from '@/store/lists'
 
 import copy from 'copy-to-clipboard'
 
-import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
+import Swiper from '@/components/Swiper' // @ is an alias to /src
 import Modal from '@/components/Modal'
 import { SwipeIndicatorState } from '@/utils/swipe'
 import { Song, param2int, getSongsByStringIndices, hasSheetMusic } from '@/lyrics'

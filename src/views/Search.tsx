@@ -9,7 +9,7 @@ import { SongHit, hasSheetMusic } from '@/lyrics'
 import { search } from '@/utils/search' // @ is an alias to /src
 import SearchBox from '@/components/SearchBox'
 import Index from '@/components/Index'
-import Swiper from '@/components/Swiper.vue'
+import Swiper from '@/components/Swiper'
 import { SwipeIndicatorState } from '@/utils/swipe'
 import { useStore } from 'vuex'
 import { key } from '@/store'

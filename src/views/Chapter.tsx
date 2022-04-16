@@ -5,7 +5,7 @@ import { useStore } from 'vuex'
 import { key } from '@/store'
 
 import Index from '@/components/Index'
-import Swiper from '@/components/Swiper.vue' // @ is an alias to /src
+import Swiper from '@/components/Swiper' // @ is an alias to /src
 import { SwipeIndicatorState } from '@/utils/swipe'
 import { getChapterFromRoute, Chapter, hasSheetMusic } from '@/lyrics'
 

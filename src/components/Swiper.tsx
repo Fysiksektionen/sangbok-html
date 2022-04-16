@@ -1,32 +1,8 @@
-<!-- Component for handling swipes. -->
-<template>
-  <div class="component-swiper" v-touch:release="releaseHandler" v-touch:press="pressHandler" v-touch:drag="dragHandler"
-    v-bind:style="onlyAllowZoomOut">
+// Component for handling swipes.
 
-    <!-- Subcomponent injection -->
-    <slot></slot>
+import './Swiper.scss'
 
-    <!-- Swipe indicators -->
-    <transition name="swipe-right">
-      <div class="swipe-indicator right bg-highlight" v-if="showSwipeIndicator.includes('right')"
-        v-bind:class="{'disabled': showSwipeIndicator.includes('x')}">
-        <img src="@/assets/back.png" style="transform: scaleX(-1);" v-if="!showSwipeIndicator.includes('x')" />
-        {{ showSwipeIndicator.includes('x') ? "⊘" : "" }}
-      </div>
-    </transition>
-    <transition name="swipe-left">
-      <div class="swipe-indicator left bg-highlight" v-if="showSwipeIndicator.includes('left')"
-        v-bind:class="{'disabled': showSwipeIndicator.includes('x')}">
-        <img src="@/assets/back.png" v-if="!showSwipeIndicator.includes('x')" />
-        {{ showSwipeIndicator.includes('x') ? "⊘" : "" }}
-      </div>
-    </transition>
-
-  </div>
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
+import { Transition, h, withDirectives, resolveDirective, Directive, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
@@ -36,6 +12,8 @@ import { SwipeIndicatorState, getCoordsFromEvent, onlyAllowZoomOut } from '@/uti
 const SWIPE_TRESHOLD = 45
 const SWIPE_RESET_TRESHOLD = 15
 const SWIPE_ANGLE = 36 // Degrees
+
+type TouchCoord = [number, number, SwipeIndicatorState] | [undefined, undefined, SwipeIndicatorState]
 
 export default defineComponent({
   name: 'Swiper',
@@ -48,7 +26,7 @@ export default defineComponent({
   data() {
     return {
       /** A list containing recent touch coordinates, as well as the SwipeIndicatorState at that point. */
-      touchCoords: [[undefined, undefined, 'none']] as ([number, number, SwipeIndicatorState] | [undefined, undefined, SwipeIndicatorState])[],
+      touchCoords: [[undefined, undefined, 'none']] as TouchCoord[],
       /** A style-object, which allows zooming, only if we are zoomed in. See also dragHandler.  */
       onlyAllowZoomOut: this.$props.allowZoom ? {} : onlyAllowZoomOut()
     }
@@ -120,60 +98,42 @@ export default defineComponent({
       // The catch-all-other case
       this.touchCoords.push([...getCoordsFromEvent(e), 'none' as SwipeIndicatorState])
     }
+  },
+  render() {
+    const slot = this.$slots.default && this.$slots.default()
+
+    // TODO: Ideally we would use something like:
+    // import Vue3TouchEvents from 'vue3-touch-events'
+    // instead. (Or at least catch undefined-errors here.)
+    const touch = resolveDirective('touch') as Directive
+
+    // TODO: Import images via
+    return withDirectives(
+      h('div', { class: 'component-swiper', style: this.onlyAllowZoomOut }, (
+        <>
+          {/* <!-- Subcomponent injection --> */}
+          {slot}
+
+          {/* <!-- Swipe indicators --> */}
+          <Transition name="swipe-right">
+            {this.showSwipeIndicator.includes('right') &&
+              <div class={{ 'swipe-indicator': true, right: true, 'bg-highlight': true, disabled: this.showSwipeIndicator.includes('x') }}>
+                {!this.showSwipeIndicator.includes('x') && <img src="img/back.png" style="transform: scaleX(-1);" />}
+                {this.showSwipeIndicator.includes('x') ? '⊘' : ''}
+              </div>}
+          </Transition>
+          <Transition name="swipe-left">
+            {this.showSwipeIndicator.includes('left') &&
+              <div class={{ 'swipe-indicator': true, left: true, 'bg-highlight': true, disabled: this.showSwipeIndicator.includes('x') }}>
+                {!this.showSwipeIndicator.includes('x') && <img src="img/back.png" />}
+                {this.showSwipeIndicator.includes('x') ? '⊘' : ''}
+              </div>}
+          </Transition>
+        </>
+      )),
+      [[touch, this.dragHandler, 'drag'],
+      [touch, this.pressHandler, 'press'],
+      [touch, this.releaseHandler, 'release']
+      ])
   }
 })
-</script>
-
-<style lang="scss">
-  .component-swiper {
-    width: 100%;
-    overflow-x: hidden;
-    padding: 0;
-    margin: 0;
-    border: none;
-
-    & div.swipe-indicator {
-      transition: all 0.3s ease-out;
-      position: fixed;
-      top: 30vh;
-      border-radius: 4cm;
-      height: 4cm;
-      width: 4cm;
-      line-height: 4cm;
-      opacity: 0.5;
-
-      &.right {
-        right: -3cm;
-        padding-left: 1cm;
-      }
-
-      &.left {
-        left: -3cm;
-        padding-right: 1cm;
-        text-align: right;
-      }
-
-      &>img {
-        height: 1em;
-        vertical-align: middle;
-      }
-
-      &.disabled {
-        background-color: gray;
-      }
-    }
-
-    /* TODO: Find a solution to this that does not involve !important. */
-    & .swipe-right-enter-from,
-    & .swipe-right-leave-to {
-      right: -4cm !important;
-      opacity: 0 !important;
-    }
-
-    & .swipe-left-enter-from,
-    & .swipe-left-leave-to {
-      left: -4cm !important;
-      opacity: 0 !important;
-    }
-  }
-</style>

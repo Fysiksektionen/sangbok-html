@@ -9,7 +9,7 @@ import { key } from '@/store'
 
 import Index from '@/components/Index'
 import ListModal from '@/views/song/ListModal'
-import Swiper from '@/components/Swiper.vue'
+import Swiper from '@/components/Swiper'
 import NavButtons from '@/views/song/SongNavButtons'
 
 import { SwipeIndicatorState, swipeIndicatorToOffset } from '@/utils/swipe'
