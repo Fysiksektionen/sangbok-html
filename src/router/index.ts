@@ -6,9 +6,9 @@ import { addListHandler } from './utils'
 import store from '@/store'
 
 // Views
-import Chapters from '@/views/Chapters.vue'
-import Chapter from '@/views/Chapter.vue'
-import Song from '@/views/Song.vue'
+import Chapters from '@/views/Chapters'
+import Chapter from '@/views/Chapter'
+import Song from '@/views/Song'
 import Search from '@/views/Search.vue'
 
 // Certain components may benefit from async loading. For now (v1.0) this adds about 3 KiB to the total size (transferred)
@@ -77,7 +77,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/list/',
     name: 'Lists',
-    component: () => import(/* webpackChunkName: "listsview" */ '../views/Lists.vue')
+    component: () => import(/* webpackChunkName: "listsview" */ '../views/Lists')
   },
   {
     path: '/list/add/:data(.+)',

@@ -1,44 +1,57 @@
 // Modal for selecting which list to add a song to.
 import './ListModal.scss'
 
-import { defineComponent, SetupContext } from 'vue'
+import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
 import Modal from '@/components/Modal'
 
 import { getSongFromRoute } from '@/lyrics'
-import { useRoute } from 'vue-router'
+import { SongList } from '@/store/lists'
 
-export default function SongViewListModal({ }, { emit }: Omit<SetupContext, 'expose'>) {
-  const store = useStore(key);
-  const route = useRoute();
-  const lists = store.state.lists;
-  let song = getSongFromRoute(route)
-
-  /**
- * Method that adds the current song to the list given by `listIdx`
- * @param listIdx the index of the list to add the song to.
- */
-  function addToList(listIdx: number) {
-    song && store.commit('addToList', { list: listIdx, index: song.index })
-  }
-
-  return (
-    <Modal>
-      <header><h3>Lägg till i lista</h3></header>
-      <div class="component-listmodal">
-        {lists.map((list, idx) => <div
-          onClick={() => { song && list.songs.indexOf(song.index) === -1 && emit('close'); addToList(idx) }}
-          class={{ 'row': true, 'disabled': !song || song && list.songs.indexOf(song.index) !== -1 }}>
-          {list.name}
+export default defineComponent({
+  name: 'SongViewListModal',
+  setup() { return { store: useStore(key) } },
+  data() {
+    const store = useStore(key)
+    return { lists: store.state.lists }
+  },
+  computed: {
+    /**
+     * @returns The Song object associated with the current route.
+     */
+    song () {
+      return getSongFromRoute(this.$route)
+    }
+  },
+  methods: {
+    /**
+     * Method that adds the current song to the list given by `listIdx`
+     * @param listIdx the index of the list to add the song to.
+     */
+    addToList(listIdx: number) {
+      this.song && this.store.commit('addToList', { list: listIdx, index: this.song.index })
+    }
+  },
+  render() {
+    const store = useStore(key)
+    return (
+      <Modal>
+        <header><h3>Lägg till i lista</h3></header>
+        <div class="component-listmodal">
+          {this.lists.map((list: SongList, idx: number) => <div
+            onClick={() => { this.song && list.songs.indexOf(this.song.index) === -1 && this.$emit('close'); this.addToList(idx) }}
+            class={{ row: true, disabled: !this.song || (this.song && list.songs.indexOf(this.song.index) !== -1) }}>
+            {list.name}
+          </div>
+          )}
         </div>
-        )}
-      </div>
-      <footer style="padding-top: 0.5em;">
-        <div class="button button-2" onClick={() => store.commit('newList')}>Ny lista</div>
-        <div class="button button-2" onClick={() => emit('close')}>Avbryt</div>
-      </footer>
-    </Modal>
-  )
-}
+        <footer style="padding-top: 0.5em;">
+          <div class="button button-2" onClick={() => store.commit('newList')}>Ny lista</div>
+          <div class="button button-2" onClick={() => this.$emit('close')}>Avbryt</div>
+        </footer>
+      </Modal>
+    )
+  }
+})
