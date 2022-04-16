@@ -1,4 +1,4 @@
-// <!-- View to list all songs in a chapter. -->
+// View to list all songs in a chapter.
 
 import './Song.scss'
 
@@ -65,7 +65,7 @@ export default defineComponent({
               {this.store.state.settings.makelist && <button class="button musicbutton" onClick={() => { this.listModalVisible = true }}>+</button>}
               {!this.showMsvg && <div class="song-index"><Index index={(this.song.index) || ''} /></div>}
 
-              {/* <!-- Main content --> */}
+              {/* Main content */}
               {(!this.showMsvg || !this.store.state.settings.sheetmusic || !this.sheetMusicAvailable) &&
                 <div>
                   {/* Header */}
@@ -74,25 +74,25 @@ export default defineComponent({
                     {this.song.melody && <div class="melody" v-html={toHTML(this.song.melody)}></div>}
                   </div>
 
-                  {/* <!-- Content --> */}
+                  {/* Content */}
                   <div v-html={this.toHTML(this.song.text)} class={{ textcontainer: true, larger: this.store.state.settings.larger }}></div>
                   {this.song.author && <div class="author" v-html={toHTML(this.song.author)}></div>}
                 </div>}
 
-              {/* <!-- Sheet music --> */}
-              {/* <!-- If this is visible, the "Main content" above will be hidden. --> */}
+              {/* Sheet music */}
+              {/* If this is visible, the "Main content" above will be hidden. */}
               {this.sheetMusicAvailable && this.showMsvg && this.store.state.settings.sheetmusic &&
                 <SheetMusicRenderer src={this.song.index} key={this.song.index} />}
 
-              {/* <!-- Navigation --> */}
+              {/* Navigation */}
               {this.chapter && <NavButtons />}
-              {/* <!-- Margin if NavButtons is hidden. --><!-- TODO: Check if this is really needed. --> */}
+              {/* Margin if NavButtons is hidden.TODO: Check if this is really needed. */}
               {!this.chapter && <div style="height: 2em;"></div>}
             </div>}
           </div>
         </Swiper>
 
-        {/* <!-- Modals --> */}
+        {/* Modals */}
         <Transition name="modal-down">
           {this.listModalVisible &&
             <ListModal onClose={() => { this.listModalVisible = false }} style="transition: all 0.2s ease-out;" />

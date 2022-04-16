@@ -9,7 +9,7 @@ import store from '@/store'
 import Chapters from '@/views/Chapters'
 import Chapter from '@/views/Chapter'
 import Song from '@/views/Song'
-import Search from '@/views/Search.vue'
+import Search from '@/views/Search'
 
 // Certain components may benefit from async loading. For now (v1.0) this adds about 3 KiB to the total size (transferred)
 // while reducing the entrypoint size by about 30 KiB. Hence the difference is pretty negligible for now, especially since
@@ -72,7 +72,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/list/:listId(\\d+)',
     name: 'List',
-    component: () => import(/* webpackChunkName: "listview" */ '../views/List.vue')
+    component: () => import(/* webpackChunkName: "listview" */ '../views/List')
   },
   {
     path: '/list/',

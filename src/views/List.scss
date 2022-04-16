@@ -1,0 +1,25 @@
+.button.left {
+    float: left;
+    position: absolute;
+    min-width: 3em;
+    margin-left: 12px;
+  }
+  .button.right {
+    float: right;
+    min-width: 3em;
+    margin-right: 12px;
+  }
+
+  div.main h2 {margin-bottom: 24px;}
+
+    td.icon {
+    /* TODO: Share with sheetmusicicon */
+    padding-right: 1em;
+    text-align: right;
+    /* Doesn't really work for tables */
+    width: min-content;
+
+    & > span {
+      padding: 0.25em;
+    }
+  }
