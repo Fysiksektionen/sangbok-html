@@ -1,5 +1,3 @@
-// Main chapter list view
-
 import { defineComponent } from 'vue'
 
 import { onlyAllowZoomOut } from '@/utils/swipe' // @ is an alias to /src
@@ -9,7 +7,8 @@ import { chapters } from '@/lyrics'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
-// TODO: Make functional
+// TODO: Refactor into a functional-style component
+/** Main chapter list view */
 export default defineComponent({
   name: 'ChaptersView',
   data() {
@@ -25,7 +24,8 @@ export default defineComponent({
     const store = useStore(key)
     return (
       <div class="main" style={this.onlyAllowZoomOut} v-touch:drag={this.dragHandler}>
-        <SearchBox/>
+        <SearchBox />
+
         <table class="songbook">
           {this.chapters.map((chapter, idx) => <tr
             onClick={() => this.$router.push('/chapter/' + idx)}>
@@ -36,6 +36,7 @@ export default defineComponent({
               { chapter.chapter }
             </td>
           </tr>)}
+
           {/* We display a link to the lists view if the user has any non-empty lists, or is in the list-editing mode. */
             (store.getters.hasLists || store.state.settings.makelist) &&
             <tr onClick={() => this.$router.push('/list/')}>

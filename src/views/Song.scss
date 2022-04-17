@@ -1,55 +1,56 @@
-.modal-down-enter-from, .modal-down-leave-to {
-    /* See hard-coded style property to set transition speed. */
-    /* TODO: Set dropdown speeds using classes. */
-    filter: blur(0);
-    transform: translateY(-100%);
-    opacity: 0;
-  }
+.modal-down-enter-from,
+.modal-down-leave-to {
+  /* See hard-coded style property to set transition speed. */
+  /* TODO: Set dropdown speeds using classes. */
+  filter: blur(0);
+  transform: translateY(-100%);
+  opacity: 0;
+}
 
-  .song-index {
-    margin: 12px 16px auto 12px;
-    float: right;
-    font-size: 1.5em;
-    opacity: 0.7;
-    letter-spacing: 1px;
-  }
+.song-index {
+  margin: 12px 16px auto 12px;
+  float: right;
+  font-size: 1.5em;
+  opacity: 0.7;
+  letter-spacing: 1px;
+}
 
-  div.lyrics {
-    margin-left: 1%;
-    margin-right: 1%;
-  }
+div.lyrics {
+  margin-left: 1%;
+  margin-right: 1%;
+}
 
-  .button.musicbutton {
-    margin-right: 12px;
-    float: left;
-    min-width: 3em;
-  }
+.button.musicbutton {
+  margin-right: 12px;
+  float: left;
+  min-width: 3em;
+}
 
-  .melody,
-  .author {
-    font-style: italic;
-    padding-right: 24px;
-    padding-left: 24px;
-  }
+.melody,
+.author {
+  font-style: italic;
+  padding-right: 24px;
+  padding-left: 24px;
+}
 
-  .melody {
-    text-align: center;
-    margin-bottom: 12px;
-  }
+.melody {
+  text-align: center;
+  margin-bottom: 12px;
+}
 
-  .author {
-    text-align: right;
-  }
+.author {
+  text-align: right;
+}
 
-  .textcontainer {
-    text-align: left;
-    display: inline-block;
-    padding: 0 24px 12px;
-    font-size: 1.05em;
-    line-height: 1.25em;
+.textcontainer {
+  text-align: left;
+  display: inline-block;
+  padding: 0 24px 12px;
+  font-size: 1.05em;
+  line-height: 1.25em;
 
-    &.larger {
-      font-size: 1.2em;
-      line-height: 1.5em;
-    }
+  &.larger {
+    font-size: 1.2em;
+    line-height: 1.5em;
   }
+}

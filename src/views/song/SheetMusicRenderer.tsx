@@ -1,4 +1,3 @@
-// Component that renders sheet music.
 import './SheetMusicRenderer.scss'
 import svglist from '@/assets/msvgs.json'
 
@@ -25,6 +24,7 @@ function getImagesForZoomLevel(source: string, zoomIdx: number): string[] {
   return curSongSvgsWithZoom.map(s => root + 'msvg/' + s)
 }
 
+/** Component that renders sheet music. */
 export default function SheetMusicRenderer({ src }: { src: string }): JSX.Element {
   let zoomIdx = Math.min(((window.matchMedia && window.matchMedia('only screen and (max-width: 760px)').matches)) ? 5 : 3, getZoomLevels(src).length - 1)
   let isLoading = true
@@ -46,10 +46,12 @@ export default function SheetMusicRenderer({ src }: { src: string }): JSX.Elemen
         <button onClick={() => zoom(1)}
           class={{ button: true, disabled: zoomIdx === getZoomLevels(src).length - 1 }}>&#128269;+</button>
       </div>
+
       {/* The svg images containing sheet music. Usually there will be only one (we had more previously). */}
       {getImagesForZoomLevel(src, zoomIdx).map((img) => <div>
         <img src={img} alt={isLoading ? 'Laddar...' : 'Noter'} onLoad={() => { isLoading = false }} />
       </div>)}
+
       {/* Error messages */}
       {getImagesForZoomLevel(src, zoomIdx).length === 0 && <div>
         <h2>Fel</h2>
@@ -57,10 +59,12 @@ export default function SheetMusicRenderer({ src }: { src: string }): JSX.Elemen
           Inga noter hittades, trots att de borde finnas. Du borde skicka ett surt mail till webmaster eller sångbokens projektledare.
         </p>
       </div>}
+
       {/* Loading message */}
       {isLoading && <div>
         <h2>Laddar...</h2>
       </div>}
+
       <p class="notice">Notvisaren är experimentell.</p>
     </div>
   )

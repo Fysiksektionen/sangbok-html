@@ -1,10 +1,11 @@
+import './Settings.scss'
+
 import { RouteLocationNormalized, useRoute } from 'vue-router'
 
 import SettingsButton from './SettingsButton'
 import SettingsSwitch from './SettingsSwitch'
 import ClipboardButton from './ClipboardButton'
 import { themes } from '@/themes'
-import './index.scss'
 import { BooleanSettings, MultipleStateSettings } from '@/store'
 
 /**

@@ -1,4 +1,3 @@
-// Modal for selecting which list to add a song to.
 import './ListModal.scss'
 
 import { defineComponent } from 'vue'
@@ -10,17 +9,13 @@ import Modal from '@/components/Modal'
 import { getSongFromRoute } from '@/lyrics'
 import { SongList } from '@/store/lists'
 
+/** Modal for selecting which list to add the current song (inferred from route) to. */
 export default defineComponent({
   name: 'SongViewListModal',
   setup() { return { store: useStore(key) } },
-  data() {
-    const store = useStore(key)
-    return { lists: store.state.lists }
-  },
+  data() { return { lists: useStore(key).state.lists } },
   computed: {
-    /**
-     * @returns The Song object associated with the current route.
-     */
+    /** @returns The Song object associated with the current route. */
     song () {
       return getSongFromRoute(this.$route)
     }
@@ -35,10 +30,10 @@ export default defineComponent({
     }
   },
   render() {
-    const store = useStore(key)
     return (
       <Modal>
         <header><h3>Lägg till i lista</h3></header>
+
         <div class="component-listmodal">
           {this.lists.map((list: SongList, idx: number) => <div
             onClick={() => { this.song && list.songs.indexOf(this.song.index) === -1 && this.$emit('close'); this.addToList(idx) }}
@@ -47,8 +42,9 @@ export default defineComponent({
           </div>
           )}
         </div>
+
         <footer style="padding-top: 0.5em;">
-          <div class="button button-2" onClick={() => store.commit('newList')}>Ny lista</div>
+          <div class="button button-2" onClick={() => this.store.commit('newList')}>Ny lista</div>
           <div class="button button-2" onClick={() => this.$emit('close')}>Avbryt</div>
         </footer>
       </Modal>

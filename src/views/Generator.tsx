@@ -1,6 +1,3 @@
-// The generator sidebar view.
-// TODO: This should probably be split into smaller components
-
 import './Generator.scss'
 
 import { defineComponent } from 'vue'
@@ -10,12 +7,13 @@ import { key } from '@/store'
 
 import { chapters, getSongsByStringIndices, getSongByStringIndex, getSongFromRoute, getChapterFromRoute } from '@/lyrics'
 import { DownloadSetting } from '@/utils/export/settings'
-
 import getContentTeX from '@/utils/export/contentTeX'
 import getMainTeX from '@/utils/export/mainTeX'
 import openInOverleaf from '@/utils/export/overleaf'
 import downloadZip from '@/utils/export/zip'
 
+// TODO: This should probably be split into smaller components
+/** The generator sidebar view. */
 export default defineComponent({
   name: 'GeneratorView',
   setup() { return { store: useStore(key) } },

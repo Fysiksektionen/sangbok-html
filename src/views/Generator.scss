@@ -1,69 +1,73 @@
 .view-generator {
-    width: 40%;
-    right: 0;
-    min-width: 8cm;
+  width: 40%;
+  right: 0;
+  min-width: 8cm;
 
-    & hr {border: none; border-top: 1px solid gray;}
-
-    & .generatorsettings {
-      padding: 0.5cm;
-    }
-
-    & .setting {
-      margin-bottom: 0.8em;
-
-      & input, select {
-        float: right;
-        // background-color: #f0f0f0;
-        text-align: right;
-      }
-    }
+  & hr {
+    border: none;
+    border-top: 1px solid gray;
   }
 
-  table.songbook tr:active {
-    background-color: unset;
+  & .generatorsettings {
+    padding: 0.5cm;
   }
 
-  table.songbook {
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-  }
+  & .setting {
+    margin-bottom: 0.8em;
 
-  .operation:hover:not(.disabled) {
-    cursor: pointer;
-  }
-
-  .operation.disabled {
-    color: #333
-  }
-
-  .generatorbuttons {
-    text-align: center;
-
-    &>div {
-      display: inline-block;
-      background-color: rgba(128, 128, 128, 0.10);
-
-      $navbutton-spacing: 12px;
-      border-radius: $navbutton-spacing;
-      margin: $navbutton-spacing;
-      padding: $navbutton-spacing;
-      width: calc(25% - 4 * #{$navbutton-spacing});
-      min-width: 1cm;
-
-      font-size: 2em;
-
-      & img {
-        max-height: 32px;
-      }
-
-      &:hover:not(.disabled) {
-        cursor: pointer;
-      }
-
-      &.disabled {
-        background-color: rgba(128, 128, 128, 0.80);
-        color: unset;
-      }
+    & input,
+    select {
+      float: right;
+      // background-color: #f0f0f0;
+      text-align: right;
     }
   }
+}
+
+table.songbook tr:active {
+  background-color: unset;
+}
+
+table.songbook {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.operation:hover:not(.disabled) {
+  cursor: pointer;
+}
+
+.operation.disabled {
+  color: #333
+}
+
+.generatorbuttons {
+  text-align: center;
+
+  &>div {
+    display: inline-block;
+    background-color: rgba(128, 128, 128, 0.10);
+
+    $navbutton-spacing: 12px;
+    border-radius: $navbutton-spacing;
+    margin: $navbutton-spacing;
+    padding: $navbutton-spacing;
+    width: calc(25% - 4 * #{$navbutton-spacing});
+    min-width: 1cm;
+
+    font-size: 2em;
+
+    & img {
+      max-height: 32px;
+    }
+
+    &:hover:not(.disabled) {
+      cursor: pointer;
+    }
+
+    &.disabled {
+      background-color: rgba(128, 128, 128, 0.80);
+      color: unset;
+    }
+  }
+}

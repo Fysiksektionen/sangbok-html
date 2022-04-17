@@ -1,31 +1,35 @@
 .navbuttons {
-    padding: 20px 0;
-    text-align: center;
+  padding: 20px 0;
+  text-align: center;
+
+  &>div {
+    width: 50%;
+    display: inline-block;
 
     &>div {
-      width: 50%;
-      display: inline-block;
+      $navbutton-spacing: 12px;
+      border-radius: $navbutton-spacing;
+      margin: $navbutton-spacing;
+      padding: $navbutton-spacing;
 
       &>div {
-        $navbutton-spacing: 12px;
-        border-radius: $navbutton-spacing;
-        margin: $navbutton-spacing;
-        padding: $navbutton-spacing;
-        &>div {
-          width: 100%;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
-          &>img {
-            height: 0.5em;
-          }
+        &>img {
+          height: 0.5em;
         }
       }
-      &:last-child > div > div > img { transform: scaleX(-1); }
+    }
+
+    &:last-child>div>div>img {
+      transform: scaleX(-1);
     }
   }
+}
 
-  div.filler {
-    opacity: 0;
-  }
+div.filler {
+  opacity: 0;
+}

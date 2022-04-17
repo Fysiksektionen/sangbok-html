@@ -1,5 +1,3 @@
-// View to list all songs in a chapter.
-
 import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '@/store'
@@ -9,7 +7,8 @@ import Swiper from '@/components/Swiper' // @ is an alias to /src
 import { SwipeIndicatorState } from '@/utils/swipe'
 import { getChapterFromRoute, Chapter, hasSheetMusic } from '@/lyrics'
 
-// TODO: Make functional
+// TODO: Refactor into a functional-style component
+/** View to list all songs in a chapter. */
 export default defineComponent({
   name: 'ChapterView',
   data() {
@@ -19,7 +18,6 @@ export default defineComponent({
   },
   setup() { return { store: useStore(key) } },
   methods: {
-    hasSheetMusic: hasSheetMusic,
     swipeHandler(direction: SwipeIndicatorState) {
       // Move up to the main view if the user swipes right (that is, the indicator is shown on the left-hand side, hence the 'left')
       (direction === 'left') && this.$router.push('/')

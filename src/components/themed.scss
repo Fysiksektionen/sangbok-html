@@ -4,7 +4,9 @@
 & .navbar {
     background: $navbar-background;
 
-    & button:active {background-color: rgba(255, 255, 255, 0.20);}
+    & button:active {
+        background-color: rgba(255, 255, 255, 0.20);
+    }
 
     & .title {
         color: white;
@@ -15,6 +17,7 @@
     color: $text-color;
     background: $dropdown-background;
     box-shadow: 0 0 14px black;
+
     & .copy .checkmark {
         color: $success;
     }
@@ -29,7 +32,8 @@
 
 & .component-sheet-music-renderer {
     & img {
-        filter: $sheet-music-filter;/* Originally #c2ad99 for night theme*/
+        filter: $sheet-music-filter;
+        /* Originally #c2ad99 for night theme*/
     }
 
     & .notice {
@@ -41,10 +45,11 @@
     filter: $inline-image-filter;
 }
 
-& .component-modal > div.modal-box {
+& .component-modal>div.modal-box {
     box-shadow: 0 0 5px $row-shadow-color;
 
-    & header, footer {
+    & header,
+    footer {
         padding: 0.25em 0;
         margin: 0;
     }
@@ -54,7 +59,8 @@
         color: $highlight-text-color;
     }
 
-    & > div, > footer {
+    &>div,
+    >footer {
         color: $modal-text-color;
         background-color: $modal-background-color;
     }
@@ -64,4 +70,4 @@
 /* Other small stuff */
 & img.inline {
     filter: $inline-image-filter;
-  }
+}

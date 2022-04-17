@@ -1,20 +1,23 @@
-.button.left { /* TODO: Share with List.vue */
-    float: left;
-    position: absolute;
-    min-width: 3em;
-    margin-left: 12px;
+.button.left {
+  /* TODO: Share with List.vue */
+  float: left;
+  position: absolute;
+  min-width: 3em;
+  margin-left: 12px;
+}
+
+div.main h2 {
+  margin-bottom: 24px;
+}
+
+td.icon {
+  /* TODO: Share with sheetmusicicon and List.vue */
+  padding-right: 1em;
+  text-align: right;
+  /* Doesn't really work for tables */
+  width: min-content;
+
+  &>span {
+    padding: 0.25em;
   }
-
-  div.main h2 {margin-bottom: 24px;}
-
-  td.icon {
-    /* TODO: Share with sheetmusicicon and List.vue */
-    padding-right: 1em;
-    text-align: right;
-    /* Doesn't really work for tables */
-    width: min-content;
-
-    & > span {
-      padding: 0.25em;
-    }
-  }
+}

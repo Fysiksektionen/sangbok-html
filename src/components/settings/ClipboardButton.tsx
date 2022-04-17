@@ -22,7 +22,8 @@ export default defineComponent({
     )
   },
   computed: {
-    lyrics () { // Returns the title and the lyrics of the current song, to be copied.
+    /** Returns the title and the lyrics of the current song, to be copied. */
+    lyrics () {
       const route: RouteLocationNormalized = this.$route
       if (route.name && route.name.toString().startsWith('Song')) {
         const song = getSongFromRoute(route)
@@ -31,17 +32,14 @@ export default defineComponent({
     }
   },
   methods: {
-    copy () { // Attempt to copy, and show an indicator of how it went.
+    /** Attempts to copy the lyrics, and starts displaying an indicator of how it went. */
+    copy () {
       if (this.lyrics === '') {
         this.state = 'err'
         return
       }
       this.state = copy(this.lyrics) ? 'ok' : 'err'
-      setTimeout(this.resetState, 1000)
-    },
-    resetState () {
-      // This is a separate function due to us needing the this, variable, which is not in scope for lambda function (there may be a better way to do this)
-      this.state = 'none'
+      setTimeout(() => { this.state = 'none' }, 1000)
     }
   }
 })

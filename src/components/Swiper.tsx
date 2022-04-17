@@ -15,6 +15,12 @@ const SWIPE_ANGLE = 36 // Degrees
 
 type TouchCoord = [number, number, SwipeIndicatorState] | [undefined, undefined, SwipeIndicatorState]
 
+/** A content container supporting swipes, handled by
+ * @param swipeHandler - Handle swipe events. Signature: (s: SwipeIndicatorState): void
+ * @param left - 'allow' or 'disallow' or 'hide'. Controls the appearance of the swipe indicator.
+ * @param right - Equivalent to left, but for the right side.
+ * @param allowZoom - Wether to allow zoom or not.
+ */
 export default defineComponent({
   name: 'Swiper',
   props: {

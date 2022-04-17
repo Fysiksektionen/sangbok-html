@@ -1,9 +1,8 @@
-// Used by the Settings dropdown to render a multiple-choice row.
-
 import { Slot } from 'vue'
 import { useStore } from 'vuex'
 import { key, MultipleStateSettings } from '@/store'
 
+/** A row with at multiple-choice switch. Used by the settings dropdown. */
 export default function SettingsSwitch(
   { setting, values }: { setting: MultipleStateSettings, values: {[key: string]: string} },
   { slots }: { slots: { [name: string]: Slot } }
@@ -24,10 +23,3 @@ export default function SettingsSwitch(
     </div>
   )
 }
-// export default defineComponent({
-//   name: 'SettingsButton',
-//   props: {
-//     setting: String,
-//     values: Object
-//   }
-// })

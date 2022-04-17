@@ -1,10 +1,10 @@
 .nohits {
-    text-align: center;
-    box-shadow: unset !important;
-    border-bottom: unset !important;
+  text-align: center;
+  box-shadow: unset !important;
+  border-bottom: unset !important;
 
-    &:not(:first-child) {
-      /* Hide the nohits row if there are hits. */
-      display: none;
-    }
+  &:not(:first-child) {
+    /* Hide the nohits row if there are hits. */
+    display: none;
   }
+}

@@ -6,6 +6,7 @@ import { themes } from '@/themes'
 import { key, stringKey } from '@/store/index'
 import { useStore } from 'vuex'
 
+/** Main app. */
 export default defineComponent({
   name: 'Sångbok',
   setup() { return { store: useStore(key) } },

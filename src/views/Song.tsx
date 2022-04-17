@@ -1,5 +1,3 @@
-// View to list all songs in a chapter.
-
 import './Song.scss'
 
 import { defineComponent, defineAsyncComponent, Transition } from 'vue'
@@ -11,11 +9,11 @@ import Index from '@/components/Index'
 import ListModal from '@/views/song/ListModal'
 import Swiper from '@/components/Swiper'
 import NavButtons from '@/views/song/SongNavButtons'
-
 import { SwipeIndicatorState, swipeIndicatorToOffset } from '@/utils/swipe'
 import { getSongFromRoute, getChapterFromRoute, getOffsetSongFromRoute, hasSheetMusic, Song } from '@/lyrics'
 import { toHTML } from '@/utils/other'
 
+/** View to list all songs in a chapter. */
 export default defineComponent({
   name: 'SongView',
   setup() { return { store: useStore(key) } },

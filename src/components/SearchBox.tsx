@@ -1,9 +1,7 @@
 import { defineComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-// query is a parameter setting the default value of the input box.
-// Internally, this component uses query2
-
+/** Search box component. Locally memorizes the query. */
 export default defineComponent({
   name: 'SearchBox',
   props: { query: String },

@@ -5,9 +5,7 @@ import { useRoute, useRouter } from 'vue-router'
 import Index from '@/components/Index'
 import { getOffsetSongFromRoute } from '@/lyrics'
 
-/**
- * Component for song navigation buttons. Button values are inferred from the route.
- */
+/** Component for song navigation buttons. Button values are inferred from the route. */
 export default function SongNavButtons(): JSX.Element {
   const router = useRouter()
   const route = useRoute()

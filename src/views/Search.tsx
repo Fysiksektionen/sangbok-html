@@ -1,9 +1,9 @@
-// View to list all songs in a chapter.
+import './Search.scss'
 
 import { defineComponent } from 'vue'
+import { useStore } from 'vuex'
+import { key } from '@/store'
 import Fuse from 'fuse.js'
-
-import './Search.scss'
 
 import { SongHit, hasSheetMusic } from '@/lyrics'
 import { search } from '@/utils/search' // @ is an alias to /src
@@ -11,15 +11,12 @@ import SearchBox from '@/components/SearchBox'
 import Index from '@/components/Index'
 import Swiper from '@/components/Swiper'
 import { SwipeIndicatorState } from '@/utils/swipe'
-import { useStore } from 'vuex'
-import { key } from '@/store'
 
+/** View to list all songs in a chapter. */
 export default defineComponent({
   name: 'Search',
   setup() { return { store: useStore(key) } },
   methods: {
-    search: search,
-    hasSheetMusic: hasSheetMusic,
     /** Sends the user to the target of the hit. */
     goto (hit: Fuse.FuseResult<SongHit>) {
       if (hit.item.chapterindex !== undefined && hit.item.songindex !== undefined) {
@@ -43,7 +40,7 @@ export default defineComponent({
           <table class="songbook">
             {search(this.$route.params.query as string).map((hit) => <tr
               onClick={() => this.goto(hit)}>
-              {/* TODO: As of now, lists are not visible in search. Don't forget to prevent XSS from list titles without using CSP if you implement this. */}
+              {/* TODO: As of now, lists are not visible in search. Don't forget to prevent XSS from list titles without using CSP if you implement that. */}
               <td class="index"><Index index={(hit.item.index || hit.item.chapterindex || '').toString()} /></td>
               <td class="name">
                 { hit.item.title }
