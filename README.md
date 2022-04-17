@@ -1,7 +1,7 @@
 # Sångboken för webben
-[![Build](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml/badge.svg?branch=jsx)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml) 
-[![ESLint](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/lint.yml/badge.svg?branch=jsx)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/lint.yml) 
-[![Tests](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/jest.yml/badge.svg?branch=jsx)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/jest.yml) 
+[![Build](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml/badge.svg?branch=main)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml) 
+[![ESLint](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/lint.yml) 
+[![Tests](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/jest.yml/badge.svg?branch=main)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/jest.yml) 
 [![codecov](https://codecov.io/gh/Fysiksektionen/sangbok-html/branch/dev/graph/badge.svg?token=AJEO5EPXXU)](https://codecov.io/gh/Fysiksektionen/sangbok-html)
 
 [Sångboken](https://f.kth.se/sangbok/), för hemsidan. Omskriven och utökad version av [Helmers original](https://github.com/HelmerNylen/sangbok-f). Vill du hänga på, eller har fler förslag på vad som kan förbättras är det bara att hojta till 😊.

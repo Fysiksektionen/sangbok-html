@@ -95,6 +95,12 @@ jobs:
       working-directory: ./music
       run: ./convert.sh --compress --no-move --force
       if: ${{ github.ref == 'refs/heads/main' }}
+    - name: Archive cache for future use
+      uses: actions/upload-artifact@v2
+      with:
+        name: music-svgs-cache
+        path: music/svg.tar.lzma
+      if: ${{ github.ref == 'refs/heads/main' }}
     - name: Perpare for export
       working-directory: ./music
       run: mv svgs.json svg
