@@ -43,14 +43,14 @@ export default defineComponent({
         <div class="navbar">
           {
             !this.hideBackButton &&
-            <div style="float: left;" onClick={this.goBack}>
+            <div style="float: left;" onClick={this.goBack} data-test="navbarBackButton">
               <button><img src="img/back.png" alt="Gå tillbaka" /></button>
             </div>
           }
           <div class="title">Sångboken</div>
           <div style="float: right;" data-test="settingsButtonWrapper">
-            {!this.showSettings && <button onClick={() => { this.showSettings = true }}><img src="img/settings.png" alt="Visa inställningar" /></button>}
-            {this.showSettings && <button onClick={() => { this.showSettings = false }}><img src="img/x.png" alt="Dölj inställningar" /></button>}
+            {!this.showSettings && <button onClick={() => { this.showSettings = true }} data-test="navbarShowSettingsButton"><img src="img/settings.png" alt="Visa inställningar" /></button>}
+            {this.showSettings && <button onClick={() => { this.showSettings = false }} data-test="navbarHideSettingsButton"><img src="img/x.png" alt="Dölj inställningar" /></button>}
           </div>
         </div>
 
