@@ -132,7 +132,7 @@ export default defineComponent({
       {/* Sharing modal */}
       {this.qrVisible && <Modal>
         <header><h3>Dela</h3></header>
-        <div style="text-align: center;"><img src="qrImage" style="text-align: center;" /></div>
+        <div style="text-align: center;"><img src={this.qrImage} style="text-align: center; filter: invert(0.87);" /></div>
         <footer style="margin-top: 0.5em;">
           <div class="button button-2" onClick={this.copyLink}>Kopiera länk</div>
           <div class="button button-2" onClick={() => { this.qrVisible = false }}>Avbryt</div>
