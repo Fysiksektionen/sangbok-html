@@ -26,6 +26,7 @@ export default defineComponent({
   render() {
     // This loads Generator component and generator helper functions on-demand.
     const GeneratorView = defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator'))
+
     return (
       <>
         <Navbar hideBackButton={this.$route.meta.hideBackButton as boolean | undefined}/>
