@@ -7,13 +7,17 @@ import { themes } from '@/themes'
 import './index.scss'
 import { BooleanSettings, MultipleStateSettings } from '@/store'
 
-export default function SettingsComponent(): JSX.Element {
+/**
+ * Component for the settings dropdown menu.
+ * Props are passed through to the dropdown root div.
+ */
+export default function SettingsComponent(props: Record<string, unknown>): JSX.Element {
   const route: RouteLocationNormalized = useRoute()
   const isSongStage = route.name && route.name.toString().startsWith('Song')
   const touchActions = { none: 'Inga', zoom: 'Zooma', swipe: 'Svep', all: 'Alla' }
 
   return (
-    <div class="component-settings">
+    <div class="component-settings" {...props}>
       <SettingsButton setting={BooleanSettings.translate}>Latinska kapitelnamn</SettingsButton>
       <SettingsSwitch setting={MultipleStateSettings.theme} values={themes}>Tema</SettingsSwitch>
       <SettingsButton setting={BooleanSettings.larger}>Större sångtext</SettingsButton>

@@ -1,7 +1,7 @@
 import './App.scss'
 
 import { defineComponent, defineAsyncComponent } from 'vue'
-import Navbar from '@/components/Navbar.vue'
+import Navbar from '@/components/Navbar'
 import { themes } from '@/themes'
 import { key, stringKey } from '@/store/index'
 import { useStore } from 'vuex'

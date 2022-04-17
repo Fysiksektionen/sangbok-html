@@ -132,8 +132,8 @@ export default defineComponent({
         </>
       )),
       [[touch, this.dragHandler, 'drag'],
-      [touch, this.pressHandler, 'press'],
-      [touch, this.releaseHandler, 'release']
+        [touch, this.pressHandler, 'press'],
+        [touch, this.releaseHandler, 'release']
       ])
   }
 })
