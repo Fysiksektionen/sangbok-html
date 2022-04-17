@@ -8,7 +8,9 @@ on:
     paths:
       - '**.vue'
       - '**.ts'
+      - '**.tsx'
       - '**.js'
+      - '**.jsx'
       - '**.json'
       - '.eslintrc'
       - '.editorconfig'

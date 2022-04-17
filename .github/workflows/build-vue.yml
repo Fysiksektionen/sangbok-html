@@ -8,8 +8,10 @@ on:
     paths:
       - '**.vue'
       - '**.ts'
+      - '**.tsx'
       - '!**.test.ts'
       - '**.js'
+      - '**.jsx'
       - '**.json'
       - '**.mscz'
       - '**.conf'
