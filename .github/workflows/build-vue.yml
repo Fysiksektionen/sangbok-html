@@ -40,7 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [16.x]
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -129,23 +129,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: [nginx, nginx-gz, statigz, nginx-prpc]
+        variant: [nginx, nginx-gz, nginx-gz-br]
         include:
-          - variant: nginx-prpc
+          - variant: nginx
             compression: semi-redundant gzip/brotli
-            server: nginx
           - variant: nginx-gz
             suffix: -nginx-gz
             compression: gzip
-            server: nginx
-          - variant: nginx
+          - variant: nginx-gz-br
             suffix: -nginx-gz-br
             compression: redundant gzip/brotli
-            server: nginx
-          - variant: statigz
-            suffix: -statigz-br
-            compression: brotli
-            server: statigz
     permissions:
       contents: read
       packages: write
@@ -180,7 +173,7 @@ jobs:
             type=ref,event=branch
           flavor: |
             suffix=${{ matrix.suffix }}
-      - name: Build and push Docker image (${{ matrix.server }} with ${{ matrix.compression }} precompression)
+      - name: Build and push Docker image (nginx with ${{ matrix.compression }} precompression)
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           file: docker/${{ matrix.variant }}/Dockerfile

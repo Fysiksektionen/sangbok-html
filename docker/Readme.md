@@ -20,14 +20,11 @@ Jag har valt nginx, då den tar väldigt lite plats, samtidigt som den är mer �
 Containrarna är taggade efter vilken branch de kommer från, dvs.
 * `latest` - från `main`
 * `edge` - från `dev`
-Dessa containrar är [nginx](https://www.nginx.com)-baserade, och har alla filer förkomprimerade som gzip, samt de mest använda filerna förkomprimerade med både gzip och brotli.
+Dessa containrar har alla filer förkomprimerade som gzip, och de mest använda filerna förkomprimerade även med brotli. Finns i [nginx](nginx)-mappen.
 
 Utöver detta finns andra containrar, som använder andra trade-offs mellan förkomprimering och prestanda.
-* `nginx-gz` - [nginx](https://www.nginx.com)-baserad. Innehåller endast förkomprimerade filer i gzip-format.
-* `nginx-gz-br` - [nginx](https://www.nginx.com)-baserad. Innehåller förkomprimerade filer i både brotli- och gzip-format. Brotli-filerna är ca. 30% mindre än motsvarande gzip-filer.
-* `statigz-br` - [statigz](https://pkg.go.dev/github.com/vearutop/statigz)-baserad. Innehåller endast förkomprimerade filer i brotli-format. 
-
-De [nginx](https://www.nginx.com)-baserade presterar generellt sett bättre, och kräver mindre RAM. De klarar sig bra på 8mb RAM, men kan dra nytta av upp till ca. 20mb. `statigz-gr`-containrarna är optimerade för att serva brotli-komprimerade filer. Det finns egentligen ingen anledning att använda statigz-containern framför den vanliga om en inte har extrem platsbrist på servern. Statigz-containern kräver 16mb ram, och trivs bäst med ca. 48mb. `nginx-gz-br` har fördelen att den kan leverera brotli-komprimerade noter till klienten och på så sätt minska internetanvändningen. Nackdelen är att själva containern tar ca. 30% mer plats (när detts skrivs).
+* `nginx-gz` - [nginx](https://www.nginx.com)-baserad. Innehåller endast förkomprimerade filer i gzip-format.  Finns i [nginx-gz](nginx-gz)-mappen.
+* `nginx-gz-br` - [nginx](https://www.nginx.com)-baserad. Innehåller förkomprimerade filer i både brotli- och gzip-format. Brotli-filerna är ca. 30% mindre än motsvarande gzip-filer.  Finns i [nginx-gz-br](nginx-gz-br)-mappen.
 
 ### Varför fungerar inte bilderna?
 Se till att du proxyar trafiken till port 80 på containern. Containrarna är tänkta att användas bakom en reverse proxy (dvs. t.ex. [traefik](https://traefik.io/traefik/) eller någon webbserver, t.ex. [Apache](httpd.apache.org)), och accepterar requests till `/`, `/sangbok` och `/sangbok2`. Vill du ha den på någon annan path, får du antingen modifiera dockerfilerna, eller låta din reverse-proxy skriva om sökvägen.

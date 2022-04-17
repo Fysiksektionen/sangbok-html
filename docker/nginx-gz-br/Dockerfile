@@ -23,34 +23,9 @@ COPY src src
 RUN npx vue-cli-service build --modern
 
 # Precompress static assets
-# All assets in the main folder, as well as js and css files are redundantly precompressed.
-# Other assets (i.e. sheet music svg:s) are not redundantly compressed, since they are rarely used. 
-# TODO: Make this less hard-coded (I really don't know how dockerfile/bash string comparisons work...)
-# We also mustn't get any .br.gz files, since that messes with the brotli precompression module.
 RUN apk add --no-cache brotli
-RUN for file in dist/js/*; do \
+RUN for file in dist/**/*; do \
         brotli "$file" --best --keep; \
-        gzip "$file" --best; \
-        touch "$file"; \
-    done
-RUN for file in dist/css/*; do \
-        brotli "$file" --best --keep; \
-        gzip "$file" --best; \
-        touch "$file"; \
-    done
-RUN for file in dist/font/*; do \
-        gzip "$file" --best; \
-        touch "$file"; \
-    done
-RUN for file in dist/img/*; do \
-        gzip "$file" --best; \
-        touch "$file"; \
-    done
-RUN for file in dist/msvg/*; do \
-        gzip "$file" --best; \
-        touch "$file"; \
-    done
-RUN for file in dist/tex/*; do \
         gzip "$file" --best; \
         touch "$file"; \
     done
@@ -60,13 +35,14 @@ RUN for file in dist/*; do \
         touch "$file"; \
     done
 
+
 ##
 ## Server
 ##
 FROM fholzer/nginx-brotli:latest
 
 # Transfer the built app to the nginx container, as well as add nginx config.
-COPY docker/nginx-prpc/nginx.conf /etc/nginx/nginx.conf
+COPY docker/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --from=frontend-build /app/dist /usr/share/nginx/html
 
 # Create symlinks to allow requests to /sangbok and /sangbok2
