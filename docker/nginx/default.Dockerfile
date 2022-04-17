@@ -38,10 +38,6 @@ RUN for file in dist/css/*; do \
         gzip "$file" --best; \
         touch "$file"; \
     done
-RUN for file in dist/font/*; do \
-        gzip "$file" --best; \
-        touch "$file"; \
-    done
 RUN for file in dist/img/*; do \
         gzip "$file" --best; \
         touch "$file"; \
@@ -66,7 +62,7 @@ RUN for file in dist/*; do \
 FROM fholzer/nginx-brotli:latest
 
 # Transfer the built app to the nginx container, as well as add nginx config.
-COPY docker/nginx-prpc/nginx.conf /etc/nginx/nginx.conf
+COPY docker/nginx/nginx.gz-br.conf /etc/nginx/nginx.conf
 COPY --from=frontend-build /app/dist /usr/share/nginx/html
 
 # Create symlinks to allow requests to /sangbok and /sangbok2

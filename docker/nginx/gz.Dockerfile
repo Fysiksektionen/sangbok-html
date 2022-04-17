@@ -39,7 +39,7 @@ RUN for file in dist/**/*; do \
 FROM fholzer/nginx-brotli:latest
 
 # Transfer the built app to the nginx container, as well as add nginx config.
-COPY docker/nginx-gz/nginx.conf /etc/nginx/nginx.conf
+COPY docker/nginx/nginx.gz.conf /etc/nginx/nginx.conf
 COPY --from=frontend-build /app/dist /usr/share/nginx/html
 
 # Create symlinks to allow requests to /sangbok and /sangbok2
