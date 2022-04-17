@@ -66,6 +66,7 @@ export function greekPrefix2latin (greek: string): string {
  */
 export function greek2latin (greek: string): string {
   const dict: { [key: string]: string } = {
+    o: 'omikron', // Latin o. Has to be first in order not to mess with epsilon and iota.
     α: 'alfa',
     β: 'beta',
     γ: 'gamma',
@@ -80,7 +81,6 @@ export function greek2latin (greek: string): string {
     μ: 'my',
     ν: 'ny',
     ο: 'omikron', // Greek ο
-    o: 'omikron', // Latin o
     σ: 'sigma',
     Α: 'Alfa',
     Β: 'Beta',
