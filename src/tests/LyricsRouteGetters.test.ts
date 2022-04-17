@@ -2,7 +2,7 @@ import { mount, flushPromises } from '@vue/test-utils'
 import Vue3TouchEvents from 'vue3-touch-events'
 import router from '@/router'
 import store, { key } from '@/store'
-import Song from '@/views/Song.vue'
+import Song from '@/views/Song'
 
 // TODO: Add test for getting from list.
 // TODO: Add chapter tests (with lists)

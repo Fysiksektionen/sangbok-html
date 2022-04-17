@@ -8,8 +8,10 @@ on:
     paths:
       - '**.vue'
       - '**.ts'
+      - '**.tsx'
       - '!**.test.ts'
       - '**.js'
+      - '**.jsx'
       - '**.json'
       - '**.mscz'
       - '**.conf'
@@ -40,7 +42,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [16.x]
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -93,6 +95,12 @@ jobs:
       working-directory: ./music
       run: ./convert.sh --compress --no-move --force
       if: ${{ github.ref == 'refs/heads/main' }}
+    - name: Archive cache for future use
+      uses: actions/upload-artifact@v2
+      with:
+        name: music-svgs-cache
+        path: music/svg.tar.lzma
+      if: ${{ github.ref == 'refs/heads/main' }}
     - name: Perpare for export
       working-directory: ./music
       run: mv svgs.json svg
@@ -129,23 +137,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: [nginx, nginx-gz, statigz, nginx-prpc]
+        variant: [default, gz, gz-br]
         include:
-          - variant: nginx-prpc
+          - variant: default
             compression: semi-redundant gzip/brotli
             server: nginx
-          - variant: nginx-gz
+          - variant: gz
             suffix: -nginx-gz
             compression: gzip
             server: nginx
-          - variant: nginx
+          - variant: gz-br
             suffix: -nginx-gz-br
             compression: redundant gzip/brotli
             server: nginx
-          - variant: statigz
-            suffix: -statigz-br
-            compression: brotli
-            server: statigz
     permissions:
       contents: read
       packages: write
@@ -183,7 +187,7 @@ jobs:
       - name: Build and push Docker image (${{ matrix.server }} with ${{ matrix.compression }} precompression)
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          file: docker/${{ matrix.variant }}/Dockerfile
+          file: docker/${{ matrix.server }}/${{ matrix.variant }}.Dockerfile
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}

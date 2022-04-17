@@ -6,21 +6,30 @@ import createPersistedState from 'vuex-persistedstate'
 import { generatorModule, GeneratorState } from './generator'
 import { listsModule, SongList } from './lists'
 
+/* eslint-disable no-unused-vars */
 /** Type declaration for the storage. */
+export enum BooleanSettings {
+  translate = 'translate',
+  larger = 'larger',
+  generator = 'generator',
+  makelist = 'makelist',
+  sheetmusic = 'sheetmusic'
+}
+
+export enum MultipleStateSettings {
+  theme = 'theme',
+  touchAction = 'touchAction' // 'none' | 'swipe' | 'zoom' | 'all'
+}
+
 export interface State {
-  settings: {
-    translate: boolean,
-    theme: string,
-    larger: boolean,
-    generator: boolean,
-    makelist: boolean,
-    sheetmusic: boolean,
-    touchAction: string // 'none' | 'swipe' | 'zoom' | 'all'
-  },
+  settings: {[key in MultipleStateSettings]: string} & {[key in BooleanSettings]: boolean},
   version: string, // Settings version (could be useful on backwards-compatibility-breaking schema changes).
   generator: GeneratorState,
   lists: SongList[]
 }
+/* eslint-enable no-unused-vars */
+
+/** Helpers. Should be integrated into the State interface */
 
 /** Allowed arguments to the setSetting function, see `store.mutations.setSetting`. */
 type SetSettingProps = {
@@ -45,14 +54,14 @@ export default createStore<State>({
       touchAction: 'all'
     },
     version: '1'
-  } as State, // We need to explicity say that this qualifies as State, since the generator property is loaded through a module. This can cause problems if you change the schema.
+  } as unknown as State, // We need to explicity say that this qualifies as State, since the generator property is loaded through a module. This can cause problems if you change the schema.
   mutations: {
     /**
      * Toggles a setting by the given `key`, to the opposite boolean value.
      * @param state The storage state. Not passed manually
      * @param key The key, identifying the setting.
      */
-    toggleSetting(state, key: 'translate' | 'larger' | 'generator' | 'sheetmusic') {
+    toggleSetting(state, key: BooleanSettings) {
       state.settings[key] = !(state.settings[key])
     },
     /**
@@ -62,7 +71,7 @@ export default createStore<State>({
      * @param key The key, identifying the setting.
      * @param value The boolean value to set the setting to.
      */
-    toggleSettingTo(state, { key, value }: { key: 'translate' | 'larger' | 'generator' | 'sheetmusic', value: boolean }) {
+    toggleSettingTo(state, { key, value }: { key: BooleanSettings, value: boolean }) {
       state.settings[key] = value
     },
     /**

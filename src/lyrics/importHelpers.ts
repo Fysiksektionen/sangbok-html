@@ -20,7 +20,8 @@ export function addPathToChapter (chapter: JSONChapter, index: number): Chapter 
  * @returns true if the song has sheetmusic. false otherwise.
  */
 export function hasSheetMusic(song: Song): boolean {
-  return svglist.filter(s => { return s.startsWith(song.index) }).length > 0
+  // The dot needs to be here, otherwise, songs like ζ1 may think it has ζ11 as sheet music.
+  return svglist.filter(s => { return s.startsWith(song.index + '.') }).length > 0
 }
 
 /**

@@ -2,7 +2,7 @@ import { flushPromises, mount } from '@vue/test-utils'
 import Vue3TouchEvents from 'vue3-touch-events'
 import router from '@/router'
 import store, { key } from '@/store'
-import App from '@/App.vue'
+import App from '@/App'
 
 test('Search box', async () => {
   router.push('/')

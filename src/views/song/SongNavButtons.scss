@@ -1,0 +1,35 @@
+.navbuttons {
+  padding: 20px 0;
+  text-align: center;
+
+  &>div {
+    width: 50%;
+    display: inline-block;
+
+    &>div {
+      $navbutton-spacing: 12px;
+      border-radius: $navbutton-spacing;
+      margin: $navbutton-spacing;
+      padding: $navbutton-spacing;
+
+      &>div {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &>img {
+          height: 0.5em;
+        }
+      }
+    }
+
+    &:last-child>div>div>img {
+      transform: scaleX(-1);
+    }
+  }
+}
+
+div.filler {
+  opacity: 0;
+}

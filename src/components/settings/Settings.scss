@@ -1,0 +1,74 @@
+/* TODO: This is redundantly defined, also in SettingsButton.vue*/
+.component-settings {
+    .checkmark {
+        float: right;
+        width: 0.8em;
+        height: 0.8em;
+        padding: 0;
+        margin-right: 0.1em;
+    }
+
+    /* TODO: don't hard-code top positions. */
+    top: 1.5em;
+    position: fixed;
+    left: 0;
+    right: 0;
+    padding: 0.5em;
+    padding-bottom: 0;
+    font-size: 1.2em;
+    transition: top 0.3s ease-in-out;
+    z-index: 9;
+
+    &>div {
+        width: 100%;
+        padding: 0.8em 0;
+    }
+
+    & .copy .checkmark {
+        float: right;
+        width: 0.8em;
+        height: 0.8em;
+        padding: 0;
+        margin-right: 0.1em;
+    }
+
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity 0.5s ease;
+    }
+
+    .fade-leave-to {
+        opacity: 0;
+    }
+}
+
+.component-settings-switch {
+    &div.setting {
+        padding: 0.8em 0;
+    }
+
+    & div.switch {
+        float: right;
+        padding: 0;
+
+        &>span {
+            font-size: 0.8em;
+            border-width: 1px 0px;
+            border-style: solid;
+            display: inline-block;
+            padding: 0.2em 0.5em;
+        }
+
+        &>span:first-child {
+            border-left-width: 1px;
+            border-top-left-radius: 0.4em;
+            border-bottom-left-radius: 0.4em;
+        }
+
+        &>span:last-child {
+            border-right-width: 1px;
+            border-top-right-radius: 0.4em;
+            border-bottom-right-radius: 0.4em;
+        }
+    }
+}

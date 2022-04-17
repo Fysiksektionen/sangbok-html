@@ -1,0 +1,37 @@
+.dropdown-enter-from,
+.dropdown-leave-to {
+  /* See hard-coded style property to set transition speed. */
+  /* TODO: Set dropdown speeds using classes. */
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.navbar {
+  position: sticky;
+  width: 100%;
+  top: 0;
+  height: 2.3em;
+  z-index: 100;
+
+  & img {
+    height: 1em;
+  }
+
+  & button {
+    background-color: transparent;
+    height: 100%;
+    border: 0;
+    padding: 0.8em 0.8em;
+  }
+
+  & .title {
+    font-family: "Lato", sans-serif;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding-top: 0.4em;
+    z-index: -1;
+  }
+}

@@ -1,0 +1,69 @@
+/* Global (=not theme-specific) styles for tsx components in this folder. */
+/* See themed.scss for theme-sepecific styles. */
+
+.component-modal {
+  /* Blur background */
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(3px) saturate(80%);
+  position: fixed;
+
+  &>.modal-box {
+    /* Main box style */
+    border-radius: 0.5em;
+    background-color: rgba(0, 0, 0, 0);
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+
+    height: max-content;
+    min-width: max(4cm, 30%);
+
+    & header {
+      text-align: center;
+      border-top-left-radius: 0.5em;
+      border-top-right-radius: 0.5em;
+
+      & h1,
+      h2,
+      h3,
+      h4 {
+        margin: 0;
+      }
+    }
+
+    & footer {
+      border-bottom-left-radius: 0.5em;
+      border-bottom-right-radius: 0.5em;
+    }
+
+    /* Main content */
+    &>div {
+      overflow-y: auto;
+      max-height: 70vh;
+      padding: 0.5em;
+
+      &:last-child {
+        border-bottom-left-radius: 0.5em;
+        border-bottom-right-radius: 0.5em;
+      }
+    }
+  }
+}
+
+form.component-search {
+  width: 100%;
+  text-align: center;
+
+  & input[type=search] {
+    margin: 1.62em 0;
+    width: 85%;
+    border: 0;
+    height: 1.8em;
+    border-radius: 0.3em;
+    padding-left: 0.5em !important;
+    padding-right: 0.5em !important;
+  }
+}

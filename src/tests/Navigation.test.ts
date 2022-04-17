@@ -2,7 +2,7 @@ import { mount, flushPromises } from '@vue/test-utils'
 import Vue3TouchEvents from 'vue3-touch-events'
 import router from '@/router'
 import store, { key } from '@/store'
-import App from '@/App.vue'
+import App from '@/App'
 
 // Tests for inter-view navigation. For more specific views, see other tests.
 
