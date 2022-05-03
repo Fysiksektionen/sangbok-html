@@ -11,9 +11,9 @@ import { SpecificDownloadSettings, specificSettings } from './specificSettings'
  */
 function getMelodyContent(gs: GeneralSettings, song: Song): string[] {
   const melodyContent = ((song.melody || '')
-    .split('\n').filter(function (line) {
-      return (!gs.showSheetMusicNotice.value || line.indexOf('notkapitlet') === -1)
-    }).join('\\*\n'))
+    .split('\n').filter(
+      (line) => (!gs.showSheetMusicNotice.value || line.indexOf('notkapitlet') === -1)
+    ).join('\\*\n'))
   if (melodyContent.length !== 0) {
     return [`\\melody{${escapeAll(melodyContent)}}\n`]
   }

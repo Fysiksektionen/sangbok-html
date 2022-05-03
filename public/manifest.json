@@ -1,0 +1,20 @@
+{
+    "name": "Konglig Fysiks S\u00e5ngbok",
+    "short_name": "S\u00e5ngboken",    "lang": "sv",
+    "dir": "ltr",
+    "display": "minimal-ui",
+    "background_color": "#222222",
+    "theme_color": "#ff6600",
+    "author": "F.com",
+    "description": "Den officiella, s\u00f6kbara s\u00e5ngboken f\u00f6r Fysiksektionen vid THS inneh\u00e5ller b\u00e5de nya och gamla s\u00e5nger f\u00f6r gasque och bankett.",
+    "orientation": "portrait",
+    "start_url": "/sangbok/",
+    "scope": "/sangbok/",
+    "icons": [
+        {
+            "src": "/sangbok/thumbnail.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
