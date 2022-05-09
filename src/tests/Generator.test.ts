@@ -4,8 +4,6 @@ import router from '@/router'
 import store, { key } from '@/store'
 import App from '@/App'
 import { escapeAll } from '@/utils/export/escapes'
-import { generalSettings, GeneralSettings } from '@/utils/export/generalSettings'
-import { specificSettings } from '@/utils/export/specificSettings'
 
 test('Generator navigation', async () => {
   router.push('/')
@@ -64,5 +62,5 @@ test('Generator navigation', async () => {
 })
 
 test('Song pre-processing', async () => {
-  expect(escapeAll("\"Citerad text\" & annat")).toEqual("''Citerad text'' \\& annat")
+  expect(escapeAll('"Citerad text" & annat')).toEqual("''Citerad text'' \\& annat")
 })
