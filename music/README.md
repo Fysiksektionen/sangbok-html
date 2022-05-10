@@ -2,7 +2,7 @@
 Noter skrivs för närvarande i [MuseScore](https://musescore.org), eftersom det är gratis, och har ett cli för att generera svg-filer.
 
 ## Nya noter
-Systemet hittar noter med hjälp av indexet. Med andra ord: se till att namnet på din .mscz-fil har börjar med samma index som låten du vill lägga till den med. När du läser detta kanske jag har fixat det, men det innebär för närvarande att noter ej kan läggas till i THS-kapitlet. (Se issue [25](https://github.com/Fysiksektionen/sangbok-html/issues/25))
+Systemet hittar noter med hjälp av indexet. Med andra ord: se till att namnet på din .mscz-fil har börjar med samma index som låten du vill lägga till den med, följt direkt av en punkt. När du läser detta kanske jag har fixat det, men det innebär för närvarande att noter ej kan läggas till i THS-kapitlet. (Se issue [25](https://github.com/Fysiksektionen/sangbok-html/issues/25)). Eftersom noterna skalas medan de genereras, bör notfilen inte ha några manuella sid- och notsystembrytningar.
 
 ## Konvertering
 Denna mapp innehåller ett skript, `./convert.sh`, som konverterar om noterna i `mscz`-mappen till svg:s. Skriptet måste köras från denna mapp.

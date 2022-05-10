@@ -93,22 +93,29 @@ jobs:
       if: ${{ github.ref != 'refs/heads/main' }}
     - name: Convert mscz to compressed svg:s (from scratch)
       working-directory: ./music
-      run: ./convert.sh --compress --no-move --force
+      run: ./convert.sh --compress --no-move --force-on-change
       if: ${{ github.ref == 'refs/heads/main' }}
+    - name: Perpare for export
+      working-directory: ./music
+      run: mv svgs.json svg
     - name: Archive cache for future use
       uses: actions/upload-artifact@v2
       with:
         name: music-svgs-cache
         path: music/svg.tar.lzma
       if: ${{ github.ref == 'refs/heads/main' }}
-    - name: Perpare for export
-      working-directory: ./music
-      run: mv svgs.json svg
+    - name: Archive mscz folder hash for future use
+      uses: actions/upload-artifact@v2
+      with:
+        name: sha1
+        path: music/mscz.sha1
+      if: ${{ github.ref == 'refs/heads/main' }}
     - name: Archive production artifacts
       uses: actions/upload-artifact@v2
       with:
         name: music-svgs
         path: music/svg
+    
 
 #   compression-benchmark:
 #     runs-on: ubuntu-latest

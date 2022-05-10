@@ -36,7 +36,7 @@ export const songs: Song[] = (function () {
  */
 export function getSongByStringIndex(index: string): Song | undefined {
   // List of all songs (for viewing. Includes easter eggs.)
-  const allSongs: Song[] = songs.concat(leo.songs as Song[])
+  const allSongs: Song[] = songs.concat(leo.songs as Song[]).concat(ths.songs as Song[])
   const hits = allSongs.filter(s => s.index === index)
   if (hits.length > 0) { return hits[0] }
 }
