@@ -7,12 +7,13 @@ if [[ $*\  == *--help\ * || $*\  == *-h\ * ]]; then
     echo -e "Användning: ./convert.sh [OPTION]..."
     echo -e "Konverterar .mscz-filer i mscz-mappen till svg:er, vilka lagras i mappen svg/. Bör köras från music/-mappen."
     echo -e "\nFlaggor:"
-    echo -e "\t-c, --compress\tKomprimera svg-filerna"
-    echo -e "\t-f, --force\tTvinga omgenerering av existerande filer"
-    echo -e "\t--no-generate\tGenerara inga nya noter"
-    echo -e "\t--no-hash\tInkludera inte en checksum i filnamnet"
-    echo -e "\t--no-json\tStrunta i att generera svgs.json"
-    echo -e "\t--no-move\tFlytta inte filerna till deras målmappar (för användning med Vue)"
+    echo -e "\t-c, --compress\t\tKomprimera svg-filerna"
+    echo -e "\t--force\t\t\tTvinga omgenerering av existerande filer"
+    echo -e "\t--force-on-change\tTvinga omgenerering av alla existerande filer om någon fil i /mscz/ har uppdateras"
+    echo -e "\t--no-generate\t\tGenerara inga nya noter"
+    echo -e "\t--no-hash\t\tInkludera inte en checksum i filnamnet"
+    echo -e "\t--no-json\t\tStrunta i att generera svgs.json"
+    echo -e "\t--no-move\t\tFlytta inte filerna till deras målmappar (för användning med Vue)"
     exit 0
 fi
 
@@ -20,8 +21,11 @@ fi
 ## Cleanup and directory creation
 ##
 mkdir -p svg
-if [[ $*\  == *--force\ * ]]; then
+if [[ $*\  == *--force\ * || "$(sha1sum mscz/*.mscz | sha1sum)" != "$(cat mscz.sha1)" && $*\  == *--force-on-change\ * ]]; then
+    echo "\e[1;32mGenererar från scratch.\e[0m"
     rm svg/*.svg
+elif [[ "$(sha1sum mscz/*.mscz | sha1sum)" == "$(cat mscz.sha1)" && $*\  == *--force-on-change\ * ]]; then
+    echo "\e[1;32mInga förändringar av noter har skett.\e[0m"
 fi
 
 
@@ -83,7 +87,7 @@ rm -rf tmp
 ##
 ## Compress svg:s
 ##
-if [[ $*\  == *--compress\ *  || $*\  == *-c\ * ]]; then
+if [[ ($*\  == *--compress\ *  || $*\  == *-c\ *) ]]; then
     echo -e "\e[1;32mKomprimerar filer:\e[0m"
     counter=1
     cd svg
@@ -93,7 +97,7 @@ if [[ $*\  == *--compress\ *  || $*\  == *-c\ * ]]; then
             echo -e "$file är redan komprimerad."
         else
             counter=$((counter+1))
-            svgo --input "$file" --output "${file//.svg/.min.svg}" --multipass && rm "$file" || echo -e "\e[31mKomprimering misslyckades\e[0m för $file." &
+            npx svgo --input "$file" --output "${file//.svg/.min.svg}" --multipass && rm "$file" || echo -e "\e[31mKomprimering misslyckades\e[0m för $file." &
         fi
         if [[ $counter > 6 ]]; then
             # Allow up to 6 compressions in parallell. Generally, you want to set this to the number of scale factors.
@@ -131,7 +135,8 @@ if [[ ! $*\  == *--no-move\ * ]]; then
 fi
 
 # Only create a cache if we reconverted from scratch and compressed everything.
-if [[ $*\  == *--force\ * && $*\  == *--compress\ * ]]; then
+if [[ $*\  == *--force\ * && $*\  == *--compress\ *  ||  "$(sha1sum mscz/*.mscz | sha1sum)" != "$(cat mscz.sha1)" && $*\  == *--force-on-change\ * && $*\  == *--compress\ * ]]; then
     echo -e "\e[1;32mSkapar cache.\e[0m"
     tar -cJf svg.tar.lzma svg/*
+    sha1sum mscz/*.mscz | sha1sum > mscz.sha1
 fi

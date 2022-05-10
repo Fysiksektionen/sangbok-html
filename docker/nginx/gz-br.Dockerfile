@@ -3,6 +3,8 @@
 ##
 FROM node:16-alpine AS frontend-build
 
+RUN apk add --no-cache git
+
 WORKDIR /app
 
 # Install packages
@@ -18,6 +20,7 @@ COPY *.json .
 COPY *.js .
 COPY .eslintrc .
 COPY src src
+COPY .git .git
 
 # Build app
 RUN npx vue-cli-service build --modern
