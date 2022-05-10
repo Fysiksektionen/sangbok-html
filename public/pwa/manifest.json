@@ -2,7 +2,7 @@
     "name": "Konglig Fysiks S\u00e5ngbok",
     "short_name": "S\u00e5ngboken",    "lang": "sv",
     "dir": "ltr",
-    "display": "minimal-ui",
+    "display": "standalone",
     "background_color": "#222222",
     "theme_color": "#ff6600",
     "author": "F.com",
@@ -15,6 +15,18 @@
             "src": "/sangbok/thumbnail.png",
             "sizes": "512x512",
             "type": "image/png"
+        },
+        {
+            "src": "/sangbok/pwa/thumbnail_maskable_192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/sangbok/pwa/thumbnail_maskable_512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
         }
     ]
 }
