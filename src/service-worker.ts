@@ -1,5 +1,5 @@
 import { registerRoute } from 'workbox-routing'
-import { StaleWhileRevalidate, CacheFirst } from 'workbox-strategies'
+import { StaleWhileRevalidate, CacheFirst, NetworkFirst } from 'workbox-strategies'
 import { ExpirationPlugin } from 'workbox-expiration'
 import { precacheAndRoute, PrecacheEntry } from 'workbox-precaching'
 
@@ -29,10 +29,10 @@ const msvgRE = /msvg\/.*\.(?:png|gif|jpg|jpeg|svg)$/
 //
 registerRoute(
   essentialsRE,
-  new StaleWhileRevalidate({
+  new NetworkFirst({
     cacheName: 'index',
     plugins: [
-      new ExpirationPlugin({ maxAgeSeconds: 4 * 60 * 60 })
+      new ExpirationPlugin({ maxAgeSeconds: 12 * 60 * 60 })
     ]
   })
 )
