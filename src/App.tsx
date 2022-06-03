@@ -8,7 +8,7 @@ import { useStore } from 'vuex'
 
 /** Main app. */
 export default defineComponent({
-  name: 'Sångbok',
+  name: 'SångbokApp',
   setup() { return { store: useStore(key) } },
   created () {
     // Ugly fix that updates the theme. Also done in store.

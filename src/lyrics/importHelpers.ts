@@ -41,5 +41,5 @@ export function addSongTags(song: Song, songId: number, chapterId: number | stri
   // If the song already had tags defined, we append these to the output tags.
   if (song.tags !== undefined) { tags.push(...song.tags) }
 
-  return { ...song, chapterindex: chapterId, songindex: songId, tags: tags } as SongHit
+  return { ...song, chapterindex: chapterId, songindex: songId, tags } as SongHit
 }

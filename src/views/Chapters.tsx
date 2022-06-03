@@ -13,7 +13,7 @@ export default defineComponent({
   name: 'ChaptersView',
   data() {
     return {
-      chapters: chapters,
+      chapters,
       onlyAllowZoomOut: onlyAllowZoomOut()
     }
   },

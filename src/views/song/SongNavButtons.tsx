@@ -1,4 +1,5 @@
 import './SongNavButtons.scss'
+import backImage from '@/assets/back_black.png'
 
 import { useRoute, useRouter } from 'vue-router'
 
@@ -28,8 +29,7 @@ export default function SongNavButtons(): JSX.Element {
               onClick={() => router.replace(songWrapper.chapterPath + '/song/' + songWrapper.index)}>
               <div>{songWrapper.song.title}</div>
               <div>
-                {/* TODO: Import through webpack or use unicode. */}
-                <img src="img/back_black.png" /> &nbsp;
+                <img src={backImage} /> &nbsp;
                 <Index index={(songWrapper.song.index) || ''} />
               </div>
             </div>

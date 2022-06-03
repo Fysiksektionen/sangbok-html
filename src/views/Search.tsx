@@ -14,7 +14,7 @@ import { SwipeIndicatorState } from '@/utils/swipe'
 
 /** View to list all songs in a chapter. */
 export default defineComponent({
-  name: 'Search',
+  name: 'SearchView',
   setup() { return { store: useStore(key) } },
   methods: {
     /** Sends the user to the target of the hit. */

@@ -13,9 +13,9 @@ export type GeneratorState = {
 
 export const generatorModule = {
   state: {
+    generalSettings,
+    specificSettings,
     generatorSongs: [],
-    generalSettings: generalSettings,
-    specificSettings: specificSettings,
     version: '1'
   } as GeneratorState,
   getters: {

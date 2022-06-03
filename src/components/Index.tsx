@@ -11,7 +11,7 @@ function computeData(index: string): { key?: string, image?: string, text: strin
   for (const key of Object.keys(INDEX_MAP)) {
     if (index.startsWith(key)) {
       return {
-        key: key,
+        key,
         image: INDEX_MAP[key],
         text: index.slice(key.length)
       }

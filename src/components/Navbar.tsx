@@ -5,6 +5,10 @@ import Dropdown from '@/components/settings/Settings'
 import { RouteLocationNormalized } from 'vue-router'
 import { getChapterFromRoute } from '@/lyrics'
 
+import backImage from '@/assets/back.png'
+import settingsImage from '@/assets/settings.png'
+import crossImage from '@/assets/x.png'
+
 /** Returns the path of the parent page. */
 function getParentPath(route: RouteLocationNormalized): string {
   const rn: string = route.name ? route.name.toString() : ''
@@ -22,7 +26,7 @@ function getParentPath(route: RouteLocationNormalized): string {
 
 /** The top navbar. Closely tied with the Dropdown component (see Settings.tsx). */
 export default defineComponent({
-  name: 'Navbar',
+  name: 'NavbarComponent',
   props: { hideBackButton: Boolean },
   components: { Dropdown },
   data() { return { showSettings: false } },
@@ -44,13 +48,13 @@ export default defineComponent({
           {
             !this.hideBackButton &&
             <div style="float: left;" onClick={this.goBack} data-test="navbarBackButton">
-              <button><img src="img/back.png" alt="Gå tillbaka" /></button>
+              <button><img src={backImage} alt="Gå tillbaka" /></button>
             </div>
           }
           <div class="title">Sångboken</div>
           <div style="float: right;" data-test="settingsButtonWrapper">
-            {!this.showSettings && <button onClick={() => { this.showSettings = true }} data-test="navbarShowSettingsButton"><img src="img/settings.png" alt="Visa inställningar" /></button>}
-            {this.showSettings && <button onClick={() => { this.showSettings = false }} data-test="navbarHideSettingsButton"><img src="img/x.png" alt="Dölj inställningar" /></button>}
+            {!this.showSettings && <button onClick={() => { this.showSettings = true }} data-test="navbarShowSettingsButton"><img src={settingsImage} alt="Visa inställningar" /></button>}
+            {this.showSettings && <button onClick={() => { this.showSettings = false }} data-test="navbarHideSettingsButton"><img src={crossImage} alt="Dölj inställningar" /></button>}
           </div>
         </div>
 

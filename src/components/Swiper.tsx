@@ -1,6 +1,7 @@
 // Component for handling swipes.
 
 import './Swiper.scss'
+import backImage from '@/assets/back.png'
 
 import { Transition, h, withDirectives, resolveDirective, Directive, defineComponent } from 'vue'
 import { useStore } from 'vuex'
@@ -22,7 +23,7 @@ type TouchCoord = [number, number, SwipeIndicatorState] | [undefined, undefined,
  * @param allowZoom - Wether to allow zoom or not.
  */
 export default defineComponent({
-  name: 'Swiper',
+  name: 'SwiperWrapper',
   props: {
     swipeHandler: Function,
     left: String, // Actually 'allow' | 'disallow' | 'hide', but Vue doesn't validate things that closely
@@ -124,14 +125,14 @@ export default defineComponent({
           <Transition name="swipe-right">
             {this.showSwipeIndicator.includes('right') &&
               <div class={{ 'swipe-indicator': true, right: true, 'bg-highlight': true, disabled: this.showSwipeIndicator.includes('x') }}>
-                {!this.showSwipeIndicator.includes('x') && <img src="img/back.png" style="transform: scaleX(-1);" />}
+                {!this.showSwipeIndicator.includes('x') && <img src={backImage} style="transform: scaleX(-1);" />}
                 {this.showSwipeIndicator.includes('x') ? '⊘' : ''}
               </div>}
           </Transition>
           <Transition name="swipe-left">
             {this.showSwipeIndicator.includes('left') &&
               <div class={{ 'swipe-indicator': true, left: true, 'bg-highlight': true, disabled: this.showSwipeIndicator.includes('x') }}>
-                {!this.showSwipeIndicator.includes('x') && <img src="img/back.png" />}
+                {!this.showSwipeIndicator.includes('x') && <img src={backImage} />}
                 {this.showSwipeIndicator.includes('x') ? '⊘' : ''}
               </div>}
           </Transition>

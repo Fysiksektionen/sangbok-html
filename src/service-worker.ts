@@ -10,7 +10,7 @@ declare const __COMMIT__: string
 // eslint-disable-next-line
 const assets = ((global as any).serviceWorkerOption.assets as string[]).map((url) => {
   return {
-    url: url,
+    url,
     // Disable revision caching in development mode
     revision: ((process.env.NODE_ENV !== 'development') && __COMMIT__) || undefined
   } as PrecacheEntry

@@ -21,7 +21,7 @@ export default defineComponent({
     const listIdx = param2int(route.params.listId)
     const store = useStore(key)
     return {
-      listIdx: listIdx,
+      listIdx,
       qrVisible: false,
       qrImage: undefined as string | undefined,
       // Only used for updates. This initialization method may be problematic if this view is used as a component (which it's not supposed to be).
@@ -45,7 +45,7 @@ export default defineComponent({
     }
   },
   methods: {
-    hasSheetMusic: hasSheetMusic,
+    hasSheetMusic,
     swipeHandler(direction: SwipeIndicatorState) {
       // Go back one step if the user swipes to the right (which shows the indicator on the 'left')
       (direction === 'left') && this.$router.go(-1)

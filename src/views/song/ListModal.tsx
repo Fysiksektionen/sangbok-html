@@ -12,6 +12,7 @@ import { SongList } from '@/store/lists'
 /** Modal for selecting which list to add the current song (inferred from route) to. */
 export default defineComponent({
   name: 'SongViewListModal',
+  emits: ['close'],
   setup() { return { store: useStore(key) } },
   data() { return { lists: useStore(key).state.lists } },
   computed: {

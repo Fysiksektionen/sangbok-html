@@ -27,6 +27,7 @@ test('Chapter back-button test', async () => {
 
   router.replace('/chapter/0')
   await flushPromises()
+  expect(router.currentRoute.value.name).toContain('Chapter')
 
   const wrapper = mount(Navbar, {
     global: { plugins: [router, [store, key], Vue3TouchEvents] }
@@ -34,9 +35,6 @@ test('Chapter back-button test', async () => {
   await wrapper.find('[data-test="navbarBackButton"]').trigger('click')
   await flushPromises()
   expect(router.currentRoute.value.name).toContain('Home')
-
-  router.back()
-  await flushPromises()
 })
 
 test('Song back-button test', async () => {
@@ -44,6 +42,7 @@ test('Song back-button test', async () => {
 
   router.replace('/chapter/0/song/0')
   await flushPromises()
+  expect(router.currentRoute.value.name).toContain('Song')
 
   const wrapper = mount(Navbar, {
     global: { plugins: [router, [store, key], Vue3TouchEvents] }
@@ -51,9 +50,6 @@ test('Song back-button test', async () => {
   await wrapper.find('[data-test="navbarBackButton"]').trigger('click')
   await flushPromises()
   expect(router.currentRoute.value.name).toContain('Chapter')
-
-  router.back()
-  await flushPromises()
 })
 
 test('Search back-button test', async () => {
@@ -61,6 +57,7 @@ test('Search back-button test', async () => {
 
   router.replace('/search/test')
   await flushPromises()
+  expect(router.currentRoute.value.name).toContain('Search')
 
   const wrapper = mount(Navbar, {
     global: { plugins: [router, [store, key], Vue3TouchEvents] }
@@ -68,9 +65,6 @@ test('Search back-button test', async () => {
   await wrapper.find('[data-test="navbarBackButton"]').trigger('click')
   await flushPromises()
   expect(router.currentRoute.value.name).toContain('Home')
-
-  router.back()
-  await flushPromises()
 })
 
 // TODO: Add test for going back from the list view.

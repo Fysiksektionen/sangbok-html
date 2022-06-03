@@ -19,7 +19,7 @@ export default defineComponent({
   setup() { return { store: useStore(key) } },
   data() {
     return {
-      chapters: chapters,
+      chapters,
       generatorSongs: useStore(key).state.generator.generatorSongs,
       generalSettings: useStore(key).state.generator.generalSettings,
       specificSettings: useStore(key).state.generator.specificSettings
@@ -27,7 +27,7 @@ export default defineComponent({
   },
   methods: {
     // TODO: Don't use this function directly in the template.
-    getSongByStringIndex: getSongByStringIndex,
+    getSongByStringIndex,
     /**
      * Attempts to add the current song (or the songs of the current chapter) to the generator.
      */

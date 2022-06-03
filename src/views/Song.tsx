@@ -32,7 +32,7 @@ export default defineComponent({
     sheetMusicAvailable() { return hasSheetMusic(getSongFromRoute(this.$route) as Song) }
   },
   methods: {
-    toHTML: toHTML,
+    toHTML,
     /** Sends the user to the next or previous song on swipes. */
     swipeHandler(direction: SwipeIndicatorState) {
       // If newSong is false we are on the first/last song and cannot swipe further.

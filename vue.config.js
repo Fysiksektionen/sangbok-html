@@ -1,7 +1,8 @@
 // vue.config.js
 /* eslint-disable @typescript-eslint/no-var-requires */
 const webpack = require('webpack')
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack5-plugin')
+const path = require('path')
 
 // Root path
 const root = '/sangbok/'
@@ -34,8 +35,6 @@ module.exports = {
   },
   chainWebpack: config => {
     config.output.chunkFilename('js/[name].[chunkhash:8].js') // Allow custom filenames for chunks
-    config.module.rule('images').use('url-loader').loader('url-loader')
-      .tap(options => Object.assign(options, { limit: 5120 })) // Limit inline images to 5kb
     config.plugins.delete('prefetch')
     // config.optimization.splitChunks({ // Doesn't work.
     //   cacheGroups: {
@@ -50,5 +49,8 @@ module.exports = {
     //   }
     // })
   },
-  devServer: { headers: { 'Service-Worker-Allowed': 'http://localhost:8080' } }
+  devServer: {
+    headers: { 'Service-Worker-Allowed': 'http://localhost:8080' },
+    static: { directory: path.join(__dirname, 'public'), publicPath: root }
+  }
 }

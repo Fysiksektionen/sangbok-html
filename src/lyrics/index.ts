@@ -9,8 +9,8 @@ import { addPathToChapter, addSongTags } from './importHelpers'
 import { Chapter, Song, SongIndex, JSONChapter } from './types'
 
 // Exports from other files
+export type { Song, Chapter, SongHit, SongIndex } from './types'
 export { hasSheetMusic } from './importHelpers'
-export { Song, Chapter, SongHit, SongIndex } from './types'
 export { getChapterFromRoute, getSongFromRoute, getOffsetSongFromRoute, param2int } from './routeGetters'
 
 /** Main menu chapters. */
