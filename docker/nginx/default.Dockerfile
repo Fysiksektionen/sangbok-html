@@ -1,7 +1,7 @@
 ##
 ##  Build frontend
 ##
-FROM node:16-alpine AS frontend-build
+FROM node:18-alpine AS frontend-build
 
 RUN apk add --no-cache git
 
