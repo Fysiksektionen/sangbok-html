@@ -27,8 +27,10 @@ const msvgRE = /msvg\/.*\.(?:png|gif|jpg|jpeg|svg)$/
 //
 // Cache rules
 //
+
+// If the index.html is updated, the essentials will be updated due to them having a new hash.
 registerRoute(
-  essentialsRE,
+  indexRE,
   new NetworkFirst({
     cacheName: 'index',
     plugins: [
@@ -37,6 +39,7 @@ registerRoute(
   })
 )
 
+// These are hashed, hence we don't need to refresh them from the server every time.
 registerRoute(
   essentialsRE,
   new CacheFirst({
@@ -47,6 +50,7 @@ registerRoute(
   })
 )
 
+// Images may be updated, but it's not very urgent
 registerRoute(
   mainImagesRE,
   new StaleWhileRevalidate({
@@ -57,6 +61,7 @@ registerRoute(
   })
 )
 
+// Sheet music may be updated, but it's not very urgent. We also don't want to store a lot of these, since they take up a fair bit of space.
 registerRoute(
   msvgRE,
   new StaleWhileRevalidate({
