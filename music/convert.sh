@@ -22,10 +22,10 @@ fi
 ##
 mkdir -p svg
 if [[ $*\  == *--force\ * || "$(sha1sum mscz/*.mscz | sha1sum)" != "$(cat mscz.sha1)" && $*\  == *--force-on-change\ * ]]; then
-    echo "\e[1;32mGenererar från scratch.\e[0m"
+    echo -e "\e[1;32mGenererar från scratch.\e[0m"
     rm svg/*.svg
 elif [[ "$(sha1sum mscz/*.mscz | sha1sum)" == "$(cat mscz.sha1)" && $*\  == *--force-on-change\ * ]]; then
-    echo "\e[1;32mInga förändringar av noter har skett.\e[0m"
+    echo -e "\e[1;32mInga förändringar av noter har skett.\e[0m"
 fi
 
 

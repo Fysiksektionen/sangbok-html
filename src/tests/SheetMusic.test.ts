@@ -29,3 +29,5 @@ test('Sheet music view', async () => {
     expect(wrapper.find('.component-sheet-music-renderer').exists()).toEqual(false)
   }
 })
+
+// TODO: Test the zoom buttons
