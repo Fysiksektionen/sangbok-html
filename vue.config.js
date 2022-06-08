@@ -5,7 +5,7 @@ const ServiceWorkerWebpackPlugin = require('serviceworker-webpack5-plugin')
 const path = require('path')
 
 // Root path
-const root = '/sangbok/'
+const root = ''
 
 // Version info
 let commitId

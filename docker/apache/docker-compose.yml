@@ -1,0 +1,24 @@
+# Sangbok-Apache-Redirect-Compatibility-Testing (SARCT)
+version: "2.4"
+networks:
+    sangbok-net:
+services:
+    apache:
+        image: httpd:2.4.46-alpine
+        container_name: sarct-apache
+        volumes:
+            - ./apache.conf:/usr/local/apache2/conf/httpd.conf:ro
+        networks:
+            - sangbok-net
+        ports:
+            - 80:80/tcp
+    sangbok:
+        build:
+            context: ../..
+            dockerfile: docker/nginx/gz.Dockerfile
+        container_name: sarct-sangbok
+        restart: unless-stopped
+        ports:
+            - 81:80/tcp
+        networks:
+            - sangbok-net
