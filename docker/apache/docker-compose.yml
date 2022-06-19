@@ -13,9 +13,13 @@ services:
         ports:
             - 80:80/tcp
     sangbok:
+        # Use this for the latest version
         build:
-            context: ../..
-            dockerfile: docker/nginx/gz.Dockerfile
+           context: ../..
+           dockerfile: docker/nginx/default.Dockerfile
+        # Use this (or similar) instead for update testing
+        # Note that certain files are indexed by commit, which may cause certain cache problems when using this testing method.
+        # image: ghcr.io/fysiksektionen/sangbok-html@sha256:73a7e635c2046609a032b5399cd056320cf81d02c1ee5ee95091b0aba12888fd
         container_name: sarct-sangbok
         restart: unless-stopped
         ports:

@@ -95,6 +95,9 @@ jobs:
       working-directory: ./music
       run: ./convert.sh --compress --no-move --force-on-change
       if: ${{ github.ref == 'refs/heads/main' }}
+    - name: Compute hashes
+      working-directory: ./music
+      run: sha1sum mscz/*.mscz
     - name: Perpare for export
       working-directory: ./music
       run: mv svgs.json svg

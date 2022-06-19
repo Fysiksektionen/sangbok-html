@@ -20,6 +20,7 @@ const assets = ((global as any).serviceWorkerOption.assets as string[]).map((url
 // Regexes
 //
 const indexRE = /index\.html$/
+const swRE = /sw\.js$/
 const essentialsRE = /\.(js|css)$/
 const mainImagesRE = /img\/.*\.(?:png|gif|jpg|jpeg|svg)$/
 const msvgRE = /msvg\/.*\.(?:png|gif|jpg|jpeg|svg)$/
@@ -33,9 +34,16 @@ registerRoute(
   indexRE,
   new NetworkFirst({
     cacheName: 'index',
-    plugins: [
-      new ExpirationPlugin({ maxAgeSeconds: 12 * 60 * 60 })
-    ]
+    plugins: [new ExpirationPlugin({ maxEntries: 1 })]
+  })
+)
+
+// Always try to update the service worker (TODO: Check if this works as intended)
+registerRoute(
+  swRE,
+  new NetworkFirst({
+    cacheName: 'sw',
+    plugins: [new ExpirationPlugin({ maxEntries: 1 })]
   })
 )
 
@@ -44,9 +52,7 @@ registerRoute(
   essentialsRE,
   new CacheFirst({
     cacheName: 'essentials',
-    plugins: [
-      new ExpirationPlugin({ maxAgeSeconds: 4 * 60 * 60 })
-    ]
+    plugins: [new ExpirationPlugin({ maxAgeSeconds: 24 * 60 * 60 })]
   })
 )
 
@@ -55,9 +61,7 @@ registerRoute(
   mainImagesRE,
   new StaleWhileRevalidate({
     cacheName: 'main-images',
-    plugins: [
-      new ExpirationPlugin({ maxAgeSeconds: 24 * 60 * 60 })
-    ]
+    plugins: [new ExpirationPlugin({ maxAgeSeconds: 24 * 60 * 60 })]
   })
 )
 
