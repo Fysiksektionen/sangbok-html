@@ -23,4 +23,4 @@ Se [src](src/Readme.md)-mappen.
 Hittar du [här](public/tex/blad.cls). Det finns även [en version](public/tex/blad.v1.1.3.cls) som är bakåtkompatibel med fkm*:s gamla mall, om du som läser detta bara vill ha en mall som löser problemet med dubbelsidighet. Den hanterar dock inte melodi-layout på rätt sätt. Får du problem med marginalerna, dubbelkolla att dokumentklassen är specificerad som `\documentclass[a4paper, titlepage, twoside]{blad}`.
 
 ## Nya låtar
-För att lägga till noter, gör en [MuseScore](https://musescore.org/)-fil med dessa, och följ sedan instruktionerna här[music/README.md]. Systemet för att lägga till nya låtar (texter) är inte helt enhetligt. Se (denna fil)[src/lyrics/README.md] för mer information.
+För att lägga till noter, gör en [MuseScore](https://musescore.org/)-fil med dessa, och följ sedan instruktionerna här[music/README.md]. Systemet för att lägga till nya låtar (texter) är inte helt enhetligt. Se [denna fil](src/lyrics/README.md) för mer information.
