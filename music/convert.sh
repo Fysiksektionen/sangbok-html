@@ -21,10 +21,10 @@ fi
 ## Cleanup and directory creation
 ##
 mkdir -p svg
-if [[ $*\  == *--force\ * || "$(sha1sum mscz/*.mscz | sha1sum)" != "$(cat mscz.sha1)" && $*\  == *--force-on-change\ * ]]; then
+if [[ $*\  == *--force\ * || "$(sha1sum mscz/*.mscz | sort | sed -z '$ s/\n$//' | sha1sum | sed -z '$ s/\n$//')" != "$(cat mscz.sha1)" && $*\  == *--force-on-change\ * ]]; then
     echo -e "\e[1;32mGenererar från scratch.\e[0m"
     rm svg/*.svg
-elif [[ "$(sha1sum mscz/*.mscz | sha1sum)" == "$(cat mscz.sha1)" && $*\  == *--force-on-change\ * ]]; then
+elif [[ "$(sha1sum mscz/*.mscz | sort | sed -z '$ s/\n$//' | sha1sum | sed -z '$ s/\n$//')" == "$(cat mscz.sha1)" && $*\  == *--force-on-change\ * ]]; then
     echo -e "\e[1;32mInga förändringar av noter har skett.\e[0m"
 fi
 
@@ -135,8 +135,8 @@ if [[ ! $*\  == *--no-move\ * ]]; then
 fi
 
 # Only create a cache if we reconverted from scratch and compressed everything.
-if [[ $*\  == *--force\ * && $*\  == *--compress\ *  ||  "$(sha1sum mscz/*.mscz | sha1sum)" != "$(cat mscz.sha1)" && $*\  == *--force-on-change\ * && $*\  == *--compress\ * ]]; then
+if [[ $*\  == *--force\ * && $*\  == *--compress\ *  ||  "$(sha1sum mscz/*.mscz | sort | sed -z '$ s/\n$//' | sha1sum | sed -z '$ s/\n$//')" != "$(cat mscz.sha1)" && $*\  == *--force-on-change\ * && $*\  == *--compress\ * ]]; then
     echo -e "\e[1;32mSkapar cache.\e[0m"
     tar -cJf svg.tar.lzma svg/*
-    sha1sum mscz/*.mscz | sha1sum > mscz.sha1
+    sha1sum mscz/*.mscz | sort | sed -z '$ s/\n$//' | sha1sum | sed -z '$ s/\n$//' > mscz.sha1
 fi

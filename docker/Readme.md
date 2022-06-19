@@ -1,5 +1,4 @@
 # Deployment
-
 ## Körning utan docker
 Självfallet kan programmet servas statiskt genom att köra `npm run build`, och kopiera över filerna från dist-mappen till lämplig plats på servern. I mappen du nu betraktar finns även en  `.htaccess`-fil som kan läggas tillsammans med de byggda filerna för att hantera caching. Du som gör detta är nog dock mer bevandrad i Apache än jag, så den kanske inte är så användbar.
 
@@ -27,6 +26,16 @@ Utöver detta finns andra containrar, som använder andra trade-offs mellan för
 * `nginx-gz-br` - Innehåller förkomprimerade filer i både brotli- och gzip-format. Brotli-filerna är ca. 30% mindre än motsvarande gzip-filer. 
 
 ### Varför fungerar inte bilderna?
-Se till att du proxyar trafiken till port 80 på containern. Containrarna är tänkta att användas bakom en reverse proxy (dvs. t.ex. [traefik](https://traefik.io/traefik/) eller någon webbserver, t.ex. [Apache](httpd.apache.org)), och accepterar requests till `/`, `/sangbok/` och `/sangbok2/`. Vill du ha den på någon annan path, får du antingen modifiera dockerfilerna, eller låta din reverse-proxy skriva om sökvägen. Requests till `/sangbok` (utan `/` på slutet) bör fungera, men vi har haft en del buggar associerade med detta så det är bättre att redirecta denna till `/sangbok/`.
+Se till att du proxyar trafiken till port 80 på containern. Containrarna är tänkta att användas bakom en reverse proxy (RP, dvs. t.ex. [traefik](https://traefik.io/traefik/) eller någon webbserver, t.ex. [Apache](httpd.apache.org)), och accepterar requests till `/`, `/sangbok/` och `/sangbok2/`. Vill du ha den på någon annan path, får du antingen modifiera dockerfilerna, eller låta din RP skriva om sökvägen. Requests till `/sangbok` kommer _**inte**_ att fungera om . Detta innebär att RP:n måste omdirigera `/sangbok` till `/sangbok/` om den skriver om redirect-sökvägarna.
+
+```conf
+# Exempelkonfiguration för Apache
+# Notera att vi nästan alltid vill ha / som suffix.
+Redirect 307 /sangbok /sangbok/
+<Location "/sangbok/">
+    ProxyPass http://url-to-sangbok-container:container-port/
+    ProxyPassReverse http://url-to-sangbok-container:container-port/
+</Location>
+```
 
 Nginx-containrarna använder en relativt strikt Content-Security-Policy, så om du läser detta långt in i framtiden, kan det hända att Vue/Webpack har uppdaterat den kod som laddar rätt skriptversion baserat på webbläsarens ålder. Det som måste göras då är att hashet i nginx.conf:s Content-Securit-Policy måste uppdateras, eller bytas ut mot `'unsafe-inline'`.

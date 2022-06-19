@@ -14,7 +14,7 @@ Installera [Node.js 18](https://nodejs.org) om du inte redan har det. Klona seda
 * `npm run lint` - lintar och fixar källkoden.
 
 ### Användning
-Se [docker](docker)-mappen.
+Se [docker](docker)-mappen. Projektet är testat för att ligga på sökvägen `/sangbok/`. Även andra sökvägar bör fungera, om [PWA-manifestet](public/pwa/manifest.json) uppdateras.
 
 ## Projektstruktur
 Se [src](src/Readme.md)-mappen.
