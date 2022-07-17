@@ -9,8 +9,31 @@ import { Chapter, JSONChapter, Song, SongHit } from './types'
  * @param index The index of the chapter
  * @returns A Chapter object.
  */
-export function addPathToChapter (chapter: JSONChapter, index: number): Chapter {
+function addPathToChapter (chapter: JSONChapter, index: number): Chapter {
   return { ...chapter, path: '/chapter/' + index }
+}
+
+/**
+ * Removes any songs containing n*llan (where * is one of Øøᴓ∅⦰oO0⊘⦸)
+ * @param songs a list of songs.
+ * @returns a filtered list of songs
+ */
+function removeNollan(songs: Song[]): Song[] {
+  const now = new Date()
+  const nollanRE = /n.llan/gi
+  if (now.getMonth() === 6 && now.getDate() >= 12) { return songs.filter((s) => !(nollanRE.test(s.title) || nollanRE.test(s.text))) } else return songs
+}
+
+/**
+ * Chapter preprocessor.
+ * Adds the "public path" (i.e. /chapter/2/ ), as well as applies certain filters (e.g. no songs containing n∅llan during the last weeks of august)
+ * @param chapter The JSONChapter object.
+ * @param index The index of the chapter
+ * @returns A Chapter object.
+ */
+export function preprocessChapter (chapter: JSONChapter, index: number): Chapter {
+  chapter.songs = removeNollan(chapter.songs)
+  return addPathToChapter(chapter, index)
 }
 
 /**

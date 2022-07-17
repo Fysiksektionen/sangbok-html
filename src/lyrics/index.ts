@@ -5,7 +5,7 @@ import ths from './addons/ths.json'
 import extraSongs from './addons/songs.json'
 
 // TS imports
-import { addPathToChapter, addSongTags } from './importHelpers'
+import { preprocessChapter, addSongTags } from './importHelpers'
 import { Chapter, Song, SongIndex, JSONChapter } from './types'
 
 // Exports from other files
@@ -14,7 +14,7 @@ export { hasSheetMusic } from './importHelpers'
 export { getChapterFromRoute, getSongFromRoute, getOffsetSongFromRoute, param2int } from './routeGetters'
 
 /** Main menu chapters. */
-export const chapters: Chapter[] = lyrics.map(addPathToChapter)
+export const chapters: Chapter[] = lyrics.map(preprocessChapter)
 
 /** List of song for search. */
 export const songs: Song[] = (function () {
@@ -23,9 +23,9 @@ export const songs: Song[] = (function () {
     .map((chapter, chapterId) => chapter.songs.map((song, songId) => addSongTags(song, songId, chapterId))).flat())
   // THS chapter.
   const thsSongs = (([ths] as JSONChapter[])
-    .map(addPathToChapter)
+    .map(preprocessChapter)
     .map((chapter) => chapter.songs.map((song, songId) => addSongTags(song, songId, chapter.prefix))).flat())
-  // Add standalone songs and return
+  // Add standalone songs and return (notes: these are NOT pre-processed with something preprocessChapter-like)
   return songs.concat(thsSongs).concat(extraSongs as Song[])
 })()
 
