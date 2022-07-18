@@ -2,7 +2,7 @@
 ## Körning utan docker
 Självfallet kan programmet servas statiskt genom att köra `npm run build`, och kopiera över filerna från dist-mappen till lämplig plats på servern. I mappen du nu betraktar finns även en  `.htaccess`-fil som kan läggas tillsammans med de byggda filerna för att hantera caching. Du som gör detta är nog dock mer bevandrad i Apache än jag, så den kanske inte är så användbar.
 
-Alternativt kan du som läser detta gå till den senaste [build-körningen](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml), skrolla ner till artifacts, och klicka på `dist-node-16.x` för att ladda ner en zip-fil med statiskt innehåll.
+Alternativt kan du som läser detta gå till den senaste [build-körningen](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml), skrolla ner till artifacts, och klicka på `dist-node-18.x` för att ladda ner en zip-fil med statiskt innehåll.
 
 ## Docker
 Denna mapp innehåller filer som används för att generera docker-containrar. Docker-containrar kan ses som en slags lätt virtual machine, dvs. en isolerad miljö där serven körs.
