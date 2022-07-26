@@ -265,7 +265,7 @@
             },
             {
                 "title": "Ubåten",
-                "author": "",
+                "author": "Leo Tikkanen, F-20",
                 "melody": "Jazzgossen",
                 "text": "Å så kommer det en ångbåt,\noch den säger: \"Tut-tut-tut!\"\nÅ så kommer det en ubåt,\noch den säger:\n(Gurgla nubben)",
                 "index": "δ1f"
@@ -716,7 +716,8 @@
                 "author": "",
                 "melody": "Hej tomtegubbar",
                 "text": "Hej, tomtegubbar, vrid på gasen\noch ta er själva av daga.\nRödsprit vi hällt i alla glasen\noch fjäriln vinglar på Haga.\nAv akvavit en får kolik\noch alla tomtar skola-sto-lik.\nHej, tomtegubbar, vrid på gasen\noch ta er själva av daga.",
-                "index": "δ14d"
+                "index": "δ14d",
+                "comment": "Endast i den digitala versionen sedan 2022."
             },
             {
                 "title": "Hörapparaten",
@@ -1061,6 +1062,14 @@
                 "melody": "Midnatt råder",
                 "text": "Yoghurt, yoghurt,\nfyller oss till brädden,\noss till brädden.\nGurglar härligt samman där med grädden,\ndär med grädden.\nGräddfil kräver att vi törstigt häfver:\nMjölk! Mjölk! Mjölk!",
                 "index": "η9"
+            },
+            {	
+                "title": "Avundsjuk visa",
+                "author": "Lundakarnevalen 2002",
+                "melody": "En sockerbagare",
+                "text": "En sockerdrickare finns på kalaset\nhen dricker Champis det lilla aset.\nHen dricker Pommac och 7-up,\noch när jag däckar så får hen napp.\n\nEn sockerdrickare finns på kalaset\nhen dricker Champis det lilla aset.\nOch när hen däckar så får jag napp,\nför jag har spetsat hens 7-up!",
+                "index": "η9,5",
+                "comment": "Endast i den digitala versionen."
             },
             {
                 "title": "Kaffe",
@@ -1801,7 +1810,7 @@
                 "title": "Konglig Fysiks Paradhymn",
                 "author": "Dum-Dum 1977",
                 "melody": "Katyuscha",
-                "text": "Här på festen stiger åter glammet.\nSången börjar, tentan bortglömd är.\nLyss min strupe Du plågas utav dammet,\nfrukta ej ty hjälpen är just här\nibland oss.\nHöj pokalen, dess flöde känns som sammet.\nDrick till det som Bacchi vapen lär.\n\nKänn, Osquarulda, känn hur blodet hettar.\nOsquarulda, orsak till det är.\nTimmar skrider och dygdens bojor lättar.\nFest och glädje kärleksflamman när\nmen minns att\nblott ej synen en hungrig kärlek mättar.\nDrick till det som Venus' vapen lär.\n\nFYSIKER, gasqueropen de har skallat,\nlikt musik från någon högre sfär.\nTentans piska för länge har oss vallat.\nTrotsa den och studiernas misär,\nmed lärdom\nfrån de makter som ytterst har oss kallat\nBacchus, Venus värdar hos oss är.\nOch vänner,\nBacchi nektar ej Venus' flamma släcker.\nSKÅL för det Fysiks skyddsgudar lär.\n\nUnder sista versen står fysiker, men inga andra, upp. \"Osquarulda\" kan bytas mot \"Osquar\", \"Quristina\" eller \"Osqulda\" efter behag.",
+                "text": "Här på festen stiger åter glammet.\nSången börjar, tentan bortglömd är.\nLyss min strupe Du plågas utav dammet,\nfrukta ej ty hjälpen är just här\nibland oss.\nHöj pokalen, dess flöde känns som sammet.\nDrick till det som Bacchi vapen lär.\n\nKänn, Osquarulda, känn hur blodet hettar.\nOsquarulda, orsak till det är.\nTimmar skrider och dygdens bojor lättar.\nFest och glädje kärleksflamman när\nmen minns att\nblott ej synen en hungrig kärlek mättar.\nDrick till det som Venus' vapen lär.\n\nFYSIKER, gasqueropen de har skallat,\nlikt musik från någon högre sfär.\nTentans piska för länge har oss vallat.\nTrotsa den och studiernas misär,\nmed lärdom\nfrån de makter som ytterst har oss kallat\nBacchus, Venus värdar hos oss är.\nOch vänner,\nBacchi nektar ej Venus' flamma släcker.\nSKÅL för det Fysiks skyddsgudar lär.\n\nUnder sista versen står F-teknologer, men inga andra, upp. \"Osquarulda\" kan bytas mot \"Osquar\", \"Quristina\" eller \"Osqulda\" efter behag.",
                 "index": "o1"
             },
             {
@@ -1822,7 +1831,7 @@
                 "title": "Överföhssång",
                 "author": "Skriven till Ettans Fest 1990",
                 "melody": "Kungssången",
-                "text": "Ur teknologens djup en gång\nen samfälld och en enkel sång\nsom går till Överföhs fram\n\nVar henne trofast och hennes ätt\nGör piskan i hennes näve lätt\nOch all din tro till henne sätt\nDu schlemm av ingen rang",
+                "text": "Ur teknologens djup en gång\nen samfälld och en enkel sång\nsom går till Överföhs fram\n\nVar honom trofast och hans ätt\nGör piskan i hans näve lätt\nOch all din tro till honom sätt\nDu schlemm av ingen rang",
                 "index": "o4"
             },
             {
@@ -1851,6 +1860,41 @@
         "chapter": "Visor vi minns",
         "prefix": "Σσ",
         "songs": [
+            {
+                "title": "Öppna PyCharm",
+                "author": "Klas Kristensson & Martin Siklosi, F-21",
+                "melody": "Katyuscha",
+                "text": "Öppna PyCharm, klona ner ditt repo\nBörja koda, från början till slut.\n||: Lägg på stacken, rekursiva anrop,\nlåt dem byggas upp och räknas ut :||\n\nTesta koden, felsök efter felen,\nkommentera varenda funktions.\nKör sen koden och använd den för syftet,\nspela schack, gå lite överkurs.\nKör sen koden och använd den för syftet,\n\n\"Markus, kan du prata lite lägre?\"\n\nLadda upp...\nAdd, commit och push",
+                "index": "σ22.1"
+            },
+            {
+                "title": "Albarevisan",
+                "author": "Klas Kristensson & Martin Siklosi, F-21",
+                "melody": "Kalmarevisan\nFörsångare/Alla",
+                "text": "Uti Albares sal\nja där håller lilla Mats\nföreläsningen!\n\nIsoterm...\n...Isobar\n\nIsokor...\n...ideal gas\n\nAdiabat process!\nAdiabat process!\n\nFör uti Albare sal,\n ja där håller lilla Mats\n föreläsningen!\n\n||: Var är heliumet du köpt?\nJa, det har jag råkat släppt :||\ni en långsam process.\n\nIsoterm... (etc.)\n\n||: Vad betyder entropi\nMen, det vet väl inte vi:||\när det energi? (NEJ)\n\nIsoterm... (etc.)\n\n||:Temperaturens definition\nja, den har jag skrivit om :||\n för en femte gång!\n\nIsoterm... (etc.)",
+                "index": "σ22.2"
+            },
+            {
+                "title": "En fredagspubrunda",
+                "author": "Philip Sjögren, F-19\nStuggasquen 2021",
+                "melody": "När solen lyser klart på himlen blå",
+                "text": "När veckan till sist slutet börjat nå, fallera!\nVi på vandring genom Bergs och Farkost gå, fallera!\nUnder rus med glada skratt vi krypa fram, fallera!\nJa vi dricka med varandra ner på Sam, fallera!\n\nLängs backarna ska höras vårat klamp, klamp, klamp\nvårat stamp, stamp, stamp, natten lång!\nOch till solen sen i öster reser sig, sig, sig\nhörs vårt hej, hej, hej, och våran sång!\n\nPå Kemi så kastas pingisbollar runt, fallera!\nOch på Indek kastar nån en sedelbunt, fallera!\nHos Maskin så tömmer nån en öl i hals, fallera!\nMen på Fysik ser jag faktiskt ingen alls, fallera!\n\nLängs backarna ska höras...\n\nSist på Data frågar nån om min LinkedIn, fallera!\nBörjar fatta att jag knappt kan se någonting, fallera!\nStad i ljus och sen en kvällens sista rit, fallera!\nBort mot Handels skriker vi att de är skit, fallera!\n\nMot portarna ska höras vårat bank, bank, bank\nvårat klank, klank, klank, vårat vrål!\nOch när glasen sen kring bordet höjer sig, sig, sig\nhörs vårt hej, hej, hej, och våran skål!",
+                "index": "σ22.3"
+            },
+            {
+                "title": "Vi är Fnatt",
+                "author": "Benjamin Velin, F-21",
+                "melody": "Hallonsaft - Klasse Möllberg\nBerättare/Fnattarna",
+                "text": "La, la, la la la\nLa la la la la la la\nLa, la, la la la\nLa la la la la la la\n\nDet började på-en mottagning\nDär vi sprang helt vilt omkring\n\nVar fönstret öppet på er bil\nrakt-in vi hoppade med stil\n\nDe lekte med knivar varje dag\nOch ledare skulle butlern va\n\näven om-hon blev krossad till damn\nSå lever-Jannie-Jan-kvar i vår famn\n\nFnatt, Fnatt, de är Fnatt\nMånga skratt från deras spratt\nFnatt, Fnatt, vi är Fnatt\nMånga skratt från våra spratt\n\nNär vågformsläran blir för svår\nVi sliter av oss allt vårt hår\n\nDe får nog aldrigt något mys\nmed envariabelanalys\n\nLaborationer går aldrig bra\nVi är bevis på Murphys lag\n\nBra betyg de nog aldrig se\nVad-finns det bokstav före E?\n\nFnatt, Fnatt, de är Fnatt\nMånga skratt från deras spratt\nFnatt, Fnatt, vi är Fnatt\nMånga skratt från våra spratt\n\nNär Fnattar går ut på en gasque\nvi dricker allt från punsch till slask\n\nFrån instruktioner till pastej\nVi äter allt du-kan tänka dig\n\nFör toastmasters är dem en pest\nFör fucka ur gör vi som bäst\n\nOch innan de bärs ut på bår\nSå skriker vi glatt ut gutår\n\nFnatt, Fnatt, de är Fnatt\nMånga skratt från deras spratt\nFnatt, Fnatt, vi är Fnatt\nMånga skratt från våra spratt\n\nFnatt, Fnatt, vi är Fnatt\nMånga skratt från våra spratt (x6)",
+                "index": "σ22.4"
+            },
+            {
+                "title": "Bortom Kons förgätmigej",
+                "author": "Martin Siklosi, F-21",
+                "melody": "Marseille",
+                "text": "Jag går i Osquars backe\nSå frusen sur och trött\nDå kommer ej emot mig\nEn teknolog jag aldrig mött\n\nHan viskar i mitt öra\nJag har nånting för dig\nVet du hur flått man har det\nBortom kons förgätmigej\n\nHan sa jag ger dig kunskap\nHan sa jag gör dig smart\nOm du har sökt till F\nOch det hade ju jag\n\nSen drar vi genom kampus\nBortom kons förgätmigej\nDär tavlorna är svarta\nOch whiteboards är det ej\n\nDär Mats trollar med matte\nOch Markus spelar schack\nOch alla block är whitelines\nOch fysiker har frack\n\nMed an gav Danijela\nUppgift ni borde sätt\nFör assen var försiktig\nOch gav mig inga rätt\n\nIngen hjälp till tentan\nÄr följden som jag ser\nOch människan jag plugga med\nDen såg jag aldrig mer\n\nJag har ett mål med livet\nDet kan jag lova dig\nEn dag ska jag ex:a\nBortom kons förgätmigej\n\nDär Mats trollar med matte\nOch Markus spelar schack\nOch alla block är whitelines\nOch fysiker har frack",
+                "index": "σ22.5"
+            },
             {
                 "title": "Brev från nØllan",
                 "author": "Alex Hamben, F-19\nEttans fest 2019",

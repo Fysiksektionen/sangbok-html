@@ -26,7 +26,6 @@
         "melody": "Den flyganede holländaren, akt 3",
         "text": "Steuermann, laß die Wacht!\nSteuermann, her zu uns!\nHo! He! Je! Ha!\nHißt die Segel auf! Anker fest!\nSteuermann, her!\n\nFürchten weder Wind noch bösen Strand,\nWollen heute mal recht lustig sein!\nJeder hat sein Mädel auf dem Land,\nHerrlichen Tabak und guten Branntewein:\nHussassahe!\nKlipp und Sturm draus\nHollohohe!\nLachen wir aus!\nHussassahe!\nSegel ein! Anker fest!\nKlipp und Sturm lachen wir aus.\n\nSteuermann, laß die Wacht!\nSteuermann, her zu uns!\nHo! He! Je! Ha!\nSteuermann her, trink mit uns!\nHo! He! Je! Ha!\nKlipp und Sturm, he!\nSind vorbei, he!\nHussahe! Hallohe!\nHussahe, Steuermann! He!\nHer, komm und trink mit uns!",
         "index": "@882",
-        "msvg": "å882. Steuermann",
         "tags": ["lass", "hisst"]
     },
     {
@@ -43,11 +42,12 @@
         "text": "Varför valde jag ens matte?\nKunde jag inte bara valt mediateknik\nHärligt softa med en latte\nBehövde jag vara så unik\n\nFattat nada sen vår första lektion\nMen ändå ska vi kunna varenda skumma ekvation\nDerivera någon skum funktion\nDetta kommer ge mig depression\n\n||: Matten är skum - känner mig dum!\nKan jag förstå - haha nejdå!\nEndast aptit - för akvavit!\nJag tar en bit! :||\n\nVad har kor för aerodynamik\nVad är däckens optimala mönsterdjup\nHa så kul med detta på fysik\nSvaret blir att ni ska ta en sup <i>(alla fysiker dricker)</i>\n\nLär sig snillen ragga tjejer/killar\nNej vi lär oss inget annat praktiskt heller\nBara många skumma grejer/Bara sånt vi inte gillar\nIngen förstår vad vi säger/IQ:n densamma som sillar\n\n||: Pytagoras sats - Eulers sats!\nRolles sats - cosinussats!\nSpelar roll? - Har ingen koll!\nAllting blir noll! :||",
         "index": "σ21.π"
     },
-    {	
-        "title": "Avundsjuk visa",
-        "author": "Lundakarnevalen 2002",
-        "melody": "En sockerbagare",
-        "text": "En sockerdrickare finns på kalaset\nhen dricker Champis det lilla aset.\nHen dricker Pommac och 7-up,\noch när jag däckar så får hen napp.\n\nEn sockerdrickare finns på kalaset\nhen dricker Champis det lilla aset.\nOch när hen däckar så får jag napp,\nför jag har spetsat hens 7-up!",
-        "index": "η9,5"
+    {
+        "title": "Grå förgätmigej",
+        "author": "Mottagningens Tackfest 2020.",
+        "melody": "Melodi: Blå förgätmigej\nSjungs knästående för gamlingbordet",
+        "text": "Hur gärna ville jag ej vara\nen liten grå förgätmigej\nen liten grå förgätmigej\nDå skulle jag för dig förklara\nhur innerligt jag hatar dig!\n\n(Fula gester mot var och en av gamlingarna)",
+        "index": "σ21.⧖",
+        "comment": "Eventuellt var det Tackfesten 2021, inte 2020."
     }
 ]
