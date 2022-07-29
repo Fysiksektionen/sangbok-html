@@ -55,7 +55,7 @@ export default createStore<State>({
       livesearch: false,
       fixednavbuttons: false,
       theme: 'night',
-      touchAction: 'all',
+      touchAction: 'all'
     },
     version: '1'
   } as State, // We need to explicity say that this qualifies as State, since the generator property is loaded through a module. This can cause problems if you change the schema.

@@ -38,7 +38,7 @@ const addons = new Fuse(keys as SongHit[], {
 
 // Make sigma songs lower priority
 function score(res: Fuse.FuseResult<Song>): number {
-  return (res.score || 0) * (res.item.index.startsWith("σ") ? 0.75 : 1)
+  return (res.score || 0) * (res.item.index.startsWith('σ') ? 0.75 : 1)
 }
 
 /**
@@ -49,6 +49,6 @@ function score(res: Fuse.FuseResult<Song>): number {
 export function search(query: string): Fuse.FuseResult<SongHit>[] {
   return (fuse.search(query)
     .concat(addons.search(query))
-    .sort((x, y) => { return score(x)-score(y) })
+    .sort((x, y) => { return score(x) - score(y) })
   )
 }

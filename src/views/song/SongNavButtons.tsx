@@ -25,25 +25,25 @@ export default function SongNavButtons(): JSX.Element {
 
   return (
     <>
-    {songWrappers() && <div class={{navbuttons: true, fixed: store.state.settings.fixednavbuttons}}>
-      {songWrappers()?.map((songWrapper) =>
-        <div>
-          {/* We only display a navigation button if we found a nearby song */
-            songWrapper && <div class="button"
-              onClick={() => router.replace(songWrapper.chapterPath + '/song/' + songWrapper.index)}>
-              <div>{songWrapper.song.title}</div>
-              <div>
-                <img src={backImage} /> &nbsp;
-                <Index index={(songWrapper.song.index) || ''} />
+      {songWrappers() && <div class={{ navbuttons: true, fixed: store.state.settings.fixednavbuttons }}>
+        {songWrappers()?.map((songWrapper) =>
+          <div>
+            {/* We only display a navigation button if we found a nearby song */
+              songWrapper && <div class="button"
+                onClick={() => router.replace(songWrapper.chapterPath + '/song/' + songWrapper.index)}>
+                <div>{songWrapper.song.title}</div>
+                <div>
+                  <img src={backImage} /> &nbsp;
+                  <Index index={(songWrapper.song.index) || ''} />
+                </div>
               </div>
-            </div>
-          }
-          {/* Or a filler ("invisible button") if no song was found. */
-            !songWrapper && <div class="filler"></div>
-          }
-        </div>
-      )}
-    </div>}
+            }
+            {/* Or a filler ("invisible button") if no song was found. */
+              !songWrapper && <div class="filler"></div>
+            }
+          </div>
+        )}
+      </div>}
     </>
   )
 }
