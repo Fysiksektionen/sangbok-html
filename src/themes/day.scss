@@ -1,31 +1,21 @@
+@import "variables";
+
 $text-color: #333;
-$secondary-text-color: $text-color;
-$secondary-background: #f1f1f1;
-
-$highlight-color: #f60;
-$highlight-text-color: #000;
-
-$navbar-background: $highlight-color;
-$dropdown-background: #fff;
-
-$sheet-music-filter: none;
-$inline-image-filter: none;
-$success: #0E0;
-
-$row-shadow-color: #aaa;
-$row-background: initial;
-
-$button-color: rgba(128, 128, 128, 0.10);
-$button-text-color: $text-color;
-$active-button-color: rgba(128, 128, 128, 0.30);
-
-$modal-text-color: $text-color;
-$modal-background-color: $secondary-background;
 
 body.day {
-    background-color: #fff;
-    color: $text-color;
-
-    @import "../components/themed.scss";
-    @import "../views/themed.scss";
+    @include export-vars((
+        $--background-color-primary: #fff,
+        $--background-color-secondary: #f1f1f1,
+        $--background-color-highlight: #f60,
+        $--background-color-button: rgba(128, 128, 128, 0.10),
+        $--background-color-button-active: rgba(128, 128, 128, 0.30),
+        $--text-color-primary: $text-color,
+        $--text-color-secondary: $text-color, 
+        $--text-color-highlight: #000,
+        $--text-color-button: $text-color,
+        $--color-success: #0E0,
+        $--row-shadow-color: #aaa,
+        $--image-filter-sheetmusic: none,
+        $--image-filter-inline: none,
+    ));
 }

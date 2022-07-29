@@ -1,4 +1,17 @@
 .navbuttons {
+  &.fixed {
+    position: fixed;
+    bottom: 0;
+    padding-top: 0;
+    width: 100%;
+    background-color: var(--background-color-primary, #222);
+    box-shadow: 0 0 20px 20px var(--background-color-primary, #222);
+  }
+
+  & .button img {
+    filter: var(--image-filter-inline, invert(1));
+  }
+
   padding: 20px 0;
   text-align: center;
 

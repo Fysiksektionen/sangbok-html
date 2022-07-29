@@ -1,0 +1,29 @@
+// Exported SCSS -> CSS variables
+
+// Backgrounds
+$--background-color-primary: --background-color-primary;
+$--background-color-secondary: --background-color-secondary;
+$--background-color-highlight: --background-color-highlight;
+$--background-color-button: --background-color-button;
+$--background-color-button-active: --background-color-button-active;
+
+// Text colors
+$--text-color-primary: --text-color-primary;
+$--text-color-secondary: --text-color-secondary;
+$--text-color-highlight: --text-color-highlight;
+$--text-color-button: --text-color-button;
+
+// Other colors
+$--color-success: --color-success;
+$--row-shadow-color: --row-shadow-color;
+
+// Filters
+$--image-filter-sheetmusic: --image-filter-sheetmusic;
+$--image-filter-inline: --image-filter-inline;
+
+// Helper function (see https://bcodes.io/blog/post/theming-css-variables-in-scss)
+@mixin export-vars($map: ()) {
+    @each $key, $value in $map {
+        #{$key}: $value;
+    }
+}

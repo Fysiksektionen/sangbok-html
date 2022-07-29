@@ -24,6 +24,7 @@ export default function SettingsComponent(props: Record<string, unknown>): JSX.E
       <SettingsButton setting={BooleanSettings.larger}>Större sångtext</SettingsButton>
       <SettingsSwitch setting={MultipleStateSettings.touchAction} values={touchActions}> Touchfunktioner</SettingsSwitch>
       <SettingsButton setting={BooleanSettings.livesearch}>Live-sökning</SettingsButton>
+      <SettingsButton setting={BooleanSettings.fixednavbuttons}>Fixerade navigationsknappar</SettingsButton>
       <SettingsButton setting={BooleanSettings.sheetmusic}>Noter</SettingsButton>
       <SettingsButton setting={BooleanSettings.generator} data-test={'generatorSettingsButton'}>Skapa sångblad</SettingsButton>
       <SettingsButton setting={BooleanSettings.makelist}>Redigera listor</SettingsButton>

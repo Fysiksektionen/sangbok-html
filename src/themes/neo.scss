@@ -1,51 +1,27 @@
-$f-red: rgb(220, 53, 69);
-$f-orange: #FF642B;
-$f-orange-light: #FB9C74;
-$f-orange-lighter: #F7D48C;
-$f-porcelain: #f5f4f4;
-$f-white: #f8f9fa;
-$f-light: rgb(240, 240, 240);
-$f-navy: #132a3e;
-$f-dark: #102537;
-$f-darker: #093144;
-$f-darkest: #062432;
-$f-gray-violet: #2f3b4b;
-$f-gray-dark: #343a40;
-$f-gray-navy: #3B5262;
-$f-gray-turqoise: #829899;
-$f-blue: #1757A3;
-$f-sky: #58a7cb;
-$f-green: #197F2A;
-$f-onyx: #221F20;
+@import "colors";
+@import "variables";
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap');
 
 $text-color: #333;
 
-$secondary-background: $f-light;
-$secondary-text-color: $text-color;
-
-$highlight-color: $f-orange;
-$highlight-text-color: #000;
-
-$navbar-background: $highlight-color;
-$dropdown-background: #fff;
-
-$sheet-music-filter: none;
-$inline-image-filter: none;
-$success: #0E0;
-
-$row-shadow-color: rgba(0,0,0,0);
-
-$button-color: $f-navy;
-$button-text-color: $f-white;
-$active-button-color: rgba(128, 128, 128, 0.30);
-
-$modal-text-color: $text-color;
-$modal-background-color: $f-porcelain;
-
-@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap');
 body.neo {
-    background-color: $f-white;
-    color: $text-color;
+    @include export-vars((
+        $--background-color-primary: $f-white,
+        $--background-color-secondary: $f-light,
+        $--background-color-highlight: $f-orange,
+        $--background-color-button: $f-navy,
+        $--background-color-button-active: rgba(128, 128, 128, 0.30),
+        $--text-color-primary: $text-color,
+        $--text-color-secondary: $text-color, 
+        $--text-color-highlight: #000,
+        $--text-color-button: $f-white,
+        $--color-success: #0E0,
+        $--row-shadow-color: transparent,
+        $--image-filter-sheetmusic: none,
+        $--image-filter-inline: none,
+    ));
+
+    // Overrides
     font-family: 'Libre Franklin', 'Arial', sans-serif;
     letter-spacing: 0.005em;
     word-spacing: 0.02em;
@@ -55,10 +31,7 @@ body.neo {
     & .button {color: $f-light;}
     & .component-settings {font-size: 1.1em;}
 
-    & .navbuttons > .button > div > img { /* Ovveride the default, which is $inline-image-filter. */
+    & .navbuttons > .button > div > img { /* Ovveride the default, which is --image-filter-inline. */
         filter: invert(1);
     }
-
-    @import "../components/themed.scss";
-    @import "../views/themed.scss";
 }

@@ -7,6 +7,10 @@
 }
 
 .navbar {
+
+  background: var(--background-color-highlight, #f60);
+
+  
   position: sticky;
   width: 100%;
   top: 0;
@@ -22,9 +26,10 @@
     height: 100%;
     border: 0;
     padding: 0.8em 0.8em;
+    &:active {background-color: rgba(255, 255, 255, 0.20);}
   }
-
   & .title {
+    color: white;
     font-family: "Lato", sans-serif;
     position: absolute;
     width: 100%;

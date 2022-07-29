@@ -2,8 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
 
 @import './components/global.scss';
+@import './views/global.scss';
 
-/* TODO: Load these on-demand. */
+
 /* Themes */
 @import './themes/night.scss';
 @import './themes/day.scss';
@@ -19,6 +20,8 @@ html {
 body,
 #app {
   min-height: 100vh;
+  color: var(--text-color-primary);
+  background-color: var(--background-color-primary);
 }
 
 #app>div.flex-row,
@@ -59,7 +62,7 @@ div.main h2 {
   padding-top: 0.75em;
 }
 
-.button {
+.button { // TODO: Why are some colors here hard-coded?
   text-align: center;
   font-size: 1em;
 

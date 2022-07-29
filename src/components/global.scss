@@ -11,7 +11,7 @@
   &>.modal-box {
     /* Main box style */
     border-radius: 0.5em;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
 
     left: 50%;
     top: 50%;
@@ -53,6 +53,28 @@
   }
 }
 
+// TODO: Integrate with the above.
+.component-modal>div.modal-box {
+  box-shadow: 0 0 5px var(--row-shadow-color, #111);
+
+  & header,
+  footer {
+      padding: 0.25em 0;
+      margin: 0;
+  }
+
+  & header {
+      background-color: var(--background-color-highlight, #f60);
+      color: var(--text-color-highlight, #000);
+  }
+
+  &>div,
+  >footer {
+      color: var(--text-color-primary, #ddd);
+      background-color: var(--background-color-primary, #222);
+  }
+}
+
 form.component-search {
   width: 100%;
   text-align: center;
@@ -65,5 +87,7 @@ form.component-search {
     border-radius: 0.3em;
     padding-left: 0.5em !important;
     padding-right: 0.5em !important;
+    color: var(--text-color-secondary, #fff);
+    background-color: var(--background-color-secondary, #444);
   }
 }

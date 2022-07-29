@@ -5,11 +5,14 @@ import { useRoute, useRouter } from 'vue-router'
 
 import Index from '@/components/Index'
 import { getOffsetSongFromRoute } from '@/lyrics'
+import { key } from '@/store'
+import { useStore } from 'vuex'
 
 /** Component for song navigation buttons. Button values are inferred from the route. */
 export default function SongNavButtons(): JSX.Element {
   const router = useRouter()
   const route = useRoute()
+  const store = useStore(key)
 
   /**
   * Returns a list of SongIndexWrapper:s, containing the previous and next song, as well as the chapter (or list) index and song index in that chapter (or list).
@@ -21,7 +24,8 @@ export default function SongNavButtons(): JSX.Element {
   }
 
   return (
-    songWrappers && <div class="navbuttons">
+    <>
+    {songWrappers() && <div class={{navbuttons: true, fixed: store.state.settings.fixednavbuttons}}>
       {songWrappers()?.map((songWrapper) =>
         <div>
           {/* We only display a navigation button if we found a nearby song */
@@ -39,6 +43,7 @@ export default function SongNavButtons(): JSX.Element {
           }
         </div>
       )}
-    </div>
+    </div>}
+    </>
   )
 }

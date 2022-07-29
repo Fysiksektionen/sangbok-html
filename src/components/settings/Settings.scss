@@ -1,11 +1,16 @@
 /* TODO: This is redundantly defined, also in SettingsButton.vue*/
 .component-settings {
+    color: var(--text-color-primary, #ddd);
+    background: var(--background-color-primary, #222);
+    box-shadow: 0 0 14px black;
+
     .checkmark {
         float: right;
         width: 0.8em;
         height: 0.8em;
         padding: 0;
         margin-right: 0.1em;
+        color: var(--color-success, #0e0);
     }
 
     /* TODO: don't hard-code top positions. */

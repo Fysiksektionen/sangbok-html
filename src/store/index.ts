@@ -9,12 +9,13 @@ import { listsModule, SongList } from './lists'
 /* eslint-disable no-unused-vars */
 /** Type declaration for the storage. */
 export enum BooleanSettings {
-  translate = 'translate',
-  larger = 'larger',
-  generator = 'generator',
-  makelist = 'makelist',
-  sheetmusic = 'sheetmusic',
-  livesearch = 'livesearch',
+  translate = 'translate', // Whether to translate greek icons to latin names
+  larger = 'larger', // Whether to enlarge the song lyrics
+  generator = 'generator', // Whether to show "sångbladsgeneratorn"
+  makelist = 'makelist', // Whether to show list editing tools
+  sheetmusic = 'sheetmusic', // Whether to show sheet music
+  livesearch = 'livesearch', // Whether to update search results after each keypress
+  fixednavbuttons = 'fixednavbuttons', // Whether fix the song navigation buttons at the bottom of the viewport rather than place them after the lyrics.
 }
 
 export enum MultipleStateSettings {
@@ -47,13 +48,14 @@ export default createStore<State>({
   state: {
     settings: {
       translate: false,
-      theme: 'night',
       larger: false,
       generator: false,
       makelist: false,
       sheetmusic: false,
       livesearch: false,
-      touchAction: 'all'
+      fixednavbuttons: false,
+      theme: 'night',
+      touchAction: 'all',
     },
     version: '1'
   } as State, // We need to explicity say that this qualifies as State, since the generator property is loaded through a module. This can cause problems if you change the schema.
