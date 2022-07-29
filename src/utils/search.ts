@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js'
-import { songs, SongHit } from '../lyrics'
+import { songs, SongHit, Song } from '../lyrics'
 import keys from '@/lyrics/addons/search.json'
 
 /** Fuse instance used for searching for songs. */
@@ -30,10 +30,16 @@ const addons = new Fuse(keys as SongHit[], {
   ignoreLocation: true,
   keys: [
     { name: 'title', weight: 10 },
+    { name: 'tags', weight: 0.5 },
     'index',
     'chapterindex'
   ]
 })
+
+// Make sigma songs lower priority
+function score(res: Fuse.FuseResult<Song>): number {
+  return (res.score || 0) * (res.item.index.startsWith("σ") ? 0.75 : 1)
+}
 
 /**
  * Performs a search for both songs and addons (which in practice means hidden chapters).
@@ -43,6 +49,6 @@ const addons = new Fuse(keys as SongHit[], {
 export function search(query: string): Fuse.FuseResult<SongHit>[] {
   return (fuse.search(query)
     .concat(addons.search(query))
-    .sort((x, y) => { return (x.score || 0) - (y.score || 0) })
+    .sort((x, y) => { return score(x)-score(y) })
   )
 }
