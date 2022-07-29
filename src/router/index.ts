@@ -23,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     component: Chapters,
-    meta: { hideBackButton: true }
+    meta: { hideBackButton: true, showSearch: true }
   },
   {
     path: '/chapter/:cid(\\d+)',
@@ -64,7 +64,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/search/:query',
     name: 'Search',
-    component: Search
+    component: Search,
+    meta: { showSearch: true }
   },
   //
   // List views

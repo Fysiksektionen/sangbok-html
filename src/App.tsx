@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar'
 import { themes } from '@/themes'
 import { key, stringKey } from '@/store/index'
 import { useStore } from 'vuex'
+import SearchBox from './components/SearchBox'
 
 /** Main app. */
 export default defineComponent({
@@ -31,7 +32,10 @@ export default defineComponent({
       <>
         <Navbar hideBackButton={this.$route.meta.hideBackButton as boolean | undefined}/>
         <div class="flex-row">
-          <router-view/>
+          <div class="flex-col main">
+            {this.$route.meta.showSearch && <SearchBox query={this.$route.params.query as string} />}
+            <router-view/>
+          </div>
           {this.store.state.settings.generator && <GeneratorView />}
         </div>
       </>

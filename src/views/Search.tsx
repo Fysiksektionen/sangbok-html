@@ -7,7 +7,6 @@ import Fuse from 'fuse.js'
 
 import { SongHit, hasSheetMusic } from '@/lyrics'
 import { search } from '@/utils/search' // @ is an alias to /src
-import SearchBox from '@/components/SearchBox'
 import Index from '@/components/Index'
 import Swiper from '@/components/Swiper'
 import { SwipeIndicatorState } from '@/utils/swipe'
@@ -36,7 +35,6 @@ export default defineComponent({
     return (
       <Swiper swipeHandler={this.swipeHandler} right="hide">
         <div class="main">
-          <SearchBox query={this.$route.params.query as string} />
           <table class="songbook">
             {search(this.$route.params.query as string).map((hit) => <tr
               onClick={() => this.goto(hit)}>

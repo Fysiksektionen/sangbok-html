@@ -2,7 +2,6 @@ import { defineComponent } from 'vue'
 
 import { onlyAllowZoomOut } from '@/utils/swipe' // @ is an alias to /src
 import { greekPrefix2latin } from '@/utils/other'
-import SearchBox from '@/components/SearchBox'
 import { chapters } from '@/lyrics'
 import { useStore } from 'vuex'
 import { key } from '@/store'
@@ -24,8 +23,6 @@ export default defineComponent({
     const store = useStore(key)
     return (
       <div class="main" style={this.onlyAllowZoomOut} v-touch:drag={this.dragHandler}>
-        <SearchBox />
-
         <table class="songbook">
           {this.chapters.map((chapter, idx) => <tr
             onClick={() => this.$router.push('/chapter/' + idx)}>

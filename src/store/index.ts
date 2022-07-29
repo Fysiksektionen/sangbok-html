@@ -13,7 +13,8 @@ export enum BooleanSettings {
   larger = 'larger',
   generator = 'generator',
   makelist = 'makelist',
-  sheetmusic = 'sheetmusic'
+  sheetmusic = 'sheetmusic',
+  livesearch = 'livesearch',
 }
 
 export enum MultipleStateSettings {
@@ -51,10 +52,11 @@ export default createStore<State>({
       generator: false,
       makelist: false,
       sheetmusic: false,
+      livesearch: false,
       touchAction: 'all'
     },
     version: '1'
-  } as unknown as State, // We need to explicity say that this qualifies as State, since the generator property is loaded through a module. This can cause problems if you change the schema.
+  } as State, // We need to explicity say that this qualifies as State, since the generator property is loaded through a module. This can cause problems if you change the schema.
   mutations: {
     /**
      * Toggles a setting by the given `key`, to the opposite boolean value.

@@ -1,5 +1,7 @@
+import { BooleanSettings, key } from '@/store'
 import { defineComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
 /** Search box component. Locally memorizes the query. */
 export default defineComponent({
@@ -8,11 +10,12 @@ export default defineComponent({
   render({ query }: { query: string }) {
     const router = useRouter()
     const route = useRoute()
+    const store = useStore(key)
     query = query || ''
 
     function search(evt: Event) {
       evt.preventDefault()
-      if (route.name === 'Search') {
+      if (route.name === 'Search' && (evt.type === 'onsubmit' || store.state.settings[BooleanSettings.livesearch] === true)) {
         // Replace the history entry if we stay on the search page.
         router.replace('/search/' + query)
       } else {
@@ -22,7 +25,7 @@ export default defineComponent({
     }
 
     return (
-      <form onSubmit={search} class="component-search">
+      <form onSubmit={search} onKeyup={search} class="component-search">
         <input type="search" v-model={query} placeholder="Sök i sångboken" />
       </form>
     )

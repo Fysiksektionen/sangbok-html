@@ -129,6 +129,7 @@ fi
 if [[ ! $*\  == *--no-move\ * ]]; then
     echo -e "\e[1;32mFlyttar filer\e[0m till deras målmapp (så att Vue kan använda dem)."
     mkdir -p ../public/msvg/
+    rm ../public/msvg/*
 
     cp svgs.json ../src/assets/msvgs.json
     cp svg/* ../public/msvg/
