@@ -56,6 +56,10 @@ module.exports = {
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black-translucent',
     workboxPluginMode: 'GenerateSW',
-    workboxOptions: { swDest: './dist/sw.js' }
+    workboxOptions: {
+      // See https://developer.chrome.com/docs/workbox/reference/workbox-webpack-plugin/
+      // Paths to exclude from pre-caching. Format: https://webpack.js.org/configuration/module/#condition
+      exclude: ['msvg', 'tex', 'img/icons', /\/js\/[generator|qrcodelib]\.[0-9|a-f]{8}\.js/]
+    }
   }
 }

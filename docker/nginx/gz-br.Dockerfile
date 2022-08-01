@@ -27,16 +27,21 @@ RUN npx vue-cli-service build --modern
 
 # Precompress static assets
 RUN apk add --no-cache brotli
-RUN for file in dist/**/*; do \
-        brotli "$file" --best --keep; \
-        gzip "$file" --best; \
-        touch "$file"; \
-    done
 RUN for file in dist/*; do \
         brotli "$file" --best --keep; \
         gzip "$file" --best; \
         touch "$file"; \
     done
+RUN for file in dist/**/*; do \
+        brotli "$file" --best --keep; \
+        gzip "$file" --best; \
+        touch "$file"; \
+    done
+RUN for file in dist/**/**/*; do \
+    brotli "$file" --best --keep; \
+    gzip "$file" --best; \
+    touch "$file"; \
+done
 
 
 ##

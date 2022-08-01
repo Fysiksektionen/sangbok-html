@@ -45,6 +45,10 @@ RUN for file in dist/img/*; do \
         gzip "$file" --best; \
         touch "$file"; \
     done
+RUN for file in dist/img/**/*; do \
+        gzip "$file" --best; \
+        touch "$file"; \
+    done
 RUN for file in dist/msvg/*; do \
         gzip "$file" --best; \
         touch "$file"; \
@@ -53,10 +57,6 @@ RUN for file in dist/tex/*; do \
         gzip "$file" --best; \
         touch "$file"; \
     done
-RUN for file in dist/pwa/*; do \
-    gzip "$file" --best; \
-    touch "$file"; \
-done
 RUN for file in dist/*; do \
         brotli "$file" --best --keep; \
         gzip "$file" --best; \

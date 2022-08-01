@@ -34,6 +34,10 @@ RUN for file in dist/**/*; do \
         gzip "$file" --best; \
         touch "$file"; \
     done
+RUN for file in dist/**/**/*; do \
+        gzip "$file" --best; \
+        touch "$file"; \
+    done
 
 
 ##
