@@ -1,11 +1,11 @@
 // vue.config.js
 /* eslint-disable @typescript-eslint/no-var-requires */
 const webpack = require('webpack')
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack5-plugin')
 const path = require('path')
 
 // Root path
-const root = ''
+const root = '' // Compilation root path
+const pwaRoot = '/sangbok/' // PWA entrypoint
 
 // Version info
 let commitId
@@ -24,33 +24,38 @@ module.exports = {
   configureWebpack: {
     plugins: [
       new webpack.DefinePlugin({ __COMMIT__: JSON.stringify(commitId) }),
-      new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 12288 /* Minimum number of characters */ }),
-      new ServiceWorkerWebpackPlugin({
-        entry: '@/service-worker.ts',
-        publicPath: root,
-        includes: ['**/*', '**/**/*'],
-        excludes: ['**/.*', '**/*.map']
-      })
+      new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 12288 /* Minimum number of characters */ })
     ]
   },
   chainWebpack: config => {
     config.output.chunkFilename('js/[name].[chunkhash:8].js') // Allow custom filenames for chunks
     config.plugins.delete('prefetch')
-    // config.optimization.splitChunks({ // Doesn't work.
-    //   cacheGroups: {
-    //     styles: {
-    //       name: 'styles',
-    //       test: /.*\.s?css$/,
-    //       chunks: 'all',
-    //       minChunks: 1,
-    //       reuseExistingChunk: true,
-    //       enforce: true
-    //     }
-    //   }
-    // })
   },
   devServer: {
     headers: { 'Service-Worker-Allowed': 'http://localhost:8080' },
     static: { directory: path.join(__dirname, 'public'), publicPath: root }
+  },
+  pwa: {
+    name: 'Konglig Fysiks Sångbok',
+    themeColor: '#FF642B',
+    msTileColor: '#222',
+    manifestOptions: {
+      short_name: 'Sångboken',
+      background_color: '#222222',
+      // Description
+      author: 'F.com',
+      description: 'Den officiella, sökbara sångboken för Fysiksektionen vid THS innehåller både nya och gamla sånger för gasque och bankett.',
+      // Display info
+      lang: 'sv',
+      dir: 'ltr',
+      orientation: 'portrait',
+      display: 'standalone',
+      start_url: pwaRoot,
+      scope: pwaRoot
+    },
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'black-translucent',
+    workboxPluginMode: 'GenerateSW',
+    workboxOptions: { swDest: './dist/sw.js' }
   }
 }

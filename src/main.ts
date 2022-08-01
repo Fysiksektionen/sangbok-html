@@ -3,11 +3,7 @@ import App from './App'
 import router from './router'
 import store, { key } from './store'
 import Vue3TouchEvents from 'vue3-touch-events'
-import runtime from 'serviceworker-webpack5-plugin/lib/runtime'
-
-if ('serviceWorker' in navigator) {
-  runtime.register()
-}
+import './registerServiceWorker'
 
 createApp(App).use(store, key).use(router).use(Vue3TouchEvents).mount('#app')
 

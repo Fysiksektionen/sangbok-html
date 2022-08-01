@@ -15,6 +15,9 @@ music/deflate
 music/more.txt
 public/msvg
 
+*.DS_Store
+*Zone.Identifier
+
 ##
 ## GitHub Node template
 ##

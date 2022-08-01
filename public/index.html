@@ -5,7 +5,7 @@
     
     <title>Konglig Fysiks Sångbok</title>
 
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="img/icons/favicon.ico">
     <meta name="theme-color" content="#ff6600">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1, maximum-scale=4, minimum-scale=1, width=device-width">
@@ -14,11 +14,8 @@
     <meta name="description" content="Den officiella, sökbara sångboken för Fysiksektionen vid THS innehåller både nya och gamla sånger för gasque och bankett.">
     <meta name="author" content="F.com (Fysiksektionens Kommunikationsnämnd)">
 
-    <meta name="thumbnail" content="thumbnail.png">
-    <link rel="manifest" href="pwa/manifest.json">
+    <meta name="thumbnail" content="img/icons/coa-dark.png">
     <meta name="apple-mobile-web-app-title" content="Sångboken">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="pwa/thumbnail_maskable_192.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +28,14 @@
       Sångboken kunde inte laddas korrekt. Om du har en väldigt gammal webbläsare är detta föväntat.
       Misstänker du att det är vårt fel får du gärna kontakta webmaster eller skapa ett issue <a href="https://github.com/Fysiksektionen/sangbok-html/issues">här</a>.
       För att hjälpa oss felsöka får du gärna inkludera <code>__COMMIT__</code>-variabeln i konsolen (Ctrl-Shift-J) när du kontaktar oss.
-      Är det ett problem med service-workern eller caching, kan det ofta lösas genom att ladda om sidan (ordentligt, med Ctrl-F5), alternativt klicka <a href="sangbok/">här</a>, eller <a href="sangbok/sangbok">här</a>.
+      <br>
+      Förmodligen är detta problem orsakat av service workern (felaktig caching). Följande åtgärder kan åtgärda problemet:
+      <ul>
+        <li>Komplett reload (Ctrl-F5)</li>
+        <li>Öppna sidan i ett nytt privat fönster</li>
+        <li>Starta om webbläsaren</li>
+        <li>Klicka <a href="sangbok/">här</a>, eller <a href="sangbok/sangbok">här</a></li>
+      </ul>
     </div>
     <!-- built files will be auto injected -->
   </body>
