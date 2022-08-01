@@ -35,7 +35,7 @@ module.exports = {
     headers: { 'Service-Worker-Allowed': 'http://localhost:8080' },
     static: { directory: path.join(__dirname, 'public'), publicPath: root }
   },
-  pwa: {
+  pwa: { // https://cli.vuejs.org/core-plugins/pwa.html#configuration
     name: 'Konglig Fysiks Sångbok',
     themeColor: '#FF642B',
     msTileColor: '#222',
@@ -55,11 +55,13 @@ module.exports = {
     },
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black-translucent',
-    workboxPluginMode: 'GenerateSW',
+    workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       // See https://developer.chrome.com/docs/workbox/reference/workbox-webpack-plugin/
       // Paths to exclude from pre-caching. Format: https://webpack.js.org/configuration/module/#condition
-      exclude: ['msvg', 'tex', 'img/icons', /\/js\/[generator|qrcodelib]\.[0-9|a-f]{8}\.js/]
+      exclude: ['msvg', 'tex', 'img/icons', /\/js\/[generator|qrcodelib]\.[0-9|a-f]{8}\.js/, /\.map$/],
+      // service-worker base
+      swSrc: '@/service-worker.ts'
     }
   }
 }
