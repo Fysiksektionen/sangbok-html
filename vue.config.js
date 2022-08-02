@@ -59,6 +59,7 @@ module.exports = {
     workboxOptions: {
       // See https://developer.chrome.com/docs/workbox/reference/workbox-webpack-plugin/
       // Paths to exclude from pre-caching. Format: https://webpack.js.org/configuration/module/#condition
+      // index.html is excluded, since we manually add '/' in service-worker.ts
       exclude: ['msvg', 'tex', 'img/icons', /\/js\/[generator|qrcodelib]\.[0-9|a-f]{8}\.js/, /\.map$/],
       // service-worker base
       swSrc: '@/service-worker.ts'
