@@ -45,10 +45,12 @@ export default defineComponent({
     return (
       <>
         <div class="navbar">
-          <div style="float: left;">
-            { !this.hideBackButton &&
-              <button><img src={backImage} alt="Gå tillbaka" onClick={this.goBack} data-test="navbarBackButton"/></button> }
-          </div>
+          {
+            !this.hideBackButton &&
+            <div style="float: left;" onClick={this.goBack} data-test="navbarBackButton">
+              <button><img src={backImage} alt="Gå tillbaka" /></button>
+            </div>
+          }
           <div class="title">Sångboken</div>
           <div style="float: right;" data-test="settingsButtonWrapper">
             {!this.showSettings && <button onClick={() => { this.showSettings = true }} data-test="navbarShowSettingsButton"><img src={settingsImage} alt="Visa inställningar" /></button>}
