@@ -93,6 +93,7 @@ img.inline {
   height: 1em;
   vertical-align: middle;
   margin-bottom: 0.2em;
+  filter: var(--image-filter-inline, invert(1));
 }
 
 /* Forms */
