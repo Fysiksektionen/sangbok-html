@@ -15,12 +15,14 @@ export default defineComponent({
 
     function search(evt: Event) {
       evt.preventDefault()
-      if (route.name === 'Search' && (evt.type === 'onsubmit' || store.state.settings[BooleanSettings.livesearch] === true)) {
-        // Replace the history entry if we stay on the search page.
-        router.replace('/search/' + query)
-      } else {
-        // If we come from somewhere else, we push a new history item.
-        router.push('/search/' + query)
+      if (evt.type === 'submit' || store.state.settings[BooleanSettings.livesearch]) {
+        if (route.name === 'Search') {
+          // Replace the history entry if we stay on the search page.
+          router.replace('/search/' + query)
+        } else {
+          // If we come from somewhere else, we push a new history item.
+          router.push('/search/' + query)
+        }
       }
     }
 

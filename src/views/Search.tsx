@@ -47,8 +47,8 @@ export default defineComponent({
                 {hasSheetMusic(hit.item) && this.store.state.settings.sheetmusic && <span class="sheetmusicicon">𝄢</span>}
               </td>
             </tr>)}
-            {results === [] &&
-              <tr class="nohits">
+            {(Array.isArray(results) && results.length === 0) &&
+              <tr class="nohits" data-test="noSongsFound">
                 <td>Inga sånger hittades.</td>
               </tr>}
             {results === false &&
