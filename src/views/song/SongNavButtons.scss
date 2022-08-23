@@ -45,4 +45,8 @@
 
 div.filler {
   opacity: 0;
+
+  &.fixed { // Not actually for fixed fillers, but for fillers that extend the main page when using fixed buttons.
+    height: 50px;
+  }
 }
