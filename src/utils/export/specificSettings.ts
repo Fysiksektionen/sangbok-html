@@ -97,6 +97,30 @@ function ogamlaklang(lyrics: string, settings: DownloadSetting[]): string {
   return getDefaultText(lyrics)
 }
 
+/**
+ * LaTeX pre-processor for Systéme International and similar songs.
+ * Do not use externally. Only exported for testing purposes.
+ */
+export function systeme(lyrics: string, settings: DownloadSetting[]): string {
+  if (settings[0].value) {
+    let out = '\\begin{tabular}{llllll}\n'
+    out += escapeAll(lyrics
+      .split(/\n/g)
+      .join('\\\\*\n')
+    ).split(/\n/g)
+      .map(s => s.trim().replace(/\s+/g, ' & '))
+      .join('\n')
+    out += '\n\\end{tabular}'
+    return out
+  } else {
+    return getDefaultText(lyrics
+      .replace(/\n/g, '\\\\')
+      .replace(/\s+/g, ' ')
+      .replace(/\\\\/g, '\n')
+    )
+  }
+}
+
 /** A list of song-specific settings and their respective pre-processors. */
 export const specificSettings: SpecificDownloadSettings[] = [{
   title: 'Årskursernas hederssång',
@@ -130,24 +154,7 @@ export const specificSettings: SpecificDownloadSettings[] = [{
     type: 'bool',
     value: true
   }],
-  processor: (lyrics: string, settings: DownloadSetting[]): string => {
-    if (settings[0].value) {
-      let out = '\\begin{tabular}{llllll}\n'
-      out += escapeAll(lyrics
-        .split(/\n/g)
-        .map(s => s.trim().replace(/\s+/g, ' & '))
-        .join('\\\\*\n')
-      )
-      out += '\n\\end{tabular}'
-      return out
-    } else {
-      return getDefaultText(lyrics
-        .replace(/\n/g, '\\\\')
-        .replace(/\s+/g, ' ')
-        .replace(/\\\\/g, '\n')
-      )
-    }
-  }
+  processor: systeme
 }, {
   title: 'The BASIC song',
   indexes: ['ι5'],

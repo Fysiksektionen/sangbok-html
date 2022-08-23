@@ -4,6 +4,9 @@ import router from '@/router'
 import store, { key } from '@/store'
 import App from '@/App'
 import { escapeAll } from '@/utils/export/escapes'
+import { systeme } from '@/utils/export/specificSettings'
+import { GeneralSettings, generalSettings } from '@/utils/export/generalSettings'
+import getMainTeX from '@/utils/export/mainTeX'
 
 test('Generator navigation', async () => {
   router.push('/')
@@ -63,4 +66,49 @@ test('Generator navigation', async () => {
 
 test('Song pre-processing', async () => {
   expect(escapeAll('"Citerad text" & annat')).toEqual("''Citerad text'' \\& annat")
+})
+
+test('Système pre-processing', async () => {
+  expect(systeme('W   kg   m   Wb   s\n', [{ text: '', type: 'bool', value: true }])).toContain('W & kg & m & Wb & s\\\\*')
+})
+
+test('mainTeX-GeneralSettings negative tests', async () => {
+  const gs: GeneralSettings = generalSettings
+  gs.title.value = 'Test-titel'
+  gs.showLogo.value = false
+  gs.showAuthor.value = false
+  gs.showDate.value = false
+  gs.showMelody.value = false
+  gs.showSheetMusicNotice.value = false // TODO: Test more extensively separately
+  const res: string = getMainTeX(gs)
+  expect(res).toContain('Test-titel')
+  expect(res).toContain('\\author{}') // The logo is in the author tag, but here it should be empty
+  expect(res).toContain('\\date{}') // Empty date is no date
+  expect(res).toContain('\n\\renewcommand{\\auth}')
+  expect(res).toContain('\n\\renewcommand{\\melody}')
+})
+
+test('mainTeX-GeneralSettings positive tests', async () => {
+  const gs: GeneralSettings = generalSettings
+  gs.title.value = 'Test-titel-2'
+  gs.showLogo.value = true
+  gs.showAuthor.value = true
+  gs.showDate.value = true
+  gs.showMelody.value = true
+  gs.showSheetMusicNotice.value = true // TODO: Test more extensively separately
+  const res: string = getMainTeX(gs)
+  expect(res).toContain('Test-titel-2')
+  expect(res).toContain('\n\\author')
+  expect(res).toContain('%\\date{}') // No (i.e. commented) date is auto-date
+  expect(res).toContain('%\\renewcommand{\\auth}') // No command overrides
+  expect(res).toContain('%\\renewcommand{\\melody}')
+})
+
+test('mainTeX-GeneralSettings bad user input tests', async () => {
+  const gs: GeneralSettings = generalSettings
+  gs.title.value = '}'
+  expect(getMainTeX(gs)).toContain('\\title{\\}}')
+
+  gs.title.value = '\\{'
+  expect(getMainTeX(gs)).toContain('\\title{\\\\\\{}')
 })

@@ -11,7 +11,7 @@ export type GeneralSettings = {
 }
 
 /** General settings used by every "sångblad" regardless of song contents. */
-export const generalSettings = {
+export const generalSettings: GeneralSettings = {
   title: {
     text: 'Titel på förstasida',
     type: 'string',
