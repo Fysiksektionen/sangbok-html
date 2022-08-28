@@ -1,0 +1,188 @@
+{
+    "chapter": "Torra visor",
+    "prefix": "Iι",
+    "songs": [
+        {
+            "title": "Système International",
+            "author": "Skriven till Sångartäfvlan -75\n av Anders Skog F-75",
+            "melody": "Studentsången",
+            "text": "W   kg   m   Wb   s\nΩm   T   A   rad\nCd   S   N   s\nΩA   m   Lx   dB\n°C   W/m²\nJ/kg   H   V   C\nkg/m³     mol\nm/s²   m/s²   F!",
+            "index": "ι1"
+        },
+        {
+            "title": "Integralkalkylens fader",
+            "author": "Skriven till integralens 300-årsdag 1975-11-11.",
+            "melody": "Sveriges fana\nSF1602 Differential- och integralkalkyl II",
+            "text": "Integralkalkylens fader,\nG W Leibniz hette han.\nHan blev trött på att skriva rader\nav plustecken efter varann.\n\nSå han tänkte:\n\"Das Wort Summe,\nes beginnt ja mit ein S\".\nOch han sade,\noch han gjorde\nintegrationssymbolen av sitt S.\n\nIntegralkalkylens fader\nfick idén för länge se'n.\nDen elfte uti november\nsextonhudra-sjuttifem.\nSe'n det året,\nse'n den dagen,\nvi skriver det tecknet så.\nOch vi räknar\noch kalkylerar,\nintegralens tecken kan en lita på.\n\nOch idag vi tecknet hylla.\nDet löser alla problem.\nDet lyckas vår fritid fylla\nmed dx och med dt:n.\nJa, må det leva.\nJa, må det leva,\ni många hundrade år.\nSå att våra barn\noch våra barnbarn\nintegralens tecken lära får.",
+            "index": "ι2"
+        },
+        {
+            "title": "GG-visan",
+            "author": "n∅llespexet 1999",
+            "melody": "Jag är ett litet ylle\n5A1203 Fysik, grundkurs del I",
+            "text": "Jag heter Göran Grimvall, W pdV Vdp.\nMed världens bästa infall, W pdV Vdp.\nJag lär ut termodynamik\noch har problem i Ny Teknik.\nGrimvall, Grimvall,\nGrimvall på dig, Grimvall-freak.\n\nI julas ringde Platen, W pdV Vdp.\nPrecis efter julmaten, W pdV Vdp.\nHur kunde han störa då, den token,\njag tittade ju på Djungelboken.\nGrimvall, Grimvall,\nGrimvall på dig, Grimvall-snoken.\n\nJag var student på Chalmers, W pdV Vdp.\nDet här blir blott en halv vers, W pdV Vdp.\n\nJag satt i kommissionen, W pdV Vdp.\nFör ubåtsinvasionen, W pdV Vdp.\nJag springer efter skärmar när\njag inte plockar svamp och bär.\n\nGrimvall, Grimvall,\noj... nu sitter Grimvall där!",
+            "index": "ι3"
+        },
+        {
+            "title": "Öl sex",
+            "author": "F-CTH",
+            "melody": "Med en enkel tulipan\nSI1140 Vektoranalys",
+            "text": "En liten enkel integral,\nuti ett Vektor III-tal.\nNi har besväret,\nni har besväret, att derivera.\n\nFörst tar en Stokes' sats däruppå,\nså blir det så enkelt så.\nAtt integralen,\natt integralen, evaluera.\n\nOch rotationen den integreras\nsen över ytan utav en boll.\nOch koordinaterna transformeras\nså integranden blir bara noll.\n\nEn liten enkel integral,\nuti ett Vektor III-tal.\nKan va' så jävlig\natt en ej hinner med något mera.",
+            "index": "ι4"
+        },
+        {
+            "title": "The BASIC song",
+            "author": "",
+            "melody": "Mors lilla Olle\nDD1346 Programkonstruktion",
+            "text": "10 LET oss nu fatta i våra glas\n20 INPUT en klunk utav det som där has\n30 IF du fått nog THEN till 50 min vän\n40 ELSE GOTO-baka till 10 igen\n50 END",
+            "index": "ι5"
+        },
+        {
+            "title": "Mors lilla dator",
+            "author": "",
+            "melody": "Mors lilla Olle\nDD1345 Grundläggande datalogi",
+            "text": "Mors lilla dator åt skogen gick,\nmitt i programmet sade det klick.\nSvart bidde skärmen och minnet försvann,\nden informationen kan ingen få fram.\n\nBrummeli-brum vad brummar där?\nDet sprakar och gnistrar, ett jordfel det är!!\nBlixtar blå från burken det slå,\nsynd att jag här nu ensam stå.\n\nHyscheli-hysch vad prasslar här?\nFram väller pappret ur printern där!\nDen har fått nippran av tecken så små,\njag tror att jag snart hemåt skall gå.",
+            "index": "ι6"
+        },
+        {
+            "title": "Tentamenssång",
+            "author": "",
+            "melody": "Stockholmsmelodi",
+            "text": "Se hur hela Teknis går i vånda.\nSnart så kommer tentaperiod.\nMek på fredag sedan Funk på måndag.\nDet är så att en kan gråta blod.\n\nVad har jag gjort hela långa våren,\nnär jag skulle pluggat och stått i.\nJag har bara druckit öl på kåren,\nmen det kan en inte tenta i.\n\nSe så många stackars teknologer.\nTranspirerar i en kvalmig sal.\nGrubblar planlöst över svåra frågor.\nSuckar, deppar åt en massa tal.\n\nSkriver formler, söker kombinera,\nför att få ihop en ekvation.\nSedan kan de ilsket konstatera,\natt de ej fått rätt på dimension.",
+            "index": "ι7"
+        },
+        {
+            "title": "ODE till en husvagn",
+            "author": "Första Fulölfesten, 2000",
+            "melody": "Husvagn\nSG1130 Mekanik, baskurs",
+            "text": "Vi har ägnat våren åt en kurs i mekanik,\nprickar, streck och pilar och en massa dynamik.\nVi har haft svårt att fatta vad en svängning innebär\nmen äntligen har vi förstått vad Newtons lagar lär...\n\nEn ska ha husvagn, som sitter fastspänd i en båt.\nEn ska ha husvagn, som sedan sjunker och blir våt.\nEn ska ha husvagn, som först är odämpad och fri.\nEn ska ha husvagn, nu så fattar vi!\n\nEn tänker sig en vagn med massan m och så en fjäder\nsom står på däcket på en båt som seglar i hårt väder.\nNär båten gungar skapas det en svängningsekvation,\noch vattnet som sen strömmar in ger stark viskös friktion.\n\nEn ska ha husvagn, då kommer en att räkna rätt.\nEn ska ha husvagn, för då kan resten inses lätt.\nEn ska ha husvagn, det är ett bra svängningssystem.\nEn ska ha husvagn i sina problem!\n\nm ẍ + c ẋ + k x är m g\nẋ är A ωₙ cosωₙ t\nτ är lika med 2π genom ωₙ,\ndär ωₙ är roten ur k genom m.\n\nEn ska ha husvagn, det är en bild som är konkret.\nEn ska ha husvagn, men för en hög viskositet\nska man ha honung, det ger ett ζ som är högt.\nEn ska ha honung, för det är kladdigt, mjukt och sött!",
+            "index": "ι8"
+        },
+        {
+            "title": "Matlab",
+            "author": "Uppsala teknologers sångbok",
+            "melody": "Husvagn\nDN1240 Numeriska metoder, grundkurs II",
+            "text": "Jag har prövat nästan allt som finns att pröva på:\nKulram, fingrar, räknesticka, tärning eller så.\nJag har kalkylerat på de konstigaste sätt\nmen nu så har jag kommit på hur en ska räkna rätt.\n\nEn ska ha MATLAB, då är kalkylen redan klar.\nEn ska ha MATLAB, det har jag sett att andra har.\nEn ska ha MATLAB, det är min livsfilosofi.\nEn ska ha MATLAB, för då blir en fri.\n\nI många år så var jag inte alls så särskilt lärd.\nJag visste ej vad som vänta’ mig i denna stora värld.\nMen sedan jag till NADA kom, och ända sedan dess\nså har jag funnit livets stora lyxdelikatess.\n\nEn ska ha MATLAB, så att en slipper tänka alls.\nEn ska ha MATLAB, ja, då går allting som en vals.\nEn ska ha MATLAB, det bygger på nån slags logik.\nEn ska ha MATLAB, för då blir en rik.\n\n5 minuter mekanik, 5 minuter statfys,\n5 minuter kvantfysik, 5 minuter analys,\n5 minuter fråga propp, 5 minuter kolla opp,\n5 minuter tänka själv och sedan tar det stopp.\n\nEn ska ha MATLAB, och datasalens friska luft.\nEn ska ha MATLAB, det tycker studenterna är tufft.\nEn ska ha MATLAB, när Ryssen kommer med sitt MIG.\nEn ska ha MATLAB, då vinner en i krig.",
+            "index": "ι9"
+        },
+        {
+            "title": "Hållfvisa",
+            "author": "Mikael Ros 1975",
+            "melody": "Mors lilla Olle\nSE1055 Hållfasthetslära, grundkurs F",
+            "text": "Mohrs lilla cirkel i skogen kröp.\nGränslast på axeln och skjuvning i blick.\nYtorna små utav tryck äro blå.\nTänk om jag slapp att få flyta ändå.\n\nBrumelibrum, vem stöter där?\nKnakar, en dislokation visst det är.\nσ den ökar och cirkeln blir krökt:\nHör du, jag tror att du spänner för högt.\n\nHooke fick nu se dem, gav till ett skri.\nLinjen försvann, nu är leken förbi.\nÅ varför skrämde du undan min vän?\nMohr lilla bed honom käla igen.",
+            "index": "ι10"
+        },
+        {
+            "title": "Elämnenas lov",
+            "author": "",
+            "melody": "Trink, Trink\nEI1240 Teoretisk elektroteknik",
+            "text": "Ström, ström, vi vill ha ström.\nDet är vår senaste dröm.\nStröm, ström, vi vill ha ström.\nDet är vår senaste dröm.\n\nShunta din MOS\noch bottna din FET\noch ge mig en puls utav det.\nSlut upp i kampen för Elmät och TET.\nStröm är det bästa vi vet!",
+            "index": "ι11"
+        },
+        {
+            "title": "O hemska lab",
+            "author": "Sångartäfvlan 1992",
+            "melody": "O Helga Natt\n2B1507 Halvledarelektronik",
+            "text": "O hemska lab, o grymma kval imorgon.\nHär sitter jag och förstår ingenting.\nHela mitt inre fylls utav ett motstånd\nemot eländig elektrisk mätteknik.\n\nJag skulle nog behöva lite ledning,\nHär räcker inte min kapacitans.\n\nKondensatorer och felvända dioder.\nO hemska lab, nu vill jag koppla af.\nO hemska lab, ty detta blir min graf!",
+            "index": "ι12a"
+        },
+        {
+            "title": "O hemska lab",
+            "author": "",
+            "melody": "O Helga Natt\nDD1331 Grundläggande programmering",
+            "text": "O hemska lab, o grymma kval imorgon.\nHär sitter jag och förstår ingenting.\nHela programmet är fyllt utav funktioner\nsom innehåller en himla massa fel.\n\nPekare som inte har nån riktning,\noändliga loopar, oj vad jag blir sträng!\n\nÅh, kompilera, hur ska det här fungera?\nO hemska lab, nu vill jag logga ut.\nO hemska lab, ty detta blir mitt slut!",
+            "index": "ι12b"
+        },
+        {
+            "title": "O hemska lab",
+            "author": "Adam Erlandsson, F-17",
+            "melody": "O Helga Natt\nSI1121 Termodynamik",
+            "text": "O hemska lab, o fasliga arbete.\nDet pumpar bort all min inre energi.\nDenna process förvärrar nog mitt tillstånd,\njag är helt fast, med utvägen medelfri.\n\nDet känns som att jag håller på att kvävas,\nty jag har inte hunnit värma upp.\n\nMystiska lådor och vätske-värmepumpar.\nO hemska lab, mitt lärande blir svalt.\nO hemska lab, det känns ej idealt!",
+            "index": "ι12c"
+        },
+        {
+            "title": "Aris summavisa",
+            "author": "Mikael Winai 2001",
+            "melody": "Idas sommarvisa\nSF1628 Komplex analys",
+            "text": "Du ska inte tro att en summa\nblir alls vad den ser ut att va'.\nJa summor kan va' lite krångligt,\ndet gäller att arbeta smart.\n\nJag gör alla index till blommor,\njag gör konvergensradien grön.\nOch nu så har serien bli'tt konvergent,\nför jag har just trollat bort n.\n\nJag gör några byten av tecken,\ndet blev visst Laurentserien kvar.\nJag gör integraler så dryga\nmen summan blir sist ganska rar.\n\nJag gör residyer på tvären\nmed nå'n enkelpol här och där.\nJag gör en Maclaurin av ln\noch sedan så är svaret där.\n\nOch KS:ar gör jag åt F:arna\n(för det tycker Bengt de ska få)\nmed många små roliga saker\nsom passar till kunskaper små.\n\nOch jag gör små roliga ställen\ndär kurvan är snirklig och fin.\nDå blir bladen fulla med summor\noch svaren blir fulla med π:n.",
+            "index": "ι13"
+        },
+        {
+            "title": "Kvarkvisan",
+            "author": "Skriven under Forces 20-årsjubileum 1997",
+            "melody": "Lingonben\nSI1151 Kvantfysik",
+            "text": "Upp och ner och charm och sär,\nvoro sex små kvarkar.\nEn var grön och en var blå\noch en var lite anti.\n\n\"Hej\" sa topp till lille charm,\nkänner du till Plancks konstant\noch en förskjutningslag från Wien;\nJa det gjorde Boltzmann!\n\nTre stycken kvarkar för en proton,\nse där passerar en foton.\nFermi, Bose och Einstein.\nTjo! sa Stephen Hawking.",
+            "index": "ι14"
+        },
+        {
+            "title": "Liten visa om Gram-Schmidts metod",
+            "author": "Christian Adåker, FanFar",
+            "melody": "Imse vimse spindel\nSF1604 Linjär algebra II",
+            "text": "Tag en delrumsbas M\noch en vektor a.\nProjicera ner, tag dess residual.\nNormalisera, tillför den till M.\nTag sen nästa vektor, börja om igen.",
+            "index": "ι15"
+        },
+        {
+            "title": "Kemisången",
+            "author": "",
+            "melody": "Studentsången",
+            "text": "Sn   As   B   Pt   Br\nNa     Tl     Pr\nP     Pd     N     Cr\nEr     I     Xe     Nd\nGd   Hg   Pb   Zr\nPa   Fe   Bi   Cl   Rn\nV   C   Se   Mo\nAl    Si   Ar\nAl    Si   Ar\nU!",
+            "index": "ι16"
+        },
+        {
+            "title": "Imperial system",
+            "author": "Skriven till Sektionens 75-årsjubileum\n2007-11-15 av GM²N",
+            "melody": "Studentsången",
+            "text": "ft   kp   K   bu   B\n”    Gb     Oe     lb   rdr   std\nst   msk   kn   E\nFr   krm   c   cSt\n°F\npt   -   ”   '\nat\nhk   nmi\nM   Ci   dptr   cal\nmvp     mvp     ha!",
+            "index": "ι17"
+        },
+        {
+            "title": "Jag gillar meken",
+            "author": "",
+            "melody": "Jag gillar punschen\nSG1112 Mekanik I",
+            "text": "Jag gillar, jag gillar meken,\njag gillar den som meken skapat har.\nIsaac Newton och Apazidis,\njag gillar meken och dess far!\n\nJag gillar, jag gillar 'Zidis,\njag gillar den som 'Zidis skapat har.\nMamazidis och Papazidis,\nde är så jävla, jävla bra!",
+            "index": "ι18"
+        },
+        {
+            "title": "Termon",
+            "author": "Yashar Honarmandi och Filip af Malmborg, F-17",
+            "melody": "Månvisa\nSI1121 Termodynamik",
+            "text": "Jag heter Patrik, ja det är mig,\njag är proffs på ekvationer.\nHär i min sal ska jag visa dig\ntermodynamiska funktioner.\nEn fråga ställs, hela salen lyssnar\nsen utan vidare salen tystnar.\nSchuup säger jag, en typisk dag.",
+            "index": "ι19"
+        },
+        {
+            "title": "Henelius-eufori",
+            "author": "Anton Grensjö och Mårten Nilsson, F-13",
+            "melody": "Euphoria\nSI1121 Termodynamik",
+            "text": "Vi, våran verklighet gått i kras.\nDet, existerar ingen ideal gas.\nNu, alla skriker du tar av din top\nÅååh, vi vill alla se din svarta kropp.\n\nHenelius, du lärde oss om termodynamik\nmen i mitt hjärta har du satt en spik\nnär du sa \"utan vidare\".\n\nHenelius, en huvudsats du gav till mig\nmen jag förstod den inte, nej,\ndå sa du \"utan vidare\".\n\nDu, vi hedrar dig på vårt kalas.\nJag, jag vill tugga dig som havrefras.\nSubstansmängden ökar och ökar\nför varje liten mängd av mol.\nSå manlig på dagen men sedan\nså tar du på en megakJoule.\n\nHenelius, du lärde oss om termodynamik\nmen i mitt hjärta har du satt en spik\nnär du sa \"utan vidare\".\n\nHenelius, en huvudsats du gav till mig\nmen jag förstod den inte, nej,\ndå sa du \"utan vidare\".",
+            "index": "ι20"
+        },
+        {
+            "title": "Reglerteknik på bal",
+            "author": "Sångarstriden 1976",
+            "melody": "Rosa på bal\nEL1000 Reglerteknik",
+            "text": "Tänk att tentera reglerteknik, lilla jag\nlilla jag, tentera reglerteknik.\nTänk att bli uppmärksammad av en sån\npopulär institution!\n\nReglerteori, vackers namn, eller hur?\nBörjan i moll och finalen... också i moll!\nNär blir den färdig herr Wittenmark, säg\nTentan Ni diktar till mig?\n\nTentan till er teknologer\nfår ni nån gång framåt jul.\nNär ni den sedan skall lösa\ntror jag ni får riktigt kul.\nMed Nyqvist och Bode och Halldiagram\nstyvhet och felhet skall ni räkna fram.\nMinimum fasasymptoter till sist,\ndet kan väl aldrig bli trist!\n\nNej, aldrig trist vill jag lova,\nhar man som Eran elev.\nMan kan varje fall inte sova\nty aldrig förglömmer man Er.\nDet här är det värsta jag någonsin läst,\ndet hade jag sluppit om jag läst till präst,\njurist eller annat som nytta ej gör.\nJag vill bli civilingenjör!",
+            "index": "ι21"
+        },
+        {
+            "title": "En matematiker",
+            "author": "Uppsala teknolog- och naturvetarkårs sångbok",
+            "melody": "En sockerbagare\nSF0003 Introduktion i matematik",
+            "text": "En matematiker här bor i staden\nhen räknar matte mest hela dagen.\nHen räknar primtal stora och små.\nHen tycker om x upphöjt till två.\nOch i hens fönster hänger skumma saker,\ndär finns det sfärer, ibland kvadrater,\noch små ellipser och kägelsnitt.\nLåter det roligt så ta en titt!\n\nVår matematiker som bor i staden,\nhen deriverar i högsta graden,\nhen äter cos-cos och basmat(i)ris,\ndet verkar vettigt på något vis.\nHen skriver räkneböcker för studenter,\noch hen gör uppgifter till massa tentor.\nOch är hen snäller blir svaret 2,\nmen är hen stygger så blir det ρ.",
+            "index": "ι22"
+        },
+        {
+            "title": "Det är långt bort till Alba Nova",
+            "author": "Anton Åkesson, F-14",
+            "melody": "It's a long way to Tipperary",
+            "text": "Ut från D1 rusade en fysiker en gång,\nkvarten den var ännu ung,\nmen marschen gick i språng.\nMuttrandes om FR4, schemaläggningsskit,\nmen så ryckte hen upp sig,\nlog och trallade en bit:\n\nDet är långt bort till Alba Nova,\ndet är lång väg att gå.\nVi blir sena, det kan ja’ lova,\nmen vi vandrar dit ändå.\nLämnar Osquars backe, går över Q-bron.\nDet är långt, långt bort till Alba Nova,\ndär mitt hjärta bo!\n\nFysikerna drömde om att kalla Alba hem\nKTH sa \"det går ej,\n men duger det med M?\"\nNya Kons blev angenämt med medlemmarnas flit\nMen ack så fjärran bort det låg,\nhur ska en hitta dit?\n\nDet är långt bort till Konsulatet,\ndet är lång väg att gå.\nHur vi än gör blir resultatet\natt vi nödgas gå ändå.\nMen uti punschpokalen, står det intet smolk:\nFysiker kan ströva till lokalen,\nvi är ett vandringsfolk!",
+            "index": "ι23"
+        },
+        {
+            "title": "Tentapluggsblues",
+            "author": "Fängselfesten 1999",
+            "melody": "Gräsänkling Blues",
+            "text": "Det är torsdag morgon, å mitt huvud känns så tungt.\nDet är torsdag morgon, å mitt huvud känns så tungt,\nnär jag sitter här med ett glas grapefruktjuice\nsjungande the tentapluggsblues.\n\nVår sista undervisning, med tangens, rötter och π\ntog slut för fjorton dar sen, å jag kände mig så fri.\nÅh åh åh, nu skulle här jumpas for joy.\nNu känner jag mig mindre fri så nu får refrängen bli\nÅ, tentaplugg, please let me be.\n\nJag försöker minnas talen ifrån räkneövningssalen\nnär min asse höll mig fången i ett stadigt grepp.\nHen sa: Jag skulle inte glömma de å de å de å de å de\nmen sen så var det slut, vi gick, när han sa stick!\nMen ännu kan jag höra hur det ringer i mitt öra:\n\"Dra ut roten här, integrera där\" häpp, häpp, häpp.\n\nJag ska köpa nya suddgum', för de gamla har tatt slut,\nå jag själv är lika vissen som en sing-singsal ser ut.\nÅh åh åh, ja, jag mår inte riktigt bra idag.\nDen vecka som har gått har trotsat all kalkyl,\nå allt som finns i huset är kapsyl å magnecyl.\n\nMin formelsamling Beta, vår trogna gamla skatt,\nden glömde jag på Sturecompagniet förrgår natt.\nÅh åh åh, ja, jag hade väl druckit, kan man tro.\nNu får jag klara allting själv, med mycket stort besvär,\noch min minneslista låter så här:\n\nJag ska böja balkar, och jag ska vrida nav,\nå jag ska också leva upp till alla andra krav,\nför jag ska z-transformera, räkna om, och integrera\nå jag ska ordna alla kunder i en prydlig liten kö,\noch göra labben sen, och komplettera den,\nåsså plugga, plugga, plugga, om igen.\n\nSch, ett kors i almanackan, jag ser det alltför bra.\nTrodde tentan var imorgon, och så kommer den idag.\nÅh åh åh, well, now I let the devil loose.\nFull fart mot tentapuben, jag tror jag smiter min kos,\nsjungande the tentapluggsblues.",
+            "index": "ι24"
+        }
+    ]
+}

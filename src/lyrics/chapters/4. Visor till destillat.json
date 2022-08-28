@@ -1,0 +1,581 @@
+{
+    "chapter": "Visor till destillat",
+    "prefix": "Δδ",
+    "songs": [
+        {
+            "title": "Supregler",
+            "author": "Utdrag ur en pastors anteckningar, 1809",
+            "melody": "",
+            "text": "<p>Varje människa som vill föra en regelmässig diet i mat och dryck tager sig följande styrketårar.</p><p>Förutsatt att en icke svultit eller törstat dagen innan besväras en dagligen av slem i halsen eller så kallade tuppar, varför en börja efter uppvaknandet med tuppsupen. Den kan tagas på sängen. En stund därefter och sedan en tagit en liten motion följer den uppfriskande bäsken. Vidare en klar för att borttaga bäskens eftersmak. Nu dricker en sitt kaffe varefter kaffesupen ej förgätes. Vid frukosten tages aptitsupen, fisksupen och halvan.</p><p>Nu inträder arbetstiden varunder blott fyllehundar supa. När middagen är serverad tages aptitsupen och innan en skiljer sig från middagsbordet, klacken. Därefter under måltiden supen på fisken, halvan och tersen. På eftermiddagen sedan en tagit sin middagstupplur drickes kaffe varefter kaffesupen ej försummas. Den som ej dricker kaffe är berättigad att istället för kaffe taga sig en klar. Därefter följa sexan som näst efter aptitsupen är den angelägnaste.</p><p>Nu ha vi tedags, men en sann patriot dricker inte denna dryck, som gör magen kvalmig, utan då en sätter sig till spelbordet, tar en sig istället en spelsup, därefter drickes toddy och mellan varje sådan är en berättigad till mellanbindare och äro glasen ej allt för stora drickes tre toddar och följdaktligen tages också två mellanbindare. Vid kvällsmåltiden de tre ordinarie måltidssuparna och då en stiger i sängen bör en ej glömma loppsupen och härmed är dagen till ända.</p>",
+            "index": "Δ"
+        },
+        {
+            "title": "Helan går",
+            "author": "",
+            "melody": "",
+            "text": "Helan går,\nsjung hopp faderallan lallan lej!\nHelan går,\nsjung hopp faderallan lej!\n\nOch den som inte helan tar,\nhen heller inte halvan får.\nHelan går (supen intages)\nSjung hopp faderallan lej!",
+            "index": "δ1a"
+        },
+        {
+            "title": "Hell and gore",
+            "author": "",
+            "melody": "Helan går",
+            "text": "Hell and Gore,\nChung Hop father Allan, Allan ley!\nHell and Gore,\nChung Hop father Allan ley!\n\nOn handsome in the hell and tar\nHell are in the half and four\nHell and Gore!\nChung Hop father Allan ley!",
+            "index": "δ1b"
+        },
+        {
+            "title": "Et langue d'or",
+            "author": "",
+            "melody": "Helan går",
+            "text": "Et langue d'or, joue haute fadeur a l'an la langue laide!\nEt langue d'or, joue haute fadeur a l'an laide!\nOctane somme mine te et loitain,\nA ni te et leur halle vend fort.\nEt langue d'or!\nJoue haute fadeur a l'an laide!",
+            "index": "δ1c"
+        },
+        {
+            "title": "Imbelupet",
+            "author": "",
+            "melody": "Kors på Idas grav",
+            "text": "Imbelupet glaset står på bräcklig fot.\nSvala pilsnerpavor luta sig därmot.\nMen därnere, miserere...\n\n...uti magens mörka djup\nsitter Djävulen och väntar på en sup.\n\n...uti magens dunkla valv\nsitter Djävulen och ropar på en halv.\n\n...uti magen kors och tvärs\nirrar Djävulen och skriker på en ters.\n\n...uti magens tom och svart\nsitter Djävulen och skränar på en kvart.\n\n...uti magens labyrint\nsitter Djävulen och tjoar på en kvint.\n\n...uti magens slingerväxt\nsitter Djävulen och skriar på en sext.\n\n...uti magen heluppknäppt\nsitter djävulen och vrålar på en sept.\n\n...uti magen varm och kvav\nsitter djävulen och väser på oktav.",
+            "index": "δ1d"
+        },
+        {
+            "title": "Vem sade ordet \"skål\"?",
+            "author": "",
+            "melody": "Vårvindar friska",
+            "text": "Vem sade ordet \"skål\" här vid bordet,\nviskande for det sällskapet kring.\nFattom kristallen, nubben är kall den,\nstiger åt skallen, pling, plang, pling.\nKäraste vänner välkomna hit\nkänn hur det bränner god akvavit.\nNu lilla hutten går i kaputten\nskål lilla tutten, pling, plang, pling.",
+            "index": "δ1e"
+        },
+        {
+            "title": "Ubåten",
+            "author": "Leo Tikkanen, F-20",
+            "melody": "Jazzgossen",
+            "text": "Å så kommer det en ångbåt,\noch den säger: \"Tut-tut-tut!\"\nÅ så kommer det en ubåt,\noch den säger:\n(Gurgla nubben)",
+            "index": "δ1f"
+        },
+        {
+            "title": "När helan en tagit",
+            "author": "",
+            "melody": "Skånska slott och härresäten",
+            "text": "När helan en tagit\noch halvan ska dricka,\nDet är som att kyssa\nen nymornad kära.\n\nJu mera en får,\ndesto mer vill en ha,\nEn ensammer jävel\ngör alls ingen gla'.",
+            "index": "δ2a"
+        },
+        {
+            "title": "Halvan",
+            "author": "",
+            "melody": "Pojkarne\nNoter finns i notkapitlet",
+            "text": "Hur länge skall på borden\nden lilla halvan stå?\nSkall snart ej höras orden:\nNu halvan går, låt gå!\n\nDet ärvda vikingsinne\ntill supen trår igen,\noch helans trogna minne\ni halvan går igen.",
+            "index": "δ2b"
+        },
+        {
+            "title": "Angorakatten",
+            "author": "",
+            "melody": "Vi går över daggstänkta berg",
+            "text": "Det var en gång en vanlig bonnakatt, fallera,\nsom älskade en hel-angorakatt, fallera!\nOch följden blev en jamare,\nmen den blev mycket tamare,\nför den var blott en halv-an-gor-akatt, fallera.",
+            "index": "δ2c"
+        },
+        {
+            "title": "Helan gick",
+            "author": "",
+            "melody": "Amanda Lundbom",
+            "text": "Helan gick i vänstra foten,\nbom-faderia, faderareralla.\nGudskelov, så vet jag boten,\nbom-faderi, faderallanlej!\nHalvan ställer saken rätt,\nbom-faderi, faderallanlej\nHugg i!\nPå nubbar blir en aldrig mätt,\nbom-faderi, faderallanlej!",
+            "index": "δ2d"
+        },
+        {
+            "title": "Helan rasat",
+            "author": "",
+            "melody": "Längtan till landet",
+            "text": "Helan rasat ned i våra magar,\nsQuvValpar nu på botten mol allen.\nI sin ensamhet den bittert klaga:\n\"Det är svårt att bara vara en.\"\nSnart är halvan här, den härliga supen,\nalkoholiskt ren och silverklar,\nDansar som en vårbäck ned genom strupen\nHamnar — plask! — i helans budoir.",
+            "index": "δ2e"
+        },
+        {
+            "title": "Nubbekantat",
+            "author": "Ur det 46:e Bergsspexet KrigEtt",
+            "melody": "Smedsvisa",
+            "text": "Att höja en skål kan nog vara rätt\nmen måttfullhet krävs för att ej halka snett.\nAv drycker är tersen särklassigt bäst\nsom tömmes av vänner på fest.\n\nSå, blott några koppar är allt vi vill ha\noch bäska droppar måste det va'.\nMen vägen till tersen är ganska lång\nså helan vi tar med en gång.\n\nNu har vi väl sagt varandra gutår,\nlagt bort våra titlar så gott som det går,\ninlett med vår bordsvän konversation,\ndå strupen vill ha solution.\n\nSå, blott några koppar är allt vi vill ha\noch bäska droppar måste det va'.\nTy talet gör halsen otroligt torr\nså halvan vi tar med en knorr.\n\nOm vi mot förmodan äter nån mat\nså bytes vårt lammkött mot pizza på fat.\nDen vådliga rätten får nog stå kvar\nistället vi tar oss en klar.\n\nSå, blott några koppar är allt vi vill ha\noch bäska droppar måste det va'.\nAv maten så blir en tjocker och fet\nså tersen får bli vår diet.",
+            "index": "δ3a"
+        },
+        {
+            "title": "Var Osquristina",
+            "author": "",
+            "melody": "Te deum (Eurovision-signaturen)",
+            "text": "Var Osquristina som går på vår sektion\nav äldre kollegor lärt en tradition,\natt noga se om sin kondition,\nOch högra armen ge motion.",
+            "index": "δ3b"
+        },
+        {
+            "title": "Små nubbarna",
+            "author": "",
+            "melody": "Små grodorna",
+            "text": "Små nubbarna, små nubbarna\när äckliga att se,\nsmå nubbarna, små nubbarna\när äckliga att se.\n\nNu tar vi dom, nu tar vi dom,\nså slipper vi dom se,\nnu tar vi dom, nu tar vi dom,\nså slipper vi dom se.",
+            "index": "δ3c"
+        },
+        {
+            "title": "Planksaft",
+            "author": "",
+            "melody": "(Längtan till baren)\nLängtan till landet",
+            "text": "Törsten rasar uti våra strupar,\ntungan hänger torr och styv och stel.\nMen snart vankas stora långa supar,\nvar och en får sin beskärda del.\nSnapsen kommer, den vi vilja tömma,\ndenna nektar lik Olympens saft\nkommer oss att våra sorger glömma.\nSnapsen skänker hälsa, liv och kraft.\n\nFordom odlade en vindruvsrankor\nav vars saft en bryggde ädelt vin.\nNu en pressar saften ur en planka,\ndoftande av äkta terpentin.\nHöj nu bägaren o broder, syster,\nlåt den svenska skogen rinna kall,\ngenom strupen och om du är dyster,\nlåt oss dricka upp en liten tall.\n\nHelan tänder helig eld i själen,\nhalvan rosar livet som en sky,\ntersen känns från hjässan ned i hälen,\nkvarten gör en som en männska ny.\nLåt oss skåla med varandra go' vänner\nskål för vår levnads glada hopp.\nTörstens eld på nytt i strupen bränner.\nLeve livet skål och botten opp!",
+            "index": "δ4a"
+        },
+        {
+            "title": "Brännvin hit",
+            "author": "",
+            "melody": "Skära havre",
+            "text": "Brännvin hit\noch brännvin dit\noch brännvin är det bästa.\nOch fan den\nsom brännvin har\noch inte bju'r sin nästa.",
+            "index": "δ4b"
+        },
+        {
+            "title": "Gums visa",
+            "author": "",
+            "melody": "Skära havre",
+            "text": "Skål, kamrater,\nlivet är glatt,\noch snart förgäta vi sorgen,\nVi söpo igår,\nvi supa idag\noch tar en sjujäkel i morgon!",
+            "index": "δ4c"
+        },
+        {
+            "title": "Fkåne faft",
+            "author": "",
+            "melody": "Helan går",
+            "text": "Fkåne faft,\nEn fydfvenfk faft med fällfam kraft.\nFkåne faft,\nDen bäfta faft vi haft.\n\nEnf livfluft löfef, fläppef loff,\nNär fådan faft ferveraf off,\nFmakenf faft\nTill landf, till luftf, till havf.",
+            "index": "δ5a"
+        },
+        {
+            "title": "Mera Skåne",
+            "author": "",
+            "melody": "Internationalen",
+            "text": "Nu är det dags att taga supen;\nden stärker varje svag fysik.\nDen rinner ner igenom strupen,\nriver gott som en tolvtumsspik.\n\nDen är vårt hopp mot gula faran,\nvår tröst vid varje bleklagd sorg.\nDen stärker oss mot mask i magen,\nstarkare än Svea borg!\n\nMera Skåne i glasen,\nflera glas på vårt bord!\nMera bord på kalasen,\nfler kalas på vår jord!\nMera jordar kring månen,\nflera månar kring Mars!\nMera marscher till Skåne!\nMer Skåne gubevars, bevars, bevars!",
+            "index": "δ5b"
+        },
+        {
+            "title": "En cyklar för lite",
+            "author": "Povel Ramel, 1964",
+            "melody": "Väda vadmal",
+            "text": "En cyklar för lite'.\nEn röker för mycke'\noch en är fasen så liberal\nnär det det gäller maten och spriten.\nEn borde slutat för länge sedan\nmen denna sup är för liten.\nVad tjänar att hyckla.\nTids nog får en cykla.\n\nEn badar för lite'.\nEn röker för mycke'\noch en är...\nDet kan inte skada.\nTids nog får en bada.\n\n En sover för lite'.\nen röker för mycke'\noch en är...\nNjut var gudagåva!\nTids nog får en sova.\nJa, det vill jag lova!",
+            "index": "δ5c"
+        },
+        {
+            "title": "För att människan",
+            "author": "",
+            "melody": "Bä, bä, vita lamm",
+            "text": "För att människan\nskall trivas på vår jord\nbör hen ständigt ha\npå sitt smörgårsbord:\n\nen stor, stor sup åt far,\nen liten snaps åt mor,\noch två små droppar\nåt lille, lille bror.",
+            "index": "δ5d"
+        },
+        {
+            "title": "Finsk snapsvisa",
+            "author": "",
+            "melody": "Bör sjungas efter grundliga förberedelser, angivande av ett flertal tonarter med bibehållen taktkänsla.\n Hiss-dur, Vivace molto fortissimo con spirito.\n",
+            "text": "(17 sekunders tystnad)\n    NU!!!",
+            "index": "δ6a"
+        },
+        {
+            "title": "Finsk brännvinsvisa",
+            "author": "",
+            "melody": "Ratataa ur Povel Ramels film \"Ratataa\"\n(bör sjungas med finlänsk brytning. På \"Ratataa\" drar en i tofsen i mössan.)",
+            "text": "Att dricka brännvin är en sed\nsom ingen oss har lärt.\nFrån början vi ej kunde\nmen det var blott temporärt.\nSå lärde vi oss så småningom,\noch det var värt besvär't.\nFililurum bom, tutigalen pang!\nVisst var det värt besvär't.\n\nRatatataa, så tar vi oss en tuting.\nRatatataa, med mycket brännvin i.\nRatatataa, ratatataa!\nDricka brännvin gillar jag,\nför jag blir så full och glad!",
+            "index": "δ6b"
+        },
+        {
+            "title": "Sädesfälten",
+            "author": "",
+            "melody": "Barndomshemmet",
+            "text": "När som sädesfälten böja sig för vinden,\nstår en jäkel där och böjer dom tillbaks!",
+            "index": "δ6c"
+        },
+        {
+            "title": "Räven",
+            "author": "",
+            "melody": "",
+            "text": "Jag fångade en räv idag,\nmen räven slank ur näven,\nmen lika gla' för det är ja'\nmen gladast är nog räven.\n\nÅh hum, vår sång är dum\nDen är ju ingenting\nVad gör det om hundra år\nnär allting kommer kring?\n\nJag gillar steppa runt i takt\nmen jag har tappat takten.\nJag har letat överallt,\nvar katten har jag lagt den?\n\nÅh hum, vår sång är dum...",
+            "index": "δ6d"
+        },
+        {
+            "title": "Supen",
+            "author": "",
+            "melody": "Räven",
+            "text": "Jag fångade en sup idag\nmen supen slank ur näven,\nmen lika gla' för det är ja'\nmen gladast är nog levern!\n\nLala lalalala...\n\nJag fångade en PRezt idag\nmen prästen damp i gatan,\nmen lika gla' för det är ja'\nmen gladast är nog Satan!\n\nLala lalalala...\n\nJag fångade en biff idag\nmen den var seg som kola\noch lika seg som den är ja'.\nDet är så kul att skåla!",
+            "index": "δ6e"
+        },
+        {
+            "title": "Nu ska vi klämma septen",
+            "author": "",
+            "melody": "Nu ska vi skörda linet",
+            "text": "Nu skall vi klämma septen gutår,\nsjunga en trudelutt om det går.\nTjosan Muhammed, nu är det vår,\njulafton är en fredag.\n\nKlunk-klunk-klunk, klunk-klunk-klunk,\nblanda och ge, blanda och ge,\nabra kadabra klunk,\njulafton är en fredag.\n\n(om och om igen, fortare och fortare)",
+            "index": "δ7a"
+        },
+        {
+            "title": "Full och galen",
+            "author": "",
+            "melody": "Kors på Idas grav (Imbelupet)",
+            "text": "Full och galen med moralen minimal,\nljuder nu signalen till vår bacchanal.\nSensmoralen i lokalen\när att tömma sin pokal\nså skandalen i finalen blir total.",
+            "index": "δ7b"
+        },
+        {
+            "title": "Toj hemtegubbar",
+            "author": "",
+            "melody": "Hej tomtegubbar",
+            "text": "||: Toj hemtegubbar gla i slåsen\noch låt oss vastiga lura! :||\n\nEn liten tid vi heva lär\nMed möcken hyda och svär bestor,\nToj hemtegubbar gla i slåsen\noch låt oss vastiga lura.",
+            "index": "δ7c"
+        },
+        {
+            "title": "Full är bäst",
+            "author": "",
+            "melody": "Vi gå över daggstänkta berg",
+            "text": "Vi som oss för att glupa satt\nsupa glatt,\nity den som försmår sin första tår\ntörsta får.\nAv längtan vi tryckas, av trängtan att lyckas,\nvi nu med bravur häller ur,\neller hur?\n\nVi ger tätt som titt strupen sitt,\nsupen stritt\nskall forsa och snart får sig tarmen vår\nvarm en tår.\nEr öven i seder, och söven sen ned er\npå denna protestbullerfest,\nfull är bäst!",
+            "index": "δ7d"
+        },
+        {
+            "title": "Morsgrisar små",
+            "author": "",
+            "melody": "Morsgrisar är vi allihopa",
+            "text": "Morsgrisar små ska inte supa\nför de stupa allihopa.\nMen vi vill ha brännvin fyllt med skupa\ni våra djupa strupa.\n\nNu med, (supen tas)\noch nu med. (tupen sas)\nNu med, (schupen tasch)\noch nu med. (schnaps)",
+            "index": "δ7e"
+        },
+        {
+            "title": "Livet är härligt",
+            "author": "Chalmersspexet Katarina 1959\nDenna sjunges först på alla Chalmerssittningar",
+            "melody": "Polyushko-polye\nSjunges först svagt, sedan starkt",
+            "text": "||: Livet är härligt!\nTavaritj, vårt liv är härligt!\nVi alla våra små bekymmer glömmer\nnär vi har fått en tår på tanden, skål!\nTag dig en vodka!\nTavaritj, en liten vodka!\nGlasen i botten vi tillsammans tömmer!\n\n1: Det kommer mera efter ha-a-and. :||\n\n2: Det kommer mera efter hand!",
+            "index": "δ8a"
+        },
+        {
+            "title": "Vodka, vodka",
+            "author": "",
+            "melody": "Stenka Razin",
+            "text": "Vodka, vodka vill jag dricka,\njag vill äta kaviar,\n||: jag vill älska russkij männ'ska,\njag vill spy i samovar :||\n\nVita möss som gå i taket,\nråma hest och falla ned,\n||: men ni skall inte var rädda,\nta en sup och allt går väl :||\n\nUppå väggen går en gädda,\nmed långa ludna, svarta ben,\n||: men ni skall inte var rädda,\nta en sup och allt går väl :||\n\n\n(Varianter på första versen)\nFalu brännvin - falukorv - falu människa - Faluån\nWhisky - baked beans - Yankee människa - på mina jeans\nEn kan också permutera \"äta\", \"älska\" och \"spy i\"",
+            "index": "δ8b"
+        },
+        {
+            "title": "Så hastigt",
+            "author": "",
+            "melody": "Flickan går i ringen",
+            "text": "Så hastigt den lilla nubben i strupen försvann,\nSå hastigt den lilla nubben i strupen försvann.\nHåhå jaja, kommer rafflan idag,\nHåhå jaja, kommer rafflan idag?",
+            "index": "δ8c"
+        },
+        {
+            "title": "Gräv ur tundran",
+            "author": "Ekonomspexet Lenin 1989",
+            "melody": "Katyuscha",
+            "text": "Gräv ur tundran två dussin potäter\nlåt dem jäsa uti fjorton dar.\n||: Modersmjölken för ryssar och sovjeter,\nbrännes i babusjkans samovar :||\n\nKyl sen drycken i Sibiriens tjäle,\ntappa upp på immiga små glas.\nHöj sen glasen för fosterlandets välgång,\nsjung \"Nastrovie\" med en mäktig bas.\nHöj sen glasen för fosterlandets välgång,\nsjung \"Nastrovie\"... (supen intages)\nlåt glasen gå i kras!",
+            "index": "δ8d"
+        },
+        {
+            "title": "Hyllning till OP Andersson",
+            "author": "",
+            "melody": "Lilie Marlene (Gul lyser solen)\n(Inte \"Vi äro musikanter\")",
+            "text": "Vi kan dricka Sädes\noch vi kan dricka Kron.\nMen allra mest vi glädes,\nåt OP Andersson.\n\nNär den gått ned uti vår strup,\nså ropas det på nästa sup:\nur svenska hjärtans djup,\nur svenska hjärtans djup.",
+            "index": "δ9a"
+        },
+        {
+            "title": "Tänk om jag hade lilla nubben...",
+            "author": "",
+            "melody": "Hej tomtegubbar",
+            "text": "||: Tänk om jag hade lilla nubben\nuppå ett snöre i halsen! :||\n\nOch kunde dra den upp och ner\nså att den smaka' som många fler!\nTänk om jag hade lilla nubben\nuppå ett snöre i halsen",
+            "index": "δ9b"
+        },
+        {
+            "title": "Krök armen",
+            "author": "",
+            "melody": "Väva vadmal",
+            "text": "Krök armen i vinken,\nhär vankas det finkel.\nOch vanka finkel\noch finka vankel\noch kröka armen i finkel.\nHär vankas det vinkel.",
+            "index": "δ9c"
+        },
+        {
+            "title": "Inre dialog",
+            "author": "Mikael Segersten (E-76)",
+            "melody": "An der schönen blauen Donau\nF: Försångare\nA: Alla",
+            "text": "F: Jag vill inte ha - A: en nubbe till!\nF: Jag mår inte bra - A: en nubbe till!\nF: Om ni ger mig mer - A: en nubbe till!\nF: ser jag er som fler - A: en nubbe till!\n\nF: Min mage är sjuk - A: en nubbe till!\nF: Min hjärna är mjuk - A: en nubbe till!\nF: Jag kan inte tänka så bra,\nså jag får väl nubben ta - hurra!",
+            "index": "δ9d"
+        },
+        {
+            "title": "Månvisa",
+            "author": "",
+            "melody": "",
+            "text": "När månen vandrar sin tysta ban\noch tittar in genom rutan\nDå tänker jag att på ljusa dan\ndå kan jag klara mig utan.\nJa, jag kan klara mig utan måne,\nmen utan renat och utan Skåne,\ndet vete f-n, det vete f-n.",
+            "index": "δ10a"
+        },
+        {
+            "title": "Måsen",
+            "author": "",
+            "melody": "Månvisa",
+            "text": "Det satt en mås på en klyvarbom,\noch torr i krävan var kräket.\nOch torkan brände i skepparns gom,\nnär de låg där i bleket.\n\"Jag vill ha sill\" hördes måsen rope,\nOch skepparn svarte \"Jag vill ha OP\nom blott jag får, om blott jag får\"\n\nNu lyfte måsen från klyvarbom\noch vinden spelar i tågen\noch OP:n svalkade skepparns gom.\nJag önskar blott att jag såg 'en.\nSå arm och nykter den arme kraken\nhen sätter storsegel den krabaten.\nTill sjöss hen far och halvan tar.",
+            "index": "δ10b"
+        },
+        {
+            "title": "Den vingklippta måsen",
+            "author": "",
+            "melody": "",
+            "text": "Det satt en mås på en klyvarbom\nJag vill ha OP!",
+            "index": "δ10c"
+        },
+        {
+            "title": "JASen",
+            "author": "Dadderiet 1993",
+            "melody": "Månvisa",
+            "text": "Det flög en JAS över Västerbron\nmen styrsystemet var trasigt.\nPiloten sköt ut sig med kanon\nför planet svängde så knasigt.\n\"Jag vill ju uppåt, jag vill ju mer\"\nmen planet svarte: \"Jag vill ju ner\"\nmot alla hjon på Västerbron.",
+            "index": "δ10d"
+        },
+        {
+            "title": "När nubben blänker",
+            "author": "",
+            "melody": "Månvisa",
+            "text": "När nubben blänker i immigt glas\nsom hoppets strålande stjärna,\ndå är det avsett att det ska tas\nförutan fruktan och gärna.\nSå klang och klingom, så tar vi supen,\nden läskar härligt den torra strupen.\nJa, skål gutår, ja, skål gutår!",
+            "index": "δ10e"
+        },
+        {
+            "title": "Moose:en",
+            "author": "",
+            "melody": "Månvisa",
+            "text": "Det satt en älg i en klyvartopp,\nförklädd i älgjaktens månad.\nBefjädrad var hen från tå till topp,\nskepparn blev rätt förvånad.\n\"Jag är en mås, goa skepparn!\", ljög den\nförklädda älgen, därefter flög den.\nMjukt föll den sen, på skepparen.",
+            "index": "δ10f"
+        },
+        {
+            "title": "När jag är fuller",
+            "author": "Sångartäflan 1942",
+            "melody": "Månvisa",
+            "text": "När jag är fuller, då är jag glad,\nfan vet om jag ej är vacker.\nDå går jag runt i vår lilla stad,\nibland lyxhus och baracker.\nJag sjunger stilla en serenad,\ndet gör jag bara när jag är glad,\noch full och vacker, och full och vacker.\n\nNär jag är fuller då är jag stark,\nfan vet om jag ej är modig.\nDå kan jag slå vem som helst i mark,\nså hen blir trasig och blodig.\nJag välter träden uti vår park,\ndet gör jag bara när jag är stark,\noch full och modig, och full och modig.\n\nNär jag är fuller då är jag rik,\nfan vet om jag ej är snille.\nOch dör jag blir jag ett vackert lik,\nbegravd med gravöl och gille.\nI himlen möts jag av hornmusik,\ndet gör en bara när en är rik,\noch är ett snille, och är ett snille.\n\nMen om jag kvicknar till ett litet slag,\ni något enkelrum med galler.\nDå känner jag mig så rysligt svag,\noch avskyr bråk och kravaller.\nMin mage krånglar och är ur lag,\noch fan ska veta att jag idag\när bakom galler, är bakom galler.",
+            "index": "δ10g"
+        },
+        {
+            "title": "Mesen",
+            "author": "",
+            "melody": "Månvisa",
+            "text": "Det satt en mes i en klyvarmast,\ndär sågs hen ragla och svaja.\nFör trots att frön var hens enda last,\nvar hen nu full som en kaja.\n\"Vad har du gjort!\" hördes skepparn stöna\noch mesen svarte: \"Jag rökte fröna!\nI egen holk, i egen holk\"",
+            "index": "δ10h"
+        },
+        {
+            "title": "Musen",
+            "author": "",
+            "melody": "Månvisa",
+            "text": "Det satt en mus i en hushållsost,\noch åt och åt utan måtta.\nTills osten blivit en mushåls-ost,\noch hen en klotformad råtta.\n\"Så bra\", sa musen, \"att va en fettboll,\nnu kan jag rulla med hast åt rätt håll:\nOstindien! Ostindien!\"",
+            "index": "δ10i"
+        },
+        {
+            "title": "Måsens sista sup",
+            "author": "",
+            "melody": "Månvisa",
+            "text": "Den mås som satt på en klyvarbom,\nden är nu död och begraven\nOch skepparn som drack en flaska rom,\nhen har nu drunknat i haven.\nSå kan det gå om en fått för mycke'\nom en för brännvin har fattat tycke.\nVi som har kvar, vi resten tar.",
+            "index": "δ10j"
+        },
+        {
+            "title": "Humlorna",
+            "author": "",
+            "melody": "Karl Alfred boy",
+            "text": "Vi äro små humlor vi, bzzz, bzzz.\nVi äro små humlor vi, bzzz, bzzz.\nVi äro små humlor som tar oss en geting.\nVi äro små humlor vi, bzzz, bzzz.",
+            "index": "δ11a"
+        },
+        {
+            "title": "Fiskarna",
+            "author": "",
+            "melody": "Karl Alfred boy",
+            "text": "Vi äro små fiskar vi, blubb, blubb.\nVi äro små fiskar vi, blubb, blubb.\nVi äro små fiskar som tar oss en kallsup.\nVi äro små fiskar vi, blubb blubb.",
+            "index": "δ11b"
+        },
+        {
+            "title": "Änglarna",
+            "author": "",
+            "melody": "Karl Alfred boy",
+            "text": "Vi äro små änglar vi, flax, flax.\nVi äro små änglar vi, flax, flax.\nVi äro små änglar som tar oss en djävel.\nVi äro små änglar vi, flax, flax.",
+            "index": "δ11c"
+        },
+        {
+            "title": "Brännvin är jävligt gott",
+            "author": "",
+            "melody": "Karl Alfred boy",
+            "text": "Ja, brännvin är jävligt gott. (bank, bank)\nBlir bättre ju mer en fått. (bank, bank)\nDet rinner längs halsen, en tappar balansen.\nJa, brännvin är jävligt gott! (bank, bank)\n\nJa, brännvin är jävligt gott. (bank, bank)\nBlir bättre ju mer en fått. (bank, bank)\nMen går en i golvet, så där framåt tolv-ett.\nSå slår en sig jävligt hårt! (bank, bank)",
+            "index": "δ11d"
+        },
+        {
+            "title": "En liten fyllhund",
+            "author": "",
+            "melody": "Mors lilla Olle",
+            "text": "En liten fyllhund på krogen satt.\nRosor på kinden - men blicken var matt.\nLäpparna små liksom näsan var blå.\nBara jag kunde så skulle jag gå.",
+            "index": "δ11e"
+        },
+        {
+            "title": "Getingen",
+            "author": "",
+            "melody": "Jazzgossen",
+            "text": "Å så kommer det en geting,\ngenom luften som ett reaplan.\nÅ hen åker på en snyting,\nmitt under röda kran.\nÅ hen trillar ner i magen,\nmed ett jätteplask,\njätteplask, jätteplask.\nÅ så blir en lite dragen,\nmen pigg och rask,\npigg och rask, pigg och rask.",
+            "index": "δ11f"
+        },
+        {
+            "title": "Kalla små nubbar",
+            "author": "",
+            "melody": "Kalle på spången\nF: Försångare\nA: Alla",
+            "text": "F: Vad är det som gör\natt en skojare trivs?\nA: Jo, kalla, kalla, kalla, kalla\nsmå nubbar.\n\nF: Vad är det som först\nuppå festen väl givs?\nA: Jo, kalla, kalla, kalla, kalla\nsmå nubbar.\n\nF: Dom skänker oss alla\nett solljust humör,\noch även för kroppen\nstor nytta dom gör.\nMen skall en ta nubbar\nså regel dom bör\nva' kalla.\nA: Mycket kalla.\n\nJa, kalla.\nA: Mycket kalla.\nJa, kalla, kalla, kalla, kalla\nsmå nubbar.",
+            "index": "δ11g"
+        },
+        {
+            "title": "Mod i barm",
+            "author": "",
+            "melody": "Kungssången",
+            "text": "Ur svenska hjärtans djup en sup,\nen samfälld och en enkel sup\nsom ger oss mod i barm.\nI prima äktsvensk alkohol\nför svenska folkets höga mål\nvi höjer nu vår första skål,\nvi ungdoms främsta vän.",
+            "index": "δ12a"
+        },
+        {
+            "title": "Oh Besinna",
+            "author": "",
+            "melody": "Oh, Susanna",
+            "text": "Smuttans ungar har just runnit ner\nuti magens boudoir.\nKommer inte genast något mer,\nHöres magens kommentar.\nOh besinna, den saken är ju klar,\nbåde tarmvred, magsår och kolik\ndunstar bort med lite sprit.",
+            "index": "δ12b"
+        },
+        {
+            "title": "Mera järn",
+            "author": "",
+            "melody": "Milord",
+            "text": "Vi vill ha mera järn,\nvi vill ha flera järn,\nett litet rostfritt, oböjt,\ndestillerat järn!\nOch vi ska böja järn,\noch vi ska kröka järn\nså att vi har det\nflytande i morgon kväll.",
+            "index": "δ12c"
+        },
+        {
+            "title": "Vem kan kröka",
+            "author": "",
+            "melody": "Vem kan segla",
+            "text": "Vem kan kröka förutan krök?\nVem kan gå utan vingel?\nVem kan skala en stor gul lök,\nutan att fälla tårar?",
+            "index": "δ12d"
+        },
+        {
+            "title": "Vem kan hugga",
+            "author": "",
+            "melody": "Vem kan segla",
+            "text": "Vem kan hugga sig själv i knät?\nVem kan slå sig på tummen?\nVem kan skära i vännen sin,\nutan att dra på munnen?\n\nJag kan hugga mig själv i knät,\nJag kan slå mig på tummen,\nMen ej skära i vännen min,\nutan att dra på munnen.\n\nVem kan ragla förutan vin?\nVem är nykter om våren?\nVem kan skilja på kron och gin,\nutan att smaka på'ren?\n\nJag kan ragla förutan vin,\nOch visst var jag nykter om våren,\nmen ej skilja på kron och gin,\nefter den elfte tåren.",
+            "index": "δ12e"
+        },
+        {
+            "title": "Var redo!",
+            "author": "C.M. Bellman",
+            "melody": "Ur vägen",
+            "text": "||: Var redo, var redo,\nFör nu skall supen tas :||\nDen gör gott åt kroppen och åt själen,\nkänns ifrån hjässan långt ned i hälen.\nKling, klang, kling, klang,\nnu börjar vårt kalas.",
+            "index": "δ13a"
+        },
+        {
+            "title": "Till supen så tager en sill",
+            "author": "",
+            "melody": "Daggstänkta berg",
+            "text": "Till supen så tager en sill, sill, sill,\nmen också ansjovis om en vill, vill, vill.\n||: Och om en är oviss om sillen är ansjovis,\nså tar en bara några supar till, till, till. :||",
+            "index": "δ13b"
+        },
+        {
+            "title": "Vi går över ån",
+            "author": "",
+            "melody": "Daggstänkta berg",
+            "text": "Vi går över ån efter sprit, fallera!\nMen efter vatten går vi ej en bit, fallera!\nJa sup kära vänner\nfast näsan den ränner,\nen gång så blir den ack va vit, fallera!",
+            "index": "δ13c"
+        },
+        {
+            "title": "Sänkta Lucia",
+            "author": "",
+            "melody": "Sankta Lucia",
+            "text": "Huvet slåt kopparslag, ögonen svider,\ni magen obehag, natten den lider.\nDå genom strupen går\nhembränt en liten tår.\nVördat vare vårat brännvin,\nvördat vårt brännvin.",
+            "index": "δ13d"
+        },
+        {
+            "title": "Lundströms kök",
+            "author": "",
+            "melody": "Ska det verkligen behövas någon melodi?",
+            "text": "Trrrrrretton kärringar i Lundströms kök,\ni Lundströms kök, i Lundströms kök.\nAlla var de fulla utom en som söp,\nen som söp sig full, skål!",
+            "index": "δ13e"
+        },
+        {
+            "title": "Solen",
+            "author": "",
+            "melody": "Camptown Ladies",
+            "text": "Solen den går upp och ner, doda, doda!\nJag ska aldrig supa mer, hej doda dej!\nHej doda dej, hej doda dej!\nJag ska aldrig supa mer, hej doda dej!\n\nMen detta var ju inte sant, doda, doda!\nI morgon gör jag likadant, hej doda dej!",
+            "index": "δ14a"
+        },
+        {
+            "title": "Korta solen",
+            "author": "",
+            "melody": "",
+            "text": "Solen den går upp och ner, snapsen den går ner!",
+            "index": "δ14b"
+        },
+        {
+            "title": "Old Janx Spirit",
+            "author": "Gruvarbetarsång från Orion",
+            "melody": "When Johnny Comes Marching Home",
+            "text": "Oh don't give me none more of that\nOld Janx Spirit!\nNo, don't you give me none more of that\nOld Janx Spirit!\nFor my head will fly,\nmy tongue will lie\nmy eyes will fry\nand I may die.\nWon't you pour me one more\nof that sinful Old Janx Spirit.",
+            "index": "δ14c"
+        },
+        {
+            "title": "Självmördarvisan",
+            "author": "",
+            "melody": "Hej tomtegubbar",
+            "text": "Hej, tomtegubbar, vrid på gasen\noch ta er själva av daga.\nRödsprit vi hällt i alla glasen\noch fjäriln vinglar på Haga.\nAv akvavit en får kolik\noch alla tomtar skola-sto-lik.\nHej, tomtegubbar, vrid på gasen\noch ta er själva av daga.",
+            "index": "δ14d",
+            "comment": "Endast i den digitala versionen sedan 2022."
+        },
+        {
+            "title": "Hörapparaten",
+            "author": "",
+            "melody": "Jenka",
+            "text": "Brännvin, öl, och gammal finkel\ngör att jag jag nu ser i vinkel.\nDärför hamnar inte supen (alt. maten)\nuti strupen utan i min hörapparat.",
+            "index": "δ14e"
+        },
+        {
+            "title": "Göken",
+            "author": "",
+            "melody": "Räven raskar över isen",
+            "text": "Ett bord:    Och nubben kallas också göken.\n    Och nubben kallas också göken.\n    Säg, får jag lov, säg, får jag lov,\n    att byta byxor i kröken?\n\nEtt annat bord:    Nej, det går inte alls, mitt herrskap,\n    det går inte alls, mitt herrskap.\n    För se ni har, för se ni har\n    ju inga byxor dessvärre.",
+            "index": "δ15a"
+        },
+        {
+            "title": "Magen brummar",
+            "author": "",
+            "melody": "Broder Jakob\nKanon",
+            "text": "Magen brummar.\nJag försummar\nhälla dit\nmera sprit.\nNu så ska vi dricka,\nså att vi får hicka.\nMera sprit.\nAkvavit.",
+            "index": "δ15b"
+        },
+        {
+            "title": "Gammalt brännvin",
+            "author": "",
+            "melody": "Gubben Noak",
+            "text": "Gammalt brännvin,\ngammalt brännvin\nfinnes i vårt krus.\nVänner slå i glasen,\nmången stora snapsen\nGån till verket,\ngån till verket!\nTag ett stadigt rus!\n\nGammalt brännvin,\ngammalt brännvin\nflödar i vår kropp.\nGenom torra strupar\nrinna starka supar.\nGe åt kroppen,\nge åt själen\nkraft och frejdigt hopp!",
+            "index": "δ15c"
+        },
+        {
+            "title": "Månen",
+            "author": "",
+            "melody": "(En gång i månan)\nMors lilla Olle",
+            "text": "En gång i månan är månen full,\nmen aldrig jag sett henom ramla omkull.\nStum av beundran hur mycket hen tål,\nhöja vi glasen och dricka hens skål.",
+            "index": "δ15d"
+        },
+        {
+            "title": "Raj-Raj",
+            "author": "",
+            "melody": "Kväsarvalsen",
+            "text": "Ingen har det så bra som jag,\nnej, ingen har det så bra som jag,\nförutom min vän som, så vitt jag vet,\nligger i sprit uppå Riksmuseet.\n\nRaj-raj-raj...",
+            "index": "δ16a"
+        },
+        {
+            "title": "Tjugotre",
+            "author": "Carl Nisser, E-80",
+            "melody": "Amanda Lundbom",
+            "text": "Tjugotre är Bäska Droppar,\nbom-faderia, bomfaderaderalla.\nskänker liv åt döda kroppar,\nbom-faderi, faderallanlej.\n\nSlå en sup i död väns kropp,\nbom-faderi, faderallanlej. Hugg i!\nså stapplar hen ur graven opp,\nbom-faderi faderallanlej.\n\nJesus visste att de döda,\nbom-faderia, bomfaderaderalla,\nkunde väckas utan möda,\nbom-faderi faderallanlej.\n\nBäska Droppar nyttja' han,\nBom-faderi, faderallanlej, Hugg i!\noch Lazarus spratt till, minsann,\nbom-faderi faderallanlej.",
+            "index": "δ16b"
+        },
+        {
+            "title": "Vikingen",
+            "author": "Sångarstriden 1981",
+            "melody": "When Johnny Comes Marching Home",
+            "text": "En viking älskar livets vand,\nhurra, hurra!\nDet hastigt i hens svalg försvann,\nhurra, hurra!\nTill kalv, till oxe, till fisk, till fläsk,\nnär alla veklingar dricker läsk.\nJa, då vill alla vikingar ha en bäsk.\n\nNär bäsken småningom är slut,\ntragik, tragik.\nDå bärs varenda viking ut\nsom lik, sig lik.\nOch sen när vi vaknar, vi sjunger en bit,\noch korkar upp skånes akvavit.\nSkål för alla vikingar som kom hit.",
+            "index": "δ16c"
+        },
+        {
+            "title": "Feministvikingen",
+            "author": "Hittad av Linn Odelius, F-15",
+            "melody": "When Johnny Comes Marching Home",
+            "text": "En viking viker tvätten själv,\nhurra, hurra!\nOrdet viking härstammar\ndärav, jaha!\nFöräldraledighet delas exakt,\nOch när herr viking barnen lagt,\nDå är vikingens fru ute på jakt!\n\nEn viking älskar livets vann,\nhurra, hurra!\nMen på sig själv han lägger band,\nvad bra, vad bra!\nMjödet prioriteras sist,\nKök och städ blir aldrig trist,\nFör vår viking han är feminist!",
+            "index": "δ16d"
+        },
+        {
+            "title": "Uti min mage",
+            "author": "",
+            "melody": "Uti vår hage",
+            "text": "Uti min mage en längtan mig tär.\nKom hjärtans fröjd.\nDär råder en hunger som ropar så här:\nKom kryddsill och kall potatis.\nKom brännvin och quantum satis.\nKom allt som kan drickas, kom hjärtans fröjd.\n\nUti mitt hjärta en längtan mig tär.\nKom hjärtans fröjd.\nDär råder en hunger som ropar så här:\nKom famnande lena armar.\nKom läppar och sköna barmar.\nKom fagraste människor.\nKom hjärtans fröjd.\n\nUti vår mage där växa begär.\nKom hjärtans kär.\nVill du mig något så träffas vi där.\nKom Renat och Aqua Vitae.\nKom OP och allt vad sprit e'.\nKom ljuva Genever.\nKom Överste.",
+            "index": "δ17a"
+        },
+        {
+            "title": "Då verka lätt",
+            "author": "",
+            "melody": "Dover Calais",
+            "text": "När jag tar mig en sup\nblir jag intressant och djup.\nAllting som är svårt\nkan då verka lätt.\n\nAll min rädsla går bort\nmed en grogg av någon sort.\nAllting som är svårt\nkan då verka lätt!",
+            "index": "δ17b"
+        }
+    ]
+}

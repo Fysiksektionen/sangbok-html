@@ -1,0 +1,17 @@
+import alpha from './1. Visor till högtid.json'
+import beta from './2. Visor till gasque.json'
+import gamma from './3. Visor till öl.json'
+import delta from './4. Visor till destillat.json'
+import epsilon from './5. Visor till vin.json'
+import zeta from './6. Visor till punsch.json'
+import eta from './7. Visor till andra drycker.json'
+import theta from './8. Blöta visor.json'
+import iota from './9. Torra visor.json'
+import kappa from './10. Fina visor.json'
+import lambda from './11. Vackra visor.json'
+import mu from './12. Nidvisor.json'
+import nu from './13. Skojiga visor.json'
+import omicron from './14. Visor till Fysiker.json'
+import { sigma } from './sigma'
+
+export const lyrics = [alpha, beta, gamma, delta, epsilon, zeta, eta, theta, iota, kappa, lambda, mu, nu, omicron, sigma]

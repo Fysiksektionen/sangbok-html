@@ -1,0 +1,2 @@
+# Dolda kapitel
+Dvs. kapitel som endast kan hittas från sökvyn. Dessa har en extra parameter, `hideSongsFromSearch`, som kan sättas till `true` för att endast göra kapitlet sökbart, inte sångerna i det (se [Leo-kapitlet](leo.json) för exempel).

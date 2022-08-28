@@ -1,12 +1,10 @@
 // Content imports
-import lyrics from './lyrics.json'
-import leo from './addons/leo.json'
-import ths from './addons/ths.json'
-import extraSongs from './addons/songs.json'
+import { lyrics } from './chapters/'
+import { hiddenChapters, hiddenSongs } from './addons/'
 
 // TS imports
 import { preprocessChapter, addSongTags } from './importHelpers'
-import { Chapter, Song, SongIndex, JSONChapter } from './types'
+import { Chapter, Song, SongIndex, JSONChapter, ChapterHit } from './types'
 
 // Exports from other files
 export type { Song, Chapter, SongHit, SongIndex } from './types'
@@ -21,12 +19,14 @@ export const songs: Song[] = (function () {
   // Regular songs
   const songs = ([...chapters]
     .map((chapter, chapterId) => chapter.songs.map((song, songId) => addSongTags(song, songId, chapterId))).flat())
-  // THS chapter.
-  const thsSongs = (([ths] as JSONChapter[])
+
+  // Addon chapters
+  const addonSongs = (hiddenChapters
+    .filter(chapter => chapter.hideSongsFromSearch !== true)
     .map(preprocessChapter)
-    .map((chapter) => chapter.songs.map((song, songId) => addSongTags(song, songId, chapter.prefix))).flat())
+    .map(chapter => chapter.songs.map((song, songId) => addSongTags(song, songId, chapter.prefix))).flat())
   // Add standalone songs and return (notes: these are NOT pre-processed with something preprocessChapter-like)
-  return songs.concat(thsSongs).concat(extraSongs as Song[])
+  return songs.concat(addonSongs).concat(hiddenSongs)
 })()
 
 /**
@@ -36,7 +36,7 @@ export const songs: Song[] = (function () {
  */
 export function getSongByStringIndex(index: string): Song | undefined {
   // List of all songs (for viewing. Includes easter eggs.)
-  const allSongs: Song[] = songs.concat(leo.songs as Song[]).concat(ths.songs as Song[])
+  const allSongs: Song[] = songs.concat(hiddenChapters.map(ch => ch.songs).flat())
   const hits = allSongs.filter(s => s.index === index)
   if (hits.length > 0) { return hits[0] }
 }
@@ -63,7 +63,15 @@ export function getSongsByStringIndices(indices: SongIndex[]): Song[] {
  */
 export function getChapterByStringIndex(idx: string): Chapter | undefined {
   const addPathToPrefixedChapter = (c: JSONChapter) => { return { ...c, path: '/chapter/' + c.prefix } as Chapter }
-  const allChapters: Chapter[] = chapters.concat(([leo, ths] as JSONChapter[]).map(addPathToPrefixedChapter))
+  const allChapters: Chapter[] = chapters.concat(hiddenChapters.map(addPathToPrefixedChapter))
   const hits = allChapters.filter(c => c.prefix === idx)
   if (hits.length > 0) { return hits[0] }
 }
+
+// Define search keys for hidden chapters. Used by @/utils/search.ts
+export const keys: ChapterHit[] = hiddenChapters.map(ch => {
+  return {
+    title: ch.chapter,
+    chapterindex: ch.prefix
+  }
+})
