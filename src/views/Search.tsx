@@ -17,7 +17,7 @@ export default defineComponent({
   setup() { return { store: useStore(key) } },
   methods: {
     /** Sends the user to the target of the hit. */
-    goto (hit: Fuse.FuseResult<SongHit>) {
+    goto(hit: Fuse.FuseResult<SongHit>) {
       if (hit.item.chapterindex !== undefined && hit.item.songindex !== undefined) {
         this.$router.push('/chapter/' + hit.item.chapterindex + '/song/' + hit.item.songindex)
       } else if (hit.item.chapterindex !== undefined && hit.item.songindex === undefined) {
@@ -32,22 +32,29 @@ export default defineComponent({
     }
   },
   render() {
+    const results = search(this.$route.params.query as string)
+
     return (
       <Swiper swipeHandler={this.swipeHandler} right="hide">
         <div class="main">
           <table class="songbook">
-            {search(this.$route.params.query as string).map((hit) => <tr
+            {results !== false && results.map((hit) => <tr
               onClick={() => this.goto(hit)}>
               {/* TODO: As of now, lists are not visible in search. Don't forget to prevent XSS from list titles without using CSP if you implement that. */}
               <td class="index"><Index index={(hit.item.index || hit.item.chapterindex || '').toString()} /></td>
               <td class="name">
-                { hit.item.title }
+                {hit.item.title}
                 {hasSheetMusic(hit.item) && this.store.state.settings.sheetmusic && <span class="sheetmusicicon">𝄢</span>}
               </td>
             </tr>)}
-            <tr class="nohits">
-              <td>Inga sånger hittades.</td>
-            </tr>
+            {(Array.isArray(results) && results.length === 0) &&
+              <tr class="nohits" data-test="noSongsFound">
+                <td>Inga sånger hittades.</td>
+              </tr>}
+            {results === false &&
+              <tr class="nohits">
+                <td>Sökningen misslyckades. Du får gärna rapportera detta <a href="https://github.com/Fysiksektionen/sangbok-html/issues">här</a>.</td>
+              </tr>}
           </table>
         </div>
       </Swiper>

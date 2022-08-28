@@ -15,6 +15,16 @@ export function escapeAll(str: string): string {
 }
 
 /**
+ * Replaces the characters '{', '}', '\\' with a backslash.
+ * @param str A string containing special characters.
+ * @returns The escaped string.
+ */
+export function escapeCommands(str: string): string {
+  for (const e of ['\\', '{', '}']) { str = str.replace(e, `\\${e}`) }
+  return str
+}
+
+/**
  * Generic pre-processor for converting raw lyrics to LaTeX.
  * @param text A raw text string.
  * @returns A string that is more LaTeX-compatible.

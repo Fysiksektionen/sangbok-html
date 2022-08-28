@@ -21,12 +21,6 @@ on:
       - '**/build-vue.yml'
   pull_request:
     branches: [ main, dev ]
-  workflow_dispatch:
-    # inputs:
-    #   skip-compression:
-    #     description: "Skip svg optimization (faster) (this setting doesn't work)"
-    #     required: true
-    #     default: "false"
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -35,6 +29,9 @@ env:
   IMAGE_NAME: fysiksektionen/sangbok-html
 
 jobs:
+  ##
+  ## Build zip file to export
+  ##
   build:
     runs-on: ubuntu-latest
     name: Build vue
@@ -69,7 +66,10 @@ jobs:
         name: dist-node-${{ matrix.node-version }}
         path: |
           dist
-
+  
+  ##
+  ## Sheet music generation
+  ##
   sheet-music:
     runs-on: ubuntu-latest
     name: Generate sheet music resources
@@ -118,24 +118,6 @@ jobs:
       with:
         name: music-svgs
         path: music/svg
-    
-
-#   compression-benchmark:
-#     runs-on: ubuntu-latest
-#     name: Check compression ratios
-#     needs: sheet-music
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Install Zopfli
-#       run: sudo apt-get install -y zopfli
-#     - name: Fetch sheet music artifacts
-#       uses: actions/download-artifact@v2
-#       with:
-#         name: music-svgs
-#         path: .github/workflows/svg
-#     - name: Benchmark
-#       working-directory: .github/workflows
-#       run: ./compression-benchmark.sh
   
   ##
   ## Docker build

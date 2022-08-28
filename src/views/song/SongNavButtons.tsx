@@ -25,6 +25,7 @@ export default function SongNavButtons(): JSX.Element {
 
   return (
     <>
+      {songWrappers() && store.state.settings.fixednavbuttons && <div class="navbuttons"><div><div class="filler fixed"></div></div></div>}
       {songWrappers() && <div class={{ navbuttons: true, fixed: store.state.settings.fixednavbuttons }}>
         {songWrappers()?.map((songWrapper) =>
           <div>

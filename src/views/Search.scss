@@ -2,9 +2,8 @@
   text-align: center;
   box-shadow: unset !important;
   border-bottom: unset !important;
+}
 
-  &:not(:first-child) {
-    /* Hide the nohits row if there are hits. */
-    display: none;
-  }
+a {
+  color: var(--background-color-highlight)
 }

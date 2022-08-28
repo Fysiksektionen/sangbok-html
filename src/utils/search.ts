@@ -38,17 +38,25 @@ const addons = new Fuse(keys as SongHit[], {
 
 // Make sigma songs lower priority
 function score(res: Fuse.FuseResult<Song>): number {
-  return (res.score || 0) * (res.item.index.startsWith('σ') ? 0.75 : 1)
+  // Keys don't necessarily have all fields of SongHit, hence we need to check if the index field exists.
+  // TODO: Add proper TypeScript types to "keys" (addons)
+  return (res.score || 0) * ((res.item.index && res.item.index.startsWith('σ')) ? 0.75 : 1)
 }
 
 /**
  * Performs a search for both songs and addons (which in practice means hidden chapters).
+ * On error, returns false.
  * @param query Search query string
- * @returns A list of results, sorted by best match.
+ * @returns A list of results, sorted by best match, or false if an error was encountered.
  */
-export function search(query: string): Fuse.FuseResult<SongHit>[] {
-  return (fuse.search(query)
-    .concat(addons.search(query))
-    .sort((x, y) => { return score(x) - score(y) })
-  )
+export function search(query: string): Fuse.FuseResult<SongHit>[] | false {
+  try {
+    return (fuse.search(query)
+      .concat(addons.search(query))
+      .sort((x, y) => { return score(x) - score(y) })
+    )
+  } catch (err) {
+    console.error(err)
+    return false
+  }
 }
