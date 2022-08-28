@@ -11,7 +11,7 @@ import Swiper from '@/components/Swiper'
 import NavButtons from '@/views/song/SongNavButtons'
 import { SwipeIndicatorState, swipeIndicatorToOffset } from '@/utils/swipe'
 import { getSongFromRoute, getChapterFromRoute, getOffsetSongFromRoute, hasSheetMusic, Song } from '@/lyrics'
-import { toHTML } from '@/utils/other'
+import { removeSheetMusicNotice, toHTML } from '@/utils/other'
 
 /** View to list all songs in a chapter. */
 export default defineComponent({
@@ -69,7 +69,7 @@ export default defineComponent({
                   {/* Header */}
                   <div class="titlecontainer" style={{ minHeight: (this.sheetMusicAvailable && !this.showMsvg ? '5em' : undefined) }}>
                     <h2>{this.song.title}</h2>
-                    {this.song.melody && <div class="melody" v-html={toHTML(this.song.melody)}></div>}
+                    {this.song.melody && <div class="melody" v-html={toHTML(removeSheetMusicNotice(this.song.melody))}></div>}
                   </div>
 
                   {/* Content */}

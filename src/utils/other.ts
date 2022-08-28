@@ -16,6 +16,15 @@ export function toHTML(text: string): string {
 }
 
 /**
+ * Removes all rows in a string that contains the substring 'notkapitlet'.
+ * @param text a text string.
+ * @returns the processed string
+ */
+export function removeSheetMusicNotice(text: string) {
+  return text.split('\n').filter(line => (line.indexOf('notkapitlet') === -1)).join('\n')
+}
+
+/**
  * Converts greek prefix to latin prefix.
  * @param greek Greek prefix. Should be of length 2.
  * @returns Latin prefix
