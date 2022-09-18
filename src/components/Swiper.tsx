@@ -61,7 +61,7 @@ export default defineComponent({
       this.onlyAllowZoomOut = this.$props.allowZoom ? {} : onlyAllowZoomOut()
 
       // If we have swipe disabled, or are zoomed in, don't enable swipes.
-      if (['swipe', 'all'].indexOf(this.store.state.settings.touchAction) === -1 || window.visualViewport.scale > 1) {
+      if (['swipe', 'all'].indexOf(this.store.state.settings.touchAction) === -1 || (window.visualViewport && window.visualViewport.scale > 1)) {
         return
       }
 
@@ -114,7 +114,6 @@ export default defineComponent({
     // instead. (Or at least catch undefined-errors here.)
     const touch = resolveDirective('touch') as Directive
 
-    // TODO: Import images via
     return withDirectives(
       h('div', { class: 'component-swiper', style: this.onlyAllowZoomOut }, (
         <>

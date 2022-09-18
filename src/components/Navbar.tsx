@@ -47,7 +47,7 @@ export default defineComponent({
         <div class="navbar">
           <div style="float: left;">
             { !this.hideBackButton &&
-              <button><img src={backImage} alt="Gå tillbaka" onClick={this.goBack} data-test="navbarBackButton"/></button> }
+              <button onClick={this.goBack} data-test="navbarBackButton"><img src={backImage} alt="Gå tillbaka"/></button> }
           </div>
           <div class="title">Sångboken</div>
           <div style="float: right;" data-test="settingsButtonWrapper">

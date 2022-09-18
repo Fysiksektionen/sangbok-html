@@ -5,7 +5,7 @@ import store, { key } from './store'
 import Vue3TouchEvents from 'vue3-touch-events'
 import './registerServiceWorker'
 
-createApp(App).use(store, key).use(router).use(Vue3TouchEvents).mount('#app')
+createApp(App).use(store, key).use(router).use(Vue3TouchEvents, { dragFrequency: 50 }).mount('#app')
 
 // Webpack injected variables to be stored in the global scope
 // Used for debugging
