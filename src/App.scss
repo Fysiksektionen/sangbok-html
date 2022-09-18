@@ -72,10 +72,12 @@ div.main h2 {
   margin: $navbutton-spacing math.div($navbutton-spacing, 2);
   padding: $navbutton-spacing;
 
-  background-color: rgba(128, 128, 128, 0.10);
+  font-family: inherit;
+  color: var(--text-color-button, #ddd);
+  background-color: var(--background-color-button, #2c2c2c);
 
   &:active:not(.disabled):not(.static) {
-    background-color: rgba(128, 128, 128, 0.30);
+    background-color: var(--background-color-button-active, #3f3f3f);
   }
 
   &.disabled {

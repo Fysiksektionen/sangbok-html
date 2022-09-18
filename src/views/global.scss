@@ -10,16 +10,6 @@
   border-color: var(--background-color-highlight, #f60);
 }
 
-.button {
-  font-family: inherit;
-  color: var(--text-color-button, #ddd);
-  background-color: var(--background-color-button, #2c2c2c);
-
-  &:active:not(.disabled):not(.static) {
-    background-color: var(--background-color-button-active, #3f3f3f);
-  }
-}
-
 table.songbook tr,
 div.row {
   box-shadow: 0 2px 3px var(--row-shadow-color, #111);

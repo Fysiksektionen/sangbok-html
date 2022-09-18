@@ -1,5 +1,6 @@
 const INDEX_MAP: { [key: string]: string } = {
-  '✻': 'img/ths_emblem_filled_black.svg'
+  '✻': 'img/ths_emblem_filled_black.svg',
+  '𝆔': 'img/tondov.svg'
 }
 
 /**
