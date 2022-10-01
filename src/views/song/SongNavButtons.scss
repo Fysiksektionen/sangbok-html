@@ -2,6 +2,7 @@
   &.fixed {
     position: fixed;
     bottom: 0;
+    left: 0;
     padding-top: 0;
     width: 100%;
     background-color: var(--background-color-primary, #222);
@@ -9,7 +10,7 @@
   }
 
   & .button img {
-    filter: var(--image-filter-inline, invert(1));
+    filter: var(--image-filter-inline-highlight, var(--image-filter-inline, invert(1)));
   }
 
   padding: 20px 0;

@@ -1,3 +1,7 @@
+input[type="text"] {
+  color: var(--text-color-primary, #ccc)
+}
+
 .button.left {
   float: left;
   position: absolute;

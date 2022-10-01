@@ -20,6 +20,7 @@ $--row-shadow-color: --row-shadow-color;
 // Filters
 $--image-filter-sheetmusic: --image-filter-sheetmusic;
 $--image-filter-inline: --image-filter-inline;
+$--image-filter-inline-highlight: --image-filter-inline-highlight; // Only to be used with --image-filter-inline fallback.
 
 // Helper function (see https://bcodes.io/blog/post/theming-css-variables-in-scss)
 @mixin export-vars($map: ()) {
