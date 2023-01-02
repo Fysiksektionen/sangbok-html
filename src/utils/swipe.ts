@@ -34,5 +34,5 @@ export function getCoordsFromEvent(e: Event): [number, number] | [undefined, und
  * @returns a style object
  */
 export function onlyAllowZoomOut(): {'touchAction': string} | Record<string, never> {
-  return { touchAction: (window === undefined || window.visualViewport === undefined || window.visualViewport.scale > 1) ? 'manipulation' : 'pan-y' }
+  return { touchAction: (!window || !window.visualViewport || window.visualViewport.scale > 1) ? 'manipulation' : 'pan-y' }
 }
