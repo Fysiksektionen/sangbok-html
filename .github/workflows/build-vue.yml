@@ -95,7 +95,7 @@ jobs:
       working-directory: ./music
       run: ./convert.sh --compress --no-move --force-on-change
       if: ${{ github.ref == 'refs/heads/main' }}
-    - name: Convert mscz to compressed svg:s (workflow testing)
+    - name: Convert mscz to compressed svg:s (from cache with forced re-caching)
       working-directory: ./music
       run: ./convert.sh --compress --no-move --force-cache-regeneration
       if: ${{ github.ref == 'refs/heads/actions-dev' }}
