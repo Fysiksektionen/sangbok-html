@@ -6,17 +6,23 @@ services:
     apache:
         image: httpd:2.4.46-alpine
         container_name: sarct-apache
+        # Sure, we could put these in the same folder, but hen
         volumes:
             - ./apache.conf:/usr/local/apache2/conf/httpd.conf:ro
+            - ./server.crt:/usr/local/apache2/conf/server.crt
+            - ./server.key:/usr/local/apache2/conf/server.key
         networks:
             - sangbok-net
         ports:
             - 80:80/tcp
+            - 443:443/tcp
+        
+
     sangbok:
         # Use this for the latest version
         build:
            context: ../..
-           dockerfile: docker/nginx/default.Dockerfile
+           dockerfile: docker/nginx/identity.Dockerfile
         # Use this (or similar) instead for update testing
         # Note that certain files are indexed by commit, which may cause certain cache problems when using this testing method.
         # image: ghcr.io/fysiksektionen/sangbok-html@sha256:73a7e635c2046609a032b5399cd056320cf81d02c1ee5ee95091b0aba12888fd
