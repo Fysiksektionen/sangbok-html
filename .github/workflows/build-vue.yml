@@ -116,6 +116,8 @@ jobs:
       run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR_ID+$GITHUB_ACTOR@users.noreply.github.com"
+          git config --get user.name
+          git config --get user.email
           git add music/svg.tar.lzma music/mscz.sha1
           git commit -m "Automatic msvg cache update ($(head -c 8 music/mscz.sha1))" --author "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
           git push
