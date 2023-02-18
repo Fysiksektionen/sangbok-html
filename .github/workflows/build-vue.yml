@@ -87,17 +87,18 @@ jobs:
     - name: Unpack cached svg:s
       run: rm -rf svg && tar -xJf svg.tar.lzma
       working-directory: ./music
-    # - name: Convert mscz to compressed svg:s (from cache)
-    #   working-directory: ./music
-    #   run: ./convert.sh --compress --no-move
-    #   if: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/actions-dev' }}
-    # - name: Convert mscz to compressed svg:s (from scratch)
-    #   working-directory: ./music
-    #   run: ./convert.sh --compress --no-move --force-on-change
-    #   if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/actions-dev' }}
+    - name: Convert mscz to compressed svg:s (from cache)
+      working-directory: ./music
+      run: ./convert.sh --compress --no-move
+      if: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/actions-dev' }}
+    - name: Convert mscz to compressed svg:s (from scratch)
+      working-directory: ./music
+      run: ./convert.sh --compress --no-move --force-on-change
+      if: ${{ github.ref == 'refs/heads/main' }}
     - name: Convert mscz to compressed svg:s (workflow testing)
       working-directory: ./music
       run: ./convert.sh --compress --no-move --force-cache-regeneration
+      if: ${{ github.ref == 'refs/heads/actions-dev' }}
     - name: Compute hashes
       working-directory: ./music
       run: sha1sum mscz/*.mscz
@@ -113,12 +114,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-          echo $GITHUB_ACTOR
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git remote set-url --push origin https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR_ID+$GITHUB_ACTOR@users.noreply.github.com"
           git add music/svg.tar.lzma music/mscz.sha1
-          git commit -m "Automatic msvg cache update ($(head -c 8 music/mscz.sha1))"
+          git commit -m "Automatic msvg cache update ($(head -c 8 music/mscz.sha1))" --author "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
           git push
       if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/actions-dev' }}
   
