@@ -39,18 +39,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [18.x]
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Install packages
       run: npm ci
     - name: Fetch sheet music artifacts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: music-svgs
         path: public/msvg
@@ -60,7 +60,7 @@ jobs:
     - name: build
       run: npx vue-cli-service build
     - name: Archive production artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       if: ${{ matrix.node-version == '18.x' }}
       with:
         name: dist-node-${{ matrix.node-version }}
@@ -74,11 +74,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Generate sheet music resources
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js 16.x
-      uses: actions/setup-node@v2
+    - uses: actions/checkout@v3
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
       with:
-        node-version: 16.x
+        node-version: 18.x
         cache: 'npm'
     - name: Install svgo
       run: npm install -g svgo
@@ -87,37 +87,40 @@ jobs:
     - name: Unpack cached svg:s
       run: rm -rf svg && tar -xJf svg.tar.lzma
       working-directory: ./music
-    - name: Convert mscz to compressed svg:s (from cache)
+    # - name: Convert mscz to compressed svg:s (from cache)
+    #   working-directory: ./music
+    #   run: ./convert.sh --compress --no-move
+    #   if: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/actions-dev' }}
+    # - name: Convert mscz to compressed svg:s (from scratch)
+    #   working-directory: ./music
+    #   run: ./convert.sh --compress --no-move --force-on-change
+    #   if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/actions-dev' }}
+    - name: Convert mscz to compressed svg:s (workflow testing)
       working-directory: ./music
-      run: ./convert.sh --compress --no-move
-      if: ${{ github.ref != 'refs/heads/main' }}
-    - name: Convert mscz to compressed svg:s (from scratch)
-      working-directory: ./music
-      run: ./convert.sh --compress --no-move --force-on-change
-      if: ${{ github.ref == 'refs/heads/main' }}
+      run: ./convert.sh --compress --no-move --force-cache-regeneration
     - name: Compute hashes
       working-directory: ./music
       run: sha1sum mscz/*.mscz
     - name: Perpare for export
       working-directory: ./music
       run: mv svgs.json svg
-    - name: Archive cache for future use
-      uses: actions/upload-artifact@v2
-      with:
-        name: music-svgs-cache
-        path: music/svg.tar.lzma
-      if: ${{ github.ref == 'refs/heads/main' }}
-    - name: Archive mscz folder hash for future use
-      uses: actions/upload-artifact@v2
-      with:
-        name: sha1
-        path: music/mscz.sha1
-      if: ${{ github.ref == 'refs/heads/main' }}
     - name: Archive production artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: music-svgs
         path: music/svg
+    - name: Push new cache to repo
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+          echo $GITHUB_ACTOR
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git remote set-url --push origin https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY
+          git add music/svg.tar.lzma music/mscz.sha1
+          git commit -m "Automatic msvg cache update ($(head -c 8 music/mscz.sha1))"
+          git push
+      if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/actions-dev' }}
   
   ##
   ## Docker build
@@ -147,9 +150,9 @@ jobs:
       packages: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Fetch sheet music artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: music-svgs
           path: public/msvg
@@ -159,7 +162,7 @@ jobs:
       # Login against a Docker registry except on PR(https://github.com/docker/login-action)
       - name: Log into registry ${{ env.REGISTRY }}
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+        uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -167,7 +170,7 @@ jobs:
       # Extract metadata (tags, labels) for Docker (https://github.com/docker/metadata-action)
       - name: Extract Docker metadata
         id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: | 
@@ -177,7 +180,7 @@ jobs:
           flavor: |
             suffix=${{ matrix.suffix }}
       - name: Build and push Docker image (${{ matrix.server }} with ${{ matrix.compression }} precompression)
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        uses: docker/build-push-action@v4
         with:
           file: docker/${{ matrix.server }}/${{ matrix.variant }}.Dockerfile
           context: .

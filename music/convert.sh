@@ -10,6 +10,7 @@ if [[ $*\  == *--help\ * || $*\  == *-h\ * ]]; then
     echo -e "\t-c, --compress\t\tKomprimera svg-filerna"
     echo -e "\t--force\t\t\tTvinga omgenerering av existerande filer"
     echo -e "\t--force-on-change\tTvinga omgenerering av alla existerande filer om någon fil i /mscz/ har uppdateras"
+    echo -e "\t--force-cache-regeneration\t\tSkapa en cache av filerna, även om allt inte omgenererats."
     echo -e "\t--no-generate\t\tGenerara inga nya noter"
     echo -e "\t--no-hash\t\tInkludera inte en checksum i filnamnet"
     echo -e "\t--no-json\t\tStrunta i att generera svgs.json"
@@ -136,7 +137,7 @@ if [[ ! $*\  == *--no-move\ * ]]; then
 fi
 
 # Only create a cache if we reconverted from scratch and compressed everything.
-if [[ $*\  == *--force\ * && $*\  == *--compress\ *  ||  "$(sha1sum mscz/*.mscz | sort | sed -z '$ s/\n$//' | sha1sum | sed -z '$ s/\n$//')" != "$(cat mscz.sha1)" && $*\  == *--force-on-change\ * && $*\  == *--compress\ * ]]; then
+if [[ $*\  == *--force\ * && $*\  == *--compress\ *  ||  "$(sha1sum mscz/*.mscz | sort | sed -z '$ s/\n$//' | sha1sum | sed -z '$ s/\n$//')" != "$(cat mscz.sha1)" && $*\  == *--force-on-change\ * && $*\  == *--compress\ * || $*\  == *--force-cache-regeneration\ * ]]; then
     echo -e "\e[1;32mSkapar cache.\e[0m"
     tar -cJf svg.tar.lzma svg/*
     sha1sum mscz/*.mscz | sort | sed -z '$ s/\n$//' | sha1sum | sed -z '$ s/\n$//' > mscz.sha1

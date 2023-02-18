@@ -43,3 +43,6 @@ Nginx-containrarna använder en relativt strikt Content-Security-Policy, så om 
 
 ### Uppdatera bilden
 Beroende på konfiguration vill du förmodligen köra något i stil med `docker run --detach --name sangbok --pull always ghcr.io/fysiksektionen/sangbok-html:latest` när du startar containern för första gången. För att ta bort containern kan du köra  `docker stop sangbok` följt av `docker rm sangbok`, och sedan kommandot ovan igen för att hämta en ny bild. Har du många gamla bilder som ligger och skräpar kan kommandot `docker image prune` användas.
+
+### Bilden verkar inte ha byggts korrekt
+Ibland när arbersflödet ska generera notfiler, kraschar det med en felkod i stil med `Cannot read file tmp/music_file.tmp.mscx: bad format`. Det är något oklart varför det händer, men det brukar lösa sig av att köra om arbetsflödet manuellt.
