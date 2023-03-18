@@ -7,6 +7,8 @@
     "build": "vue-cli-service build --modern",
     "lint": "vue-cli-service lint",
     "start": "vue-cli-service serve",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "vue-cli-service test:unit"
   },
   "dependencies": {
@@ -49,6 +51,7 @@
     "eslint-plugin-node": "11.x",
     "eslint-plugin-promise": "6.x",
     "eslint-plugin-vue": "9.x",
+    "gh-pages": "^5.0.0",
     "jest": "^27.5.1",
     "jest-expect-message": "^1.0.2",
     "sass": "^1.26.5",
