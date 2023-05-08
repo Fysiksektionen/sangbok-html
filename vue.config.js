@@ -5,7 +5,7 @@ const path = require('path')
 
 // Root path
 const root = '' // Compilation root path
-const pwaRoot = '/sangbok/' // PWA entrypoint
+const pwaRoot = '/sangbok/' // PWA entrypoint. Not used when pwa is disabled
 
 // Version info
 let commitId
@@ -34,5 +34,35 @@ module.exports = {
   devServer: {
     headers: { 'Service-Worker-Allowed': 'http://localhost:8080' },
     static: { directory: path.join(__dirname, 'public'), publicPath: root }
+  },
+  pwa: { // https://cli.vuejs.org/core-plugins/pwa.html#configuration
+    name: 'Konglig Fysiks Sångbok',
+    themeColor: '#FF642B',
+    msTileColor: '#222',
+    manifestOptions: {
+      short_name: 'Sångboken',
+      background_color: '#222222',
+      // Description
+      author: 'F.com',
+      description: 'Den officiella, sökbara sångboken för Fysiksektionen vid THS innehåller både nya och gamla sånger för gasque och bankett.',
+      // Display info
+      lang: 'sv',
+      dir: 'ltr',
+      orientation: 'portrait',
+      display: 'standalone',
+      start_url: pwaRoot,
+      scope: pwaRoot
+    },
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'black-translucent',
+    workboxPluginMode: 'InjectManifest',
+    workboxOptions: {
+      // See https://developer.chrome.com/docs/workbox/reference/workbox-webpack-plugin/
+      // Paths to exclude from pre-caching. Format: https://webpack.js.org/configuration/module/#condition
+      // index.html is excluded, since we manually add '/' in service-worker.ts
+      exclude: ['msvg', 'tex', 'img/icons', /\/js\/[generator|qrcodelib]\.[0-9|a-f]{8}\.js/, /\.map$/],
+      // service-worker base
+      swSrc: '@/service-worker.ts'
+    }
   }
 }

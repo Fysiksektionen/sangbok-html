@@ -1,5 +1,10 @@
+//
 // NOT CURRENTLY IN USE!
 // See service-worker.md for more info.
+//
+
+// See service-worker.md for more info.
+
 import { registerRoute } from 'workbox-routing'
 import { StaleWhileRevalidate, CacheFirst } from 'workbox-strategies'
 import { ExpirationPlugin } from 'workbox-expiration'
