@@ -3,7 +3,7 @@ import App from './App'
 import router from './router'
 import store, { key } from './store'
 import Vue3TouchEvents from 'vue3-touch-events'
-import './registerServiceWorker'
+// import './registerServiceWorker'
 
 createApp(App).use(store, key).use(router).use(Vue3TouchEvents, { dragFrequency: 50 }).mount('#app')
 

@@ -1,3 +1,5 @@
+// NOT CURRENTLY IN USE!
+// See service-worker.md for more info.
 /* eslint-disable no-console */
 import { register } from 'register-service-worker'
 

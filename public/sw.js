@@ -1,5 +1,6 @@
 // No-op service worker. Removes the old, malfunctioning service worker.
 // The new service worker is located at service-worker.js
+// Do not remove.
 
 self.addEventListener('install', () => {
   // Skip over the "waiting" lifecycle state, to ensure that our
