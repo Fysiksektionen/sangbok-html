@@ -39,7 +39,7 @@ export default defineComponent({
         <div class="main">
           <table class="songbook">
             {results !== false && results.map((hit) => <tr
-              data-score={hit.score} // Primarily for debug
+              // data-score={hit.score} // Primarily for debug. Fuse internal score. Not sorting score. Lower is better.
               onClick={() => this.goto(hit)}>
               {/* TODO: As of now, lists are not visible in search. Don't forget to prevent XSS from list titles without using CSP if you implement that. */}
               <td class="index"><Index index={(hit.item.index || hit.item.chapterindex || '').toString()} /></td>

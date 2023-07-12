@@ -4,7 +4,7 @@ import { hiddenChapters, hiddenSongs } from './addons/'
 
 // TS imports
 import { preprocessChapter, addSongTags } from './importHelpers'
-import { Chapter, Song, SongIndex, JSONChapter, ChapterHit } from './types'
+import { Chapter, Song, SongIndex, JSONChapter, ChapterHit, SongHit } from './types'
 
 // Exports from other files
 export type { Song, Chapter, SongHit, SongIndex } from './types'
@@ -15,7 +15,7 @@ export { getChapterFromRoute, getSongFromRoute, getOffsetSongFromRoute, param2in
 export const chapters: Chapter[] = lyrics.map(preprocessChapter)
 
 /** List of song for search. */
-export const songs: Song[] = (function () {
+export const songs: SongHit[] = (function () {
   // Regular songs
   const songs = ([...chapters]
     .map((chapter, chapterId) => chapter.songs.map((song, songId) => addSongTags(song, songId, chapterId))).flat())

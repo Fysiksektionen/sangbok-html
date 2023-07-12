@@ -14,7 +14,8 @@ export type Song = {
 export type SongHit = Song & {
   chapterindex?: number | string,
   songindex?: number,
-  tags?: string[]
+  tags?: string[],
+  indexTags?: string[] // Alternate names for index
 }
 
 /** Chapter hit, as used by Search */
