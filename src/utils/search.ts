@@ -35,11 +35,19 @@ const addons = new Fuse(keys, {
   ]
 })
 
-// Make sigma songs lower priority
+// Ordering score. Not used for filtering.
 function score(res: Fuse.FuseResult<Song>): number {
   // Keys don't necessarily have all fields of SongHit, hence we need to check if the index field exists.
   // TODO: Add proper TypeScript types to "keys" (addons)
-  return (res.score || 0) * ((res.item.index && res.item.index.startsWith('σ')) ? 0.75 : 1)
+  let score = res.score || 0
+
+  // Make sigma songs lower priority
+  score *= ((res.item.index && res.item.index.startsWith('σ')) ? 0.75 : 1)
+
+  // The "+" tag gives a score boost
+  score *= ((res.item.tags && res.item.tags.includes('+')) ? 1.25 : 1)
+
+  return score
 }
 
 /**
@@ -50,10 +58,9 @@ function score(res: Fuse.FuseResult<Song>): number {
  */
 export function search(query: string): Fuse.FuseResult<SongHit>[] | false {
   try {
-    return (fuse.search(query)
-      .concat(addons.search(query))
-      .sort((x, y) => { return score(x) - score(y) })
-    )
+    const res = fuse.search(query).concat(addons.search(query))
+    res.sort((x, y) => { return score(y) - score(x) })
+    return res
   } catch (err) {
     console.error(err)
     return false

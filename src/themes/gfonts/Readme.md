@@ -1,0 +1,2 @@
+# Typsnitt
+Dessa finns förmodligen fortfarande på [Google Fonts](https://fonts.google.com). Filerna i denna mapp är kopior på de CSS- och typsnittsfiler som annars skulle hämtats därifrån, ändrade så att de (för det mesta) pekar på lokala filer istället för filer på Googles servrar.

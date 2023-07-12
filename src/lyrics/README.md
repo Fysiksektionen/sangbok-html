@@ -5,3 +5,18 @@ I [sångboksrepot](https://github.com/Fysiksektionen/Sangbok) finns [ett workflo
 
 ## Dolda låtar och kapitel
 Kapitel och låtar som endast kan besökas via sökvyn. Se [addons](addons/README.md) för mer info.
+
+## Taggar
+Låtar kan ha taggar, och dessa går att söka på. Detta kan vara användbart om det finns flera alternativa stavningar eller titlar på låten. Exempel:
+```json
+{
+    "title": "Ievan Polkka",
+    "author": "E. Kettunen",
+    "melody": "",
+    "text": "Nuapurista kuulu se polokan tahti\nJalakani pohjii kutkutti\nIevan äiti se tyttöösä vahti\n...",
+    "index": "🧅⭮",
+    "tags": ["leekspin"]
+}
+```
+
+Dessutom finns taggen `+`, som gör att låten kommer högre upp i sökresultat.

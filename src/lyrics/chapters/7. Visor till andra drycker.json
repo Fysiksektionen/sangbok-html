@@ -7,7 +7,8 @@
             "author": "Vattenfysikalen Shakespeare 1990",
             "melody": "Rule Britannia",
             "text": "I Spanien hör det till god ton och etikett\natt gå omkring och skryta vitt och brett.\nDe trodde att de skulle slå oss lätt!\n\nMen vi är modesta.\nJa, vår profil är låg,\nmen vi är de som väger tyngst på havets våg!\n\nSkål för vattnet, tjoho för H₂O!\nSkål för ön där bara blyga britter bo!\nSkål för vattnet som gör vår flotta stark,\nhell allt vatten som ger flyt åt vår monark!",
-            "index": "η1"
+            "index": "η1",
+            "tags": ["+"]
         },
         {
             "title": "En kan dricka vatten",

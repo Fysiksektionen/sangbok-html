@@ -7,7 +7,8 @@
             "author": "Skriven till Sångartäfvlan -75\n av Anders Skog F-75",
             "melody": "Studentsången",
             "text": "W   kg   m   Wb   s\nΩm   T   A   rad\nCd   S   N   s\nΩA   m   Lx   dB\n°C   W/m²\nJ/kg   H   V   C\nkg/m³     mol\nm/s²   m/s²   F!",
-            "index": "ι1"
+            "index": "ι1",
+            "tags": ["+"]
         },
         {
             "title": "Integralkalkylens fader",
@@ -84,7 +85,8 @@
             "author": "Sångartäfvlan 1992",
             "melody": "O Helga Natt\n2B1507 Halvledarelektronik",
             "text": "O hemska lab, o grymma kval imorgon.\nHär sitter jag och förstår ingenting.\nHela mitt inre fylls utav ett motstånd\nemot eländig elektrisk mätteknik.\n\nJag skulle nog behöva lite ledning,\nHär räcker inte min kapacitans.\n\nKondensatorer och felvända dioder.\nO hemska lab, nu vill jag koppla af.\nO hemska lab, ty detta blir min graf!",
-            "index": "ι12a"
+            "index": "ι12a",
+            "tags": ["+"]
         },
         {
             "title": "O hemska lab",
@@ -140,7 +142,8 @@
             "author": "",
             "melody": "Jag gillar punschen\nSG1112 Mekanik I",
             "text": "Jag gillar, jag gillar meken,\njag gillar den som meken skapat har.\nIsaac Newton och Apazidis,\njag gillar meken och dess far!\n\nJag gillar, jag gillar 'Zidis,\njag gillar den som 'Zidis skapat har.\nMamazidis och Papazidis,\nde är så jävla, jävla bra!",
-            "index": "ι18"
+            "index": "ι18",
+            "tags": ["+"]
         },
         {
             "title": "Termon",
@@ -168,7 +171,8 @@
             "author": "Uppsala teknolog- och naturvetarkårs sångbok",
             "melody": "En sockerbagare\nSF0003 Introduktion i matematik",
             "text": "En matematiker här bor i staden\nhen räknar matte mest hela dagen.\nHen räknar primtal stora och små.\nHen tycker om x upphöjt till två.\nOch i hens fönster hänger skumma saker,\ndär finns det sfärer, ibland kvadrater,\noch små ellipser och kägelsnitt.\nLåter det roligt så ta en titt!\n\nVår matematiker som bor i staden,\nhen deriverar i högsta graden,\nhen äter cos-cos och basmat(i)ris,\ndet verkar vettigt på något vis.\nHen skriver räkneböcker för studenter,\noch hen gör uppgifter till massa tentor.\nOch är hen snäller blir svaret 2,\nmen är hen stygger så blir det ρ.",
-            "index": "ι22"
+            "index": "ι22",
+            "tags": ["+"]
         },
         {
             "title": "Det är långt bort till Alba Nova",

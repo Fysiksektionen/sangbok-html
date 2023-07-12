@@ -1,5 +1,5 @@
 @use "sass:math";
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+@import './themes/gfonts/EB_Garamond.css'; // Main font
 
 @import './components/global.scss';
 @import './views/global.scss';

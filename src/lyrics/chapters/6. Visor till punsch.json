@@ -7,14 +7,16 @@
             "author": "",
             "melody": "Glada änkan\n(Sjungs medan punschen serveras, under det att en gungar vänster-höger, framåt-bakåt och uppåt-nedåt.\nDen som fått sin punsch slutar sjunga.)",
             "text": "Punschen kommer, punschen kommer,\nljuv och sval.\nGlasen imma, röster stimma,\ni vår sal.\nSkål för glada minnen,\nskål för varje vår!\nInga sorger finnas mer\nnär punsch vi får.",
-            "index": "ζ1"
+            "index": "ζ1",
+            "tags": ["+"]
         },
         {
             "title": "Punschkanon",
             "author": "",
             "melody": "Gökvisa",
             "text": "Herrar:\n||: Punsch punsch punsch punsch\npunsch punsch, alla sorters :||\n\nDamer:\nNär snapsen vandrat hädan\noch maten lagts därpå\noch kaffet står på bordet\nvad väntar vi då på?\n\n||: Jo, punsch, och punsch\noch ännu mera punsch. :||\n\nJa den föll oss i smaken\nnu ropar vi gutår\noch koppen står där naken\noch väntar på påtår.\n\nJo punsch...",
-            "index": "ζ2"
+            "index": "ζ2",
+            "tags": ["+"]
         },
         {
             "title": "Punschschottis",
@@ -42,14 +44,16 @@
             "author": "DKM 2000",
             "melody": "Imperial March (Star Wars)",
             "text": "Punsch, punsch, punsch, mera punsch, mera punsch!\nPunsch, punsch, punsch, mera punsch, mera punsch!\n\nPunsch, punsch, punsch, mera punsch, punsch punsch,\nmera punsch, punsch, punsch, mera punsch,\nmera punsch!",
-            "index": "ζ6"
+            "index": "ζ6",
+            "tags": ["+"]
         },
         {
             "title": "Djungelpunsch",
             "author": "",
             "melody": "Var nöjd med.../Djungelboken",
             "text": "Jag gillar alla tiders punsch.\nPunsch till frukost, punsch till lunch.\nEn punsch till förrätt, varmrätt och dessert.\nJag gillar punsch för vet du vad;\nrent kaffe gör ju ingen glad.\nSå punsch för fulla muggar vill jag ha!\n\nMed konjak du lockar\nden bästa Renault.\nFörlåt om jag chockar\noch tar punsch ändå.\nOch bjuder du på fin likör\nfår du ursäkta om det stör\njag väljer hellre Grönstedts blå,\nen cederlunds eller Flaggpunsch åh...\nkanske har du ren platin?\n\nJag gillar punsch,\nså ge mig punsch\noch jag är din,\nför evigt din.",
-            "index": "ζ7"
+            "index": "ζ7",
+            "tags": ["+"]
         },
         {
             "title": "Vi vill ha punsch",
@@ -91,7 +95,8 @@
             "author": "Ekonomspexet Erik XIV, 1992",
             "melody": "Du gamla, Du fria",
             "text": "Du ädla, du friska, du livselixir,\nmed dig vill jag mina läppar blöta.\nDen svenskaste drycken på jorden, den förblir\nden gyllene, den underbara söta,\nden gyllene, den underbara söta.\n\nSom iskallt till kaffet du ställs på vårt bord\noch även som varm till torsdagslunchen.\nJag halsar dig lenaste drycken uppå jord.\nJa, jag vill leva, jag vill dö av punschen.\nJa, jag vill leva, jag vill dö av punschen.",
-            "index": "ζ13"
+            "index": "ζ13",
+            "tags": ["+"]
         },
         {
             "title": "Punschfinalen",
@@ -105,7 +110,8 @@
             "author": "",
             "melody": "Auld lang syne",
             "text": "När punschen småningom ta't slut\noch vår flaska blivit tom.\nDå vänder vi den upp och ner\ntill dess inget rinner ut.\n\n||: Så slicka vi, så slicka vi,\nbåd' utanpå och i.\nOch finns det ändå något kvar\nfår det va' till sämre dar. :||\n\nAndra versen brukar sjungas två gånger på fina sittningar. På mer uppsluppna fester sjungs andra versen\n· sittande\n· stående\n· med en fot på stolen\n· med båda fötter på stolen\n· med en fot på bordet\n· och till sist under bordet",
-            "index": "ζ∞"
+            "index": "ζ∞",
+            "tags": ["+"]
         }
     ]
 }

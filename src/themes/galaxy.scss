@@ -1,10 +1,10 @@
 @import "colors";
 @import "variables";
+@import './themes/gfonts/Libre_Franklin.css';
 
 $text-color: #ddd;
 $secondary-background: lighten($f-onyx, 10%);
 
-@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap');
 body.galaxy {
     @include export-vars((
         $--background-color-primary: $f-onyx,
