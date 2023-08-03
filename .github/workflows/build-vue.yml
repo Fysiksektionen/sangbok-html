@@ -104,7 +104,7 @@ jobs:
       run: sha1sum mscz/*.mscz
     - name: Perpare for export
       working-directory: ./music
-      run: mv svgs.json svg
+      run: cp svgs.json svg
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -116,7 +116,7 @@ jobs:
       run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR_ID+$GITHUB_ACTOR@users.noreply.github.com"
-          git add music/svg.tar.lzma music/mscz.sha1
+          git add music/svg.tar.lzma music/mscz.sha1 music/svgs.json
           git commit -m "Automatic msvg cache update ($(head -c 8 music/mscz.sha1))" --author "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>" | exit 0
           git push
       if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/actions-dev' }}
