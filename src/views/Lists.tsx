@@ -1,4 +1,3 @@
-
 import './Lists.scss'
 
 import { defineComponent } from 'vue'

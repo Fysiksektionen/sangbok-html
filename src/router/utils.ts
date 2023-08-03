@@ -1,4 +1,3 @@
-
 import { RouteLocationNormalized } from 'vue-router'
 
 import store from '@/store'

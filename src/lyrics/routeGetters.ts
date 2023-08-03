@@ -1,4 +1,3 @@
-
 import { RouteLocationNormalized } from 'vue-router'
 import store from '@/store'
 import { chapters, getChapterByStringIndex, Chapter, Song, getSongByStringIndex, getSongsByStringIndices } from '.'
