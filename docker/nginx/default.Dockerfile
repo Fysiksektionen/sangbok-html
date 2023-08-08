@@ -1,7 +1,9 @@
+## Pre-compresses everything with gz, and main assets with br as well.
+
 ##
 ##  Build frontend
 ##
-FROM node:18-alpine AS frontend-build
+FROM node:20-alpine AS frontend-build
 
 RUN apk add --no-cache git
 
