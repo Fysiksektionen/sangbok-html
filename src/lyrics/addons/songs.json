@@ -59,13 +59,6 @@
         "comment": "F.d. ζ11. Ersatt av Flaggpunchens visa 2022."
     },
     {
-        "title": "Hey Toast",
-        "author": "StrumpGunnar & August, F-21",
-        "melody": "Hey Jude",
-        "text": "Hej Toast, vi älskar dig\nÄven om vi gör er helt insane\nKom ihåg att bli inte allt för sur\nFör vi anser det tur att ha er som värdar\n\nHej Toast, bli inte arg\nNär inget gått som planerat\nDet är den läxa vi hoppas vi lärt\nförlåt om vi tärt en bit av er hälsa\n\nOch känner ni att allt står still, hej Toast, säg till\nSå ska vi försöka att lugna ner oss\nsyftet är ej att ni tar på allt ansvar\nFör hur vi alla på gasquen beter oss\nNa-na-na-na-na, na-na-na-na\n\nHej Toast, försök va stark\nvissa stunder kan allt se hejdlöst\nMen i slutet av tunneln finns det hopp\nOch för er tropp är vår kärlek ändlöst\n\nSå känner ni att allt går trögt, hej Toast, skrik högt\nSå kommer ert budskap fram till alla\nOch vet ni ej att det är ni, hej Toast, ta i\nVi är er flock så börja valla\nNa-na-na-na-na, na-na-na-na\n\nHej Toast, vi älskar dig\nÄven om vi gör er helt insane\nKom ihåg att bli inte allt för sur\nFör vi anser det tur att ha er som\nVärdar, värdar, värdar, värdar, värdar, värdar!\n\n||: Na-na-na-na-na-na-na, na-na-na-na, hej Toast :||\n",
-        "index": "σ23.🍞"
-    },
-    {
         "title": "Tøndøvs Hymn",
         "author": "TØNDØV-Förfaddrarna, 2022",
         "index": "𝆔1",
@@ -76,15 +69,16 @@
     {
         "title": "La lampa",
         "author": "Fysikalen Kennedy 2014",
-        "index": "@540",
+        "index": "🎭 40",
         "melody": "La bamba",
         "text": "Var ska vi ställa lampan?\nVar ska vi ställa lampan?\nDet ser ju ut som han har fått den gratis\nHar han fått den här gratis?\nKom och hugg i, vi ska flytta på lampan\nVi ska flytta på lampan\nNej, inte där, nej, inte där, nej inte där\nOm vi ställer den här då?\nNej, vi ställer den här\nBakom gardin, bakom gardin, bakom gardin\n\nLampa, lampa\nLampa, lampa\nLampa, lampa",
-        "tags": []
+        "tags": [],
+        "comment": "Numreringen ovan är godtycklig."
     },
     {
         "title": "Vad säger grisen?",
         "author": "Fysikalen Maria och Elisabet 2018",
-        "index": "@547",
+        "index": "🎭 47",
         "melody": "The Fox",
         "text": "Liten knorr, rosa hy\nÄter slask och bökar dy\nTryne och klövar små\nSmittar med H3N2\n\nFrån tekoppsstor till granens topp\nÄr du våran favorit\nOch varje grymt, det tycker vi\nÄr liksom onomato-po-o-oesi\npo-o-oesi\npo-o-oesi\nVärldens vackraste melo-o-o-oodi\nlo-o-o-odi\nlo-o-o-odi\n\nVad säger grisen?\nNöff nöff...\nOch här i england?\nOink oink...\nOch sen i Ryssland\nKryoo-kryoo...\nOch sen i Japan\nOooooh...\nVad säger grisen?",
         "tags": ["what does the fox say"]
