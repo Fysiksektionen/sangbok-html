@@ -17,7 +17,7 @@ Installera [Node.js 20](https://nodejs.org) om du inte redan har det. Klona seda
 Sidan öppnas med fördel i ett privat fönster, då service workern kan ge problem (sidan uppdateras inte, eller laddas om hela tiden) i kombination med utvecklingsmiljön.
 
 ### Användning
-Se [docker](docker)-mappen. Projektet är testat för att ligga på sökvägen `/sangbok/`. Även andra sökvägar bör fungera, om [PWA-manifestet](public/pwa/manifest.json) uppdateras.
+Se [docker](docker)-mappen. Projektet är testat för att ligga på sökvägen `/sangbok/`. ~~Även andra sökvägar bör fungera, om [PWA-manifestet](public/pwa/manifest.json) uppdateras~~ (PWA används ej längre).
 
 ### Alternativa fönster
 Just finns sångboken främst på [Fysiksektionens hemsida](https://f.kth.se/sangbok/). Den finns även på [GitHub Pages](https://fysiksektionen.github.io/) (måste uppdateras manuellt [här](https://github.com/Fysiksektionen/fysiksektionen.github.io)), samt en version på [Netlify](https://f-kth-sangbok.netlify.app/) (uppdateras automatiskt).
