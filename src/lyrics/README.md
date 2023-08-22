@@ -20,3 +20,10 @@ Låtar kan ha taggar, och dessa går att söka på. Detta kan vara användbart o
 ```
 
 Dessutom finns taggen `+`, som gör att låten kommer högre upp i sökresultat.
+
+## Specialtecken
+När sångblad ska genereras har LaTeX ofta problem med unicode-symboler. Detta kan lösas genom att lägga till en rad likt följande i [blad.cls](../../public/tex/blad.cls):
+```tex
+\DeclareUnicodeCharacter{2124}{$\mathbb{Z}$} % ℤ
+```
+Raden ovan definierar unicode-tecknet U+2124 (dvs. ℤ), och säger åt LaTeX att ersätta det med `$\mathbb{Z}$`.

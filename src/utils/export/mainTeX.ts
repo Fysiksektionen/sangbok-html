@@ -16,6 +16,8 @@ export default function getMainTeX(gs: GeneralSettings): string {
     `${gs.showDate.value ? '%' : ''}\\date{}\t%Ta bort kommentaren om du inte vill ha med datum.`,
     `${gs.showAuthor.value ? '%' : ''}\\renewcommand{\\auth}[1]{}\t%Ta bort kommentaren om du inte vill ha med upphovspersons-angivelse.`,
     `${gs.showMelody.value ? '%' : ''}\\renewcommand{\\melody}[1]{}\t%Ta bort kommentaren om du inte vill ha med melodier.`,
+    `${gs.showIndices.value ? '%' : ''}\\renewcommand{\\songindex}[1]{}\t%Ta bort kommentaren om du inte vill ha med index.`,
+    `${gs.showPageNumbers.value ? '%' : ''}\\fancyfoot{}\\setlength{\\textheight}{.95\\paperheight} \t%Ta bort kommentaren om du inte vill ha med sidnummer.`,
     '\n\n\\begin{document}\n\\maketitle\n\\input{content.tex}\n\\end{document}'
   )
   return out.join('\n')

@@ -5,7 +5,9 @@ export type GeneralSettings = {
   title: StringSetting,
   showLogo: BoolSetting,
   showDate: BoolSetting,
+  showPageNumbers: BoolSetting,
   showMelody: BoolSetting,
+  showIndices: BoolSetting,
   showAuthor: BoolSetting,
   showSheetMusicNotice: BoolSetting
 }
@@ -27,10 +29,20 @@ export const generalSettings: GeneralSettings = {
     type: 'bool',
     value: true
   },
+  showPageNumbers: {
+    text: 'Inkludera sidnummer',
+    type: 'bool',
+    value: true
+  },
   showMelody: {
     text: 'Inkludera melodi',
     type: 'bool',
     value: true
+  },
+  showIndices: {
+    text: 'Inkludera index',
+    type: 'bool',
+    value: false
   },
   showAuthor: {
     text: 'Inkludera författare',

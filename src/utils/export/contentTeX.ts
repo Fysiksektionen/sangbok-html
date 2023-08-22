@@ -43,7 +43,7 @@ export default function getContentTeX(songs: Song[], gs: GeneralSettings, ss: Sp
       '\\pagebreak[3]\n',
       // Try to get everything else on the same page
       '\\begin{samepage}\n',
-      `\\songtitle{${escapeAll(song.title)}}\n`,
+      `\\songtitle[${escapeAll(song.index)}]{${escapeAll(song.title)}}\n`,
       ...getMelodyContent(gs, song),
       '\\begin{lyrics}\n'
     )
