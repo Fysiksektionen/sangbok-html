@@ -1,4 +1,5 @@
 import './App.scss'
+import './Print.scss'
 
 import { defineComponent, defineAsyncComponent } from 'vue'
 import Navbar from '@/components/Navbar'

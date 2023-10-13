@@ -1,0 +1,11 @@
+// This file contains print-layout overrides
+// (That is, style changes when the user tries to print the page)
+
+@media print {
+    // Things to hide
+    .navbar, .view-generator, // General
+    .component-search, // Main view
+    .navbuttons, // Song view
+    .musicbutton, .zoombuttoncontainer, .component-sheet-music-renderer > .notice // Sheet music
+    { display: none; }
+}
