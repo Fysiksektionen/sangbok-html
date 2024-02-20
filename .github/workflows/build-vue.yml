@@ -17,6 +17,7 @@ on:
       - '**.conf'
       - '**.go'
       - 'Dockerfile'
+      - '*.Dockerfile'
       - '.Dockerignore'
       - '**/build-vue.yml'
   pull_request:

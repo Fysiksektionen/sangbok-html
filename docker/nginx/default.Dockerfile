@@ -35,12 +35,12 @@ RUN npm run build
 # TODO: Make this less hard-coded (I really don't know how dockerfile/bash string comparisons work...)
 # We also mustn't get any .br.gz files, since that messes with the brotli precompression module.
 RUN apk add --no-cache brotli
-RUN for file in dist/js/*; do \
+RUN for file in dist/assets/*; do \
         brotli "$file" --best --keep; \
         gzip "$file" --best; \
         touch "$file"; \
     done
-RUN for file in dist/css/*; do \
+RUN for file in dist/assets/*; do \
         brotli "$file" --best --keep; \
         gzip "$file" --best; \
         touch "$file"; \
