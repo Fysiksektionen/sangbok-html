@@ -1,3 +1,4 @@
+import { expect, test, vi } from 'vitest'
 import { mount, flushPromises } from '@vue/test-utils'
 import Vue3TouchEvents from 'vue3-touch-events'
 import router from '@/router'
@@ -50,7 +51,7 @@ test('List song management', async () => {
 })
 
 test('List navigation', async () => {
-  router.push('/')
+  await router.push('/')
   await router.isReady()
 
   store.commit('newList')
@@ -60,18 +61,22 @@ test('List navigation', async () => {
   expect(store.state.lists[0].songs).toEqual(['α1', 'α2'])
 
   const wrapper = mount(App, {
-    global: { plugins: [router, [store, key], Vue3TouchEvents] }
+    global: {
+      plugins: [router, [store, key], Vue3TouchEvents]
+    }
   })
 
   expect(wrapper.findComponent({ name: 'ChaptersView' }).exists()).toEqual(true)
 
   // Enter lists view
   await wrapper.find('tr:last-child > td.index').trigger('click')
+  await vi.dynamicImportSettled() // Since this may be the first time we load the Lists component, await imports.
   await flushPromises()
   expect(wrapper.findComponent({ name: 'ListsView' }).exists()).toEqual(true)
 
   // Enter list view
   await wrapper.find('tr > td.index').trigger('click')
+  await vi.dynamicImportSettled() // Since this may be the first time we load the List component, await imports.
   await flushPromises()
   expect(wrapper.findComponent({ name: 'ListView' }).exists()).toEqual(true)
 

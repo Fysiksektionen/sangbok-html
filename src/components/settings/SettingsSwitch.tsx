@@ -1,4 +1,4 @@
-import { Slot } from 'vue'
+import { Slot, VNode } from 'vue'
 import { useStore } from 'vuex'
 import { key, MultipleStateSettings } from '@/store'
 
@@ -6,7 +6,7 @@ import { key, MultipleStateSettings } from '@/store'
 export default function SettingsSwitch(
   { setting, values }: { setting: MultipleStateSettings, values: {[key: string]: string} },
   { slots }: { slots: { [name: string]: Slot } }
-): JSX.Element {
+): VNode {
   const store = useStore(key)
   const slot = slots.default && slots.default()
   return (

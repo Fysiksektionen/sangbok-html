@@ -7,12 +7,13 @@ import SettingsSwitch from './SettingsSwitch'
 import ClipboardButton from './ClipboardButton'
 import { themes } from '@/themes'
 import { BooleanSettings, MultipleStateSettings } from '@/store'
+import { VNode } from 'vue'
 
 /**
  * Component for the settings dropdown menu.
  * Props are passed through to the dropdown root div.
  */
-export default function SettingsComponent(props: Record<string, unknown>): JSX.Element {
+export default function SettingsComponent(props: Record<string, unknown>): VNode {
   const route: RouteLocationNormalized = useRoute()
   const isSongStage = route.name && route.name.toString().startsWith('Song')
   const touchActions = { none: 'Inga', zoom: 'Zooma', swipe: 'Svep', all: 'Alla' }

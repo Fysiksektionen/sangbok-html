@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest'
 import { flushPromises, mount } from '@vue/test-utils'
 import Vue3TouchEvents from 'vue3-touch-events'
 import router from '@/router'

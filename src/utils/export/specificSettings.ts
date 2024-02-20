@@ -73,7 +73,7 @@ function arskursernas(lyrics: string, settings: DownloadSetting[]): string { // 
 
   let year = 1900
   let yearIndex = 0
-  while (year < settings[0].value && ++yearIndex < years.length) {
+  while (year < (settings[0].value as unknown as number) && ++yearIndex < years.length) {
     const digits = parseInt(years[yearIndex].slice(0, 2))
     if (digits === 0) { year = Math.ceil(year / 100) * 100 } else { year = Math.floor(year / 100) * 100 + digits }
   }

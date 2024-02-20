@@ -1,4 +1,3 @@
-/* TODO: Import images with webpack. */
 import './Navbar.scss'
 import { defineComponent, Transition } from 'vue'
 import Dropdown from '@/components/settings/Settings'

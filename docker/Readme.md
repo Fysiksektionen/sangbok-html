@@ -39,7 +39,7 @@ Redirect 307 /sangbok /sangbok/
 </Location>
 ```
 
-Nginx-containrarna använder en relativt strikt Content-Security-Policy, så om du läser detta långt in i framtiden, kan det hända att Vue/Webpack har uppdaterat den kod som laddar rätt skriptversion baserat på webbläsarens ålder. Det som måste göras då är att hashet i nginx.conf:s Content-Securit-Policy måste uppdateras, eller bytas ut mot `'unsafe-inline'`.
+Nginx-containrarna använder en relativt strikt Content-Security-Policy, så om du läser detta långt in i framtiden, kan det hända att Vue har uppdaterat den kod som laddar rätt skriptversion baserat på webbläsarens ålder. Det som måste göras då är att hashet i nginx.conf:s Content-Securit-Policy måste uppdateras, eller bytas ut mot `'unsafe-inline'`.
 
 ### Uppdatera bilden
 Beroende på konfiguration vill du förmodligen köra något i stil med `docker run --detach --name sangbok --pull always ghcr.io/fysiksektionen/sangbok-html:latest` när du startar containern för första gången. För att ta bort containern kan du köra  `docker stop sangbok` följt av `docker rm sangbok`, och sedan kommandot ovan igen för att hämta en ny bild. Har du många gamla bilder som ligger och skräpar kan kommandot `docker image prune` användas.

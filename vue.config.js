@@ -1,6 +1,5 @@
 // vue.config.js
 /* eslint-disable @typescript-eslint/no-var-requires */
-const webpack = require('webpack')
 const path = require('path')
 
 // Root path
@@ -21,16 +20,6 @@ try {
 module.exports = {
   publicPath: root, // See https://cli.vuejs.org/config/#publicpath for limitations.
   lintOnSave: true,
-  configureWebpack: {
-    plugins: [
-      new webpack.DefinePlugin({ __COMMIT__: JSON.stringify(commitId) }),
-      new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 12288 /* Minimum number of characters */ })
-    ]
-  },
-  chainWebpack: config => {
-    config.output.chunkFilename('js/[name].[chunkhash:8].js') // Allow custom filenames for chunks
-    config.plugins.delete('prefetch')
-  },
   devServer: {
     headers: { 'Service-Worker-Allowed': 'http://localhost:8080' },
     static: { directory: path.join(__dirname, 'public'), publicPath: root }
@@ -54,15 +43,6 @@ module.exports = {
       scope: pwaRoot
     },
     appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: 'black-translucent',
-    workboxPluginMode: 'InjectManifest',
-    workboxOptions: {
-      // See https://developer.chrome.com/docs/workbox/reference/workbox-webpack-plugin/
-      // Paths to exclude from pre-caching. Format: https://webpack.js.org/configuration/module/#condition
-      // index.html is excluded, since we manually add '/' in service-worker.ts
-      exclude: ['msvg', 'tex', 'img/icons', /\/js\/[generator|qrcodelib]\.[0-9|a-f]{8}\.js/, /\.map$/],
-      // service-worker base
-      swSrc: '@/service-worker.ts'
-    }
+    appleMobileWebAppStatusBarStyle: 'black-translucent'
   }
 }

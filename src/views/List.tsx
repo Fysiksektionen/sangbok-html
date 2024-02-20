@@ -71,7 +71,7 @@ export default defineComponent({
     /** Shows the sharing modal, with a QR code. */
     async showQR() {
       this.qrVisible = true
-      const QRCode = await import(/* webpackChunkName: "qrcodelib" */ 'qrcode')
+      const QRCode = await import('qrcode')
       this.qrImage = await QRCode.toDataURL(this.link)
     },
     /** Copies the sharing link to the user's clipboard. */

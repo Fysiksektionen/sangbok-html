@@ -1,3 +1,5 @@
+import { VNode } from 'vue'
+
 const INDEX_MAP: { [key: string]: string } = {
   '✻': 'img/ths_emblem_filled_black.svg',
   '𝆔': 'img/tondov.svg',
@@ -23,7 +25,7 @@ function computeData(index: string): { key?: string, image?: string, text: strin
 }
 
 /** Accepts an index (i.e. song index), and displays it, inserting relevant images if needed. */
-export default function Index({ index }: { index: string }): JSX.Element {
+export default function Index({ index }: { index: string }): VNode {
   const data = computeData(index || '')
 
   return (

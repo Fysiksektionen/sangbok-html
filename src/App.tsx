@@ -7,6 +7,8 @@ import { themes } from '@/themes'
 import { key, stringKey } from '@/store/index'
 import { useStore } from 'vuex'
 import SearchBox from './components/SearchBox'
+// TODO: Make async (and make vitest not complain about it).
+// import GeneratorView from '@/views/Generator'
 
 /** Main app. */
 export default defineComponent({
@@ -27,7 +29,7 @@ export default defineComponent({
   },
   render() {
     // This loads Generator component and generator helper functions on-demand.
-    const GeneratorView = defineAsyncComponent(() => import(/* webpackChunkName: "generator" */ '@/views/Generator'))
+    const GeneratorView = defineAsyncComponent(() => import('@/views/Generator'))
 
     return (
       <>

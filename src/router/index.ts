@@ -73,12 +73,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/list/:listId(\\d+)',
     name: 'List',
-    component: () => import(/* webpackChunkName: "listview" */ '../views/List')
+    component: () => import('../views/List')
   },
   {
     path: '/list/',
     name: 'Lists',
-    component: () => import(/* webpackChunkName: "listsview" */ '../views/Lists')
+    component: () => import('../views/Lists')
   },
   {
     path: '/list/add/:data(.+)',

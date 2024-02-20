@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest'
 import { mount, flushPromises } from '@vue/test-utils'
 import Vue3TouchEvents from 'vue3-touch-events'
 import router from '@/router'
@@ -25,7 +26,7 @@ test('Navbar dropdown', async () => {
 test('Chapter back-button test', async () => {
   global.history.state.back = null
 
-  router.replace('/chapter/0')
+  await router.replace('/chapter/0')
   await flushPromises()
   expect(router.currentRoute.value.name).toContain('Chapter')
 
@@ -40,7 +41,7 @@ test('Chapter back-button test', async () => {
 test('Song back-button test', async () => {
   global.history.state.back = null
 
-  router.replace('/chapter/0/song/0')
+  await router.replace('/chapter/0/song/0')
   await flushPromises()
   expect(router.currentRoute.value.name).toContain('Song')
 
@@ -55,7 +56,7 @@ test('Song back-button test', async () => {
 test('Search back-button test', async () => {
   global.history.state.back = null
 
-  router.replace('/search/test')
+  await router.replace('/search/test')
   await flushPromises()
   expect(router.currentRoute.value.name).toContain('Search')
 

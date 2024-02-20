@@ -59,7 +59,7 @@ jobs:
       working-directory: public/msvg
       run: mv svgs.json ../../src/assets/msvgs.json
     - name: build
-      run: npx vue-cli-service build
+      run: npx vite build
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       if: ${{ matrix.node-version == '20.x' }}

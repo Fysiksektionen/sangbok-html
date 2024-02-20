@@ -15,14 +15,10 @@ function getZoomLevels(source: string) {
 
 /** @returns The images of the current song, for specified zoom-level. */
 function getImagesForZoomLevel(source: string, zoomIdx: number): string[] {
-  const curSongSvgs = svglist.filter(s => { return source && s.indexOf(source) > -1 })
+  const curSongSvgs: string[] = svglist.filter(s => { return source && s.indexOf(source) > -1 })
   const curSongSvgsWithZoom = curSongSvgs.filter(s => getZoomLevelFromFileName(s) === getZoomLevels(source)[zoomIdx])
 
-  // __webpack_public_path__ is undefined in our testing environment. This is a Goodhart-style fix to that.
-  // TODO: find a way to define __webpack_public_path__ in the testing code instead.
-  // eslint-disable-next-line
-  const root = (typeof __webpack_public_path__ !== 'string') ? '' : __webpack_public_path__
-  return curSongSvgsWithZoom.map(s => root + 'msvg/' + s)
+  return curSongSvgsWithZoom.map(s => 'msvg/' + s)
 }
 
 /** Component that renders sheet music. */

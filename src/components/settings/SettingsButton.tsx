@@ -1,12 +1,12 @@
 import { useStore } from 'vuex'
 import { BooleanSettings, key } from '@/store'
-import { Slot } from 'vue'
+import { Slot, VNode } from 'vue'
 
 /** A row with a toggle. Used by the settings dropdown. */
 export default function SettingsButtonComponent(
   { setting }: { setting: BooleanSettings },
   { slots, attrs }: { slots: { [name: string]: Slot }, attrs: { [name: string]: string } }
-): JSX.Element {
+): VNode {
   const store = useStore(key)
   const slot = slots.default && slots.default()
 

@@ -20,12 +20,14 @@ RUN npm clean-install
 COPY public public
 COPY *.json .
 COPY *.js .
+COPY *.mjs .
+COPY *.html .
 COPY .eslintrc .
 COPY src src
 COPY .git .git
 
 # Build app
-RUN npx vue-cli-service build --modern
+RUN npm run build
 
 # Precompress static assets
 RUN apk add --no-cache brotli

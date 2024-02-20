@@ -45,7 +45,7 @@ export default defineComponent({
     }
   },
   render() {
-    const SheetMusicRenderer = defineAsyncComponent(() => import(/* webpackChunkName: "musicrenderer", webpackPrefetch: true */ '@/views/song/SheetMusicRenderer'))
+    const SheetMusicRenderer = defineAsyncComponent(() => import('@/views/song/SheetMusicRenderer'))
     const songId = parseInt(this.$route.params.songId as string)
 
     return (

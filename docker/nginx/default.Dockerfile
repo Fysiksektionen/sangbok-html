@@ -1,4 +1,4 @@
-## Pre-compresses everything with gz, and main assets with br as well.
+## Pre-compresses everything with gz. All main assets are compressed with br as well (stored alongside their gz precompressed files).
 
 ##
 ##  Build frontend
@@ -20,12 +20,14 @@ RUN npm clean-install
 COPY public public
 COPY *.json .
 COPY *.js .
+COPY *.mjs .
+COPY *.html .
 COPY .eslintrc .
 COPY src src
 COPY .git .git
 
 # Build app
-RUN npx vue-cli-service build --modern
+RUN npm run build
 
 # Precompress static assets
 # All assets in the main folder, as well as js and css files are redundantly precompressed.

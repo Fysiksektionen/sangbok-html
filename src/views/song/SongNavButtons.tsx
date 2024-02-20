@@ -7,9 +7,10 @@ import Index from '@/components/Index'
 import { getOffsetSongFromRoute } from '@/lyrics'
 import { key } from '@/store'
 import { useStore } from 'vuex'
+import { VNode } from 'vue'
 
 /** Component for song navigation buttons. Button values are inferred from the route. */
-export default function SongNavButtons(): JSX.Element {
+export default function SongNavButtons(): VNode {
   const router = useRouter()
   const route = useRoute()
   const store = useStore(key)

@@ -31,8 +31,8 @@ jobs:
     - name: Install packages
       run: npm ci
     - name: Lint
-      run: npx vue-cli-service lint --no-fix
+      run: npm run lint-check
     - name: Strict lint
-      run: npx vue-cli-service lint --no-fix --max-warnings 0
-#      continue-on-error: true
-#      if: ${{ github.ref == 'refs/heads/main' }}
+      run: npm run lint-check-strict
+      # continue-on-error: true
+      if: ${{ github.ref == 'refs/heads/main' }}

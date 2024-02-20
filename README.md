@@ -1,7 +1,7 @@
 # Sångboken för webben
 [![Build](https://img.shields.io/github/actions/workflow/status/Fysiksektionen/sangbok-html/build-vue.yml?logo=github&label=Build)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/build-vue.yml) 
 [![ESLint](https://img.shields.io/github/actions/workflow/status/Fysiksektionen/sangbok-html/lint.yml?logo=github&label=Lint)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/lint.yml) 
-[![Tests](https://img.shields.io/github/actions/workflow/status/Fysiksektionen/sangbok-html/jest.yml?logo=github&label=Tests)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/jest.yml) 
+[![Tests](https://img.shields.io/github/actions/workflow/status/Fysiksektionen/sangbok-html/vitest.yml?logo=github&label=Tests)](https://github.com/Fysiksektionen/sangbok-html/actions/workflows/vitest.yml) 
 [![Netlify](https://img.shields.io/netlify/1e6dc2eb-31a1-4121-acd8-c72ee6356ef4?logo=netlify&label=Netlify)](https://f-kth-sangbok.netlify.app)
 [![Codecov](https://img.shields.io/codecov/c/github/Fysiksektionen/sangbok-html?logo=codecov&label=Coverage)](https://codecov.io/gh/Fysiksektionen/sangbok-html)
 

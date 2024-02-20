@@ -1,3 +1,4 @@
+import { expect, test, vi } from 'vitest'
 import { mount, flushPromises } from '@vue/test-utils'
 import Vue3TouchEvents from 'vue3-touch-events'
 import router from '@/router'
@@ -29,8 +30,9 @@ test('Generator navigation', async () => {
   expect(wrapper.find('.component-settings').exists()).toEqual(false)
 
   // Add a song.
-  router.push('/song/o1')
+  await router.push('/song/o1')
   await flushPromises()
+  await vi.dynamicImportSettled() // Since this may be the first time we load the generator component, await imports.
   await wrapper.find('.generatorbuttons > [data-test="addButton"]').trigger('click')
   await flushPromises()
   expect(wrapper.find('.view-generator').html()).toContain('Paradhymn')
