@@ -10,7 +10,7 @@
     "lint-check": "eslint --ext .js,.ts,.jsx,.tsx,.vue --ignore-path .gitignore src",
     "lint-check-strict": "eslint --ext .js,.ts,.jsx,.tsx,.vue --ignore-path .gitignore --max-warnings 0 src",
     "serve": "vite preview",
-    "start": "vite preview",
+    "start": "vite",
     "test": "vitest"
   },
   "dependencies": {
@@ -18,6 +18,7 @@
     "core-js": "^3.6.5",
     "fuse.js": "^6.0",
     "jszip": "^3.0",
+    "opensheetmusicdisplay": "^1.8.6",
     "qrcode": "^1.5",
     "register-service-worker": "^1.7.2",
     "vue": "^3.4.10",
