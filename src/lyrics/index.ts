@@ -3,12 +3,12 @@ import { lyrics } from './chapters/'
 import { hiddenChapters, hiddenSongs } from './addons/'
 
 // TS imports
-import { preprocessChapter, addSongTags } from './importHelpers'
+import { preprocessChapter, addSongTags, hasMxlSheetMusic } from './importHelpers'
 import { Chapter, Song, SongIndex, JSONChapter, ChapterHit, SongHit } from './types'
 
 // Exports from other files
 export type { Song, Chapter, SongHit, SongIndex } from './types'
-export { hasSheetMusic } from './importHelpers'
+export { hasMxlSheetMusic as hasSheetMusic } from './importHelpers'
 export { getChapterFromRoute, getSongFromRoute, getOffsetSongFromRoute, param2int } from './routeGetters'
 
 /** Main menu chapters. */

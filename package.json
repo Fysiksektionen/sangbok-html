@@ -10,6 +10,7 @@
     "lint-check": "eslint --ext .js,.ts,.jsx,.tsx,.vue --ignore-path .gitignore src",
     "lint-check-strict": "eslint --ext .js,.ts,.jsx,.tsx,.vue --ignore-path .gitignore --max-warnings 0 src",
     "serve": "vite preview",
+    "serve-ngrok": "vite build; vite preview & ngrok http http://localhost:4173 & wait",
     "start": "vite",
     "test": "vitest"
   },

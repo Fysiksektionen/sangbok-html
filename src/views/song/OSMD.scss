@@ -1,0 +1,35 @@
+.component-sheet-music-renderer {
+    display: contents;
+
+    /* Layout */
+    & .canvas {
+        width: 100%;
+        filter: var(--image-filter-sheetmusic, invert(0.6));
+        /* Originally #c2ad99 for night theme*/
+    }
+
+    & .zoombuttoncontainer {
+        display: inline;
+    }
+
+    & .err {
+        text-align: center;
+
+        & p {
+            font-style: italic;
+            font-size: 75%;
+            opacity: 75%;
+        }
+    }
+
+    & .loading {
+        text-align: center;
+    }
+
+    & .notice {
+        text-align: center;
+        font-size: 75%;
+        color: var(--text-color-primary, #ddd);
+        opacity: 0.6;
+    }
+}
