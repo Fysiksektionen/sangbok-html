@@ -1,6 +1,6 @@
 {
   "name": "sangbok",
-  "version": "1.2.0-beta10",
+  "version": "1.3.0-alpha1",
   "private": true,
   "scripts": {
     "build": "vite build",
@@ -15,11 +15,11 @@
     "test": "vitest"
   },
   "dependencies": {
+    "abc2svg": "^1.22.1",
     "copy-to-clipboard": "^3.3.1",
     "core-js": "^3.6.5",
     "fuse.js": "^6.0",
     "jszip": "^3.0",
-    "opensheetmusicdisplay": "^1.8.6",
     "qrcode": "^1.5",
     "register-service-worker": "^1.7.2",
     "vue": "^3.4.10",

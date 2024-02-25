@@ -46,7 +46,7 @@ export default defineComponent({
     }
   },
   render() {
-    const OSMD = defineAsyncComponent(() => import('@/views/song/OSMD'))
+    const OSMD = defineAsyncComponent(() => import('@/views/song/ABC'))
     const songId = parseInt(this.$route.params.songId as string)
 
     return (

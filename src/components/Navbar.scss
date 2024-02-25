@@ -28,15 +28,18 @@
     padding: 0.8em 0.8em;
     &:active {background-color: rgba(255, 255, 255, 0.20);}
   }
-  & .title {
-    color: white;
-    font-family: "Lato", sans-serif;
+  & .title  {
     position: absolute;
     width: 100%;
     text-align: center;
-    font-weight: bold;
-    font-size: 1.1em;
     padding-top: 0.4em;
     z-index: -1;
+    font-family: "Lato", sans-serif;
+    font-weight: bold;
+    font-size: 1.1em;
+    & > a {
+      text-decoration: none;
+      color: white;
+    }
   }
 }

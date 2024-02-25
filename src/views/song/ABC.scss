@@ -2,10 +2,15 @@
     display: contents;
 
     /* Layout */
-    & .canvas {
+    & .svg-list {
         width: 100%;
         filter: var(--image-filter-sheetmusic, invert(0.6));
+
         /* Originally #c2ad99 for night theme*/
+        &>img {
+            display: block;
+            width: 100%;
+        }
     }
 
     & .zoombuttoncontainer {

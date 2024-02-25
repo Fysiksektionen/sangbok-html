@@ -8,7 +8,7 @@ import store from '@/store'
 // Views
 import Chapters from '@/views/Chapters'
 import Chapter from '@/views/Chapter'
-import Song from '@/views/Song.OSMD'
+import Song from '@/views/Song.mxl'
 import Search from '@/views/Search'
 
 // Certain components may benefit from async loading. For now (v1.0) this adds about 3 KiB to the total size (transferred)

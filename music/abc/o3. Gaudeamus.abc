@@ -1,0 +1,36 @@
+X:1
+T:Längtan till landet
+C:Musik: Otto Lindblad
+C:Arr: Ivar Widéen
+%%score [ ( 1 2 ) ( 3 4 ) ]
+L:1/8
+M:3/4
+I:linebreak $
+K:Eb
+V:1 treble-8 nm="S A"
+V:2 treble-8 
+L:1/4
+V:3 bass nm="T B"
+L:1/4
+V:4 bass 
+V:1
+|: e>B B2 e2 | c>c c2 z2 | d>e f2 d2 | (eg) e2 z2 :| d>e f2 f2 | ge f2 f2 | d>e f2 f2 | ge f2 f2 | %8
+w: 1. Gau de- a- mus|i- gi- tur,|Ju- ve- nes dum|su- * mus.|Post ju- cun- dam|ju- ven- tu- tem,|Post mol- es- tam|sen- ec- tu- tem,|
+w: 4. Vi- vat a- ca-|de- mi- a!|Vi- vant pro- fes-|sor- * es!|Vi- vat mem- brum|quod- li- bet; _|Vi- vant mem- bra|quae- li- bet; _|
+w: 10. Al- ma Ma- ter|flo- re- at,|Quae nos e- du-|ca- * vit;|Ca- ros et com-|mi- lit- on- es,|Dis- si- tas in|re- gi- on- es|
+ e>d c2 (af) | (e4 f2) |$ g6 | e>d c2 (af) | (e4 d2) | e2- e4 :| %14
+w: Nos ha- be- bit _|hu- *|mus,|Nos ha- be- bit _|hu- *|mus. *|
+w: Sem- per sint in _|flo- *|re,|Sem- per sint in _|flo- *|re. *|
+w: Spar- sos, con- gre- *|ga- *|vit,|Spar- sos, con- gre- *|ga- *|vit. *|
+V:2
+|: B/>B/ B B | c/>c/ c x | B/>B/ B B | B B x :| B/>c/ d d | e/e/ d d | B/>c/ d d | e/e/ d d | %8
+ B/>B/ A c | (B2 d) |$ e3 | B/>B/ A c | (B2 A) | G- G2 :| %14
+V:3
+|: G,/>G,/ G, G, | A,/>A,/ A, z | F,/>G,/ A, F, | (G,/B,/) G, z :| B,/>B,/ B, B, | B,/B,/ B, B, | %6
+ F,/>F,/ B, B, | B,/B,/ B, B, | E,/>E,/ E, A, | (G,2 B,) |$ B,3 | E,/>E,/ E, A, | (G,2 F,) | %13
+ E,- E,2 :| %14
+V:4
+|: E,>E, E,2 E,2 | [A,,E,]>[A,,E,] [A,,E,]2 x2 | B,,>B,, B,,2 B,,2 | E,2 E,2 x2 :| %4
+ B,,>B,, B,,2 B,,2 | E,G, B,2 B,,2 | B,,>B,, B,,2 B,,2 | E,G, B,2 B,,2 | G,,>G,, A,,2 (F,,A,,) | %9
+ B,,6 |$ E,6 | G,,>G,, A,,2 (F,,A,,) | B,,6 | E,,2- E,,4 :| %14
+

@@ -1,7 +1,7 @@
 import './Navbar.scss'
 import { defineComponent, Transition } from 'vue'
 import Dropdown from '@/components/settings/Settings'
-import { RouteLocationNormalized } from 'vue-router'
+import { RouteLocationNormalized, RouterLink } from 'vue-router'
 import { getChapterFromRoute } from '@/lyrics'
 
 import backImage from '@/assets/back.png'
@@ -48,7 +48,7 @@ export default defineComponent({
             { !this.hideBackButton &&
               <button onClick={this.goBack} data-test="navbarBackButton"><img src={backImage} alt="Gå tillbaka"/></button> }
           </div>
-          <div class="title">Sångboken</div>
+          <div class="title"><RouterLink to='/'>Sångboken</RouterLink></div>
           <div style="float: right;" data-test="settingsButtonWrapper">
             {!this.showSettings && <button onClick={() => { this.showSettings = true }} data-test="navbarShowSettingsButton"><img src={settingsImage} alt="Visa inställningar" /></button>}
             {this.showSettings && <button onClick={() => { this.showSettings = false }} data-test="navbarHideSettingsButton"><img src={crossImage} alt="Dölj inställningar" /></button>}

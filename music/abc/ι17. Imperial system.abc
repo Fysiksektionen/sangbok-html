@@ -1,0 +1,46 @@
+X:1
+T:ι17. Imperial system 
+T:Musik: Prins Gustaf Text: GM²N, 2007
+T:Melodi: Studentsången
+%%score [ ( 1 2 ) ( 3 4 ) ]
+L:1/4
+Q:1/4=120
+M:4/4
+I:linebreak $
+K:G
+V:1 treble-8 nm="T"
+L:1/8
+V:2 treble-8 
+V:3 bass nm="B\n\nB"
+V:4 bass 
+V:1
+!mf! B2 G>A B2 c>c | B2 A>A B2 z2 | d2 B>c d2 g>e | d2 G>A B2 A2 | B2 G>A B2 c>c | B2 A2 G2 z2 | %6
+w: ft kp _ _ K _|bu _ B _|" G _ Oe _ lb|rdr _ _ std _|st _ _ msk _ kn|E _ _|
+w: Fot, ki- lo- pond, Kay- ser,|bush- el, Beau- fort,|tum, Gil- bert, Ør- stedt, pund,|riks- da- ler, stan- dard.|Sta- di- on, mat- sked, knop,|E- öt- vös.|
+!f! g2 g2 f2 e>e |$ d2 ^c>c d2 z2 ||!p! d4 c4 | B3 c d2 z2 | f4 e2 d2 | g3 B d2 z2 | d4 c4 | %13
+w: Fe _ krm _ c|_ cSt _ _|°F _||pt – "|_ ' _|at _|
+w: Fran- klin krydd- mått ca-|rat cen- ti- Stoke.|Gra- der|Fa- ren- heit|Punkt, streck, se-|kund, min- ut.|Tek- nisk|
+ B3 c d2 z2 |"^cresc." g3 A B2 ^c2 | d2 dd _e2 ee | !courtesy!=e2 ee!f! f4 |$!ff! g3 g g2 e2 | %18
+w: |hk _ nmi _|_ M Ci _ dptr _|_ cal _ _|mvp _ _ _|
+w: at- mos- fär.|Häst- kraft nau- tisk|mil mach, Cu- rie, di- op-|tri, kal- o- ri.|Me- ter vatt- en-|
+ d2 c2 B2 z2 |!f! e3 e d2 G>A | B4 A4 | G3!ff! g g2 z2 :| %22
+w: |mvp _ _ _ _||* ha! _|
+w: pe- la- re.|Me- ter vatt- en _|pe- la-|re. Hek- tar!|
+V:2
+ G G/>G/ G G/>G/ | G F/>F/ G x | B G/>A/ B e/>c/ | B G/>G/ G F | G G/>G/ G G/>G/ | G A G x | %6
+ A ^c d B/>B/ |$ A G/>G/ F x || A A A A | G G/A/ B B | c c c c | B B B B | A A A A | G G/A/ B B | %14
+ A G G G | F A/F/ _B B/G/ | !courtesy!=B B/B/ c d |$ d3/2 d/ e c | B A G x | c3/2 c/ B G/>A/ | %20
+ G2 F2 | G3/2 B/ B x :| %22
+V:3
+ D, B,,/>C,/ D, E,/>E,/ | D, D,/>D,/ D, z | G, G, G, G,/>G,/ | G, G,/>G,/ G, F, | %4
+ D, B,,/>C,/ D, E,/>E,/ | G, F, G, z | E, A, A, G,/>G,/ |$ F, E,/>E,/ D, z || F, F, F, F, | %9
+ G, D, D, G, | A, A, G, F, | G, G, G, G, | F, F, F, F, | G, D, D, D, | ^C, E, E, E, | %15
+ F, F,/F,/ G, G,/G,/ | ^G, G,/G,/ A,2 |$ !courtesy!=G,3/2 G,/ G, G, | G, F, G, z | %19
+ G,3/2 G,/ G, G,/>G,/ | G,2 D,2 | G,3/2 G,/ G, z :| %22
+V:4
+ G,, G,,/>G,,/ G,, G,,/>G,,/ | D, D,/>D,/ G,, x | G,, G,, G,, C,/>E,/ | G, E,/>E,/ D,2 | %4
+ G,, G,,/>G,,/ G,, G,,/>G,,/ | D, D, (E, D,) | ^C, A,, D, G,,/>G,,/ |$ A,, A,,/>A,,/ D, x || %8
+ D, D, D, D, | G,, G,, G,, G,, | D, D, D, D, | G,, G,, G,, G,, | D, D, D, D, | G,, G,, G,, G,, | %14
+ A,, A,, A,, A,, | D, D,/D,/ D, D,/D,/ | D, D,/D,/ (D, C,) |$ B,,3/2 B,,/ C, C, | D, ^D, E, x | %19
+ C,3/2 C,/ G, E,/>E,/ | D,2 D,2 | G,3/2 G,/ G, x :| %22
+
