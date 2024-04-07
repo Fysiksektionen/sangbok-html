@@ -11,6 +11,7 @@ load_test.js
 .mscbackup
 music/svg
 music/tmp
+music/xml
 music/deflate
 music/more.txt
 public/msvg
