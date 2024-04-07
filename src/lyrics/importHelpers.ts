@@ -1,5 +1,4 @@
-import svglist from '@/assets/msvgs.json'
-import mxllist from '@/assets/mxls.json'
+import abclist from '@/assets/abcs.json'
 import { greek2latin, greek2latin2 } from '@/utils/other'
 import { Chapter, JSONChapter, Song, SongHit } from './types'
 
@@ -38,25 +37,14 @@ export function preprocessChapter (chapter: JSONChapter, index: number): Chapter
 }
 
 /**
- * Returns a boolean representing whether a Song object has associated svg sheet music or not.
- * Checks if the song index exists in the list of sheet-music-svg files, and returns true if the index was found.
+ * Returns a boolean representing whether a Song object has associated abc sheet music or not.
+ * Checks if the song index exists in the list of sheet-music-abc files, and returns true if the index was found.
  * @param song A Song object
  * @returns true if the song has sheetmusic. false otherwise.
  */
-export function hasSvgSheetMusic(song: Song): boolean {
+export function hasAbcSheetMusic(song: Song): boolean {
   // The dot needs to be here, otherwise, songs like ζ1 may think it has ζ11 as sheet music.
-  return svglist.filter(s => { return s.startsWith(song.index + '.') }).length > 0
-}
-
-/**
- * Returns a boolean representing whether a Song object has associated mxl sheet music or not.
- * Checks if the song index exists in the list of sheet-music-svg files, and returns true if the index was found.
- * @param song A Song object
- * @returns true if the song has sheetmusic. false otherwise.
- */
-export function hasMxlSheetMusic(song: Song): boolean {
-  // The dot needs to be here, otherwise, songs like ζ1 may think it has ζ11 as sheet music.
-  return mxllist.filter(s => { return s.startsWith(song.index + '.') }).length > 0
+  return abclist.filter(s => { return s.startsWith(song.index + '.') }).length > 0
 }
 
 /**
@@ -71,7 +59,7 @@ export function addSongTags(song: Song, songId: number, chapterId: number | stri
     greek2latin(song.index),
     greek2latin2(song.index)
   ]
-  const tags: string[] = hasMxlSheetMusic(song) ? ['noter'] : []
+  const tags: string[] = hasAbcSheetMusic(song) ? ['noter'] : []
 
   // If the song already had tags defined, we append these to the output tags.
   if (song.tags !== undefined) { tags.push(...song.tags) }

@@ -4,12 +4,12 @@ import Vue3TouchEvents from 'vue3-touch-events'
 import router from '@/router'
 import store, { key } from '@/store'
 import App from '@/App'
-import svglist from '@/assets/msvgs.json'
+import abclist from '@/assets/abcs.json'
 
 test('Sheet music view', async () => {
   await router.push('/')
   await router.isReady()
-  const sheetMusicIndexes = [...new Set(svglist.map(s => s.split('.')[0]))]
+  const sheetMusicIndexes = [...new Set(abclist.map(s => s.split('.')[0]))]
 
   const wrapper = mount(App, {
     global: { plugins: [router, [store, key], Vue3TouchEvents] }

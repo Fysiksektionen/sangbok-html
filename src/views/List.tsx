@@ -10,7 +10,7 @@ import { SongList } from '@/store/lists'
 import Swiper from '@/components/Swiper' // @ is an alias to /src
 import Modal from '@/components/Modal'
 import { SwipeIndicatorState } from '@/utils/swipe'
-import { param2int, getSongsByStringIndices, hasSheetMusic } from '@/lyrics'
+import { param2int, getSongsByStringIndices, hasAbcSheetMusic } from '@/lyrics'
 
 /** View to list all songs in a chapter. */
 export default defineComponent({
@@ -45,7 +45,7 @@ export default defineComponent({
     }
   },
   methods: {
-    hasSheetMusic,
+    hasSheetMusic: hasAbcSheetMusic,
     swipeHandler(direction: SwipeIndicatorState) {
       // Go back one step if the user swipes to the right (which shows the indicator on the 'left')
       (direction === 'left') && this.$router.go(-1)
@@ -112,7 +112,7 @@ export default defineComponent({
               <td class="index" v-html={song.index} onClick={() => this.clickHandler(idx)}></td>
               <td class="name" onClick={() => this.clickHandler(idx)}>
                 <span v-html={song.title}></span>
-                {hasSheetMusic(song) && this.store.state.settings.sheetmusic && !this.store.state.settings.makelist &&
+                {hasAbcSheetMusic(song) && this.store.state.settings.sheetmusic && !this.store.state.settings.makelist &&
                   <span class="sheetmusicicon">𝄢</span> /* 𝄞 */}
               </td>
               {/* Song order editing controls. */}

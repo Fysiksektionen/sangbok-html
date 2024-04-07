@@ -5,7 +5,7 @@ import { key } from '@/store'
 import Index from '@/components/Index'
 import Swiper from '@/components/Swiper' // @ is an alias to /src
 import { SwipeIndicatorState } from '@/utils/swipe'
-import { getChapterFromRoute, Chapter, hasSheetMusic } from '@/lyrics'
+import { getChapterFromRoute, Chapter, hasAbcSheetMusic } from '@/lyrics'
 
 // TODO: Refactor into a functional-style component
 /** View to list all songs in a chapter. */
@@ -43,7 +43,7 @@ export default defineComponent({
                 <td class="index"><Index index={song.index} /></td>
                 <td class="name">
                   <span v-html={song.title}></span>
-                  {hasSheetMusic(song) && this.store.state.settings.sheetmusic && <span class="sheetmusicicon">𝄢</span>}
+                  {hasAbcSheetMusic(song) && this.store.state.settings.sheetmusic && <span class="sheetmusicicon">𝄢</span>}
                 </td>
               </tr>)}
           </table>

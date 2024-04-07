@@ -6,6 +6,8 @@ declare class Abc {
         read_file: (fname: string) => string,
         errmsg: (msg: string, l: number, c: number) => any,
         img_out: (data: string) => any,
+        abc_error_output: string,
+        abc_svg_output: string,
     });
 
   tosvg(in_fname: string | undefined, file: string, bol?: any, eof?: any): void;

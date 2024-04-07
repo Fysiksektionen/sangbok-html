@@ -10,8 +10,9 @@ import ListModal from '@/views/song/ListModal'
 import Swiper from '@/components/Swiper'
 import NavButtons from '@/views/song/SongNavButtons'
 import { SwipeIndicatorState, swipeIndicatorToOffset } from '@/utils/swipe'
-import { getSongFromRoute, getChapterFromRoute, getOffsetSongFromRoute, hasSheetMusic, Song } from '@/lyrics'
+import { getSongFromRoute, getChapterFromRoute, getOffsetSongFromRoute, Song } from '@/lyrics'
 import { removeSheetMusicNotice, toHTML } from '@/utils/other'
+import { hasAbcSheetMusic } from '@/lyrics/importHelpers'
 
 /** View to list all songs in a chapter. */
 export default defineComponent({
@@ -29,7 +30,7 @@ export default defineComponent({
   computed: {
     song() { return getSongFromRoute(this.$route) },
     /** @returns true if the current song has sheet music, and false otherwise. */
-    sheetMusicAvailable() { return hasSheetMusic(getSongFromRoute(this.$route) as Song) }
+    sheetMusicAvailable() { return hasAbcSheetMusic(getSongFromRoute(this.$route) as Song) }
   },
   methods: {
     toHTML,
@@ -45,7 +46,7 @@ export default defineComponent({
     }
   },
   render() {
-    const SheetMusicRenderer = defineAsyncComponent(() => import('@/views/song/SheetMusicRenderer'))
+    const ABCSMR = defineAsyncComponent(() => import('@/views/song/ABC'))
     const songId = parseInt(this.$route.params.songId as string)
 
     return (
@@ -80,7 +81,8 @@ export default defineComponent({
               {/* Sheet music */}
               {/* If this is visible, the "Main content" above will be hidden. */}
               {this.sheetMusicAvailable && this.showMsvg && this.store.state.settings.sheetmusic &&
-                <SheetMusicRenderer src={this.song.index} key={this.song.index} />}
+                <ABCSMR src={this.song.index} key={this.song.index}/>
+              }
 
               {/* Navigation */}
               {this.chapter && <NavButtons />}

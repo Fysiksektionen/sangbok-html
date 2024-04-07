@@ -51,14 +51,6 @@ jobs:
         cache: 'npm'
     - name: Install packages
       run: npm ci
-    - name: Fetch sheet music artifacts
-      uses: actions/download-artifact@v3
-      with:
-        name: music-svgs
-        path: public/msvg
-    - name: Unpack sheet music artifacts
-      working-directory: public/msvg
-      run: mv svgs.json ../../src/assets/msvgs.json
     - name: build
       run: npx vite build
     - name: Archive production artifacts
@@ -82,48 +74,31 @@ jobs:
       with:
         node-version: 20.x
         cache: 'npm'
-    - name: Install svgo
-      run: npm install -g svgo
     - name: Install MuseScore 3
       run: sudo apt-get update && sudo apt-get install musescore3
-    - name: Unpack cached svg:s
-      run: rm -rf svg && tar -xJf svg.tar.lzma
+    - name: Convert mscz to compressed abc:s
       working-directory: ./music
-    - name: Convert mscz to compressed svg:s (from cache)
-      working-directory: ./music
-      run: ./convert.sh --compress --no-move
+      run: ./convert.sh
       if: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/actions-dev' }}
     - name: Convert mscz to compressed svg:s (from scratch)
       working-directory: ./music
-      run: ./convert.sh --compress --no-move --force-on-change
+      run: ./convert.sh --force-on-change
       if: ${{ github.ref == 'refs/heads/main' }}
-    - name: Convert mscz to compressed svg:s (workflow testing)
-      working-directory: ./music
-      run: ./convert.sh --compress --no-move --force-cache-regeneration
-      if: ${{ github.ref == 'refs/heads/actions-dev' }}
     - name: Compute hashes
       working-directory: ./music
       run: sha1sum mscz/*.mscz
-    - name: Perpare for export
-      working-directory: ./music
-      run: cp svgs.json svg
-    - name: Archive production artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: music-svgs
-        path: music/svg
     - name: Push new cache to repo
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR_ID+$GITHUB_ACTOR@users.noreply.github.com"
-          git add music/svg.tar.lzma music/mscz.sha1 music/svgs.json
-          git commit -m "Automatic msvg cache update ($(head -c 8 music/mscz.sha1))" --author "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>" | exit 0
+          git add music/mscz.sha1 music/abcs.json music/abc/*
+          git commit -m "Automatic abc update ($(head -c 8 music/mscz.sha1))" --author "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>" | exit 0
           git push
-      if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/actions-dev' }}
+      if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/actions-dev' || github.ref == 'refs/heads/abc-notation-renderer' }}
     # TODO: git commit exit codes are overridden above. This is most commonly done to prevent the workflow from crashing due to empty commits. It may, however, be a source of bugs if git commit crashes for some other reason.
-  
+
   ##
   ## Docker build
   ##
@@ -153,14 +128,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Fetch sheet music artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: music-svgs
-          path: public/msvg
-      - name: Unpack sheet music artifacts
-        working-directory: public/msvg
-        run: mv svgs.json ../../src/assets/msvgs.json
       # Login against a Docker registry except on PR(https://github.com/docker/login-action)
       - name: Log into registry ${{ env.REGISTRY }}
         if: github.event_name != 'pull_request'

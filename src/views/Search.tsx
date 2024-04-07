@@ -5,7 +5,7 @@ import { useStore } from 'vuex'
 import { key } from '@/store'
 import Fuse from 'fuse.js'
 
-import { SongHit, hasSheetMusic } from '@/lyrics'
+import { SongHit, hasAbcSheetMusic } from '@/lyrics'
 import { search } from '@/utils/search' // @ is an alias to /src
 import Index from '@/components/Index'
 import Swiper from '@/components/Swiper'
@@ -45,7 +45,7 @@ export default defineComponent({
               <td class="index"><Index index={(hit.item.index || hit.item.chapterindex || '').toString()} /></td>
               <td class="name">
                 {hit.item.title}
-                {hasSheetMusic(hit.item) && this.store.state.settings.sheetmusic && <span class="sheetmusicicon">𝄢</span>}
+                {hasAbcSheetMusic(hit.item) && this.store.state.settings.sheetmusic && <span class="sheetmusicicon">𝄢</span>}
               </td>
             </tr>)}
             {(Array.isArray(results) && results.length === 0) &&
