@@ -149,5 +149,5 @@ export function greek2latin2 (greek: string): string {
  * Runs `func` asynchronously. Does not return anything.
  */
 export function spawn(func: () => void) {
-  (new Promise(resolve => setTimeout(resolve, 0))).then(func);
+  (new Promise(resolve => setTimeout(resolve, 0))).then(func)
 }

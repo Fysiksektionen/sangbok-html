@@ -12,8 +12,10 @@ fi
 ##
 ## Generate svg:s
 ##
+SCALE_FACTORS=(1 1.25 1.5 1.75 2 3 4)
 if [[ ! $*\  == *--no-generate\ * ]]; then
     echo -e "\e[1;32mGenererar MXL-filer:\e[0m"
+    mkdir xml tmp abc
     for path in mscz/*.mscz
     do
         file=$(basename "$path")
@@ -27,27 +29,29 @@ if [[ ! $*\  == *--no-generate\ * ]]; then
         unzip -o "mscz/$file" *.mscx -d "tmp" || exit 3;
 
         
-        sf=1;
-        if [[ $*\  == *--no-hash\ * ]]; then
-            # Set hash to empty.
-            csum=""
-        else
-            # Check if another file with the same checksum exists.
-            # If it's found, use the old file.
-            csum="."$(sha1sum "mscz/$file")
-            if ls svg/*${csum:0:8}-sf$sf-*.svg > /dev/null 2>&1
-            then
-                continue
-            fi
-        fi
-        
-        for tmpfile in tmp/*.mscx # Find whatever the .mscx file is called (there should only be one).
+        for sf in "${SCALE_FACTORS[@]}"
         do
-            # Prevent musescore from trying to open the above file if it's not 100% finished. Makes the script more stable.
-            sleep 0.2
-            # Generate xml files
-            mscore3 --force --export-to "xml/${file//.mscz/}.xml" "tmp/${file//mscz/tmp.mscx}" || exit 1;
-            python3 xml2abc.py "xml/${file//.mscz/}.xml" > "abc/${file//.mscz/}.abc" || exit 2;
+            if [[ $*\  == *--no-hash\ * ]]; then
+                # Set hash to empty.
+                csum=""
+            else
+                # Check if another file with the same checksum exists.
+                # If it's found, use the old file.
+                csum="."$(sha1sum "mscz/$file")
+                if ls svg/*${csum:0:8}-sf$sf-*.svg > /dev/null 2>&1
+                then
+                    continue
+                fi
+            fi
+            
+            for tmpfile in tmp/*.mscx # Find whatever the .mscx file is called (there should only be one).
+            do
+                # Prevent musescore from trying to open the above file if it's not 100% finished. Makes the script more stable.
+                sleep 0.2
+                # Generate xml files
+                mscore3 --force --export-to "xml/${file//.mscz/}-${sf}.xml" "${tmpfile//mscz/mscx}" || exit 1;
+                python3 xml2abc.py "xml/${file//.mscz/}-${sf}.xml" > "abc/${file//.mscz/}-${sf}.abc" || exit 2;
+            done
         done
     done
 fi

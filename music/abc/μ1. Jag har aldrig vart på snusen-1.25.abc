@@ -1,0 +1,52 @@
+X:1
+T:Längtan till landet
+C:Musik: Otto Lindblad
+C:Arr: Ivar Widéen
+%%score [ ( 1 2 ) ( 3 4 ) ]
+L:1/16
+M:4/4
+I:linebreak $
+K:Eb
+V:1 treble nm="S\nA"
+V:2 treble 
+V:3 bass nm="T\nB"
+V:4 bass 
+V:1
+ G4 G4 G3 F G3 A | B8 G8 | A4 A4 A3 B A3 G | (F8 B8) | G4 G4 G3 F G3 A |$ B8 G4 G2 A2 | %6
+w: Jag har ald- rig var't på|snu- sen,|ald- rig rök- at en cig-|arr, haleluja!|Mi- na dygd- er är- o|tu- sen, in- ga|
+w: Bacc- hus spel- ar på git-|arr- en.|Sa- tan spel- ar på sitt|hand- klaver.|Al- la djäv- lar dan- sar|tan- go, säg vad|
+ F4 F2G2 A4 G2F2 | E8- E8 | c4 c4 e3 d e3 c | B8 G8 |$ A4 A4 A3 B A3 F | (G4 A4 B8) | %12
+w: synd- ig- a last- er jag|har. _|Jag har ald- rig sett nå't|nak- et,|in- te ens ett li- tet|ny- fött barn.|
+w: kan man väl ön- ska sig|mer? *|al- la bäck- ar vo- re|bränn- vin,|Ridd- ar fjär- den fylld av|Bay- erskt öl.|
+ c7 c e2>d2 e3 c | B8 G4 (G2>G2) |$ F4 F3 G A4 G2F2 | E8 z3 e e2>d2 |: c3 x x3 x x3 e e2>d2 | %17
+w: Mi- na blick- ar går mot|tak- et, där- med|und- går jag frest- ar- ens|garn. Ha- le- lu-|ja, ha- le- lu-|
+w: Kon- jak i var- en- da|ränn- sten, och _|punsch i var- en- das- te|pöl. Och mell- an|öl, och mell- an|
+ B3 x x3 x x3 B B2>B2 |$ d3 x x3 x x3 d c2>d2 |1 (e4 B4 e2>)e2 e2>d2 :|2 (e4 B4 e4) z4!D.C.! |] %21
+w: ja, ha- le- lu-|ja, ha- le- lu-|ja! _ _ Ha- le- lu-|ja! _ _|
+w: öl, och mell- an|öl, och mell- an|öl! _ _ Och mell- an-|öl! _ _|
+V:2
+ E4 E4 E3 E E3 F | G8 E8 | F4 F4 F3 G F3 E | D16 | E4 E4 E3 E E3 F |$ G8 E4 E2 F2 | %6
+w: ||||||
+w: ||||||
+ D4 D2E2 F4 E2D2 | x8 g7 E | A4 A4 A3 A A3 A | G8 E8 |$ F4 F4 F3 G F3 D | E4 F4 G8 | A7 A A4 A3 A | %13
+w: |||||||
+w: |Jo, att||||||
+ G8 E4 E2>E2 |$ D4 D3 E F4 E2D2 | E8 x3 x x4 |: x3 C C2>C2 C3 x x4 | x3 B, B,2>B,2 B,3 x x4 |$ %18
+w: |||||
+w: |||||
+ x3 D D2>D2 D3 x x4 |1 x16 :|2 x16 |] %21
+w: |||
+w: |||
+V:3
+ B,4 B,4 B,3 B, B,3 B, | E8 B,8 | B,4 B,4 B,3 B, B,3 B, | B,16 | B,4 B,4 B,3 B, B,3 B, |$ %5
+ E8 B,4 B,2 B,2 | B,4 B,4 B,4 B,2A,2 | G,16 | E4 E4 C3 =B, C3 E | E8 B,6 B,2 |$ %10
+ B,3 B, B,3 B, B,3 B, B,4 | (B,8 E8) | E7 E C2>=B,2 C3 E | E8 B,4 B,2>B,2 |$ %14
+ B,4 B,3 B, B,4 B,2A,2 | G,8 z8 |: z3 A, A,2>A,2 A,4 z4 | z3 G, G,2>G,2 G,4 z4 |$ %18
+ z3 B, B,2>B,2 B,4 z4 |1 z16 :|2 z16 |] %21
+V:4
+ E,4 E,4 E,3 E, E,3 E, | E,8 E,8 | B,,4 B,,4 B,,3 B,, B,,3 B,, | B,,16 | E,4 E,4 E,3 E, E,3 E, |$ %5
+ E,8 E,4 E,2 E,2 | B,,4 B,,4 B,,4 B,,4 | E,16 | A,4 A,4 A,3 A, A,3 A, | E,8 E,6 E,2 |$ %10
+ B,,3 B,, B,,3 B,, B,,3 B,, B,,4 | (E,8 E,8) | A,7 A, A,4 A,3 A, | E,8 E,4 (E,2>E,2) |$ %14
+ B,,4 B,,3 B,, B,,4 B,,4 | E,8 x8 |: x3 E, E,2>E,2 E,4 x4 | x3 E, E,2>E,2 E,4 x4 |$ %18
+ x3 [B,,F,] [B,,F,]2>[B,,F,]2 [B,,F,]4 x4 |1 x16 :|2 x16 |] %21
+

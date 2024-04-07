@@ -1,0 +1,35 @@
+X:1
+T:Lyft ditt välförsedda glas
+C:Melodi: Ding Dong Merrily on High
+%%score [ ( 1 2 ) ( 3 4 ) ]
+L:1/8
+M:2/2
+I:linebreak $
+K:Bb
+V:1 treble nm="S\nA"
+V:2 treble 
+V:3 bass nm="T\nB"
+L:1/4
+V:4 bass 
+L:1/4
+V:1
+|: B2 B2 cBAG | F6 F2 | G2 B2 B2 A2 | B4 B4 :: f3 e defd |$ e3 d cdec | d3 c BcdB | c3 B ABcA | %8
+w: 1. Lyft ditt väl för- sedd- a|glas. Det|är en ljuv- lig|bör- da.|Ding- e ding- e ding- e|ding- e ding- e ding- e|ding- e ding- e ding- e|ding- e ding- e ding- e|
+w: Nu har grab- bar- na ka-|las. I|mor- gon är det|lör- dag.|||||
+w: 2. Sätt nu gla- set till din|mun. Se|dö den på dig|vän- ta.|||||
+w:  Nu har grab- bar- na ka-|las. Hör|li- e- man- nen|fläm- ta.|||||
+ B3 A GABG |$ A2 F2 F2 F2 | G2 B2 B2 A2 | B4 B4 :| %12
+w: ding- e ding- e ding- e|ding dong dong Vi|se- gern snart skall|skör- da.|
+w: |* * * Be-|grav- nings kloc- kor|kläm- ta.|
+w: ||||
+w: ||||
+V:2
+|: F2 F2 GGEE | C6 F2 | F2 E2 C2 F2 | F4 F4 :: z2 F4 B2 |$ BAGF GF E2 | z2 FE D2 G2 | GFED ED C2 | %8
+ z2 DC B,2 E2 |$ CDED C2 F2 | F2 E2 C2 F2 | F4 F4 :| %12
+V:3
+|: D B, G,/G,/C/B,/ | A,3 B, | B, B, C C | D2 D2 :: z C D B, |$ C B,2 C | z A, B, G, | A, G,2 A, | %8
+ z F, G,2 |$ C B, C D | B, B, C C | D2 D2 :| %12
+V:4
+|: B,, D, E,/E,/C,/C,/ | F,3 D, | E, G, F, F, | B,,2 B,,2 :: x A, B, D, |$ C, D, E,/D,/ C, | %6
+ x F, G, B,, | A,, B,, C,/B,,/ A,, | x D, E, G, |$ F, G, A, B, | E, G, F, F, | B,,2 B,,2 :| %12
+

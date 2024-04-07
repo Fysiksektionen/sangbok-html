@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "abc2svg": "^1.22.1",
+    "abc2svg--nomin": "^1.15.0",
     "copy-to-clipboard": "^3.3.1",
     "core-js": "^3.6.5",
     "fuse.js": "^6.0",

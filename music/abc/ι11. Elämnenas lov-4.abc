@@ -1,0 +1,20 @@
+X:1
+T:Melodi: Trink, trink, Brüderlein, trink
+T:ι11. Elämnenas lov
+T:Musik: Willhelm Lindemann
+T:EI1240 TET
+C:G7
+L:1/4
+Q:1/4=172
+M:3/4
+I:linebreak $
+K:G
+V:1 treble nm="Instrument 1"
+V:1
+"^Vivace" B3 | B3 | B A G | D3 | D E F | G A B | c3- | c3 | c3 | c3 | c A F |$ D3 | D F G | %13
+w: Ström,|ström,|vi vill ha|ström,|det är vår|sen- as- te|dröm.|_|Ström,|ström,|vi vill ha|ström,|det är vår|
+ A A ^A | B3- | B3 || e3/2 e/ e | e2 e | d3/2 d/ d | d2 d | c3/2 c/ c |$ c B A | d3- | d3 | %24
+w: se- nas- te|dröm.|_|Shun- ta din|MOS, och|bott- na din|FET, och|ge mig en|puls ut- av|det.|_|
+ e3/2 e/ e | e3/2 e/ e | d3/2 d/ d | d3 | c3/2 c/ c | c B A | G3- | G3 |] %32
+w: Slut upp i|kamp- en för|El- mät och|TET.|Ström är det|bäst- ta vi|vet!||
+
