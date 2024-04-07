@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import './ABC.scss'
 import { defineComponent } from 'vue'
-import abclist from '@/../music/abcs.json'
+import abclist from '@/assets/abcs.json'
 import Abc from '@/lib/abc2svg'
 
 const MIN_ZOOM = 0.25
@@ -52,6 +52,7 @@ export default defineComponent({
     async zoom(factor: number) {
       this.isLoading = true
       this.zoomLevel *= factor
+      this.zoomLevel = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, this.zoomLevel))
       await this.renderAbc()
     },
     async fetchAbc() {

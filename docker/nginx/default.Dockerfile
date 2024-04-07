@@ -18,6 +18,7 @@ RUN npm clean-install
 
 # Copy files for build
 COPY public public
+COPY music music
 COPY *.json .
 COPY *.js .
 COPY *.mjs .
@@ -53,7 +54,7 @@ RUN for file in dist/img/**/*; do \
         gzip "$file" --best; \
         touch "$file"; \
     done
-RUN for file in dist/msvg/*; do \
+RUN for file in dist/abc/*; do \
         gzip "$file" --best; \
         touch "$file"; \
     done
@@ -73,6 +74,7 @@ RUN for file in dist/*; do \
 FROM fholzer/nginx-brotli:latest
 
 # Transfer the built app to the nginx container, as well as add nginx config.
+COPY docker/nginx/mime-types.conf /etc/nginx/mime.types
 COPY docker/nginx/nginx.gz-br.conf /etc/nginx/nginx.conf
 COPY --from=frontend-build /app/dist /usr/share/nginx/html
 

@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable */ /* eslint-enable no-eval*/
 // abc2svg - ABC to SVG translator
 // @source: https://chiselapp.com/user/moinejf/repository/abc2svg
 // Copyright (C) 2014-2024 Jean-Francois Moine - LGPL3+
@@ -9628,7 +9628,7 @@ H "History: "', infospace: 0, keywarn: true, leftmargin: 1.4 * CM, lineskipfac: 
                                 break
                             meter.top += p[i++]
                         }
-                        m1 = eval(meter.top)
+                        m1 = parseFloat(meter.top)
                         break
                 }
                 if (!in_parenth) {

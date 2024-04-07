@@ -78,11 +78,11 @@ jobs:
       run: sudo apt-get update && sudo apt-get install musescore3
     - name: Convert mscz to compressed abc:s
       working-directory: ./music
-      run: ./convert.sh
+      run: ./generate_abc.sh
       if: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/actions-dev' }}
     - name: Convert mscz to compressed svg:s (from scratch)
       working-directory: ./music
-      run: ./convert.sh --force-on-change
+      run: ./generate_abc.sh --force-on-change
       if: ${{ github.ref == 'refs/heads/main' }}
     - name: Compute hashes
       working-directory: ./music

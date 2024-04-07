@@ -9,4 +9,4 @@ sudo docker build -f docker/nginx/identity.Dockerfile -t sangbok:nginx-identity 
 sudo docker container rm sbi
 
 # Start the container, to test it. Note that we expose port 8080.
-sudo docker run -p 8080:80 --name sbi --memory 16m sangbok:nginx-identity
+sudo docker run -p 8080:80 --name sbi --memory 64m sangbok:nginx-identity
