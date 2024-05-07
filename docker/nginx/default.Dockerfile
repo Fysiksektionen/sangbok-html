@@ -40,14 +40,11 @@ RUN for file in dist/assets/*; do \
         gzip "$file" --best; \
         touch "$file"; \
     done
-RUN for file in dist/assets/*; do \
-        brotli "$file" --best --keep; \
-        gzip "$file" --best; \
-        touch "$file"; \
-    done
 RUN for file in dist/img/*; do \
-        gzip "$file" --best; \
-        touch "$file"; \
+        if [ -f "$file" ]; then \
+            gzip "$file" --best; \
+            touch "$file"; \
+        fi; \
     done
 RUN for file in dist/img/**/*; do \
         gzip "$file" --best; \
@@ -62,9 +59,11 @@ RUN for file in dist/tex/*; do \
         touch "$file"; \
     done
 RUN for file in dist/*; do \
-        brotli "$file" --best --keep; \
-        gzip "$file" --best; \
-        touch "$file"; \
+        if [ -f "$file" ]; then \
+            brotli "$file" --best --keep; \
+            gzip "$file" --best; \
+            touch "$file"; \
+        fi; \
     done
 
 ##

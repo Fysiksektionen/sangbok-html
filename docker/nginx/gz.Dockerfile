@@ -31,16 +31,22 @@ RUN npm run build
 
 # Precompress static assets
 RUN for file in dist/*; do \
-        gzip "$file" --best; \
-        touch "$file"; \
+        if [ -f "$file" ]; then \
+            gzip "$file" --best; \
+            touch "$file"; \
+        fi; \
     done
 RUN for file in dist/**/*; do \
-        gzip "$file" --best; \
-        touch "$file"; \
+        if [ -f "$file" ]; then \
+            gzip "$file" --best; \
+            touch "$file"; \
+        fi; \
     done
 RUN for file in dist/**/**/*; do \
-        gzip "$file" --best; \
-        touch "$file"; \
+        if [ -f "$file" ]; then \
+            gzip "$file" --best; \
+            touch "$file"; \
+        fi; \
     done
 
 

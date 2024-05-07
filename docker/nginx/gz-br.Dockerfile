@@ -32,20 +32,26 @@ RUN npm run build
 # Precompress static assets
 RUN apk add --no-cache brotli
 RUN for file in dist/*; do \
-        brotli "$file" --best --keep; \
-        gzip "$file" --best; \
-        touch "$file"; \
+        if [ -f "$file" ]; then \
+            brotli "$file" --best --keep; \
+            gzip "$file" --best; \
+            touch "$file"; \
+        fi; \
     done
 RUN for file in dist/**/*; do \
-        brotli "$file" --best --keep; \
-        gzip "$file" --best; \
-        touch "$file"; \
+        if [ -f "$file" ]; then \
+            brotli "$file" --best --keep; \
+            gzip "$file" --best; \
+            touch "$file"; \
+        fi; \
     done
 RUN for file in dist/**/**/*; do \
-    brotli "$file" --best --keep; \
-    gzip "$file" --best; \
-    touch "$file"; \
-done
+        if [ -f "$file" ]; then \
+            brotli "$file" --best --keep; \
+            gzip "$file" --best; \
+            touch "$file"; \
+        fi; \
+    done
 
 
 ##
