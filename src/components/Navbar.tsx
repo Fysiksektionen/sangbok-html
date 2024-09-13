@@ -48,6 +48,7 @@ export default defineComponent({
             { !this.hideBackButton &&
               <button onClick={this.goBack} data-test="navbarBackButton"><img src={backImage} alt="Gå tillbaka"/></button> }
           </div>
+          <div class="title"><a href="https://f.kth.se/sangbok">Sångboken</a></div>
           <a class="title" href="https://f.kth.se/sangbok">Sångboken</a>
           <div style="float: right;" data-test="settingsButtonWrapper">
             {!this.showSettings && <button onClick={() => { this.showSettings = true }} data-test="navbarShowSettingsButton"><img src={settingsImage} alt="Visa inställningar" /></button>}

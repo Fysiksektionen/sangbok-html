@@ -39,5 +39,9 @@
     font-size: 1.1em;
     padding-top: 0.4em;
     z-index: -1;
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
   }
 }
