@@ -31,13 +31,7 @@ export default defineComponent({
   data() { return { showSettings: false } },
   methods: {
     goBack () {
-      if (history.state.back === null) {
-        // The back button in the Navbar should never leave the sångbok page. (See issue #29)
-        // Hence if we got here directly, we will compute the path to go to instead of using history to go back.
-        this.$router.push(getParentPath(this.$route))
-      } else {
-        this.$router.go(-1)
-      }
+      this.$router.push(getParentPath(this.$route))
     }
   },
   render() {
@@ -48,7 +42,7 @@ export default defineComponent({
             { !this.hideBackButton &&
               <button onClick={this.goBack} data-test="navbarBackButton"><img src={backImage} alt="Gå tillbaka"/></button> }
           </div>
-          <div class="title"><a href="https://f.kth.se/sangbok">Sångboken</a></div>
+          <div class="title"><a href="https://f.kth.se/sangbok#">Sångboken</a></div>
           <div style="float: right;" data-test="settingsButtonWrapper">
             {!this.showSettings && <button onClick={() => { this.showSettings = true }} data-test="navbarShowSettingsButton"><img src={settingsImage} alt="Visa inställningar" /></button>}
             {this.showSettings && <button onClick={() => { this.showSettings = false }} data-test="navbarHideSettingsButton"><img src={crossImage} alt="Dölj inställningar" /></button>}
