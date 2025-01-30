@@ -52,7 +52,7 @@ jobs:
     - name: Install packages
       run: npm ci
     - name: Fetch sheet music artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: music-svgs
         path: public/msvg
@@ -154,7 +154,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Fetch sheet music artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: music-svgs
           path: public/msvg
