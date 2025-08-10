@@ -3,12 +3,19 @@
     "prefix": "Zζ",
     "songs": [
         {
-            "title": "Punschen kommer",
+            "title": "Punschen kommer (Kall)",
             "author": "",
             "melody": "Glada änkan\n(Sjungs medan punschen serveras, under det att en gungar vänster-höger, framåt-bakåt och uppåt-nedåt.\nDen som fått sin punsch slutar sjunga.)",
             "text": "Punschen kommer, punschen kommer,\nljuv och sval.\nGlasen imma, röster stimma,\ni vår sal.\nSkål för glada minnen,\nskål för varje vår!\nInga sorger finnas mer\nnär punsch vi får.",
-            "index": "ζ1",
+            "index": "ζ1a",
             "tags": ["+"]
+        },
+        {
+            "title": "Punschen kommer (Varm)",
+            "author": "",
+            "melody": "Glada änkan\n(Sjungs medan punschen serveras, under det att en gungar vänster-höger, framåt-bakåt och uppåt-nedåt.\nDen som fått sin punsch slutar sjunga.)",
+            "text": "Punschen kommer, punschen kommer,\ngod och varm.\nVettet svinner, droppen rinner,\nner i tarm.\nSkål för glada minner!\nSom vi snart ej ha,\ndå ett par glas simmig punsch vi hunnit ta",
+            "index": "ζ1b"
         },
         {
             "title": "Punschkanon",
