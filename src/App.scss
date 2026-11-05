@@ -155,3 +155,21 @@ div.titlecontainer {
   margin: auto auto;
   width: fit-content;
 }
+
+.song-request {
+  text-align: center;
+  padding: 1em 0 1.5em;
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: var(--background-color-highlight);
+    text-decoration: underline;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
