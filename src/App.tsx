@@ -41,6 +41,9 @@ export default defineComponent({
           </div>
           {this.store.state.settings.generator && <GeneratorView />}
         </div>
+        <div>
+            <p>Vill du önska en sång: <h>https://forms.gle/KWBjoZdUgukUr98h8</h></p>
+        </div>
       </>
     )
   }
